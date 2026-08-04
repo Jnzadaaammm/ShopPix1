@@ -1,0 +1,50 @@
+import { prisma } from "@/lib/db";
+
+/**
+ * Configurações de pagamento padrão.
+ * Usado quando não há configuração salva no banco ainda.
+ */
+export const DEFAULT_PAYMENT_SETTINGS = {
+  stripeEnabled: true,
+};
+
+export type PaymentSettings = typeof DEFAULT_PAYMENT_SETTINGS;
+
+/**
+ * Lê as configurações de pagamento do banco (Setting key-value).
+ * Retorna os defaults se não houver configuração salva.
+ */
+export async function getPaymentSettings(): Promise<PaymentSettings> {
+  const rows = await prisma.setting.findMany({
+    where: {
+      key: {
+        in: Object.keys(DEFAULT_PAYMENT_SETTINGS),
+      },
+    },
+  });
+
+  const settings = { ...DEFAULT_PAYMENT_SETTINGS };
+  for (const row of rows) {
+    (settings as Record<string, boolean>)[row.key] = row.value === "true";
+  }
+  return settings;
+}
+
+/**
+ * Salva as configurações de pagamento no banco.
+ */
+export async function savePaymentSettings(settings: Partial<PaymentSettings>): Promise<void> {
+  const entries = Object.entries(settings).filter(([key]) =>
+    key in DEFAULT_PAYMENT_SETTINGS
+  );
+
+  await Promise.all(
+    entries.map(([key, value]) =>
+      prisma.setting.upsert({
+        where: { key },
+        update: { value: String(value) },
+        create: { key, value: String(value) },
+      })
+    )
+  );
+}

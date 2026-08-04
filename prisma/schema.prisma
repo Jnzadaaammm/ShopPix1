@@ -1,0 +1,307 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String            @id @default(cuid())
+  name          String?
+  email         String?           @unique
+  emailVerified DateTime?
+  image         String?
+  isAdmin       Boolean           @default(false)
+  roles         UserRole[]
+  accounts      Account[]
+  sessions      Session[]
+  orders        Order[]
+  refunds       Refund[]
+  downloads     DigitalDownload[]
+  reviews       Review[]
+  wishlist      WishlistItem[]
+  tickets       Ticket[]
+  ticketReplies TicketMessage[]
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+}
+
+model UserRole {
+  id        String   @id @default(cuid())
+  userId    String
+  roleId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, roleId])
+  @@index([userId])
+  @@index([roleId])
+}
+
+model Role {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  type        String   @default("CLIENT") // "CLIENT" ou "TEAM"
+  level       Int      @default(0)        // Nível hierárquico (0 = mais baixo)
+  discount    Float    @default(0)        // Desconto percentual (0-100)
+  color       String   @default("gray")   // Cor para badge (gray, blue, green, purple, gold, orange, red)
+  permissions String   @default("[]")     // JSON array de permissões
+  isDefault   Boolean  @default(false)    // Cargo padrão para novos usuários
+  discordRoleId String?                   // ID do cargo correspondente no Discord (para sync)
+  userRoles   UserRole[]                  // relação N:N
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Product {
+  id            String            @id @default(cuid())
+  name          String
+  description   String
+  price         Float
+  image         String
+  categoryId    String
+  category      Category          @relation(fields: [categoryId], references: [id])
+  stock         Int               @default(0)   // usado apenas para credenciais (contador de disponíveis)
+  featured      Boolean           @default(false)
+  fileUrl       String?           // URL do arquivo para download (modo SIMPLES)
+  maxDownloads  Int               @default(5)
+  stockMode     String            @default("SIMPLE") // "SIMPLE" (download ilimitado) ou "CREDENTIALS" (senhas individuais)
+  orderItems    OrderItem[]
+  downloads     DigitalDownload[]
+  credentials   ProductCredential[]
+  reviews       Review[]
+  wishlistItems WishlistItem[]
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+}
+
+// Credenciais individuais (senhas/logins) para produtos digitais
+model ProductCredential {
+  id          String     @id @default(cuid())
+  productId   String
+  product     Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
+  content     String     // a senha/credencial em si (ex: "senha1" ou "user:pass")
+  status      String     @default("AVAILABLE") // "AVAILABLE", "SOLD", "RESERVED"
+  orderItemId String?    // vinculado ao item do pedido quando vendido
+  orderItem   OrderItem? @relation(fields: [orderItemId], references: [id])
+  createdAt   DateTime   @default(now())
+  soldAt      DateTime?
+
+  @@index([productId, status])
+}
+
+model DigitalDownload {
+  id            String   @id @default(cuid())
+  orderId       String
+  order         Order    @relation(fields: [orderId], references: [id])
+  productId     String
+  product       Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+  downloadKey   String   @unique
+  expiresAt     DateTime
+  downloadsUsed Int      @default(0)
+  maxDownloads  Int      @default(5)
+  createdAt     DateTime @default(now())
+}
+
+model Order {
+  id                  String      @id @default(cuid())
+  userId              String
+  user                User        @relation(fields: [userId], references: [id])
+  items               OrderItem[]
+  refunds             Refund[]
+  downloads           DigitalDownload[]
+  subtotal            Float       @default(0)
+  discount            Float       @default(0)
+  total               Float
+  couponCode          String?
+  status              OrderStatus @default(PENDING)
+  paymentMethod       String      @default("pix")
+  pixTxId             String?
+  pixQrCode           String?
+  pixCopyPaste        String?
+  pixExpiresAt        DateTime?
+  mpPreferenceId      String?
+  mpInitPoint         String?
+  mpPaymentId         String?
+  stripePaymentId     String?
+  stripeClientSecret  String?
+  paypalOrderId       String?
+  paypalCaptureId     String?
+  // Aprovação manual do dono
+  approvedAt          DateTime?   // quando o dono liberou o pedido
+  approvedBy          String?     // email do dono que aprovou
+  rejectedAt          DateTime?
+  rejectionReason     String?
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model OrderItem {
+  id           String               @id @default(cuid())
+  orderId      String
+  order        Order                @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId    String?
+  product      Product?             @relation(fields: [productId], references: [id], onDelete: SetNull)
+  productName  String?              // snapshot do nome, preservado se o produto for excluído
+  productImage String?              // snapshot da imagem
+  quantity     Int
+  price        Float
+  credentials  ProductCredential[]
+}
+
+enum OrderStatus {
+  PENDING
+  AWAITING_APPROVAL
+  PAID
+  CANCELLED
+  EXPIRED
+  REFUNDED
+}
+
+enum RefundStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  COMPLETED
+}
+
+model Refund {
+  id          String      @id @default(cuid())
+  orderId     String
+  order       Order       @relation(fields: [orderId], references: [id])
+  userId      String
+  user        User        @relation(fields: [userId], references: [id])
+  amount      Float
+  reason      String
+  status      RefundStatus @default(PENDING)
+  pixKey      String?     // Chave PIX para receber o reembolso
+  processedAt DateTime?
+  adminNote   String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rating    Int      // 1 a 5
+  comment   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([productId, userId]) // um review por produto por usuário
+}
+
+model WishlistItem {
+  id        String   @id @default(cuid())
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([productId, userId]) // não duplicar
+}
+
+model Coupon {
+  id          String    @id @default(cuid())
+  code        String    @unique
+  type        String    // "PERCENTAGE" ou "FIXED"
+  value       Float     // percentual (10 = 10%) ou valor fixo em R$
+  minOrder    Float?    // valor mínimo do pedido para aplicar
+  maxUses     Int?      // limite de usos total (null = ilimitado)
+  usesCount   Int       @default(0)
+  validFrom   DateTime  @default(now())
+  validUntil  DateTime?
+  active      Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Setting {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
+model Ticket {
+  id        String          @id @default(cuid())
+  subject   String
+  category  String          @default("general") // general, order, payment, product, refund, other
+  status    String          @default("OPEN")    // OPEN, ANSWERED, CLOSED
+  priority  String          @default("normal")  // low, normal, high, urgent
+  userId    String
+  user      User            @relation(fields: [userId], references: [id])
+  orderId   String?
+  messages  TicketMessage[]
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+}
+
+model TicketMessage {
+  id        String   @id @default(cuid())
+  ticketId  String
+  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  content   String
+  isStaff   Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
