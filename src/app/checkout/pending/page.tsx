@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Clock, Loader2 } from "lucide-react";
 
-function PendingContent() {
+export default function CheckoutPendingPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
@@ -36,7 +36,7 @@ function PendingContent() {
         <p className="mt-2 text-yellow-600">
           {orderId 
             ? `Seu pedido #${orderId} está sendo processado.` 
-            : "Seu pagamento está sendo processado."}
+            : "Seu pagamento está sendo processado pelo Mercado Pago."}
         </p>
         <p className="mt-2 text-sm text-yellow-700">
           Você receberá uma confirmação assim que o pagamento for aprovado.
@@ -49,17 +49,5 @@ function PendingContent() {
         </button>
       </div>
     </div>
-  );
-}
-
-export default function CheckoutPendingPage() {
-  return (
-    <Suspense fallback={
-      <div className="flex min-h-[50vh] items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-brand-600" />
-      </div>
-    }>
-      <PendingContent />
-    </Suspense>
   );
 }

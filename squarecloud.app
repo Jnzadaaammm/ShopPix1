@@ -1,10 +1,7 @@
-{
-  "NAME": "shoppix",
-  "DESCRIPTION": "ShopPix - Loja Digital com Stripe",
-  "VERSION": "1.0.0",
-  "MAIN": "main_file.js",
-  "STARTUP": "node main_file.js",
-  "MEMORY": "4096",
-  "SUBDOMAIN": "shoppix",
-  "AUTO_RESTART": true
-}
+DISPLAY_NAME=Ecommerce
+MEMORY=4096
+VERSION=recommended
+AUTORESTART=true
+RUNTIME=nodejs
+START=npx prisma db push && npm run build && npm run db:seed && npm start
+SUBDOMAIN=shoppix

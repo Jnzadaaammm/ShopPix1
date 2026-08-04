@@ -4,7 +4,6 @@ import Google from "next-auth/providers/google";
 import Discord from "next-auth/providers/discord";
 import { prisma } from "./db";
 import { addUserToGuild, sendLoginWebhook, syncDiscordRoles } from "./discord-guild";
-import { isOwnerEmail } from "./owner";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -33,15 +32,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async createUser({ user }) {
       // Atribuir cargo padrão (Bronze) a novos usuários
       if (!user.id) return;
-
-      // Se o dono se cadastrar, já coloca como admin
-      if (isOwnerEmail(user.email)) {
-        await prisma.user.update({
-          where: { id: user.id },
-          data: { isAdmin: true },
-        });
-      }
-
       const defaultRole = await prisma.role.findFirst({
         where: { isDefault: true },
       });
@@ -108,28 +98,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async session({ session, user }) {
       if (session.user) {
-        const u = session.user as any;
-        u.id = user.id;
+        session.user.id = user.id;
+        // @ts-expect-error - isAdmin não está no tipo DefaultUser
+        session.user.isAdmin = user.isAdmin;
 
+        // Buscar todos os cargos do usuário
         const dbUser = await prisma.user.findUnique({
           where: { id: user.id },
           include: {
             roles: { include: { role: true } },
           },
         });
-
-        const isAdmin = dbUser?.isAdmin || false;
-        const ownerAccess = isOwnerEmail(u.email || user.email);
-
-        u.isAdmin = isAdmin || ownerAccess;
-
-        // Garante que o dono sempre tenha isAdmin=true no banco
-        if (ownerAccess && !isAdmin && dbUser) {
-          await prisma.user.update({
-            where: { id: user.id },
-            data: { isAdmin: true },
-          });
-        }
 
         if (dbUser?.roles && dbUser.roles.length > 0) {
           const roles = dbUser.roles.map((ur) => ur.role);
@@ -151,7 +130,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           // Maior desconto entre todos os cargos
           const maxDiscount = Math.max(...roles.map((r) => r.discount));
 
-          u.role = {
+          // @ts-expect-error - role não está no tipo DefaultUser
+          session.user.role = {
             id: topRole.id,
             name: topRole.name,
             type: topRole.type,
@@ -161,7 +141,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             permissions: Array.from(allPermissions),
           };
 
-          u.roles = roles.map((r) => ({
+          // @ts-expect-error - roles não está no tipo DefaultUser
+          session.user.roles = roles.map((r) => ({
             id: r.id,
             name: r.name,
             type: r.type,

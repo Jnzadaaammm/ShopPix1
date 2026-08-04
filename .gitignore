@@ -1,4 +1,10 @@
 node_modules/
+.next/
 .env
+.env.local
+.env.*
 *.db
 *.db-journal
+tsc_err.txt
+tsconfig.tsbuildinfo
+*.log

@@ -9,10 +9,10 @@
     "start": "next start",
     "lint": "next lint",
     "db:push": "prisma db push",
-    "db:seed": "npx tsx prisma/seed.ts",
-    "bot": "npx tsx src/bot/index.ts",
-    "make-owner": "npx tsx make-owner.ts",
-    "dev:all": "npx concurrently \"npm run dev\" \"npm run bot\""
+    "db:seed": "tsx prisma/seed.ts",
+    "bot": "tsx src/bot/index.ts",
+    "make-owner": "tsx make-owner.ts",
+    "dev:all": "concurrently \"npm run dev\" \"npm run bot\""
   },
   "engines": {
     "node": ">=20.0.0"
@@ -23,12 +23,8 @@
     "@prisma/client": "^6.3.1",
     "@stripe/react-stripe-js": "^6.8.0",
     "@stripe/stripe-js": "^9.12.1",
-    "@types/node": "^22.12.0",
-    "@types/nodemailer": "^8.0.1",
-    "@types/react": "^19.0.8",
-    "@types/react-dom": "^19.0.3",
-    "@types/uuid": "^10.0.0",
     "autoprefixer": "^10.4.20",
+    "concurrently": "^10.0.4",
     "discord.js": "^14.27.0",
     "lucide-react": "^0.474.0",
     "next": "^15.1.6",
@@ -42,12 +38,16 @@
     "sonner": "^2.0.7",
     "stripe": "^22.4.0",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5.7.3",
+    "tsx": "^4.19.2",
     "uuid": "^11.0.5",
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "concurrently": "^10.0.4",
-    "tsx": "^4.19.2"
+    "@types/node": "^22.12.0",
+    "@types/nodemailer": "^8.0.1",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "^19.0.3",
+    "@types/uuid": "^10.0.0",
+    "typescript": "^5.7.3"
   }
 }
