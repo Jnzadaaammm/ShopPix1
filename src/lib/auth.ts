@@ -7,15 +7,17 @@ import { addUserToGuild, sendLoginWebhook, syncDiscordRoles } from "./discord-gu
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
-  debug: true,
+  debug: process.env.NODE_ENV === "development",
   providers: [
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      allowDangerousEmailAccountLinking: true,
     }),
     Discord({
       clientId: process.env.DISCORD_CLIENT_ID!,
       clientSecret: process.env.DISCORD_CLIENT_SECRET!,
+      allowDangerousEmailAccountLinking: true,
       authorization: {
         params: {
           // guilds.join permite adicionar o usuário ao servidor da loja
