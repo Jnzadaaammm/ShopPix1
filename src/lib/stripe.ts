@@ -41,7 +41,7 @@ export async function createStripePayment(
         description: `Pedido #${orderId}${cardType ? ` (${cardType === 'credit' ? 'Crédito' : 'Débito'})` : ''}`,
         payment_method: paymentMethodId,
         confirm: true,
-        automatic_payment_methods: { enabled: true, allow_redirects: 'never' },
+        payment_method_types: ['card'],
         ...(customerEmail && { receipt_email: customerEmail }),
         ...cardOptions,
       });
@@ -61,7 +61,7 @@ export async function createStripePayment(
         ...(cardType && { cardType }),
       },
       description: `Pedido #${orderId}${cardType ? ` (${cardType === 'credit' ? 'Crédito' : 'Débito'})` : ''}`,
-      automatic_payment_methods: { enabled: true },
+      payment_method_types: ['card'],
       ...(customerEmail && { receipt_email: customerEmail }),
       ...cardOptions,
     });

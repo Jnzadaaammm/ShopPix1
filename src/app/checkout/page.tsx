@@ -48,6 +48,19 @@ export default function CheckoutPage() {
       .catch(() => setSettings(null));
   }, []);
 
+  useEffect(() => {
+    if (!settings) return;
+    const enabled = {
+      stripe: settings.stripeEnabled !== false,
+      paypal: settings.paypalEnabled !== false,
+      pix: settings.pixEnabled !== false,
+    };
+    if (!enabled[paymentMethod]) {
+      const firstEnabled = (["stripe", "paypal", "pix"] as const).find((m) => enabled[m]);
+      if (firstEnabled) setPaymentMethod(firstEnabled);
+    }
+  }, [settings]);
+
   // Desconto do cargo do usuário
   const roleDiscount = (session?.user as any)?.role?.discount || 0;
   const roleDiscountAmount = roleDiscount > 0 ? (total * roleDiscount) / 100 : 0;
@@ -346,30 +359,33 @@ export default function CheckoutPage() {
           <div className="card p-6">
             <h2 className="font-semibold text-gray-900">Forma de Pagamento</h2>
             <div className="mt-4 space-y-3">
-              <button
-                onClick={() => setPaymentMethod("stripe")}
-                className={`flex w-full items-center gap-3 rounded-lg border p-4 text-left transition-colors ${
-                  paymentMethod === "stripe"
-                    ? "border-brand-600 bg-brand-50"
-                    : "border-gray-200 hover:bg-gray-50"
-                }`}
-              >
-                <CreditCard className="h-5 w-5 text-brand-600" />
-                <div>
-                  <p className="font-medium text-gray-900">Cartão de Crédito/Débito (Stripe)</p>
-                  <p className="text-sm text-gray-500">Pagamento processado com segurança pelo Stripe.</p>
-                </div>
-              </button>
+              {(settings?.stripeEnabled !== false) && (
+                <button
+                  onClick={() => setPaymentMethod("stripe")}
+                  className={`flex w-full items-center gap-3 rounded-lg border p-4 text-left transition-colors ${
+                    paymentMethod === "stripe"
+                      ? "border-brand-600 bg-brand-50"
+                      : "border-gray-200 hover:bg-gray-50"
+                  }`}
+                >
+                  <CreditCard className="h-5 w-5 text-brand-600" />
+                  <div>
+                    <p className="font-medium text-gray-900">Cartão de Crédito/Débito (Stripe)</p>
+                    <p className="text-sm text-gray-500">Pagamento processado com segurança pelo Stripe.</p>
+                  </div>
+                </button>
+              )}
 
-              <button
-                onClick={() => setPaymentMethod("paypal")}
-                className={`flex w-full items-center gap-3 rounded-lg border p-4 text-left transition-colors ${
-                  paymentMethod === "paypal"
-                    ? "border-brand-600 bg-brand-50"
-                    : "border-gray-200 hover:bg-gray-50"
-                }`}
-              >
-                <svg className="h-5 w-5" viewBox="0 0 24 24" fill="#003087">
+              {(settings?.paypalEnabled !== false) && (
+                <button
+                  onClick={() => setPaymentMethod("paypal")}
+                  className={`flex w-full items-center gap-3 rounded-lg border p-4 text-left transition-colors ${
+                    paymentMethod === "paypal"
+                      ? "border-brand-600 bg-brand-50"
+                      : "border-gray-200 hover:bg-gray-50"
+                  }`}
+                >
+                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="#003087">
                   <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.77.77 0 0 1 .757-.629h6.69c2.884 0 5.108.558 6.006 2.885.396 1.028.477 2.104.093 3.168-.53 1.473-1.617 2.504-3.067 2.98h.002c1.246.337 2.095.94 2.617 1.865.52.924.66 2.107.36 3.38-.328 1.38-1.002 2.48-1.995 3.26-1.19.94-2.78 1.383-4.578 1.383H9.84a.77.77 0 0 0-.757.63l-.003-.001-.002.006c-.002.004-.002.008-.002.012L7.076 21.337z" />
                 </svg>
                 <div>
@@ -377,6 +393,7 @@ export default function CheckoutPage() {
                   <p className="text-sm text-gray-500">Pague com conta PayPal ou cartão via PayPal.</p>
                 </div>
               </button>
+              )}
 
               {(settings?.pixEnabled !== false) && (
                 <button
