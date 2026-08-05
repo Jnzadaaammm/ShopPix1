@@ -29,7 +29,6 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   // Otimizacoes de memoria
-  output: "standalone",
   productionBrowserSourceMaps: false,
   experimental: {
     // Limitar workers paralelos para economizar RAM
