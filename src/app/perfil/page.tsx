@@ -177,15 +177,15 @@ export default function ProfilePage() {
                 alt=""
                 width={96}
                 height={96}
-                className="rounded-full ring-4 ring-brand-100"
+                className="rounded-full ring-4 ring-brand-500/30"
               />
             ) : (
-              <div className="flex h-24 w-24 items-center justify-center rounded-full bg-slate-800 ring-4 ring-brand-50">
+              <div className="flex h-24 w-24 items-center justify-center rounded-full bg-brand-600/20 ring-4 ring-brand-500/30">
                 <User className="h-10 w-10 text-brand-400" />
               </div>
             )}
             {profile.isAdmin && (
-              <span className="absolute -bottom-1 -right-1 flex h-7 w-7 items-center justify-center rounded-full bg-purple-600 ring-2 ring-white">
+              <span className="absolute -bottom-1 -right-1 flex h-7 w-7 items-center justify-center rounded-full bg-purple-600 ring-2 ring-slate-950">
                 <Shield className="h-4 w-4 text-white" />
               </span>
             )}
@@ -199,14 +199,14 @@ export default function ProfilePage() {
               <Calendar className="h-3 w-3" /> Membro desde {new Date(profile.createdAt).toLocaleDateString("pt-BR")}
             </p>
             {profile.isAdmin && (
-              <span className="mt-2 inline-flex items-center gap-1 rounded-full bg-purple-100 px-3 py-1 text-xs font-medium text-purple-700">
+              <span className="mt-2 inline-flex items-center gap-1 rounded-full bg-purple-900/30 px-3 py-1 text-xs font-medium text-purple-300">
                 <Shield className="h-3 w-3" /> Administrador
               </span>
             )}
           </div>
           <button
             onClick={() => signOut({ callbackUrl: "/" })}
-            className="flex items-center gap-2 rounded-lg border border-red-200 px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+            className="flex items-center gap-2 rounded-lg border border-red-900/50 bg-red-900/20 px-4 py-2 text-sm text-red-400 hover:bg-red-900/40"
           >
             <LogOut className="h-4 w-4" /> Sair
           </button>
