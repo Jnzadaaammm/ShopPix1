@@ -42,18 +42,33 @@ export async function generateMetadata(): Promise<Metadata> {
       title: `${storeName} - Loja Digital`,
       description: storeDescription,
       url: baseUrl,
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: `${storeName} - Loja Digital`,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: `${storeName} - Loja Digital`,
       description: storeDescription,
+      images: ["/og-image.png"],
     },
     robots: {
       index: true,
       follow: true,
     },
+    manifest: "/site.webmanifest",
     icons: {
-      icon: "/favicon.ico",
+      icon: [
+        { url: "/favicon-16x16.png", sizes: "16x16" },
+        { url: "/favicon-32x32.png", sizes: "32x32" },
+      ],
+      apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+      shortcut: ["/favicon.ico"],
     },
   };
 }

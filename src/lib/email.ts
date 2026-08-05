@@ -95,13 +95,13 @@ export async function sendDigitalProductEmail({
   `;
 
   try {
-    await transporter.sendMail({
+    const info = await transporter.sendMail({
       from: `"ShopPix" <${process.env.SMTP_USER}>`,
       to,
-      subject: `🎉 Seus produtos digitais chegaram! - Pedido #${orderId.slice(0, 8).toUpperCase()}`,
+      subject: `Seus produtos digitais chegaram! - Pedido #${orderId.slice(0, 8).toUpperCase()}`,
       html,
     });
-    return { sent: true };
+    return { sent: true, messageId: info.messageId };
   } catch (error) {
     console.error("Erro ao enviar email:", error);
     return { sent: false, reason: error instanceof Error ? error.message : "Erro desconhecido" };

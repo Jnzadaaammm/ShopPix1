@@ -221,6 +221,7 @@ export async function POST(request: Request) {
 
   emit(REALTIME_EVENTS.ORDER_CREATED, { orderId: order.id });
   notifyOrderCreated(order.id).catch(() => {});
+  console.log(`[checkout] Pedido ${order.id} criado. Método: ${paymentMethod}. Total: R$ ${total.toFixed(2)}`);
 
   if (paymentMethod === "stripe") {
     const stripePayment = await createStripePayment(total, order.id);
