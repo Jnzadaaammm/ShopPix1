@@ -122,7 +122,7 @@ export default function CheckoutPage() {
       const res = await fetch("/api/coupons/validate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ code: couponCode.trim(), orderTotal: total }),
+        body: JSON.stringify({ code: couponCode.trim(), orderTotal: totalAfterRoleDiscount }),
       });
       const data = await res.json();
       if (data.valid) {

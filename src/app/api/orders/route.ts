@@ -81,7 +81,20 @@ export async function POST(request: Request) {
     };
   });
 
-  // Aplicar cupom se fornecido
+  // Aplicar desconto do cargo do usuário (maior desconto entre seus cargos)
+  const userRoles = await prisma.userRole.findMany({
+    where: { userId: session.user.id },
+    include: { role: true },
+  });
+  const roleDiscountPercent = userRoles.length > 0
+    ? Math.max(...userRoles.map((ur) => ur.role.discount))
+    : 0;
+  const roleDiscountAmount = roleDiscountPercent > 0
+    ? (subtotal * roleDiscountPercent) / 100
+    : 0;
+  const subtotalAfterRole = Math.max(0, subtotal - roleDiscountAmount);
+
+  // Aplicar cupom se fornecido (sobre o subtotal já com desconto do cargo)
   let discount = 0;
   let appliedCouponCode: string | undefined;
   let couponId: string | undefined;
@@ -102,34 +115,22 @@ export async function POST(request: Request) {
     if (coupon.maxUses !== null && coupon.usesCount >= coupon.maxUses) {
       return NextResponse.json({ error: "Cupom esgotado" }, { status: 400 });
     }
-    if (coupon.minOrder !== null && subtotal < coupon.minOrder) {
+    if (coupon.minOrder !== null && subtotalAfterRole < coupon.minOrder) {
       return NextResponse.json(
         { error: `Pedido mínimo de R$ ${coupon.minOrder.toFixed(2)} para este cupom` },
         { status: 400 }
       );
     }
     if (coupon.type === "PERCENTAGE") {
-      discount = subtotal * (coupon.value / 100);
+      discount = subtotalAfterRole * (coupon.value / 100);
     } else {
-      discount = Math.min(coupon.value, subtotal);
+      discount = Math.min(coupon.value, subtotalAfterRole);
     }
     appliedCouponCode = coupon.code;
     couponId = coupon.id;
   }
 
-  // Aplicar desconto do cargo do usuário (maior desconto entre seus cargos)
-  const userRoles = await prisma.userRole.findMany({
-    where: { userId: session.user.id },
-    include: { role: true },
-  });
-  const roleDiscountPercent = userRoles.length > 0
-    ? Math.max(...userRoles.map((ur) => ur.role.discount))
-    : 0;
-  const roleDiscountAmount = roleDiscountPercent > 0
-    ? (subtotal * roleDiscountPercent) / 100
-    : 0;
-
-  const total = Math.max(0.01, subtotal - discount - roleDiscountAmount);
+  const total = Math.max(0.01, subtotalAfterRole - discount);
 
   // Criar pedido + decrementar estoque + incrementar cupom em transação
   const order = await prisma.$transaction(async (tx) => {
@@ -180,15 +181,19 @@ export async function POST(request: Request) {
     // Vincular credenciais reservadas aos orderItems criados
     for (const item of newOrder.items) {
       if (item.product?.stockMode === "CREDENTIALS") {
-        await tx.productCredential.updateMany({
+        // Buscar credenciais RESERVED deste produto que ainda não estão vinculadas
+        const toLink = await tx.productCredential.findMany({
           where: {
             productId: item.productId!,
             status: "RESERVED",
+            orderItemId: null,
           },
-          data: {
-            status: "RESERVED",
-            orderItemId: item.id,
-          },
+          take: item.quantity,
+          orderBy: { createdAt: "asc" },
+        });
+        await tx.productCredential.updateMany({
+          where: { id: { in: toLink.map((c) => c.id) } },
+          data: { orderItemId: item.id },
         });
       }
     }
