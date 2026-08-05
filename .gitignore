@@ -8,3 +8,9 @@ node_modules/
 tsc_err.txt
 tsconfig.tsbuildinfo
 *.log
+
+# Certificados SSL (nao enviar para o GitHub)
+certs/*.pem
+certs/*.p12
+certs/*.crt
+certs/*.key
