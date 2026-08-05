@@ -62,33 +62,45 @@ export function useRealtime<T>(
   useEffect(() => {
     if (!enabled) return;
 
-    const es = getSharedEventSource();
+    addRealtimeListener();
+    let es: EventSource | null = null;
     let mounted = true;
 
-    const onConnected = () => {
-      if (mounted) setConnected(true);
-    };
+    try {
+      es = getSharedEventSource();
 
-    const handler = (e: MessageEvent) => {
-      if (!mounted) return;
-      // Verificar se este evento está na lista de eventos monitorados
-      if (eventsRef.current.includes(e.type)) {
-        refetch();
-      }
-    };
+      const onConnected = () => {
+        if (mounted) setConnected(true);
+      };
 
-    es.addEventListener("connected", onConnected);
-    for (const event of events) {
-      es.addEventListener(event, handler as EventListener);
-    }
+      const handler = (e: MessageEvent) => {
+        if (!mounted) return;
+        // Verificar se este evento está na lista de eventos monitorados
+        if (eventsRef.current.includes(e.type)) {
+          refetch();
+        }
+      };
 
-    return () => {
-      mounted = false;
-      es.removeEventListener("connected", onConnected);
+      es.addEventListener("connected", onConnected);
       for (const event of events) {
-        es.removeEventListener(event, handler as EventListener);
+        es.addEventListener(event, handler as EventListener);
       }
-    };
+
+      return () => {
+        mounted = false;
+        if (es) {
+          es.removeEventListener("connected", onConnected);
+          for (const event of events) {
+            es.removeEventListener(event, handler as EventListener);
+          }
+        }
+        removeRealtimeListener();
+      };
+    } catch {
+      // Se não conseguir conectar (sem listeners), limpa
+      removeRealtimeListener();
+      return;
+    }
   }, [enabled, refetch, events.join(",")]);
 
   return { data, loading, connected, refetch };
@@ -100,22 +112,53 @@ export function useRealtime<T>(
 
 let sharedES: EventSource | null = null;
 let connectionAttempts = 0;
+let reconnectTimer: ReturnType<typeof setTimeout> | null = null;
+let listenerCount = 0;
+
+function cleanupSharedEventSource() {
+  if (reconnectTimer) {
+    clearTimeout(reconnectTimer);
+    reconnectTimer = null;
+  }
+  if (sharedES) {
+    sharedES.close();
+    sharedES = null;
+  }
+}
+
+export function addRealtimeListener() {
+  listenerCount++;
+}
+
+export function removeRealtimeListener() {
+  listenerCount = Math.max(0, listenerCount - 1);
+  // Fechar conexão se nenhum componente estiver ouvindo
+  if (listenerCount === 0) {
+    cleanupSharedEventSource();
+  }
+}
 
 function getSharedEventSource(): EventSource {
   if (sharedES && sharedES.readyState !== EventSource.CLOSED) {
     return sharedES;
   }
 
+  if (listenerCount === 0) {
+    // Não conectar se ninguém está ouvindo
+    throw new Error("Nenhum listener ativo para realtime");
+  }
+
   connectionAttempts++;
   sharedES = new EventSource("/api/realtime");
 
   sharedES.onerror = () => {
-    // Reconectar com backoff exponencial (max 10s)
-    const delay = Math.min(1000 * Math.pow(2, connectionAttempts - 1), 10000);
-    setTimeout(() => {
+    if (reconnectTimer) return; // evitar múltiplos timers
+    // Reconectar com backoff exponencial (max 30s)
+    const delay = Math.min(1000 * Math.pow(2, connectionAttempts - 1), 30000);
+    reconnectTimer = setTimeout(() => {
+      reconnectTimer = null;
       if (sharedES?.readyState === EventSource.CLOSED) {
         sharedES = null;
-        getSharedEventSource();
       }
     }, delay);
   };

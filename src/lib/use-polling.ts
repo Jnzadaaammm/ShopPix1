@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 
 interface UsePollingOptions {
-  /** Intervalo em ms (padrão: 30000) */
+  /** Intervalo em ms (padrão: 120000 - 2 minutos, economiza RAM/CPU) */
   interval?: number;
   /** Se false, não executa (padrão: true) */
   enabled?: boolean;

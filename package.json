@@ -11,8 +11,7 @@
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
     "bot": "tsx src/bot/index.ts",
-    "make-owner": "tsx make-owner.ts",
-    "dev:all": "concurrently \"npm run dev\" \"npm run bot\""
+    "make-owner": "tsx make-owner.ts"
   },
   "engines": {
     "node": ">=20.0.0"
