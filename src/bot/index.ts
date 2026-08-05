@@ -33,11 +33,11 @@ const client = new Client({
   partials: [Partials.GuildMember],
 });
 
-client.once("ready", async () => {
-  // console.log(`[bot] ✅ Online como ${client.user?.tag}`);
+client.once("clientReady", async (clientInstance) => {
+  console.info(`[bot] Online como ${clientInstance.user?.tag}`);
 
   // Definir presença: "online" com atividade personalizada
-  client.user?.setPresence({
+  clientInstance.user?.setPresence({
     status: "online",
     activities: [
       {
