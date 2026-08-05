@@ -117,7 +117,19 @@ export async function POST(request: Request) {
     couponId = coupon.id;
   }
 
-  const total = Math.max(0, subtotal - discount);
+  // Aplicar desconto do cargo do usuário (maior desconto entre seus cargos)
+  const userRoles = await prisma.userRole.findMany({
+    where: { userId: session.user.id },
+    include: { role: true },
+  });
+  const roleDiscountPercent = userRoles.length > 0
+    ? Math.max(...userRoles.map((ur) => ur.role.discount))
+    : 0;
+  const roleDiscountAmount = roleDiscountPercent > 0
+    ? (subtotal * roleDiscountPercent) / 100
+    : 0;
+
+  const total = Math.max(0, subtotal - discount - roleDiscountAmount);
 
   // Criar pedido + decrementar estoque + incrementar cupom em transação
   const order = await prisma.$transaction(async (tx) => {
@@ -156,7 +168,7 @@ export async function POST(request: Request) {
       data: {
         userId: session.user.id,
         subtotal,
-        discount,
+        discount: discount + roleDiscountAmount,
         total,
         couponCode: appliedCouponCode || null,
         paymentMethod,
