@@ -12,7 +12,7 @@
  */
 
 import { Client, GatewayIntentBits, Partials, ActivityType } from "discord.js";
-import { setupDiscordRoles } from "../lib/discord-guild";
+import { setupDiscordRoles, syncDiscordRoles } from "../lib/discord-guild";
 import { prisma } from "../lib/db";
 
 const TOKEN = process.env.DISCORD_BOT_TOKEN;
@@ -69,28 +69,42 @@ client.once("ready", async () => {
   // console.log("[bot] Pronto para receber eventos!");
 });
 
-// Logar quando um membro entra no servidor
-client.on("guildMemberAdd", (member) => {
-  // console.log(`[bot] 👋 ${member.user.tag} entrou no servidor ${member.guild.name}`);
-});
-
-// Logar quando um membro sai
-client.on("guildMemberRemove", (member) => {
-  // console.log(`[bot] 👋 ${member.user.tag} saiu do servidor ${member.guild.name}`);
-});
-
-// Logar mudanças de cargo
-client.on("guildMemberUpdate", (oldMember, newMember) => {
-  const oldRoles = oldMember.roles.cache.map((r) => r.name);
-  const newRoles = newMember.roles.cache.map((r) => r.name);
-  const added = newRoles.filter((r) => !oldRoles.includes(r));
-  const removed = oldRoles.filter((r) => !newRoles.includes(r));
-
-  if (added.length > 0) {
-    // console.log(`[bot] ⬆️ ${newMember.user.tag} recebeu cargo(s): ${added.join(", ")}`);
+// Sincroniza cargos do site quando um membro entra no servidor
+client.on("guildMemberAdd", async (member) => {
+  if (member.user.bot) return;
+  try {
+    const user = await prisma.user.findFirst({
+      where: { accounts: { some: { provider: "discord", providerAccountId: member.id } } },
+      include: { accounts: { where: { provider: "discord" } } },
+    });
+    if (user?.accounts[0]?.providerAccountId) {
+      await syncDiscordRoles(user.id, user.accounts[0].providerAccountId);
+    }
+  } catch (error) {
+    console.error("[bot] Erro ao sincronizar cargos no member add:", error);
   }
-  if (removed.length > 0) {
-    // console.log(`[bot] ⬇️ ${newMember.user.tag} perdeu cargo(s): ${removed.join(", ")}`);
+});
+
+// Sincroniza mudanças de cargo do Discord com o site
+client.on("guildMemberUpdate", async (oldMember, newMember) => {
+  if (newMember.user.bot) return;
+  const oldRoleIds = new Set(oldMember.roles.cache.map((r) => r.id));
+  const newRoleIds = new Set(newMember.roles.cache.map((r) => r.id));
+
+  // Se não houve mudança de cargos, não faz nada
+  const added = [...newRoleIds].filter((id) => !oldRoleIds.has(id));
+  const removed = [...oldRoleIds].filter((id) => !newRoleIds.has(id));
+  if (added.length === 0 && removed.length === 0) return;
+
+  try {
+    const user = await prisma.user.findFirst({
+      where: { accounts: { some: { provider: "discord", providerAccountId: newMember.id } } },
+    });
+    if (user) {
+      await syncDiscordRoles(user.id, newMember.id);
+    }
+  } catch (error) {
+    console.error("[bot] Erro ao sincronizar cargos no member update:", error);
   }
 });
 

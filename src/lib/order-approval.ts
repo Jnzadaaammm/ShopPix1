@@ -3,6 +3,7 @@ import { deliverDigitalProducts } from "./digital-delivery";
 import { checkAndUpgradeRole } from "./roles";
 import { emit, REALTIME_EVENTS } from "./event-bus";
 import { getStoreSettings } from "./settings";
+import { notifyOrderPaid, notifyOrderDelivered } from "./discord-notify";
 
 /**
  * Pagamento confirmado pelo gateway. NÃO entrega o produto: o pedido fica
@@ -35,8 +36,10 @@ export async function approveAndDeliver(orderId: string, ownerEmail: string) {
     include: { items: { include: { product: true } } },
   });
   emit(REALTIME_EVENTS.ORDER_PAID, { orderId });
+  notifyOrderPaid(orderId).catch(() => {});
   try {
     await deliverDigitalProducts(orderId);
+    notifyOrderDelivered(orderId).catch(() => {});
   } catch (error) {
     console.error("Erro ao entregar produtos digitais:", error);
   }
