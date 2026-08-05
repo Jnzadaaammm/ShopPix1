@@ -5,6 +5,9 @@ import HeroSection from "@/components/HeroSection";
 import { prisma } from "@/lib/db";
 import { calculateRating } from "@/lib/rating";
 
+// Sempre buscar dados em tempo real, sem cache
+export const revalidate = 0;
+
 export default async function HomePage() {
   const [featuredProducts, categories] = await Promise.all([
     prisma.product.findMany({
