@@ -35,6 +35,8 @@ async function getAccessToken(): Promise<string> {
     headers: {
       Authorization: `Basic ${auth}`,
       "Content-Type": "application/x-www-form-urlencoded",
+      Accept: "application/json",
+      "Accept-Language": "en_US",
     },
     body: "grant_type=client_credentials",
   });
@@ -63,6 +65,8 @@ export async function createPayPalOrder(
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Accept: "application/json",
+      "Accept-Language": "en_US",
       Authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify({
@@ -109,6 +113,8 @@ export async function capturePayPalOrder(
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Accept: "application/json",
+        "Accept-Language": "en_US",
         Authorization: `Bearer ${accessToken}`,
       },
     }
