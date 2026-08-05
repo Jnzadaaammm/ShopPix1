@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { confirmPaymentIntent, createStripePayment } from "@/lib/stripe";
+import { capturePayPalOrder } from "@/lib/paypal";
 import { emit, REALTIME_EVENTS } from "@/lib/event-bus";
 import { requireOwner } from "@/lib/owner";
 import {
@@ -54,7 +55,7 @@ export async function PATCH(
   }
 
   const { id } = await params;
-  const { action, paymentMethodId } = await request.json();
+  const { action, paymentMethodId, paypalOrderId } = await request.json();
 
   const order = await prisma.order.findUnique({
     where: { id },
@@ -124,6 +125,38 @@ export async function PATCH(
       console.error("Erro no process_stripe_payment:", error);
       return NextResponse.json(
         { error: "Erro ao processar pagamento" },
+        { status: 500 }
+      );
+    }
+  }
+
+  if (action === "capture_paypal" && order.paymentMethod === "paypal" && order.status === "PENDING") {
+    try {
+      const payPalOrderId = paypalOrderId || order.paypalOrderId;
+      if (!payPalOrderId) {
+        return NextResponse.json({ error: "ID da ordem PayPal não encontrado" }, { status: 400 });
+      }
+
+      const result = await capturePayPalOrder(payPalOrderId);
+
+      if (result.status !== "COMPLETED") {
+        return NextResponse.json(
+          { error: "Pagamento PayPal não completado" },
+          { status: 402 }
+        );
+      }
+
+      await prisma.order.update({
+        where: { id: order.id },
+        data: { paypalCaptureId: result.paypalCaptureId },
+      });
+
+      const updated = await markAwaitingApproval(order.id);
+      return NextResponse.json(updated);
+    } catch (error) {
+      console.error("Erro no capture_paypal:", error);
+      return NextResponse.json(
+        { error: "Erro ao processar pagamento PayPal" },
         { status: 500 }
       );
     }

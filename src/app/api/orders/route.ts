@@ -3,6 +3,7 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { userHasPermission, forbiddenResponse } from "@/lib/roles";
 import { createStripePayment } from "@/lib/stripe";
+import { createPayPalOrder } from "@/lib/paypal";
 import { emit, REALTIME_EVENTS } from "@/lib/event-bus";
 
 export async function POST(request: Request) {
@@ -14,6 +15,10 @@ export async function POST(request: Request) {
   const { items, paymentMethod, couponCode } = await request.json();
   if (!items?.length) {
     return NextResponse.json({ error: "Carrinho vazio" }, { status: 400 });
+  }
+
+  if (!["stripe", "paypal", "pix"].includes(paymentMethod)) {
+    return NextResponse.json({ error: "Método de pagamento inválido" }, { status: 400 });
   }
 
   // Validar quantidades
@@ -151,7 +156,7 @@ export async function POST(request: Request) {
         discount,
         total,
         couponCode: appliedCouponCode || null,
-        paymentMethod: "stripe",
+        paymentMethod,
         items: { create: orderItems },
       },
       include: { items: { include: { product: true } } },
@@ -186,17 +191,35 @@ export async function POST(request: Request) {
 
   emit(REALTIME_EVENTS.ORDER_CREATED, { orderId: order.id });
 
-  const stripePayment = await createStripePayment(total, order.id);
-  const updatedOrder = await prisma.order.update({
-    where: { id: order.id },
-    data: { stripePaymentId: stripePayment.paymentIntentId },
-    include: { items: { include: { product: true } } },
-  });
+  if (paymentMethod === "stripe") {
+    const stripePayment = await createStripePayment(total, order.id);
+    const updatedOrder = await prisma.order.update({
+      where: { id: order.id },
+      data: { stripePaymentId: stripePayment.paymentIntentId },
+      include: { items: { include: { product: true } } },
+    });
 
-  return NextResponse.json({
-    ...updatedOrder,
-    stripeClientSecret: stripePayment.clientSecret,
-  });
+    return NextResponse.json({
+      ...updatedOrder,
+      stripeClientSecret: stripePayment.clientSecret,
+    });
+  }
+
+  if (paymentMethod === "paypal") {
+    const paypalPayment = await createPayPalOrder(total, order.id);
+    const updatedOrder = await prisma.order.update({
+      where: { id: order.id },
+      data: { paypalOrderId: paypalPayment.paypalOrderId },
+      include: { items: { include: { product: true } } },
+    });
+
+    return NextResponse.json({
+      ...updatedOrder,
+      paypalOrderId: paypalPayment.paypalOrderId,
+    });
+  }
+
+  return NextResponse.json(order);
 }
 
 export async function GET(request: Request) {

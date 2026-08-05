@@ -6,6 +6,7 @@ import { prisma } from "@/lib/db";
  */
 export const DEFAULT_PAYMENT_SETTINGS = {
   stripeEnabled: true,
+  paypalEnabled: true,
 };
 
 export type PaymentSettings = typeof DEFAULT_PAYMENT_SETTINGS;

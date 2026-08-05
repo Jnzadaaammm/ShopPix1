@@ -227,7 +227,7 @@ export default function AdminReportsPage() {
                   <div key={pm.method}>
                     <div className="mb-1 flex items-center justify-between">
                       <span className="font-medium text-gray-900 capitalize">
-                        {pm.method === "pix" ? "PIX" : pm.method === "stripe" ? "Cartão (Stripe)" : "Mercado Pago"}
+                        {pm.method === "pix" ? "PIX" : pm.method === "stripe" ? "Cartão (Stripe)" : pm.method === "paypal" ? "PayPal" : "Mercado Pago"}
                       </span>
                       <span className="text-sm text-gray-600">
                         {pm.count} pedidos · {formatCurrency(pm.revenue)}
@@ -237,7 +237,8 @@ export default function AdminReportsPage() {
                       <div
                         className={`h-2 rounded-full ${
                           pm.method === "pix" ? "bg-green-500" :
-                          pm.method === "stripe" ? "bg-purple-500" : "bg-blue-500"
+                          pm.method === "stripe" ? "bg-purple-500" :
+                          pm.method === "paypal" ? "bg-blue-600" : "bg-blue-500"
                         }`}
                         style={{ width: `${pct}%` }}
                       />

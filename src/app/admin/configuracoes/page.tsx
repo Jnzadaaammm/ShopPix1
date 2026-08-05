@@ -6,6 +6,7 @@ import PermissionGuard from "@/components/admin/PermissionGuard";
 
 interface PaymentSettings {
   stripeEnabled: boolean;
+  paypalEnabled: boolean;
 }
 
 export default function AdminSettingsPage() {
@@ -14,6 +15,7 @@ export default function AdminSettingsPage() {
   const [loading, setLoading] = useState(true);
   const [paymentSettings, setPaymentSettings] = useState<PaymentSettings>({
     stripeEnabled: true,
+    paypalEnabled: true,
   });
 
   useEffect(() => {
@@ -22,6 +24,7 @@ export default function AdminSettingsPage() {
       .then((data) => {
         setPaymentSettings({
           stripeEnabled: data.stripeEnabled ?? true,
+          paypalEnabled: data.paypalEnabled ?? true,
         });
         setLoading(false);
       })
@@ -54,6 +57,13 @@ export default function AdminSettingsPage() {
       desc: "Cartões via Stripe — internacional",
       icon: CreditCard,
       color: "green",
+    },
+    {
+      key: "paypalEnabled" as const,
+      label: "PayPal / Cartão (PayPal)",
+      desc: "Pagamento via PayPal ou cartão pelo PayPal",
+      icon: CreditCard,
+      color: "blue",
     },
   ];
 
