@@ -302,10 +302,6 @@ export async function syncDiscordRoles(
     });
   }
 
-  // console.log(
-    `[discord] Cargos sincronizados para ${discordUserId}: removidos=${rolesToRemove.length}, adicionados=${rolesToAdd.length}`
-  );
-
   return { ok: true };
 }
 
@@ -493,17 +489,11 @@ export async function setupDiscordRoles(): Promise<{
       body: JSON.stringify(positions),
     });
 
-    if (reorderRes.ok) {
-      // console.log(`[discord] Cargos reordenados hierarquicamente (posições ${startPos}-${startPos + siteToDiscordId.length - 1})`);
-    } else {
+    if (!reorderRes.ok) {
       const text = await reorderRes.text().catch(() => "");
       skipped.push(`Reordenação falhou: ${reorderRes.status} ${text}`);
     }
   }
-
-  // console.log(
-    `[discord] setupDiscordRoles: criados=${created.length}, atualizados=${updated.length}, pulados=${skipped.length}`
-  );
 
   return { ok: true, created, updated, skipped };
 }
