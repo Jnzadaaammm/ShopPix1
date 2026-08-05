@@ -56,14 +56,14 @@ export default async function HomePage() {
 
       {/* Features */}
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 text-slate-100">
           <div className="card group flex items-start gap-4 p-6 hover:-translate-y-1">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-green-400 to-green-600 text-white shadow-lg shadow-green-500/30 transition-transform group-hover:scale-110">
               <Zap className="h-6 w-6" />
             </div>
             <div>
-              <h3 className="font-semibold text-gray-900">Pagamento com Cartão</h3>
-              <p className="mt-1 text-sm text-gray-500">Pague em segundos com cartão via Stripe e receba confirmação imediata.</p>
+              <h3 className="font-semibold text-slate-100">Pagamento com Cartão</h3>
+              <p className="mt-1 text-sm text-slate-400">Pague em segundos com cartão via Stripe e receba confirmação imediata.</p>
             </div>
           </div>
           <div className="card group flex items-start gap-4 p-6 hover:-translate-y-1">
@@ -71,8 +71,8 @@ export default async function HomePage() {
               <CreditCard className="h-6 w-6" />
             </div>
             <div>
-              <h3 className="font-semibold text-gray-900">Cartão via Stripe</h3>
-              <p className="mt-1 text-sm text-gray-500">Pague com cartão (Visa, Master, Elo) via Stripe com segurança.</p>
+              <h3 className="font-semibold text-slate-100">Cartão via Stripe</h3>
+              <p className="mt-1 text-sm text-slate-400">Pague com cartão (Visa, Master, Elo) via Stripe com segurança.</p>
             </div>
           </div>
           <div className="card group flex items-start gap-4 p-6 hover:-translate-y-1">
@@ -80,8 +80,8 @@ export default async function HomePage() {
               <Download className="h-6 w-6" />
             </div>
             <div>
-              <h3 className="font-semibold text-gray-900">Entrega Imediata</h3>
-              <p className="mt-1 text-sm text-gray-500">Produtos digitais disponíveis logo após o pagamento.</p>
+              <h3 className="font-semibold text-slate-100">Entrega Imediata</h3>
+              <p className="mt-1 text-sm text-slate-400">Produtos digitais disponíveis logo após o pagamento.</p>
             </div>
           </div>
           <div className="card group flex items-start gap-4 p-6 hover:-translate-y-1">
@@ -89,22 +89,22 @@ export default async function HomePage() {
               <Shield className="h-6 w-6" />
             </div>
             <div>
-              <h3 className="font-semibold text-gray-900">Compra Segura</h3>
-              <p className="mt-1 text-sm text-gray-500">Login via Google ou Discord. Dados protegidos.</p>
+              <h3 className="font-semibold text-slate-100">Compra Segura</h3>
+              <p className="mt-1 text-sm text-slate-400">Login via Google ou Discord. Dados protegidos.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Produtos em Destaque */}
-      <section className="bg-white py-16">
+      <section className="bg-slate-950 py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between border-b-2 border-gray-100 pb-4">
             <div className="flex items-center gap-3">
               <div className="h-10 w-1.5 rounded-full bg-gradient-to-b from-brand-400 to-brand-600" />
               <div>
-                <h2 className="text-2xl font-bold text-gray-900">Produtos em Destaque</h2>
-                <p className="mt-1 text-gray-500">Os mais populares da nossa loja</p>
+                <h2 className="text-2xl font-bold text-slate-100">Produtos em Destaque</h2>
+                <p className="mt-1 text-slate-400">Os mais populares da nossa loja</p>
               </div>
             </div>
             <Link href="/produtos" className="btn-outline hidden sm:inline-flex">
@@ -136,17 +136,17 @@ export default async function HomePage() {
 
       {/* Seções por Categoria */}
       {categoriesWithProducts.map((cat, idx) => (
-        <section key={cat.id} className={`py-16 ${idx % 2 === 0 ? "bg-gray-50" : "bg-white"}`}>
+        <section key={cat.id} className={`py-16 ${idx % 2 === 0 ? "bg-slate-900" : "bg-slate-950"}`}>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex items-end justify-between border-b-2 border-gray-100 pb-4">
               <div className="flex items-center gap-3">
                 <div className="h-10 w-1.5 rounded-full bg-gradient-to-b from-brand-400 to-brand-600" />
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900">{cat.name}</h2>
+                  <h2 className="text-2xl font-bold text-slate-100">{cat.name}</h2>
                   {cat.description && (
-                    <p className="mt-1 text-sm text-gray-500">{cat.description}</p>
+                    <p className="mt-1 text-sm text-slate-400">{cat.description}</p>
                   )}
-                  <p className="mt-1 text-xs text-gray-400">
+                  <p className="mt-1 text-xs text-slate-500">
                     {cat._count.products} {cat._count.products === 1 ? "produto" : "produtos"}
                   </p>
                 </div>
@@ -187,17 +187,17 @@ export default async function HomePage() {
 
 
       {/* CTA */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-brand-600 via-brand-700 to-brand-800 py-20 animate-gradient">
+      <section className="relative overflow-hidden bg-slate-900 py-20">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggIGQ9Ik0zNiAzNGg2djZoLTZ6TTAgMzRoNnY2SDB6TTAgMGg2djZIMHptMzYgMGg2djZoLTZ6TTAgMzRoNnY2SDB6TTM2IDM0aDZ2NmgtNnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-20" />
         <div className="absolute -right-10 -top-10 h-60 w-60 rounded-full bg-brand-400/20 blur-3xl animate-float" />
         <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-white sm:text-4xl">Pronto para começar?</h2>
-          <p className="mt-3 text-brand-100">
+          <p className="mt-3 text-slate-400">
             Explore nosso catálogo de produtos digitais e receba seus arquivos imediatamente após o pagamento.
           </p>
           <Link
             href="/produtos"
-            className="mt-8 inline-flex items-center gap-2 rounded-xl bg-white px-8 py-4 font-semibold text-brand-600 shadow-xl shadow-brand-900/20 transition-all hover:bg-brand-50 hover:shadow-2xl active:scale-[0.98]"
+            className="btn-primary mt-8 px-8 py-4 text-base"
           >
             Ver Produtos <ArrowRight className="h-5 w-5" />
           </Link>

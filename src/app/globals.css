@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-gray-50 text-gray-900 antialiased;
+    @apply bg-slate-950 text-slate-100 antialiased;
   }
 
   /* Scrollbar customizada */
@@ -13,55 +13,54 @@
     height: 10px;
   }
   ::-webkit-scrollbar-track {
-    @apply bg-gray-100;
+    @apply bg-slate-900;
   }
   ::-webkit-scrollbar-thumb {
-    @apply rounded-full bg-gray-300 transition-colors;
+    @apply rounded-full bg-slate-700 transition-colors;
   }
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-brand-400;
+    @apply bg-brand-500;
   }
 
   /* Seleção de texto */
   ::selection {
-    @apply bg-brand-200 text-brand-900;
+    @apply bg-brand-500/30 text-white;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 py-3 font-semibold text-white shadow-lg shadow-brand-600/20 transition-all hover:bg-brand-700 hover:shadow-xl hover:shadow-brand-600/30 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 py-3 font-semibold text-white shadow-lg shadow-brand-600/20 transition-all hover:bg-brand-500 hover:shadow-xl hover:shadow-brand-500/30 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl border-2 border-gray-200 bg-white px-6 py-3 font-semibold text-gray-700 transition-all hover:border-brand-300 hover:bg-brand-50 active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border-2 border-slate-700 bg-slate-900 px-6 py-3 font-semibold text-slate-200 transition-all hover:border-brand-500 hover:bg-slate-800 active:scale-[0.98];
   }
 
   .btn-outline {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-all hover:border-brand-400 hover:bg-brand-50 hover:text-brand-700;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 px-4 py-2 text-sm font-medium text-slate-300 transition-all hover:border-brand-500 hover:bg-slate-800 hover:text-brand-300;
   }
 
   .card {
-    @apply rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:shadow-gray-200/50;
+    @apply rounded-2xl border border-slate-800 bg-slate-900 shadow-sm transition-all duration-300 hover:shadow-xl hover:shadow-brand-900/20;
   }
 
   .input {
-    @apply w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 placeholder:text-gray-400 transition-all focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10;
+    @apply w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 placeholder:text-slate-500 transition-all focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10;
   }
 
   /* Badge com gradiente */
   .badge-gradient {
-    @apply bg-gradient-to-r from-brand-500 to-brand-600 text-white;
+    @apply bg-gradient-to-r from-brand-600 to-brand-500 text-white;
   }
 
-  /* Glassmorphism */
+  /* Glassmorphism dark */
   .glass {
-    @apply border border-white/20 bg-white/70 backdrop-blur-xl;
+    @apply border border-white/10 bg-slate-900/70 backdrop-blur-xl;
   }
 }
 
 @layer utilities {
-  /* Animação de fade-in para elementos que aparecem */
   @keyframes fadeInUp {
     from {
       opacity: 0;
@@ -76,7 +75,6 @@
     animation: fadeInUp 0.5s ease-out forwards;
   }
 
-  /* Animação de slide-in */
   @keyframes slideIn {
     from {
       opacity: 0;
@@ -91,7 +89,6 @@
     animation: slideIn 0.4s ease-out forwards;
   }
 
-  /* Gradiente animado (para hero) */
   @keyframes gradientShift {
     0%, 100% {
       background-position: 0% 50%;
@@ -105,7 +102,6 @@
     animation: gradientShift 8s ease infinite;
   }
 
-  /* Float para elementos decorativos */
   @keyframes float {
     0%, 100% {
       transform: translateY(0);
@@ -118,7 +114,6 @@
     animation: float 4s ease-in-out infinite;
   }
 
-  /* Pulse suave para badges */
   @keyframes softPulse {
     0%, 100% {
       opacity: 1;
@@ -131,7 +126,6 @@
     animation: softPulse 2s ease-in-out infinite;
   }
 
-  /* Shimmer para skeletons */
   @keyframes shimmer {
     0% {
       background-position: -1000px 0;
@@ -141,12 +135,11 @@
     }
   }
   .shimmer {
-    background: linear-gradient(90deg, #f3f4f6 0%, #e5e7eb 50%, #f3f4f6 100%);
+    background: linear-gradient(90deg, #1e293b 0%, #334155 50%, #1e293b 100%);
     background-size: 1000px 100%;
     animation: shimmer 2s infinite;
   }
 
-  /* Line clamp */
   .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;

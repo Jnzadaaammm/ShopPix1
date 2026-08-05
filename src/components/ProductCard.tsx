@@ -81,9 +81,9 @@ function ProductCard({
   };
 
   return (
-    <div className="card group relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-brand-200/40">
+    <div className="card group relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-brand-900/40">
       <Link href={`/produtos/${id}`}>
-        <div className="relative aspect-square overflow-hidden bg-gray-100">
+        <div className="relative aspect-square overflow-hidden bg-slate-900">
           <ImageWithFallback
             src={image}
             alt={name}
@@ -91,14 +91,12 @@ function ProductCard({
             className="object-cover transition-transform duration-700 group-hover:scale-110"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
           />
-          {/* Gradiente suave na parte inferior da imagem */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-          {/* Badges no topo */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           <div className="absolute left-3 top-3 flex flex-col gap-1.5">
-            <span className="rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-gray-600 backdrop-blur-sm">
+            <span className="rounded-full bg-slate-950/90 px-3 py-1 text-xs font-medium text-slate-300 backdrop-blur-sm">
               {categoryName}
             </span>
-            <span className="flex w-fit items-center gap-1 rounded-full bg-purple-600 px-2 py-1 text-xs font-medium text-white">
+            <span className="flex w-fit items-center gap-1 rounded-full bg-brand-600 px-2 py-1 text-xs font-medium text-white">
               {stockMode === "CREDENTIALS" ? (
                 <><KeyRound className="h-3 w-3" /> Credencial</>
               ) : (
@@ -107,14 +105,13 @@ function ProductCard({
             </span>
           </div>
 
-          {/* Botão de favoritos */}
           <button
             onClick={toggleWishlist}
             aria-label={wishlisted ? "Remover dos favoritos" : "Adicionar aos favoritos"}
             className={`absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full backdrop-blur-sm transition-all active:scale-90 ${
               wishlisted
                 ? "bg-red-500 text-white"
-                : "bg-white/90 text-gray-600 hover:bg-white hover:text-red-500"
+                : "bg-slate-950/90 text-slate-300 hover:bg-slate-900 hover:text-red-400"
             }`}
             title="Favoritar"
           >
@@ -124,7 +121,7 @@ function ProductCard({
       </Link>
       <div className="p-4">
         <Link href={`/produtos/${id}`}>
-          <h3 className="font-semibold text-gray-900 line-clamp-2 hover:text-brand-600 transition-colors">
+          <h3 className="font-semibold text-slate-100 line-clamp-2 hover:text-brand-400 transition-colors">
             {name}
           </h3>
         </Link>
@@ -137,24 +134,24 @@ function ProductCard({
                   className={`h-3 w-3 ${
                     star <= Math.round(rating)
                       ? "fill-yellow-400 text-yellow-400"
-                      : "text-gray-300"
+                      : "text-slate-600"
                   }`}
                 />
               ))}
             </div>
-            <span className="text-xs text-gray-500">({reviewCount || 0})</span>
+            <span className="text-xs text-slate-500">({reviewCount || 0})</span>
           </div>
         )}
         <div className="mt-3 flex items-center justify-between">
           <div>
-            <span className="text-lg font-bold text-brand-600">
+            <span className="text-lg font-bold text-brand-400">
               {formatCurrency(price)}
             </span>
           </div>
           <button
             onClick={handleAddCart}
             aria-label={`Adicionar ${name} ao carrinho`}
-            className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-600 text-white transition-all hover:bg-brand-700 hover:scale-110 active:scale-90"
+            className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-600 text-white transition-all hover:bg-brand-500 hover:scale-110 active:scale-90"
             title="Adicionar ao carrinho"
           >
             <ShoppingCart className="h-4 w-4" />

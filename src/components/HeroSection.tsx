@@ -8,79 +8,69 @@ export default function HeroSection() {
   const { data: session } = useSession();
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-brand-600 via-brand-700 to-brand-900 animate-gradient">
-      {/* Padrão de pontos de fundo */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggIGQ9Ik0zNiAzNGg2djZoLTZ6TTAgMzRoNnY2SDB6TTAgMGg2djZIMHptMzYgMGg2djZoLTZ6TTAgMzRoNnY2SDB6TTM2IDM0aDZ2NmgtNnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30" />
+    <section className="relative overflow-hidden bg-slate-950">
+      {/* Grade de pontos sutil */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(124,58,237,0.12)_1px,transparent_0)] bg-[length:32px_32px]" />
 
-      {/* Blobs decorativos flutuantes */}
-      <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-brand-400/20 blur-3xl animate-float" />
-      <div className="absolute -bottom-32 left-1/3 h-80 w-80 rounded-full bg-brand-300/10 blur-3xl" style={{ animationDelay: "2s" }} />
+      {/* Blobs decorativos */}
+      <div className="absolute -right-20 -top-20 h-96 w-96 rounded-full bg-brand-600/20 blur-3xl" />
+      <div className="absolute -bottom-32 left-1/3 h-96 w-96 rounded-full bg-brand-500/10 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
-        <div className="max-w-2xl">
-          {/* Badge animado */}
-          <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-md ring-1 ring-white/20 animate-fade-in-up">
-            <Sparkles className="h-4 w-4 text-yellow-300" />
-            Pagamento instantâneo: Cartão via Stripe
+        <div className="max-w-3xl text-center lg:text-left">
+          {/* Badge */}
+          <span className="inline-flex items-center gap-2 rounded-full border border-brand-500/30 bg-brand-500/10 px-4 py-1.5 text-sm font-medium text-brand-300 backdrop-blur-md animate-fade-in-up">
+            <Sparkles className="h-3.5 w-3.5" />
+            Entrega Instantânea
           </span>
 
-          <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl animate-fade-in-up" style={{ animationDelay: "0.1s", opacity: 0 }}>
-            Compre online com{" "}
-            <span className="bg-gradient-to-r from-brand-200 to-yellow-200 bg-clip-text text-transparent">
-              facilidade
-            </span>
+          <h1
+            className="mt-6 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl animate-fade-in-up"
+            style={{ animationDelay: "0.1s", opacity: 0 }}
+          >
+            Produtos Digitais <br className="hidden sm:block" />
+            <span className="text-brand-500">Licenças</span> sem Enrolação
           </h1>
-          <p className="mt-6 text-lg text-brand-100 animate-fade-in-up" style={{ animationDelay: "0.2s", opacity: 0 }}>
-            Produtos selecionados com os melhores preços. Pague com cartão via Stripe e receba seus produtos digitais imediatamente.
+          <p
+            className="mt-6 text-lg text-slate-400 animate-fade-in-up"
+            style={{ animationDelay: "0.2s", opacity: 0 }}
+          >
+            Licenças, softwares, games e assinaturas com entrega na hora.
+            <br className="hidden sm:block" />
+            <span className="text-slate-200 font-medium">Pagou? Recebeu.</span>
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-4 animate-fade-in-up" style={{ animationDelay: "0.3s", opacity: 0 }}>
+          <div className="mt-8 flex flex-wrap justify-center gap-4 lg:justify-start animate-fade-in-up" style={{ animationDelay: "0.3s", opacity: 0 }}>
             <Link
               href="/produtos"
-              className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3.5 font-semibold text-brand-700 shadow-xl shadow-brand-900/20 transition-all hover:bg-brand-50 hover:shadow-2xl active:scale-[0.98]"
+              className="inline-flex items-center gap-2 rounded-xl bg-brand-600 px-6 py-3.5 font-semibold text-white shadow-lg shadow-brand-600/25 transition-all hover:bg-brand-500 hover:shadow-xl active:scale-[0.98]"
             >
-              Ver Produtos <ArrowRight className="h-4 w-4" />
+              Ver Catálogo <ArrowRight className="h-4 w-4" />
             </Link>
-            {!session ? (
-              <Link
-                href="/login"
-                className="inline-flex items-center gap-2 rounded-xl border-2 border-white/30 px-6 py-3.5 font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/10 active:scale-[0.98]"
-              >
-                Criar Conta
-              </Link>
-            ) : (
-              <Link
-                href="/pedidos"
-                className="inline-flex items-center gap-2 rounded-xl border-2 border-white/30 px-6 py-3.5 font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/10 active:scale-[0.98]"
-              >
-                Meus Pedidos
-              </Link>
-            )}
+            <Link
+              href="/faq"
+              className="inline-flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900 px-6 py-3.5 font-semibold text-slate-200 transition-all hover:border-slate-600 hover:bg-slate-800 active:scale-[0.98]"
+            >
+              Saber Mais
+            </Link>
           </div>
 
-          {/* Mini stats */}
-          <div className="mt-12 flex flex-wrap gap-8 animate-fade-in-up" style={{ animationDelay: "0.4s", opacity: 0 }}>
-            <div className="flex items-center gap-2">
-              <Zap className="h-5 w-5 text-yellow-300" />
-              <span className="text-sm text-brand-100">Entrega imediata</span>
+          {/* Mini badges */}
+          <div className="mt-12 flex flex-wrap justify-center gap-6 lg:justify-start animate-fade-in-up" style={{ animationDelay: "0.4s", opacity: 0 }}>
+            <div className="flex items-center gap-2 text-sm text-slate-400">
+              <Zap className="h-4 w-4 text-brand-400" />
+              Entrega na Hora
             </div>
-            <div className="flex items-center gap-2">
-              <Shield className="h-5 w-5 text-green-300" />
-              <span className="text-sm text-brand-100">Compra 100% segura</span>
+            <div className="flex items-center gap-2 text-sm text-slate-400">
+              <Shield className="h-4 w-4 text-brand-400" />
+              Compra Segura
             </div>
-            <div className="flex items-center gap-2">
-              <Download className="h-5 w-5 text-purple-300" />
-              <span className="text-sm text-brand-100">Download instantâneo</span>
+            <div className="flex items-center gap-2 text-sm text-slate-400">
+              <Download className="h-4 w-4 text-brand-400" />
+              Suporte Real
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Onda decorativa na parte inferior */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1440 80" className="h-12 w-full sm:h-20" preserveAspectRatio="none">
-          <path d="M0,40 C320,80 640,0 960,40 C1280,80 1440,40 1440,40 L1440,80 L0,80 Z" fill="rgb(249, 250, 251)" />
-        </svg>
       </div>
     </section>
   );
