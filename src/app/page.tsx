@@ -90,6 +90,7 @@ export default async function HomePage() {
               key={f.title}
               className={`group animate-fade-in-up rounded-2xl border border-slate-800 bg-slate-900/50 p-6 transition-all duration-500 hover:-translate-y-1 hover:border-slate-700 hover:bg-slate-900 hover:shadow-2xl hover:shadow-brand-900/20`}
               style={{ animationDelay: `${i * 100}ms`, opacity: 0 }}
+            >
               <div
                 className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${f.from} ${f.to} text-white shadow-lg transition-transform group-hover:scale-110`}
               >
