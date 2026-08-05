@@ -177,6 +177,7 @@ model Order {
   stripeClientSecret  String?
   paypalOrderId       String?
   paypalCaptureId     String?
+  paymentProof        String?
   // Aprovação manual do dono
   approvedAt          DateTime?   // quando o dono liberou o pedido
   approvedBy          String?     // email do dono que aprovou

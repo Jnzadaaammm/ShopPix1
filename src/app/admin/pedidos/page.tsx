@@ -32,6 +32,7 @@ interface Order {
   total: number;
   status: string;
   paymentMethod: string;
+  paymentProof: string | null;
   createdAt: string;
   items: OrderItem[];
   user?: {
@@ -372,6 +373,22 @@ export default function AdminOrdersPage() {
                     Aprove para entregar os produtos ao cliente, ou rejeite para cancelar o pedido.
                   </p>
                 </div>
+              </div>
+            )}
+
+            {/* Comprovante PIX */}
+            {selectedOrder.paymentMethod === "pix" && (
+              <div className="mb-6 rounded-lg border bg-gray-50 p-4">
+                <h3 className="mb-3 font-semibold text-gray-900">Comprovante PIX</h3>
+                {selectedOrder.paymentProof ? (
+                  <img
+                    src={selectedOrder.paymentProof}
+                    alt="Comprovante de pagamento PIX"
+                    className="max-h-96 rounded-lg border"
+                  />
+                ) : (
+                  <p className="text-sm text-gray-600">Comprovante ainda não enviado.</p>
+                )}
               </div>
             )}
 

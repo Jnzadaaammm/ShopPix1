@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Minus, Plus, Trash2, ShoppingBag, ArrowRight, CreditCard } from "lucide-react";
+import { Minus, Plus, Trash2, ShoppingBag, ArrowRight, CreditCard, QrCode } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
 import { formatCurrency } from "@/lib/utils";
 import { toast } from "@/components/ui/Toaster";
@@ -139,6 +139,10 @@ export default function CartPage() {
                   <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.77.77 0 0 1 .757-.629h6.69c2.884 0 5.108.558 6.006 2.885.396 1.028.477 2.104.093 3.168-.53 1.473-1.617 2.504-3.067 2.98h.002c1.246.337 2.095.94 2.617 1.865.52.924.66 2.107.36 3.38-.328 1.38-1.002 2.48-1.995 3.26-1.19.94-2.78 1.383-4.578 1.383H9.84a.77.77 0 0 0-.757.63l-.003-.001-.002.006c-.002.004-.002.008-.002.012L7.076 21.337z" />
                 </svg>
                 PayPal
+              </div>
+              <span className="text-gray-300">|</span>
+              <div className="flex items-center gap-1 text-xs text-gray-500" title="PIX manual">
+                <QrCode className="h-3 w-3" /> PIX
               </div>
             </div>
           </div>

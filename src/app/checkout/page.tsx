@@ -9,7 +9,8 @@ import { formatCurrency } from "@/lib/utils";
 import ImageWithFallback from "@/components/ImageWithFallback";
 import StripeCardForm from "@/components/StripeCardForm";
 import PayPalPaymentForm from "@/components/PayPalPaymentForm";
-import { Loader2, Ticket, X, CreditCard } from "lucide-react";
+import PixProofModal from "@/components/PixProofModal";
+import { Loader2, Ticket, X, CreditCard, Copy, Check, QrCode } from "lucide-react";
 import { toast } from "@/components/ui/Toaster";
 
 interface Order {
@@ -17,6 +18,7 @@ interface Order {
   total: number;
   status: string;
   paymentMethod: string;
+  paymentProof: string | null;
   stripeClientSecret: string | null;
   paypalOrderId: string | null;
 }
@@ -31,7 +33,17 @@ export default function CheckoutPage() {
   const [couponCode, setCouponCode] = useState("");
   const [appliedCoupon, setAppliedCoupon] = useState<{ code: string; discount: number } | null>(null);
   const [couponLoading, setCouponLoading] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState<"stripe" | "paypal">("stripe");
+  const [paymentMethod, setPaymentMethod] = useState<"stripe" | "paypal" | "pix">("stripe");
+  const [settings, setSettings] = useState<{ stripeEnabled: boolean; paypalEnabled: boolean; pixEnabled: boolean; pixKey: string } | null>(null);
+  const [showPixModal, setShowPixModal] = useState(false);
+  const [pixKeyCopied, setPixKeyCopied] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/settings")
+      .then((r) => r.json())
+      .then((data) => setSettings(data))
+      .catch(() => setSettings(null));
+  }, []);
 
   // Desconto do cargo do usuário
   const roleDiscount = (session?.user as any)?.role?.discount || 0;
@@ -124,6 +136,81 @@ export default function CheckoutPage() {
   }
 
   if (order) {
+    if (order.paymentMethod === "pix") {
+      return (
+        <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8">
+          <h1 className="mb-8 text-3xl font-bold text-gray-900">Pagamento via PIX</h1>
+          <div className="card p-6">
+            <div className="mb-6">
+              <p className="text-sm text-gray-500">Valor a transferir</p>
+              <p className="text-3xl font-bold text-gray-900">{formatCurrency(order.total)}</p>
+            </div>
+
+            {order.status === "AWAITING_APPROVAL" ? (
+              <div className="rounded-lg bg-blue-50 p-4 text-blue-700">
+                <p className="font-medium">Comprovante enviado!</p>
+                <p className="text-sm">Seu pedido está aguardando aprovação.</p>
+              </div>
+            ) : (
+              <>
+                <div className="mb-4">
+                  <p className="text-sm text-gray-500">Chave PIX</p>
+                  <div className="mt-1 flex items-center gap-2 rounded-lg border bg-gray-50 p-3">
+                    <p className="flex-1 break-all font-mono text-sm text-gray-900">
+                      {settings?.pixKey || "Chave PIX não configurada"}
+                    </p>
+                    {settings?.pixKey && (
+                      <button
+                        onClick={() => {
+                          navigator.clipboard.writeText(settings.pixKey);
+                          setPixKeyCopied(true);
+                          setTimeout(() => setPixKeyCopied(false), 2000);
+                        }}
+                        className="rounded-lg bg-brand-100 p-2 text-brand-600 hover:bg-brand-200"
+                        title="Copiar chave"
+                      >
+                        {pixKeyCopied ? (
+                          <Check className="h-4 w-4" />
+                        ) : (
+                          <Copy className="h-4 w-4" />
+                        )}
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                <p className="text-sm text-gray-600">
+                  Faça o pagamento e depois clique no botão abaixo para anexar o comprovante.
+                </p>
+
+                <button
+                  onClick={() => setShowPixModal(true)}
+                  disabled={!settings?.pixKey}
+                  className="btn-primary mt-6 w-full disabled:opacity-50"
+                >
+                  Já paguei
+                </button>
+
+                {showPixModal && (
+                  <PixProofModal
+                    orderId={order.id}
+                    onClose={() => setShowPixModal(false)}
+                    onSubmitted={() => router.push("/pedidos")}
+                  />
+                )}
+              </>
+            )}
+          </div>
+
+          <div className="mt-6 text-center">
+            <Link href="/pedidos" className="text-sm text-brand-600 hover:underline">
+              Ver meus pedidos
+            </Link>
+          </div>
+        </div>
+      );
+    }
+
     if (order.paymentMethod === "paypal" && order.paypalOrderId) {
       return (
         <PayPalPaymentForm
@@ -258,6 +345,23 @@ export default function CheckoutPage() {
                   <p className="text-sm text-gray-500">Pague com conta PayPal ou cartão via PayPal.</p>
                 </div>
               </button>
+
+              {(settings?.pixEnabled !== false) && (
+                <button
+                  onClick={() => setPaymentMethod("pix")}
+                  className={`flex w-full items-center gap-3 rounded-lg border p-4 text-left transition-colors ${
+                    paymentMethod === "pix"
+                      ? "border-brand-600 bg-brand-50"
+                      : "border-gray-200 hover:bg-gray-50"
+                  }`}
+                >
+                  <QrCode className="h-5 w-5 text-green-600" />
+                  <div>
+                    <p className="font-medium text-gray-900">PIX Manual</p>
+                    <p className="text-sm text-gray-500">Transfira via PIX e envie o comprovante.</p>
+                  </div>
+                </button>
+              )}
             </div>
           </div>
 
@@ -292,7 +396,11 @@ export default function CheckoutPage() {
                 <Loader2 className="h-5 w-5 animate-spin" /> Processando...
               </>
             ) : (
-              paymentMethod === "stripe" ? "Confirmar e Pagar via Cartão" : "Confirmar e Pagar via PayPal"
+              paymentMethod === "stripe"
+                ? "Confirmar e Pagar via Cartão"
+                : paymentMethod === "paypal"
+                ? "Confirmar e Pagar via PayPal"
+                : "Confirmar e Pagar via PIX"
             )}
           </button>
         </div>

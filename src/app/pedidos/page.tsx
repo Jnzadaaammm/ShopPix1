@@ -5,11 +5,12 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState, useMemo, useCallback } from "react";
 import Link from "next/link";
 import {
-  Package, Loader2, ArrowRight, RefreshCw, Key, Copy, Check, Download, Clock,
+  Package, Loader2, ArrowRight, RefreshCw, Key, Copy, Check, Download, Clock, Upload,
 } from "lucide-react";
 import { formatCurrency, formatDate, ORDER_STATUS_LABELS, ORDER_STATUS_COLORS } from "@/lib/utils";
 import { toast } from "@/components/ui/Toaster";
 import { usePolling } from "@/lib/use-polling";
+import PixProofModal from "@/components/PixProofModal";
 
 interface Credential {
   id: string;
@@ -31,6 +32,7 @@ interface Order {
   id: string;
   total: number;
   status: string;
+  paymentMethod: string;
   createdAt: string;
   items: OrderItem[];
 }
@@ -41,6 +43,7 @@ export default function OrdersPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [proofOrderId, setProofOrderId] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
 
   useEffect(() => {
@@ -250,12 +253,23 @@ export default function OrdersPage() {
               </div>
 
               {order.status === "PENDING" && (
-                <Link
-                  href={`/checkout/${order.id}`}
-                  className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-brand-600 hover:underline"
-                >
-                  Finalizar Pagamento <ArrowRight className="h-3 w-3" />
-                </Link>
+                <>
+                  {order.paymentMethod === "pix" ? (
+                    <button
+                      onClick={() => setProofOrderId(order.id)}
+                      className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-green-600 hover:underline"
+                    >
+                      Já paguei <Upload className="h-3 w-3" />
+                    </button>
+                  ) : (
+                    <Link
+                      href={`/checkout/${order.id}`}
+                      className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-brand-600 hover:underline"
+                    >
+                      Finalizar Pagamento <ArrowRight className="h-3 w-3" />
+                    </Link>
+                  )}
+                </>
               )}
 
               {order.status === "PAID" && (
@@ -269,6 +283,17 @@ export default function OrdersPage() {
             </div>
           ))}
         </div>
+      )}
+
+      {proofOrderId && (
+        <PixProofModal
+          orderId={proofOrderId}
+          onClose={() => setProofOrderId(null)}
+          onSubmitted={() => {
+            setProofOrderId(null);
+            refetch();
+          }}
+        />
       )}
     </div>
   );

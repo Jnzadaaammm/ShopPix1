@@ -55,7 +55,7 @@ export async function PATCH(
   }
 
   const { id } = await params;
-  const { action, paymentMethodId, paypalOrderId } = await request.json();
+  const { action, paymentMethodId, paypalOrderId, paymentProof, reason } = await request.json();
 
   const order = await prisma.order.findUnique({
     where: { id },
@@ -97,7 +97,10 @@ export async function PATCH(
     await releaseReservedCredentials(order.id);
     const rejected = await prisma.order.update({
       where: { id },
-      data: { status: "CANCELLED" },
+      data: {
+        status: "CANCELLED",
+        rejectionReason: reason || null,
+      },
       include: { items: { include: { product: true } } },
     });
     emit(REALTIME_EVENTS.ORDER_UPDATED, { orderId: order.id });
@@ -160,6 +163,32 @@ export async function PATCH(
         { status: 500 }
       );
     }
+  }
+
+  if (action === "submit_pix_proof" && isOwnOrder) {
+    if (order.paymentMethod !== "pix" || order.status !== "PENDING") {
+      return NextResponse.json({ error: "Pedido não aceita comprovante PIX" }, { status: 400 });
+    }
+
+    if (!paymentProof || typeof paymentProof !== "string") {
+      return NextResponse.json({ error: "Comprovante é obrigatório" }, { status: 400 });
+    }
+
+    if (paymentProof.length > 3_000_000) {
+      return NextResponse.json({ error: "Comprovante muito grande (máx. ~2MB)" }, { status: 400 });
+    }
+
+    const updated = await prisma.order.update({
+      where: { id: order.id },
+      data: {
+        paymentProof,
+        status: "AWAITING_APPROVAL",
+      },
+      include: { items: { include: { product: true } } },
+    });
+
+    emit(REALTIME_EVENTS.ORDER_UPDATED, { orderId: order.id });
+    return NextResponse.json(updated);
   }
 
   if (action === "expired" && isOwner) {

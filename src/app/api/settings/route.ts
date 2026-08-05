@@ -27,7 +27,7 @@ export async function PUT(request: Request) {
 
   try {
     const body = await request.json();
-    const allowed = ["stripeEnabled", "paypalEnabled"];
+    const allowed = ["stripeEnabled", "paypalEnabled", "pixEnabled"];
     const updates: Record<string, boolean> = {};
 
     for (const key of allowed) {

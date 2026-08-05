@@ -1,12 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Store, Mail, CreditCard, Save, Check } from "lucide-react";
+import { Store, Mail, CreditCard, Save, Check, QrCode, AlertCircle } from "lucide-react";
 import PermissionGuard from "@/components/admin/PermissionGuard";
 
 interface PaymentSettings {
   stripeEnabled: boolean;
   paypalEnabled: boolean;
+  pixEnabled: boolean;
+  pixKey: string;
 }
 
 export default function AdminSettingsPage() {
@@ -16,6 +18,8 @@ export default function AdminSettingsPage() {
   const [paymentSettings, setPaymentSettings] = useState<PaymentSettings>({
     stripeEnabled: true,
     paypalEnabled: true,
+    pixEnabled: true,
+    pixKey: "",
   });
 
   useEffect(() => {
@@ -25,6 +29,8 @@ export default function AdminSettingsPage() {
         setPaymentSettings({
           stripeEnabled: data.stripeEnabled ?? true,
           paypalEnabled: data.paypalEnabled ?? true,
+          pixEnabled: data.pixEnabled ?? true,
+          pixKey: data.pixKey || "",
         });
         setLoading(false);
       })
@@ -64,6 +70,13 @@ export default function AdminSettingsPage() {
       desc: "Pagamento via PayPal ou cartão pelo PayPal",
       icon: CreditCard,
       color: "blue",
+    },
+    {
+      key: "pixEnabled" as const,
+      label: "PIX Manual",
+      desc: "O cliente transfere via PIX e envia o comprovante para aprovação.",
+      icon: QrCode,
+      color: "green",
     },
   ];
 
@@ -144,6 +157,20 @@ export default function AdminSettingsPage() {
             })}
           </div>
         )}
+
+        <div className="mt-4 rounded-lg border bg-gray-50 p-4">
+          <p className="text-sm font-medium text-gray-700">Chave PIX</p>
+          {paymentSettings.pixKey ? (
+            <p className="mt-1 break-all font-mono text-sm text-gray-900">{paymentSettings.pixKey}</p>
+          ) : (
+            <p className="mt-1 flex items-center gap-2 text-sm text-amber-700">
+              <AlertCircle className="h-4 w-4" /> Chave PIX não configurada no arquivo .env
+            </p>
+          )}
+          <p className="mt-2 text-xs text-gray-500">
+            Configure a variável <code className="rounded bg-gray-200 px-1">PIX_KEY</code> no arquivo .env e faça o redeploy para alterar.
+          </p>
+        </div>
 
         <div className="mt-4 rounded-lg bg-amber-50 border border-amber-200 p-3 text-sm text-amber-800">
           <strong>Atenção:</strong> Para que um método funcione, além de ativá-lo aqui,

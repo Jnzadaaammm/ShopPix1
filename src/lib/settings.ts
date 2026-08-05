@@ -7,9 +7,15 @@ import { prisma } from "@/lib/db";
 export const DEFAULT_PAYMENT_SETTINGS = {
   stripeEnabled: true,
   paypalEnabled: true,
+  pixEnabled: true,
 };
 
-export type PaymentSettings = typeof DEFAULT_PAYMENT_SETTINGS;
+export interface PaymentSettings {
+  stripeEnabled: boolean;
+  paypalEnabled: boolean;
+  pixEnabled: boolean;
+  pixKey: string;
+}
 
 /**
  * Lê as configurações de pagamento do banco (Setting key-value).
@@ -24,10 +30,13 @@ export async function getPaymentSettings(): Promise<PaymentSettings> {
     },
   });
 
-  const settings = { ...DEFAULT_PAYMENT_SETTINGS };
+  const settings: PaymentSettings = { ...DEFAULT_PAYMENT_SETTINGS, pixKey: "" };
   for (const row of rows) {
-    (settings as Record<string, boolean>)[row.key] = row.value === "true";
+    if ((settings as unknown as Record<string, boolean | string>)[row.key] !== undefined) {
+      (settings as unknown as Record<string, boolean | string>)[row.key] = row.value === "true";
+    }
   }
+  settings.pixKey = process.env.PIX_KEY || "";
   return settings;
 }
 
