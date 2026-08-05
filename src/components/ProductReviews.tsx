@@ -128,7 +128,7 @@ export default function ProductReviews({ productId }: { productId: string }) {
                 <Star
                   key={s}
                   className={`h-4 w-4 ${
-                    s <= Math.round(avgRating) ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+                    s <= Math.round(avgRating) ? "fill-yellow-400 text-yellow-400" : "text-slate-600"
                   }`}
                 />
               ))}
@@ -156,7 +156,7 @@ export default function ProductReviews({ productId }: { productId: string }) {
 
       {/* Formulário */}
       {showForm && (
-        <form onSubmit={handleSubmit} className="mt-4 rounded-xl border bg-slate-950 p-5 shadow-sm">
+        <form onSubmit={handleSubmit} className="card mt-4 p-5">
           <h3 className="font-semibold text-slate-100">Sua avaliação</h3>
           <div className="mt-3 flex gap-1">
             {[1, 2, 3, 4, 5].map((s) => (
@@ -168,7 +168,7 @@ export default function ProductReviews({ productId }: { productId: string }) {
               >
                 <Star
                   className={`h-7 w-7 transition-colors ${
-                    s <= rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300 hover:text-yellow-300"
+                    s <= rating ? "fill-yellow-400 text-yellow-400" : "text-slate-500 hover:text-yellow-300"
                   }`}
                 />
               </button>
@@ -179,7 +179,7 @@ export default function ProductReviews({ productId }: { productId: string }) {
             onChange={(e) => setComment(e.target.value)}
             placeholder="Conte sobre sua experiência com o produto (opcional)..."
             rows={4}
-            className="mt-3 w-full rounded-lg border px-3 py-2 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200"
+            className="input mt-3"
           />
           <button
             type="submit"
@@ -199,7 +199,7 @@ export default function ProductReviews({ productId }: { productId: string }) {
           </p>
         ) : (
           reviews.map((review) => (
-            <div key={review.id} className="rounded-xl border bg-slate-950 p-4 shadow-sm">
+            <div key={review.id} className="card p-4">
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-3">
                   {review.user.image ? (
@@ -217,7 +217,7 @@ export default function ProductReviews({ productId }: { productId: string }) {
                           <Star
                             key={s}
                             className={`h-3 w-3 ${
-                              s <= review.rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+                              s <= review.rating ? "fill-yellow-400 text-yellow-400" : "text-slate-500"
                             }`}
                           />
                         ))}
