@@ -4,6 +4,8 @@ import { prisma } from "@/lib/db";
 import { userHasPermission, forbiddenResponse } from "@/lib/roles";
 import { createStripePayment } from "@/lib/stripe";
 import { createPayPalOrder } from "@/lib/paypal";
+import { generateStaticBrCode, projectReceiverName, projectCity, buildBrCodeRef } from "@thiagoprazeres/pix-static-brcode";
+import QRCode from "qrcode";
 import { emit, REALTIME_EVENTS } from "@/lib/event-bus";
 
 export async function POST(request: Request) {
@@ -218,6 +220,38 @@ export async function POST(request: Request) {
       ...updatedOrder,
       paypalOrderId: paypalPayment.paypalOrderId,
     });
+  }
+
+  if (paymentMethod === "pix") {
+    const pixKey = process.env.PIX_KEY?.trim();
+    const pixName = process.env.PIX_NAME?.trim();
+    const pixCity = process.env.PIX_CITY?.trim();
+
+    if (!pixKey || !pixName || !pixCity) {
+      throw new Error("PIX_KEY, PIX_NAME e PIX_CITY devem estar configurados no .env");
+    }
+
+    const brcode = generateStaticBrCode({
+      pixKey,
+      receiverName: projectReceiverName(pixName),
+      receiverCity: projectCity(pixCity),
+      referenceLabel: buildBrCodeRef(order.id),
+      amount: order.total,
+      description: `Pedido #${order.id.slice(-8).toUpperCase()}`,
+    });
+
+    const qrCodeBase64 = await QRCode.toDataURL(brcode, { width: 256, margin: 2 });
+
+    const updatedOrder = await prisma.order.update({
+      where: { id: order.id },
+      data: {
+        pixCopyPaste: brcode,
+        pixQrCode: qrCodeBase64,
+      },
+      include: { items: { include: { product: true } } },
+    });
+
+    return NextResponse.json(updatedOrder);
   }
 
   return NextResponse.json(order);

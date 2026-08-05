@@ -19,6 +19,8 @@ interface Order {
   status: string;
   paymentMethod: string;
   paymentProof: string | null;
+  pixQrCode: string | null;
+  pixCopyPaste: string | null;
   stripeClientSecret: string | null;
   paypalOrderId: string | null;
 }
@@ -37,6 +39,7 @@ export default function CheckoutPage() {
   const [settings, setSettings] = useState<{ stripeEnabled: boolean; paypalEnabled: boolean; pixEnabled: boolean; pixKey: string } | null>(null);
   const [showPixModal, setShowPixModal] = useState(false);
   const [pixKeyCopied, setPixKeyCopied] = useState(false);
+  const [pixPasteCopied, setPixPasteCopied] = useState(false);
 
   useEffect(() => {
     fetch("/api/settings")
@@ -153,27 +156,56 @@ export default function CheckoutPage() {
               </div>
             ) : (
               <>
+                {order.pixQrCode ? (
+                  <div className="mb-4 flex flex-col items-center">
+                    <p className="text-sm text-gray-500">Escaneie o QR Code</p>
+                    <img
+                      src={order.pixQrCode}
+                      alt="QR Code PIX"
+                      className="mt-2 h-56 w-56 rounded-lg border"
+                    />
+                  </div>
+                ) : (
+                  <div className="mb-4">
+                    <p className="text-sm text-gray-500">Chave PIX</p>
+                    <div className="mt-1 flex items-center gap-2 rounded-lg border bg-gray-50 p-3">
+                      <p className="flex-1 break-all font-mono text-sm text-gray-900">
+                        {settings?.pixKey || "Chave PIX não configurada"}
+                      </p>
+                      {settings?.pixKey && (
+                        <button
+                          onClick={() => {
+                            navigator.clipboard.writeText(settings.pixKey);
+                            setPixKeyCopied(true);
+                            setTimeout(() => setPixKeyCopied(false), 2000);
+                          }}
+                          className="rounded-lg bg-brand-100 p-2 text-brand-600 hover:bg-brand-200"
+                          title="Copiar chave"
+                        >
+                          {pixKeyCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                )}
+
                 <div className="mb-4">
-                  <p className="text-sm text-gray-500">Chave PIX</p>
+                  <p className="text-sm text-gray-500">Pix Copia e Cola</p>
                   <div className="mt-1 flex items-center gap-2 rounded-lg border bg-gray-50 p-3">
-                    <p className="flex-1 break-all font-mono text-sm text-gray-900">
-                      {settings?.pixKey || "Chave PIX não configurada"}
+                    <p className="flex-1 break-all font-mono text-xs text-gray-900">
+                      {order.pixCopyPaste || "---"}
                     </p>
-                    {settings?.pixKey && (
+                    {order.pixCopyPaste && (
                       <button
                         onClick={() => {
-                          navigator.clipboard.writeText(settings.pixKey);
-                          setPixKeyCopied(true);
-                          setTimeout(() => setPixKeyCopied(false), 2000);
+                          navigator.clipboard.writeText(order.pixCopyPaste!);
+                          setPixPasteCopied(true);
+                          setTimeout(() => setPixPasteCopied(false), 2000);
                         }}
                         className="rounded-lg bg-brand-100 p-2 text-brand-600 hover:bg-brand-200"
-                        title="Copiar chave"
+                        title="Copiar código"
                       >
-                        {pixKeyCopied ? (
-                          <Check className="h-4 w-4" />
-                        ) : (
-                          <Copy className="h-4 w-4" />
-                        )}
+                        {pixPasteCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                       </button>
                     )}
                   </div>
