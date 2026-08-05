@@ -52,7 +52,7 @@ export default function ImageWithFallback({
         aria-label={alt}
       >
         <img
-          src="/logo.svg"
+          src="/logo.png"
           alt="ShopPix"
           className="h-full w-full object-contain p-4"
         />

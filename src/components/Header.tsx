@@ -37,9 +37,11 @@ export default function Header() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2 transition-transform hover:scale-105">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-lg font-bold text-white shadow-lg shadow-brand-500/30">
-            S
-          </div>
+          <img
+            src="/logo.png"
+            alt="ShopPix"
+            className="h-10 w-10 rounded-xl object-cover shadow-lg shadow-brand-500/30"
+          />
           <span className="text-xl font-bold text-gray-900">ShopPix</span>
         </Link>
 

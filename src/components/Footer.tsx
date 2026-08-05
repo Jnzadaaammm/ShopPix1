@@ -15,9 +15,11 @@ export default function Footer() {
         <div className="grid gap-8 md:grid-cols-4">
           <div className="md:col-span-1">
             <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 text-sm font-bold text-white">
-                S
-              </div>
+              <img
+                src="/logo.png"
+                alt="ShopPix"
+                className="h-9 w-9 rounded-xl object-cover"
+              />
               <span className="text-lg font-bold">ShopPix</span>
             </div>
             <p className="mt-3 text-sm text-gray-500">
