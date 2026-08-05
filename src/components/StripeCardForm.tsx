@@ -140,13 +140,13 @@ function CardForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="mb-6 text-center">
-        <p className="text-sm text-gray-500">Valor a pagar</p>
+        <p className="text-sm text-slate-400">Valor a pagar</p>
         <p className="text-3xl font-bold text-brand-600">{formatCurrency(total)}</p>
       </div>
 
       {/* Seletor Crédito / Débito */}
       <div>
-        <label className="mb-2 block text-sm font-medium text-gray-700">
+        <label className="mb-2 block text-sm font-medium text-slate-300">
           Tipo de Cartão
         </label>
         <div className="grid grid-cols-2 gap-3">
@@ -156,17 +156,17 @@ function CardForm({
             className={`flex items-center gap-3 rounded-xl border-2 p-4 transition-all ${
               cardType === "credit"
                 ? "border-brand-500 bg-brand-50"
-                : "border-gray-200 hover:border-gray-300"
+                : "border-slate-700 hover:border-slate-700"
             }`}
           >
             <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${
-              cardType === "credit" ? "bg-brand-600 text-white" : "bg-gray-100 text-gray-500"
+              cardType === "credit" ? "bg-brand-600 text-white" : "bg-slate-900 text-slate-400"
             }`}>
               <CreditCard className="h-5 w-5" />
             </div>
             <div className="text-left">
-              <p className="text-sm font-semibold text-gray-900">Crédito</p>
-              <p className="text-xs text-gray-500">Pague em até 12x</p>
+              <p className="text-sm font-semibold text-slate-100">Crédito</p>
+              <p className="text-xs text-slate-400">Pague em até 12x</p>
             </div>
           </button>
           <button
@@ -175,17 +175,17 @@ function CardForm({
             className={`flex items-center gap-3 rounded-xl border-2 p-4 transition-all ${
               cardType === "debit"
                 ? "border-brand-500 bg-brand-50"
-                : "border-gray-200 hover:border-gray-300"
+                : "border-slate-700 hover:border-slate-700"
             }`}
           >
             <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${
-              cardType === "debit" ? "bg-brand-600 text-white" : "bg-gray-100 text-gray-500"
+              cardType === "debit" ? "bg-brand-600 text-white" : "bg-slate-900 text-slate-400"
             }`}>
               <Banknote className="h-5 w-5" />
             </div>
             <div className="text-left">
-              <p className="text-sm font-semibold text-gray-900">Débito</p>
-              <p className="text-xs text-gray-500">À vista</p>
+              <p className="text-sm font-semibold text-slate-100">Débito</p>
+              <p className="text-xs text-slate-400">À vista</p>
             </div>
           </button>
         </div>
@@ -193,10 +193,10 @@ function CardForm({
 
       {/* Campos do cartão */}
       <div>
-        <label className="mb-2 block text-sm font-medium text-gray-700">
+        <label className="mb-2 block text-sm font-medium text-slate-300">
           Dados do Cartão
         </label>
-        <div className="rounded-lg border border-gray-300 p-4 bg-white">
+        <div className="rounded-lg border border-slate-700 p-4 bg-slate-950">
           <CardElement
             options={{
               style: {
@@ -247,7 +247,7 @@ function CardForm({
         )}
       </button>
 
-      <p className="text-center text-xs text-gray-400">
+      <p className="text-center text-xs text-slate-500">
         Pagamento seguro processado via Stripe
       </p>
     </form>
@@ -271,14 +271,14 @@ export default function StripeCardForm({
   }
 
   return (
-    <div className="rounded-xl border border-gray-200 bg-white p-6">
+    <div className="rounded-xl border border-slate-700 bg-slate-950 p-6">
       <div className="mb-6 flex items-center gap-3">
         <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-100">
           <CreditCard className="h-5 w-5 text-blue-600" />
         </div>
         <div>
-          <h2 className="text-lg font-bold text-gray-900">Cartão de Crédito/Débito</h2>
-          <p className="text-sm text-gray-500">Pagamento seguro via Stripe</p>
+          <h2 className="text-lg font-bold text-slate-100">Cartão de Crédito/Débito</h2>
+          <p className="text-sm text-slate-400">Pagamento seguro via Stripe</p>
         </div>
       </div>
 

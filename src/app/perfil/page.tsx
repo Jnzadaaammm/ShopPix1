@@ -154,7 +154,7 @@ export default function ProfilePage() {
   }
 
   if (!profile) {
-    return <div className="py-12 text-center text-gray-500">Erro ao carregar perfil</div>;
+    return <div className="py-12 text-center text-slate-400">Erro ao carregar perfil</div>;
   }
 
   const tabs: { id: Tab; label: string; icon: typeof User }[] = [
@@ -168,7 +168,7 @@ export default function ProfilePage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
       {/* Header do perfil */}
-      <div className="rounded-2xl border bg-white p-6 shadow-sm">
+      <div className="rounded-2xl border bg-slate-950 p-6 shadow-sm">
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-start">
           <div className="relative">
             {profile.image ? (
@@ -191,11 +191,11 @@ export default function ProfilePage() {
             )}
           </div>
           <div className="flex-1 text-center sm:text-left">
-            <h1 className="text-2xl font-bold text-gray-900">{profile.name || "Sem nome"}</h1>
-            <p className="text-sm text-gray-500 flex items-center justify-center sm:justify-start gap-1 mt-1">
+            <h1 className="text-2xl font-bold text-slate-100">{profile.name || "Sem nome"}</h1>
+            <p className="text-sm text-slate-400 flex items-center justify-center sm:justify-start gap-1 mt-1">
               <Mail className="h-4 w-4" /> {profile.email}
             </p>
-            <p className="text-xs text-gray-400 flex items-center justify-center sm:justify-start gap-1 mt-1">
+            <p className="text-xs text-slate-500 flex items-center justify-center sm:justify-start gap-1 mt-1">
               <Calendar className="h-3 w-3" /> Membro desde {new Date(profile.createdAt).toLocaleDateString("pt-BR")}
             </p>
             {profile.isAdmin && (
@@ -215,30 +215,30 @@ export default function ProfilePage() {
 
       {/* Stats */}
       <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
-        <div className="rounded-xl border bg-white p-4 shadow-sm text-center">
+        <div className="rounded-xl border bg-slate-950 p-4 shadow-sm text-center">
           <ShoppingBag className="mx-auto h-6 w-6 text-blue-500 mb-1" />
-          <p className="text-2xl font-bold text-gray-900">{profile.stats.totalOrders}</p>
-          <p className="text-xs text-gray-500">Pedidos</p>
+          <p className="text-2xl font-bold text-slate-100">{profile.stats.totalOrders}</p>
+          <p className="text-xs text-slate-400">Pedidos</p>
         </div>
-        <div className="rounded-xl border bg-white p-4 shadow-sm text-center">
+        <div className="rounded-xl border bg-slate-950 p-4 shadow-sm text-center">
           <TrendingUp className="mx-auto h-6 w-6 text-green-500 mb-1" />
-          <p className="text-xl font-bold text-gray-900">{formatCurrency(profile.stats.totalSpent)}</p>
-          <p className="text-xs text-gray-500">Total Gasto</p>
+          <p className="text-xl font-bold text-slate-100">{formatCurrency(profile.stats.totalSpent)}</p>
+          <p className="text-xs text-slate-400">Total Gasto</p>
         </div>
-        <div className="rounded-xl border bg-white p-4 shadow-sm text-center">
+        <div className="rounded-xl border bg-slate-950 p-4 shadow-sm text-center">
           <Download className="mx-auto h-6 w-6 text-purple-500 mb-1" />
-          <p className="text-2xl font-bold text-gray-900">{profile.stats.downloads}</p>
-          <p className="text-xs text-gray-500">Downloads</p>
+          <p className="text-2xl font-bold text-slate-100">{profile.stats.downloads}</p>
+          <p className="text-xs text-slate-400">Downloads</p>
         </div>
-        <div className="rounded-xl border bg-white p-4 shadow-sm text-center">
+        <div className="rounded-xl border bg-slate-950 p-4 shadow-sm text-center">
           <RefreshCw className="mx-auto h-6 w-6 text-orange-500 mb-1" />
-          <p className="text-2xl font-bold text-gray-900">{profile.stats.refunds}</p>
-          <p className="text-xs text-gray-500">Reembolsos</p>
+          <p className="text-2xl font-bold text-slate-100">{profile.stats.refunds}</p>
+          <p className="text-xs text-slate-400">Reembolsos</p>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="mt-6 flex gap-1 overflow-x-auto rounded-xl border bg-white p-1.5 shadow-sm">
+      <div className="mt-6 flex gap-1 overflow-x-auto rounded-xl border bg-slate-950 p-1.5 shadow-sm">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           return (
@@ -248,7 +248,7 @@ export default function ProfilePage() {
               className={`flex flex-shrink-0 items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
                 activeTab === tab.id
                   ? "bg-brand-600 text-white"
-                  : "text-gray-600 hover:bg-gray-100"
+                  : "text-slate-400 hover:bg-slate-900"
               }`}
             >
               <Icon className="h-4 w-4" />
@@ -263,21 +263,21 @@ export default function ProfilePage() {
         {/* Visão Geral */}
         {activeTab === "overview" && (
           <div className="space-y-6">
-            <div className="rounded-xl border bg-white p-6 shadow-sm">
-              <h2 className="mb-4 text-lg font-semibold text-gray-900">Pedidos Recentes</h2>
+            <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
+              <h2 className="mb-4 text-lg font-semibold text-slate-100">Pedidos Recentes</h2>
               {orders.length === 0 ? (
-                <p className="text-sm text-gray-500">Nenhum pedido ainda. <Link href="/produtos" className="text-brand-600 hover:underline">Começar a comprar →</Link></p>
+                <p className="text-sm text-slate-400">Nenhum pedido ainda. <Link href="/produtos" className="text-brand-600 hover:underline">Começar a comprar →</Link></p>
               ) : (
                 <div className="space-y-3">
                   {orders.slice(0, 3).map((order) => (
                     <Link
                       key={order.id}
                       href={`/pedidos`}
-                      className="flex items-center justify-between rounded-lg border p-3 hover:bg-gray-50"
+                      className="flex items-center justify-between rounded-lg border p-3 hover:bg-slate-900"
                     >
                       <div>
-                        <p className="font-medium text-gray-900">#{order.id.slice(0, 8)}</p>
-                        <p className="text-xs text-gray-500">
+                        <p className="font-medium text-slate-100">#{order.id.slice(0, 8)}</p>
+                        <p className="text-xs text-slate-400">
                           {new Date(order.createdAt).toLocaleDateString("pt-BR")} · {order.items.length} itens
                         </p>
                       </div>
@@ -305,42 +305,42 @@ export default function ProfilePage() {
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2">
-              <div className="rounded-xl border bg-white p-6 shadow-sm">
-                <h2 className="mb-3 text-lg font-semibold text-gray-900">Ações Rápidas</h2>
+              <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
+                <h2 className="mb-3 text-lg font-semibold text-slate-100">Ações Rápidas</h2>
                 <div className="space-y-2">
-                  <Link href="/produtos" className="flex items-center gap-3 rounded-lg border p-3 hover:bg-gray-50">
+                  <Link href="/produtos" className="flex items-center gap-3 rounded-lg border p-3 hover:bg-slate-900">
                     <ShoppingBag className="h-5 w-5 text-brand-600" />
                     <span className="text-sm font-medium">Continuar comprando</span>
                   </Link>
-                  <Link href="/downloads" className="flex items-center gap-3 rounded-lg border p-3 hover:bg-gray-50">
+                  <Link href="/downloads" className="flex items-center gap-3 rounded-lg border p-3 hover:bg-slate-900">
                     <Download className="h-5 w-5 text-purple-600" />
                     <span className="text-sm font-medium">Meus downloads</span>
                   </Link>
-                  <Link href="/pedidos" className="flex items-center gap-3 rounded-lg border p-3 hover:bg-gray-50">
+                  <Link href="/pedidos" className="flex items-center gap-3 rounded-lg border p-3 hover:bg-slate-900">
                     <Package className="h-5 w-5 text-blue-600" />
                     <span className="text-sm font-medium">Histórico de pedidos</span>
                   </Link>
                 </div>
               </div>
 
-              <div className="rounded-xl border bg-white p-6 shadow-sm">
-                <h2 className="mb-3 text-lg font-semibold text-gray-900">Resumo da Conta</h2>
+              <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
+                <h2 className="mb-3 text-lg font-semibold text-slate-100">Resumo da Conta</h2>
                 <dl className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <dt className="text-gray-500">Email</dt>
-                    <dd className="font-medium text-gray-900 truncate ml-2">{profile.email}</dd>
+                    <dt className="text-slate-400">Email</dt>
+                    <dd className="font-medium text-slate-100 truncate ml-2">{profile.email}</dd>
                   </div>
                   <div className="flex justify-between">
-                    <dt className="text-gray-500">Conta criada</dt>
-                    <dd className="font-medium text-gray-900">{new Date(profile.createdAt).toLocaleDateString("pt-BR")}</dd>
+                    <dt className="text-slate-400">Conta criada</dt>
+                    <dd className="font-medium text-slate-100">{new Date(profile.createdAt).toLocaleDateString("pt-BR")}</dd>
                   </div>
                   <div className="flex justify-between">
-                    <dt className="text-gray-500">Tipo de conta</dt>
-                    <dd className="font-medium text-gray-900">{profile.isAdmin ? "Administrador" : "Cliente"}</dd>
+                    <dt className="text-slate-400">Tipo de conta</dt>
+                    <dd className="font-medium text-slate-100">{profile.isAdmin ? "Administrador" : "Cliente"}</dd>
                   </div>
                   <div className="flex justify-between">
-                    <dt className="text-gray-500">Pedidos pagos</dt>
-                    <dd className="font-medium text-gray-900">{profile.stats.paidOrders} de {profile.stats.totalOrders}</dd>
+                    <dt className="text-slate-400">Pedidos pagos</dt>
+                    <dd className="font-medium text-slate-100">{profile.stats.paidOrders} de {profile.stats.totalOrders}</dd>
                   </div>
                 </dl>
               </div>
@@ -350,18 +350,18 @@ export default function ProfilePage() {
 
         {/* Pedidos */}
         {activeTab === "orders" && (
-          <div className="rounded-xl border bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-semibold text-gray-900">Histórico de Pedidos</h2>
+          <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
+            <h2 className="mb-4 text-lg font-semibold text-slate-100">Histórico de Pedidos</h2>
             {orders.length === 0 ? (
-              <p className="text-sm text-gray-500">Nenhum pedido realizado. <Link href="/produtos" className="text-brand-600 hover:underline">Ver produtos →</Link></p>
+              <p className="text-sm text-slate-400">Nenhum pedido realizado. <Link href="/produtos" className="text-brand-600 hover:underline">Ver produtos →</Link></p>
             ) : (
               <div className="space-y-3">
                 {orders.map((order) => (
                   <div key={order.id} className="rounded-lg border p-4">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-medium text-gray-900">#{order.id.slice(0, 8)}</p>
-                        <p className="text-xs text-gray-500">
+                        <p className="font-medium text-slate-100">#{order.id.slice(0, 8)}</p>
+                        <p className="text-xs text-slate-400">
                           {new Date(order.createdAt).toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" })} · {order.paymentMethod.toUpperCase()}
                         </p>
                       </div>
@@ -377,9 +377,9 @@ export default function ProfilePage() {
                     </div>
                     <div className="mt-3 flex flex-wrap gap-2">
                       {order.items.map((item) => (
-                        <div key={item.id} className="flex items-center gap-2 rounded-lg bg-gray-50 px-2 py-1">
+                        <div key={item.id} className="flex items-center gap-2 rounded-lg bg-slate-900 px-2 py-1">
                           <ImageWithFallback src={item.product?.image || item.productImage || ""} alt="" width={24} height={24} className="rounded object-cover" />
-                          <span className="text-xs text-gray-600">{item.product?.name || item.productName || "Produto removido"} x{item.quantity}</span>
+                          <span className="text-xs text-slate-400">{item.product?.name || item.productName || "Produto removido"} x{item.quantity}</span>
                         </div>
                       ))}
                     </div>
@@ -402,10 +402,10 @@ export default function ProfilePage() {
 
         {/* Downloads */}
         {activeTab === "downloads" && (
-          <div className="rounded-xl border bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-semibold text-gray-900">Meus Downloads</h2>
+          <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
+            <h2 className="mb-4 text-lg font-semibold text-slate-100">Meus Downloads</h2>
             {downloads.length === 0 ? (
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-slate-400">
                 Nenhum download disponível. Após comprar produtos digitais, os links aparecerão aqui.
               </p>
             ) : (
@@ -418,14 +418,14 @@ export default function ProfilePage() {
                       <div className="flex items-center gap-3">
                         <ImageWithFallback src={dl.product.image} alt="" width={48} height={48} className="rounded object-cover" />
                         <div className="flex-1 min-w-0">
-                          <p className="font-medium text-gray-900 truncate">{dl.product.name}</p>
-                          <p className="text-xs text-gray-500">
+                          <p className="font-medium text-slate-100 truncate">{dl.product.name}</p>
+                          <p className="text-xs text-slate-400">
                             {dl.downloadsUsed}/{dl.maxDownloads} usados
                           </p>
                         </div>
                       </div>
                       <div className="mt-3 flex items-center justify-between">
-                        <span className={`text-xs ${expired || exhausted ? "text-red-500" : "text-gray-500"}`}>
+                        <span className={`text-xs ${expired || exhausted ? "text-red-500" : "text-slate-400"}`}>
                           {expired ? "Expirado" : exhausted ? "Esgotado" : `Expira em ${new Date(dl.expiresAt).toLocaleDateString("pt-BR")}`}
                         </span>
                         {!expired && !exhausted && (
@@ -447,18 +447,18 @@ export default function ProfilePage() {
 
         {/* Reembolsos */}
         {activeTab === "refunds" && (
-          <div className="rounded-xl border bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-semibold text-gray-900">Solicitações de Reembolso</h2>
+          <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
+            <h2 className="mb-4 text-lg font-semibold text-slate-100">Solicitações de Reembolso</h2>
             {refunds.length === 0 ? (
-              <p className="text-sm text-gray-500">Nenhuma solicitação de reembolso.</p>
+              <p className="text-sm text-slate-400">Nenhuma solicitação de reembolso.</p>
             ) : (
               <div className="space-y-3">
                 {refunds.map((refund) => (
                   <div key={refund.id} className="rounded-lg border p-4">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="font-medium text-gray-900">Pedido #{refund.order.id.slice(0, 8)}</p>
-                        <p className="text-xs text-gray-500">
+                        <p className="font-medium text-slate-100">Pedido #{refund.order.id.slice(0, 8)}</p>
+                        <p className="text-xs text-slate-400">
                           {new Date(refund.createdAt).toLocaleDateString("pt-BR")}
                         </p>
                       </div>
@@ -473,7 +473,7 @@ export default function ProfilePage() {
                         </span>
                       </div>
                     </div>
-                    <p className="mt-2 text-sm text-gray-600">{refund.reason}</p>
+                    <p className="mt-2 text-sm text-slate-400">{refund.reason}</p>
                   </div>
                 ))}
               </div>
@@ -484,9 +484,9 @@ export default function ProfilePage() {
         {/* Configurações */}
         {activeTab === "settings" && (
           <div className="space-y-6">
-            <div className="rounded-xl border bg-white p-6 shadow-sm">
+            <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
               <div className="mb-4 flex items-center justify-between">
-                <h2 className="text-lg font-semibold text-gray-900">Dados Pessoais</h2>
+                <h2 className="text-lg font-semibold text-slate-100">Dados Pessoais</h2>
                 {!editing && (
                   <button
                     onClick={() => setEditing(true)}
@@ -500,7 +500,7 @@ export default function ProfilePage() {
               {editing ? (
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Nome</label>
+                    <label className="block text-sm font-medium text-slate-300">Nome</label>
                     <input
                       type="text"
                       value={name}
@@ -509,7 +509,7 @@ export default function ProfilePage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">URL da Foto</label>
+                    <label className="block text-sm font-medium text-slate-300">URL da Foto</label>
                     <input
                       type="text"
                       value={image}
@@ -517,19 +517,19 @@ export default function ProfilePage() {
                       placeholder="https://..."
                       className="mt-1 w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500"
                     />
-                    <p className="mt-1 text-xs text-gray-500">
+                    <p className="mt-1 text-xs text-slate-400">
                       Para alterar a foto via Google, faça logout e login novamente.
                     </p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Email</label>
+                    <label className="block text-sm font-medium text-slate-300">Email</label>
                     <input
                       type="email"
                       value={profile.email || ""}
                       disabled
-                      className="mt-1 w-full rounded-lg border bg-gray-50 px-3 py-2 text-gray-500"
+                      className="mt-1 w-full rounded-lg border bg-slate-900 px-3 py-2 text-slate-400"
                     />
-                    <p className="mt-1 text-xs text-gray-500">O email não pode ser alterado.</p>
+                    <p className="mt-1 text-xs text-slate-400">O email não pode ser alterado.</p>
                   </div>
                   <div className="flex gap-3">
                     <button
@@ -551,7 +551,7 @@ export default function ProfilePage() {
                         setName(profile.name || "");
                         setImage(profile.image || "");
                       }}
-                      className="rounded-lg border px-4 py-2 text-gray-700 hover:bg-gray-50"
+                      className="rounded-lg border px-4 py-2 text-slate-300 hover:bg-slate-900"
                     >
                       Cancelar
                     </button>
@@ -560,30 +560,30 @@ export default function ProfilePage() {
               ) : (
                 <dl className="space-y-3 text-sm">
                   <div className="flex justify-between border-b pb-2">
-                    <dt className="text-gray-500">Nome</dt>
-                    <dd className="font-medium text-gray-900">{profile.name || "—"}</dd>
+                    <dt className="text-slate-400">Nome</dt>
+                    <dd className="font-medium text-slate-100">{profile.name || "—"}</dd>
                   </div>
                   <div className="flex justify-between border-b pb-2">
-                    <dt className="text-gray-500">Email</dt>
-                    <dd className="font-medium text-gray-900">{profile.email}</dd>
+                    <dt className="text-slate-400">Email</dt>
+                    <dd className="font-medium text-slate-100">{profile.email}</dd>
                   </div>
                   <div className="flex justify-between border-b pb-2">
-                    <dt className="text-gray-500">Foto</dt>
-                    <dd className="font-medium text-gray-900 truncate max-w-[200px]">
+                    <dt className="text-slate-400">Foto</dt>
+                    <dd className="font-medium text-slate-100 truncate max-w-[200px]">
                       {profile.image ? "Definida" : "—"}
                     </dd>
                   </div>
                   <div className="flex justify-between">
-                    <dt className="text-gray-500">Tipo de conta</dt>
-                    <dd className="font-medium text-gray-900">{profile.isAdmin ? "Administrador" : "Cliente"}</dd>
+                    <dt className="text-slate-400">Tipo de conta</dt>
+                    <dd className="font-medium text-slate-100">{profile.isAdmin ? "Administrador" : "Cliente"}</dd>
                   </div>
                 </dl>
               )}
             </div>
 
-            <div className="rounded-xl border bg-white p-6 shadow-sm">
-              <h2 className="mb-3 text-lg font-semibold text-gray-900">Sessão</h2>
-              <p className="text-sm text-gray-500 mb-4">
+            <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
+              <h2 className="mb-3 text-lg font-semibold text-slate-100">Sessão</h2>
+              <p className="text-sm text-slate-400 mb-4">
                 Encerre sua sessão neste dispositivo. Você precisará fazer login novamente para acessar sua conta.
               </p>
               <button
@@ -594,8 +594,8 @@ export default function ProfilePage() {
               </button>
             </div>
 
-            <div className="rounded-xl border border-gray-200 bg-gray-50 p-6">
-              <h2 className="mb-2 text-sm font-semibold text-gray-900">Links Úteis</h2>
+            <div className="rounded-xl border border-slate-700 bg-slate-900 p-6">
+              <h2 className="mb-2 text-sm font-semibold text-slate-100">Links Úteis</h2>
               <div className="flex flex-wrap gap-3 text-sm">
                 <Link href="/termos" className="text-brand-600 hover:underline">Termos de Uso</Link>
                 <Link href="/privacidade" className="text-brand-600 hover:underline">Política de Privacidade</Link>

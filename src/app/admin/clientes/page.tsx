@@ -148,7 +148,7 @@ export default function AdminCustomersPage() {
     return (
       <PermissionGuard permission="customers.view">
         <div className="flex items-center justify-center py-12">
-          <div className="text-gray-500">Carregando...</div>
+          <div className="text-slate-400">Carregando...</div>
         </div>
       </PermissionGuard>
     );
@@ -158,13 +158,13 @@ export default function AdminCustomersPage() {
     <PermissionGuard permission="customers.view">
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Clientes</h1>
-        <p className="mt-2 text-gray-600">{users.length} clientes cadastrados</p>
+        <h1 className="text-3xl font-bold text-slate-100">Clientes</h1>
+        <p className="mt-2 text-slate-400">{users.length} clientes cadastrados</p>
       </div>
 
       <div className="mb-6">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500" />
           <input
             type="text"
             placeholder="Buscar por nome ou email..."
@@ -175,17 +175,17 @@ export default function AdminCustomersPage() {
         </div>
       </div>
 
-      <div className="rounded-xl border bg-white shadow-sm overflow-hidden">
+      <div className="rounded-xl border bg-slate-950 shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="border-b bg-gray-50">
+            <thead className="border-b bg-slate-900">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Cliente</th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Pedidos</th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Total Gasto</th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Cadastrado em</th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Tipo</th>
-                <th className="px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500">Ações</th>
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">Cliente</th>
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">Pedidos</th>
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">Total Gasto</th>
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">Cadastrado em</th>
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">Tipo</th>
+                <th className="px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-slate-400">Ações</th>
               </tr>
             </thead>
             <tbody className="divide-y">
@@ -193,30 +193,30 @@ export default function AdminCustomersPage() {
                 const userOrders = getUserOrders(user.id);
                 const userRevenue = getUserRevenue(user.id);
                 return (
-                  <tr key={user.id} className="hover:bg-gray-50">
+                  <tr key={user.id} className="hover:bg-slate-900">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
                         {user.image ? (
                           <ImageWithFallback src={user.image ?? ""} alt="" width={40} height={40} className="rounded-full" />
                         ) : (
-                          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 text-gray-600 font-medium">
+                          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-800 text-slate-400 font-medium">
                             {(user.name || user.email || "?").charAt(0).toUpperCase()}
                           </div>
                         )}
                         <div>
-                          <p className="font-medium text-gray-900">{user.name || "Sem nome"}</p>
-                          <p className="text-sm text-gray-500">{user.email}</p>
+                          <p className="font-medium text-slate-100">{user.name || "Sem nome"}</p>
+                          <p className="text-sm text-slate-400">{user.email}</p>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <span className="font-medium text-gray-900">{userOrders.length}</span>
-                      <span className="text-sm text-gray-500 ml-1">pedidos</span>
+                      <span className="font-medium text-slate-100">{userOrders.length}</span>
+                      <span className="text-sm text-slate-400 ml-1">pedidos</span>
                     </td>
-                    <td className="px-6 py-4 font-medium text-gray-900">
+                    <td className="px-6 py-4 font-medium text-slate-100">
                       {formatCurrency(userRevenue)}
                     </td>
-                    <td className="px-6 py-4 text-gray-600">
+                    <td className="px-6 py-4 text-slate-400">
                       {new Date(user.createdAt).toLocaleDateString("pt-BR")}
                     </td>
                     <td className="px-6 py-4">
@@ -225,7 +225,7 @@ export default function AdminCustomersPage() {
                           <Shield className="h-3 w-3" /> Admin
                         </span>
                       ) : (
-                        <span className="inline-flex rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-gray-700">
+                        <span className="inline-flex rounded-full bg-slate-900 px-2 py-1 text-xs font-medium text-slate-300">
                           Cliente
                         </span>
                       )}
@@ -248,60 +248,60 @@ export default function AdminCustomersPage() {
 
       {selectedUser && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-          <div className="w-full max-w-2xl rounded-xl bg-white p-6 max-h-[90vh] overflow-y-auto">
+          <div className="w-full max-w-2xl rounded-xl bg-slate-950 p-6 max-h-[90vh] overflow-y-auto">
             <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-gray-900">Detalhes do Cliente</h2>
-              <button onClick={() => setSelectedUser(null)} className="text-gray-400 hover:text-gray-600">✕</button>
+              <h2 className="text-xl font-semibold text-slate-100">Detalhes do Cliente</h2>
+              <button onClick={() => setSelectedUser(null)} className="text-slate-500 hover:text-slate-400">✕</button>
             </div>
 
             <div className="mb-6 flex items-center gap-4">
               {selectedUser.image ? (
                 <ImageWithFallback src={selectedUser.image ?? ""} alt="" width={64} height={64} className="rounded-full" />
               ) : (
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gray-200 text-gray-600 text-xl font-medium">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-slate-800 text-slate-400 text-xl font-medium">
                   {(selectedUser.name || selectedUser.email || "?").charAt(0).toUpperCase()}
                 </div>
               )}
               <div>
-                <p className="text-lg font-medium text-gray-900">{selectedUser.name || "Sem nome"}</p>
-                <p className="text-sm text-gray-500 flex items-center gap-1">
+                <p className="text-lg font-medium text-slate-100">{selectedUser.name || "Sem nome"}</p>
+                <p className="text-sm text-slate-400 flex items-center gap-1">
                   <Mail className="h-4 w-4" /> {selectedUser.email}
                 </p>
-                <p className="text-sm text-gray-500 flex items-center gap-1 mt-1">
+                <p className="text-sm text-slate-400 flex items-center gap-1 mt-1">
                   <Calendar className="h-4 w-4" /> Desde {new Date(selectedUser.createdAt).toLocaleDateString("pt-BR")}
                 </p>
               </div>
             </div>
 
             <div className="mb-6 grid grid-cols-3 gap-4">
-              <div className="rounded-lg bg-gray-50 p-4 text-center">
-                <Package className="mx-auto h-5 w-5 text-gray-400 mb-1" />
-                <p className="text-2xl font-bold text-gray-900">{getUserOrders(selectedUser.id).length}</p>
-                <p className="text-xs text-gray-500">Pedidos</p>
+              <div className="rounded-lg bg-slate-900 p-4 text-center">
+                <Package className="mx-auto h-5 w-5 text-slate-500 mb-1" />
+                <p className="text-2xl font-bold text-slate-100">{getUserOrders(selectedUser.id).length}</p>
+                <p className="text-xs text-slate-400">Pedidos</p>
               </div>
-              <div className="rounded-lg bg-gray-50 p-4 text-center">
+              <div className="rounded-lg bg-slate-900 p-4 text-center">
                 <p className="text-2xl font-bold text-green-600">{formatCurrency(getUserRevenue(selectedUser.id))}</p>
-                <p className="text-xs text-gray-500">Total Gasto</p>
+                <p className="text-xs text-slate-400">Total Gasto</p>
               </div>
-              <div className="rounded-lg bg-gray-50 p-4 text-center">
-                <p className="text-2xl font-bold text-gray-900">
+              <div className="rounded-lg bg-slate-900 p-4 text-center">
+                <p className="text-2xl font-bold text-slate-100">
                   {getUserOrders(selectedUser.id).filter((o: any) => o.status === "PAID").length}
                 </p>
-                <p className="text-xs text-gray-500">Pagos</p>
+                <p className="text-xs text-slate-400">Pagos</p>
               </div>
             </div>
 
             <div className="mb-6">
-              <h3 className="mb-3 font-semibold text-gray-900">Pedidos do Cliente</h3>
+              <h3 className="mb-3 font-semibold text-slate-100">Pedidos do Cliente</h3>
               <div className="space-y-2 max-h-48 overflow-y-auto">
                 {getUserOrders(selectedUser.id).length === 0 ? (
-                  <p className="text-sm text-gray-500">Nenhum pedido</p>
+                  <p className="text-sm text-slate-400">Nenhum pedido</p>
                 ) : (
                   getUserOrders(selectedUser.id).map((order: any) => (
                     <div key={order.id} className="flex items-center justify-between rounded-lg border p-3">
                       <div>
                         <p className="text-sm font-medium">#{order.id.slice(0, 8)}</p>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs text-slate-400">
                           {new Date(order.createdAt).toLocaleDateString("pt-BR")} · {order.paymentMethod.toUpperCase()}
                         </p>
                       </div>
@@ -322,8 +322,8 @@ export default function AdminCustomersPage() {
 
             <div className="flex items-center justify-between rounded-lg border p-4">
               <div>
-                <p className="font-medium text-gray-900">Acesso de Administrador</p>
-                <p className="text-sm text-gray-500">
+                <p className="font-medium text-slate-100">Acesso de Administrador</p>
+                <p className="text-sm text-slate-400">
                   {selectedUser.isAdmin ? "Tem acesso total ao painel" : "Acesso apenas como cliente"}
                 </p>
               </div>
@@ -348,7 +348,7 @@ export default function AdminCustomersPage() {
             <div className="rounded-lg border p-4">
               <div className="mb-3 flex items-center gap-2">
                 <Crown className="h-5 w-5 text-brand-600" />
-                <p className="font-medium text-gray-900">Cargos do Usuário</p>
+                <p className="font-medium text-slate-100">Cargos do Usuário</p>
               </div>
 
               {/* Badges dos cargos atuais */}
@@ -382,7 +382,7 @@ export default function AdminCustomersPage() {
                       className={`flex cursor-pointer items-center gap-2 rounded-lg border-2 px-3 py-2 text-xs font-medium transition-all ${
                         isSelected
                           ? getRoleColorClass(role.color).badge
-                          : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
+                          : "border-slate-700 bg-slate-950 text-slate-400 hover:border-slate-700"
                       } ${updating ? "opacity-50 pointer-events-none" : ""}`}
                     >
                       <input
@@ -396,7 +396,7 @@ export default function AdminCustomersPage() {
                           )
                         }
                         disabled={updating}
-                        className="h-3.5 w-3.5 rounded border-gray-300 text-brand-600 focus:ring-brand-500"
+                        className="h-3.5 w-3.5 rounded border-slate-700 text-brand-600 focus:ring-brand-500"
                       />
                       <span>
                         {role.name}
@@ -415,7 +415,7 @@ export default function AdminCustomersPage() {
             <div className="mt-6 flex justify-end">
               <button
                 onClick={() => setSelectedUser(null)}
-                className="rounded-lg border px-4 py-2 text-gray-700 hover:bg-gray-50"
+                className="rounded-lg border px-4 py-2 text-slate-300 hover:bg-slate-900"
               >
                 Fechar
               </button>

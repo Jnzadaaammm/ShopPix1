@@ -12,7 +12,7 @@ export default function AdminLayout({
 }) {
   return (
     <AdminGuard>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-slate-900">
         <AdminSidebar />
         <AdminMobileNav />
         <main className="lg:pl-64">

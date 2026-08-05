@@ -39,11 +39,11 @@ const CATEGORY_LABELS: Record<string, string> = {
 const STATUS_CONFIG: Record<string, { label: string; color: string; icon: typeof Clock }> = {
   OPEN: { label: "Aberto", color: "bg-blue-100 text-blue-700", icon: AlertCircle },
   ANSWERED: { label: "Respondido", color: "bg-green-100 text-green-700", icon: CheckCircle },
-  CLOSED: { label: "Fechado", color: "bg-gray-100 text-gray-600", icon: CheckCircle },
+  CLOSED: { label: "Fechado", color: "bg-slate-900 text-slate-400", icon: CheckCircle },
 };
 
 const PRIORITY_CONFIG: Record<string, string> = {
-  low: "bg-gray-100 text-gray-600",
+  low: "bg-slate-900 text-slate-400",
   normal: "bg-blue-100 text-blue-600",
   high: "bg-orange-100 text-orange-600",
   urgent: "bg-red-100 text-red-600",
@@ -194,22 +194,22 @@ export default function AdminTicketsPage() {
       <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
         <button
           onClick={() => closeTicket()}
-          className="mb-6 inline-flex items-center gap-2 text-sm text-gray-500 hover:text-brand-600"
+          className="mb-6 inline-flex items-center gap-2 text-sm text-slate-400 hover:text-brand-600"
         >
           <ArrowLeft className="h-4 w-4" /> Voltar
         </button>
 
         <div className="card overflow-hidden">
           {/* Header */}
-          <div className="border-b border-gray-100 p-6">
+          <div className="border-b border-slate-800 p-6">
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
-                <h1 className="text-xl font-bold text-gray-900">{selectedTicket.subject}</h1>
+                <h1 className="text-xl font-bold text-slate-100">{selectedTicket.subject}</h1>
                 <div className="mt-2 flex flex-wrap items-center gap-2">
                   <span className={`rounded-full px-3 py-1 text-xs font-medium ${statusCfg.color}`}>
                     {statusCfg.label}
                   </span>
-                  <span className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-600">
+                  <span className="rounded-full bg-slate-900 px-3 py-1 text-xs text-slate-400">
                     {CATEGORY_LABELS[selectedTicket.category] || selectedTicket.category}
                   </span>
                   <select
@@ -222,7 +222,7 @@ export default function AdminTicketsPage() {
                     ))}
                   </select>
                 </div>
-                <p className="mt-2 text-sm text-gray-500">
+                <p className="mt-2 text-sm text-slate-400">
                   Cliente: {selectedTicket.user?.name || "N/A"} ({selectedTicket.user?.email || "N/A"})
                 </p>
               </div>
@@ -230,7 +230,7 @@ export default function AdminTicketsPage() {
                 {selectedTicket.status !== "CLOSED" && (
                   <button
                     onClick={() => updateStatus("CLOSED")}
-                    className="rounded-lg bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-600 hover:bg-gray-200"
+                    className="rounded-lg bg-slate-900 px-3 py-1.5 text-xs font-medium text-slate-400 hover:bg-slate-800"
                   >
                     Fechar Ticket
                   </button>
@@ -255,7 +255,7 @@ export default function AdminTicketsPage() {
                 className={`flex gap-3 ${msg.isStaff ? "flex-row-reverse" : "flex-row"}`}
               >
                 <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-medium ${
-                  msg.isStaff ? "bg-brand-600 text-white" : "bg-gray-200 text-gray-600"
+                  msg.isStaff ? "bg-brand-600 text-white" : "bg-slate-800 text-slate-400"
                 }`}>
                   {msg.user?.name?.charAt(0).toUpperCase() || "?"}
                 </div>
@@ -266,18 +266,18 @@ export default function AdminTicketsPage() {
                         Equipe
                       </span>
                     )}
-                    <span className="text-xs font-medium text-gray-700">
+                    <span className="text-xs font-medium text-slate-300">
                       {msg.user?.name || "N/A"}
                     </span>
                   </div>
                   <div
                     className={`inline-block rounded-2xl px-4 py-2.5 text-sm ${
-                      msg.isStaff ? "bg-brand-600 text-white" : "bg-gray-100 text-gray-800"
+                      msg.isStaff ? "bg-brand-600 text-white" : "bg-slate-900 text-slate-200"
                     }`}
                   >
                     {msg.content}
                   </div>
-                  <p className="mt-1 text-[10px] text-gray-400">
+                  <p className="mt-1 text-[10px] text-slate-500">
                     {new Date(msg.createdAt).toLocaleString("pt-BR")}
                   </p>
                 </div>
@@ -287,7 +287,7 @@ export default function AdminTicketsPage() {
           </div>
 
           {/* Resposta */}
-          <div className="border-t border-gray-100 p-4">
+          <div className="border-t border-slate-800 p-4">
             <div className="flex gap-2">
               <input
                 type="text"
@@ -311,10 +311,10 @@ export default function AdminTicketsPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-8">
-        <h1 className="flex items-center gap-2 text-3xl font-bold text-gray-900">
+        <h1 className="flex items-center gap-2 text-3xl font-bold text-slate-100">
           <TicketIcon className="h-8 w-8 text-brand-600" /> Tickets de Suporte
         </h1>
-        <p className="mt-2 text-gray-600">Gerencie tickets de suporte dos clientes</p>
+        <p className="mt-2 text-slate-400">Gerencie tickets de suporte dos clientes</p>
       </div>
 
       {/* Filtros */}
@@ -332,7 +332,7 @@ export default function AdminTicketsPage() {
               className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
                 statusFilter === f.id
                   ? "bg-brand-600 text-white"
-                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  : "bg-slate-900 text-slate-400 hover:bg-slate-800"
               }`}
             >
               {f.label} ({f.count})
@@ -340,13 +340,13 @@ export default function AdminTicketsPage() {
           ))}
         </div>
         <div className="relative flex-1 max-w-xs">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Buscar..."
-            className="w-full rounded-xl border border-gray-200 pl-9 pr-3 py-2 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200"
+            className="w-full rounded-xl border border-slate-700 pl-9 pr-3 py-2 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200"
           />
         </div>
       </div>
@@ -355,13 +355,13 @@ export default function AdminTicketsPage() {
       {loading ? (
         <div className="space-y-3">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="h-20 animate-pulse rounded-xl bg-gray-100" />
+            <div key={i} className="h-20 animate-pulse rounded-xl bg-slate-900" />
           ))}
         </div>
       ) : filteredTickets.length === 0 ? (
         <div className="card py-20 text-center">
           <MessageCircle className="mx-auto h-16 w-16 text-gray-300" />
-          <p className="mt-4 text-gray-500">Nenhum ticket encontrado.</p>
+          <p className="mt-4 text-slate-400">Nenhum ticket encontrado.</p>
         </div>
       ) : (
         <div className="space-y-3">
@@ -379,12 +379,12 @@ export default function AdminTicketsPage() {
                   <StatusIcon className="h-5 w-5" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-gray-900 truncate">{ticket.subject}</h3>
-                  <p className="text-sm text-gray-500 truncate">
+                  <h3 className="font-semibold text-slate-100 truncate">{ticket.subject}</h3>
+                  <p className="text-sm text-slate-400 truncate">
                     {ticket.user?.name} • {lastMsg?.content || "Sem mensagens"}
                   </p>
-                  <div className="mt-1 flex items-center gap-2 text-xs text-gray-400">
-                    <span className="rounded-full bg-gray-100 px-2 py-0.5">
+                  <div className="mt-1 flex items-center gap-2 text-xs text-slate-500">
+                    <span className="rounded-full bg-slate-900 px-2 py-0.5">
                       {CATEGORY_LABELS[ticket.category] || ticket.category}
                     </span>
                     <span className={`rounded-full px-2 py-0.5 ${PRIORITY_CONFIG[ticket.priority] || PRIORITY_CONFIG.normal}`}>

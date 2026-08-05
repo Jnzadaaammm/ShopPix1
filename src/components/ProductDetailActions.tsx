@@ -74,7 +74,7 @@ export default function ProductDetailActions({ productId }: { productId: string 
         className={`flex h-12 w-12 items-center justify-center rounded-xl border-2 transition-all active:scale-90 ${
           wishlisted
             ? "border-red-500 bg-red-50 text-red-500"
-            : "border-gray-200 bg-white text-gray-600 hover:border-red-300 hover:text-red-500"
+            : "border-slate-700 bg-slate-950 text-slate-400 hover:border-red-300 hover:text-red-500"
         }`}
         title={wishlisted ? "Remover dos favoritos" : "Adicionar aos favoritos"}
       >
@@ -84,7 +84,7 @@ export default function ProductDetailActions({ productId }: { productId: string 
       <button
         onClick={handleShare}
         aria-label="Compartilhar produto"
-        className="flex h-12 w-12 items-center justify-center rounded-xl border-2 border-gray-200 bg-white text-gray-600 transition-all hover:border-brand-300 hover:text-brand-600 active:scale-90"
+        className="flex h-12 w-12 items-center justify-center rounded-xl border-2 border-slate-700 bg-slate-950 text-slate-400 transition-all hover:border-brand-300 hover:text-brand-600 active:scale-90"
         title="Compartilhar"
       >
         {copied ? <Check className="h-5 w-5 text-green-600" /> : <Share2 className="h-5 w-5" />}

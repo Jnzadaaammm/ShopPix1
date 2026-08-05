@@ -96,7 +96,7 @@ export default function ProductReviews({ productId }: { productId: string }) {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-8">
-        <Loader2 className="h-6 w-6 animate-spin text-gray-400" />
+        <Loader2 className="h-6 w-6 animate-spin text-slate-500" />
       </div>
     );
   }
@@ -104,7 +104,7 @@ export default function ProductReviews({ productId }: { productId: string }) {
   return (
     <div className="mt-12 border-t pt-8">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-bold text-gray-900">
+        <h2 className="text-xl font-bold text-slate-100">
           Avaliações ({reviews.length})
         </h2>
         {session && (
@@ -120,9 +120,9 @@ export default function ProductReviews({ productId }: { productId: string }) {
 
       {/* Resumo */}
       {reviews.length > 0 && (
-        <div className="mt-4 flex items-center gap-4 rounded-xl bg-gray-50 p-4">
+        <div className="mt-4 flex items-center gap-4 rounded-xl bg-slate-900 p-4">
           <div className="text-center">
-            <p className="text-3xl font-bold text-gray-900">{avgRating.toFixed(1)}</p>
+            <p className="text-3xl font-bold text-slate-100">{avgRating.toFixed(1)}</p>
             <div className="flex justify-center mt-1">
               {[1, 2, 3, 4, 5].map((s) => (
                 <Star
@@ -133,7 +133,7 @@ export default function ProductReviews({ productId }: { productId: string }) {
                 />
               ))}
             </div>
-            <p className="mt-1 text-xs text-gray-500">{reviews.length} avaliações</p>
+            <p className="mt-1 text-xs text-slate-400">{reviews.length} avaliações</p>
           </div>
           <div className="flex-1 space-y-1">
             {[5, 4, 3, 2, 1].map((star) => {
@@ -141,12 +141,12 @@ export default function ProductReviews({ productId }: { productId: string }) {
               const pct = (count / reviews.length) * 100;
               return (
                 <div key={star} className="flex items-center gap-2 text-xs">
-                  <span className="w-3 text-gray-500">{star}</span>
+                  <span className="w-3 text-slate-400">{star}</span>
                   <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
-                  <div className="h-2 flex-1 rounded-full bg-gray-200">
+                  <div className="h-2 flex-1 rounded-full bg-slate-800">
                     <div className="h-2 rounded-full bg-yellow-400" style={{ width: `${pct}%` }} />
                   </div>
-                  <span className="w-6 text-right text-gray-500">{count}</span>
+                  <span className="w-6 text-right text-slate-400">{count}</span>
                 </div>
               );
             })}
@@ -156,8 +156,8 @@ export default function ProductReviews({ productId }: { productId: string }) {
 
       {/* Formulário */}
       {showForm && (
-        <form onSubmit={handleSubmit} className="mt-4 rounded-xl border bg-white p-5 shadow-sm">
-          <h3 className="font-semibold text-gray-900">Sua avaliação</h3>
+        <form onSubmit={handleSubmit} className="mt-4 rounded-xl border bg-slate-950 p-5 shadow-sm">
+          <h3 className="font-semibold text-slate-100">Sua avaliação</h3>
           <div className="mt-3 flex gap-1">
             {[1, 2, 3, 4, 5].map((s) => (
               <button
@@ -194,23 +194,23 @@ export default function ProductReviews({ productId }: { productId: string }) {
       {/* Lista de reviews */}
       <div className="mt-6 space-y-4">
         {reviews.length === 0 ? (
-          <p className="text-center text-gray-500 py-8">
+          <p className="text-center text-slate-400 py-8">
             Ainda não há avaliações. {session ? "Seja o primeiro a avaliar!" : "Faça login para avaliar."}
           </p>
         ) : (
           reviews.map((review) => (
-            <div key={review.id} className="rounded-xl border bg-white p-4 shadow-sm">
+            <div key={review.id} className="rounded-xl border bg-slate-950 p-4 shadow-sm">
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-3">
                   {review.user.image ? (
                     <ImageWithFallback src={review.user.image} alt="" width={40} height={40} className="rounded-full" />
                   ) : (
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 text-gray-600 font-medium">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-800 text-slate-400 font-medium">
                       {(review.user.name || "?").charAt(0).toUpperCase()}
                     </div>
                   )}
                   <div>
-                    <p className="font-medium text-gray-900">{review.user.name || "Anônimo"}</p>
+                    <p className="font-medium text-slate-100">{review.user.name || "Anônimo"}</p>
                     <div className="flex items-center gap-2">
                       <div className="flex">
                         {[1, 2, 3, 4, 5].map((s) => (
@@ -222,7 +222,7 @@ export default function ProductReviews({ productId }: { productId: string }) {
                           />
                         ))}
                       </div>
-                      <span className="text-xs text-gray-500">
+                      <span className="text-xs text-slate-400">
                         {new Date(review.createdAt).toLocaleDateString("pt-BR")}
                       </span>
                     </div>
@@ -231,7 +231,7 @@ export default function ProductReviews({ productId }: { productId: string }) {
                 {review.isOwner && (
                   <button
                     onClick={() => handleDelete(review.id)}
-                    className="rounded p-1 text-gray-400 hover:bg-red-50 hover:text-red-500"
+                    className="rounded p-1 text-slate-500 hover:bg-red-50 hover:text-red-500"
                     title="Excluir"
                   >
                     <Trash2 className="h-4 w-4" />
@@ -239,7 +239,7 @@ export default function ProductReviews({ productId }: { productId: string }) {
                 )}
               </div>
               {review.comment && (
-                <p className="mt-3 text-sm text-gray-600 leading-relaxed">{review.comment}</p>
+                <p className="mt-3 text-sm text-slate-400 leading-relaxed">{review.comment}</p>
               )}
             </div>
           ))

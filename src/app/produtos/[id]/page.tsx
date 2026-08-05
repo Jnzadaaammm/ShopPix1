@@ -66,8 +66,8 @@ export default async function ProductDetailPage({
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-100">
           <Lock className="h-8 w-8 text-brand-600" />
         </div>
-        <h1 className="mt-6 text-2xl font-bold text-gray-900">Conta necessária</h1>
-        <p className="mt-2 text-gray-500">
+        <h1 className="mt-6 text-2xl font-bold text-slate-100">Conta necessária</h1>
+        <p className="mt-2 text-slate-400">
           Você precisa estar logado para ver os detalhes dos produtos.
         </p>
         <Link href="/login" className="btn-primary mt-8">
@@ -115,7 +115,7 @@ export default async function ProductDetailPage({
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       {/* Breadcrumbs */}
-      <nav className="mb-6 flex items-center gap-1 text-sm text-gray-500" aria-label="Breadcrumb">
+      <nav className="mb-6 flex items-center gap-1 text-sm text-slate-400" aria-label="Breadcrumb">
         <Link href="/" className="hover:text-brand-600">Início</Link>
         <ChevronRight className="h-3 w-3" />
         <Link href="/produtos" className="hover:text-brand-600">Produtos</Link>
@@ -127,12 +127,12 @@ export default async function ProductDetailPage({
           {product.category.name}
         </Link>
         <ChevronRight className="h-3 w-3" />
-        <span className="truncate font-medium text-gray-900">{product.name}</span>
+        <span className="truncate font-medium text-slate-100">{product.name}</span>
       </nav>
 
       <div className="grid gap-12 lg:grid-cols-2">
         {/* Imagem */}
-        <div className="relative aspect-square overflow-hidden rounded-2xl bg-gray-100">
+        <div className="relative aspect-square overflow-hidden rounded-2xl bg-slate-900">
           <Image
             src={product.image}
             alt={product.name}
@@ -151,7 +151,7 @@ export default async function ProductDetailPage({
           <span className="inline-flex w-fit rounded-full bg-brand-50 px-3 py-1 text-sm font-medium text-brand-700">
             {product.category.name}
           </span>
-          <h1 className="mt-4 text-3xl font-bold text-gray-900">{product.name}</h1>
+          <h1 className="mt-4 text-3xl font-bold text-slate-100">{product.name}</h1>
 
           {/* Rating */}
           {product.reviews.length > 0 && (
@@ -166,20 +166,20 @@ export default async function ProductDetailPage({
                   />
                 ))}
               </div>
-              <span className="text-sm text-gray-500">
+              <span className="text-sm text-slate-400">
                 {avgRating.toFixed(1)} ({product.reviews.length} avaliações)
               </span>
             </div>
           )}
 
-          <p className="mt-4 text-gray-600 leading-relaxed">{product.description}</p>
+          <p className="mt-4 text-slate-400 leading-relaxed">{product.description}</p>
 
           {/* Preço */}
           <div className="mt-6">
             <span className="text-4xl font-bold text-brand-600">
               {formatCurrency(product.price)}
             </span>
-            <p className="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-sm text-slate-400">
               {product.stockMode === "CREDENTIALS"
                 ? "Disponível para entrega imediata após o pagamento"
                 : "Disponível para download imediato após o pagamento"}
@@ -188,17 +188,17 @@ export default async function ProductDetailPage({
 
           {/* Features */}
           <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <div className="flex items-center gap-2 rounded-lg bg-gray-50 p-3">
+            <div className="flex items-center gap-2 rounded-lg bg-slate-900 p-3">
               <Zap className="h-5 w-5 text-green-600" />
-              <span className="text-xs font-medium text-gray-700">PIX Instantâneo</span>
+              <span className="text-xs font-medium text-slate-300">PIX Instantâneo</span>
             </div>
-            <div className="flex items-center gap-2 rounded-lg bg-gray-50 p-3">
+            <div className="flex items-center gap-2 rounded-lg bg-slate-900 p-3">
               <Shield className="h-5 w-5 text-blue-600" />
-              <span className="text-xs font-medium text-gray-700">Compra Segura</span>
+              <span className="text-xs font-medium text-slate-300">Compra Segura</span>
             </div>
-            <div className="flex items-center gap-2 rounded-lg bg-gray-50 p-3">
+            <div className="flex items-center gap-2 rounded-lg bg-slate-900 p-3">
               <Download className="h-5 w-5 text-purple-600" />
-              <span className="text-xs font-medium text-gray-700">Entrega Digital</span>
+              <span className="text-xs font-medium text-slate-300">Entrega Digital</span>
             </div>
           </div>
 
@@ -218,9 +218,9 @@ export default async function ProductDetailPage({
       {/* Produtos Relacionados */}
       {relatedProducts.length > 0 && (
         <section className="mt-16">
-          <div className="mb-6 border-b border-gray-200 pb-4">
-            <h2 className="text-2xl font-bold text-gray-900">Produtos Relacionados</h2>
-            <p className="mt-1 text-sm text-gray-500">
+          <div className="mb-6 border-b border-slate-700 pb-4">
+            <h2 className="text-2xl font-bold text-slate-100">Produtos Relacionados</h2>
+            <p className="mt-1 text-sm text-slate-400">
               Outros produtos de {product.category.name}
             </p>
           </div>

@@ -24,7 +24,7 @@ interface Role {
 }
 
 const COLORS = [
-  { id: "gray", label: "Cinza", class: "bg-gray-100 text-gray-700" },
+  { id: "gray", label: "Cinza", class: "bg-slate-900 text-slate-300" },
   { id: "blue", label: "Azul", class: "bg-blue-100 text-blue-700" },
   { id: "green", label: "Verde", class: "bg-green-100 text-green-700" },
   { id: "purple", label: "Roxo", class: "bg-purple-100 text-purple-700" },
@@ -195,7 +195,7 @@ export default function AdminRolesPage() {
   if (status === "loading") {
     return (
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <div className="h-8 w-48 animate-pulse rounded bg-gray-200" />
+        <div className="h-8 w-48 animate-pulse rounded bg-slate-800" />
       </div>
     );
   }
@@ -205,8 +205,8 @@ export default function AdminRolesPage() {
       <div className="flex min-h-[60vh] items-center justify-center px-4">
         <div className="text-center">
           <ShieldAlert className="mx-auto h-16 w-16 text-red-500" />
-          <h1 className="mt-4 text-2xl font-bold text-gray-900">Acesso Negado</h1>
-          <p className="mt-2 text-gray-600">Você não tem permissão para gerenciar cargos.</p>
+          <h1 className="mt-4 text-2xl font-bold text-slate-100">Acesso Negado</h1>
+          <p className="mt-2 text-slate-400">Você não tem permissão para gerenciar cargos.</p>
         </div>
       </div>
     );
@@ -215,10 +215,10 @@ export default function AdminRolesPage() {
   if (loading) {
     return (
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <div className="h-8 w-48 animate-pulse rounded bg-gray-200" />
+        <div className="h-8 w-48 animate-pulse rounded bg-slate-800" />
         <div className="mt-6 space-y-4">
           {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="h-20 animate-pulse rounded-xl bg-gray-100" />
+            <div key={i} className="h-20 animate-pulse rounded-xl bg-slate-900" />
           ))}
         </div>
       </div>
@@ -229,10 +229,10 @@ export default function AdminRolesPage() {
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="flex items-center gap-2 text-3xl font-bold text-gray-900">
+          <h1 className="flex items-center gap-2 text-3xl font-bold text-slate-100">
             <Crown className="h-8 w-8 text-brand-600" /> Cargos
           </h1>
-          <p className="mt-2 text-gray-600">Gerencie cargos de clientes e equipe</p>
+          <p className="mt-2 text-slate-400">Gerencie cargos de clientes e equipe</p>
         </div>
         <div className="flex gap-2">
           <button
@@ -252,9 +252,9 @@ export default function AdminRolesPage() {
 
       {/* Cargos de Cliente */}
       <div className="mb-8">
-        <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-gray-900">
+        <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-100">
           <Tag className="h-5 w-5 text-brand-600" /> Cargos de Cliente
-          <span className="text-sm font-normal text-gray-400">
+          <span className="text-sm font-normal text-slate-500">
             ({clientRoles.length}) — desconto automático no checkout
           </span>
         </h2>
@@ -278,29 +278,29 @@ export default function AdminRolesPage() {
                 <div className="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
                   <button
                     onClick={() => openEdit(role)}
-                    className="rounded-lg p-1.5 text-gray-400 hover:bg-gray-100 hover:text-brand-600"
+                    className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-900 hover:text-brand-600"
                     aria-label="Editar"
                   >
                     <Save className="h-4 w-4" />
                   </button>
                   <button
                     onClick={() => handleDelete(role)}
-                    className="rounded-lg p-1.5 text-gray-400 hover:bg-red-50 hover:text-red-500"
+                    className="rounded-lg p-1.5 text-slate-500 hover:bg-red-50 hover:text-red-500"
                     aria-label="Remover"
                   >
                     <Trash2 className="h-4 w-4" />
                   </button>
                 </div>
               </div>
-              <p className="mt-2 text-sm text-gray-500">{role.description || "Sem descrição"}</p>
-              <div className="mt-4 flex items-center justify-between border-t border-gray-100 pt-3">
+              <p className="mt-2 text-sm text-slate-400">{role.description || "Sem descrição"}</p>
+              <div className="mt-4 flex items-center justify-between border-t border-slate-800 pt-3">
                 <div className="flex items-center gap-3 text-sm">
                   <span className="font-bold text-brand-600">{role.discount}% OFF</span>
-                  <span className="flex items-center gap-1 text-gray-400">
+                  <span className="flex items-center gap-1 text-slate-500">
                     <Users className="h-3 w-3" /> {role.userCount}
                   </span>
                 </div>
-                <span className="text-xs text-gray-400">Nível {role.level}</span>
+                <span className="text-xs text-slate-500">Nível {role.level}</span>
               </div>
             </div>
           ))}
@@ -309,9 +309,9 @@ export default function AdminRolesPage() {
 
       {/* Cargos de Equipe */}
       <div>
-        <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-gray-900">
+        <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-100">
           <Shield className="h-5 w-5 text-red-600" /> Cargos de Equipe
-          <span className="text-sm font-normal text-gray-400">
+          <span className="text-sm font-normal text-slate-500">
             ({teamRoles.length}) — permissões administrativas
           </span>
         </h2>
@@ -330,21 +330,21 @@ export default function AdminRolesPage() {
                 <div className="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
                   <button
                     onClick={() => openEdit(role)}
-                    className="rounded-lg p-1.5 text-gray-400 hover:bg-gray-100 hover:text-brand-600"
+                    className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-900 hover:text-brand-600"
                     aria-label="Editar"
                   >
                     <Save className="h-4 w-4" />
                   </button>
                   <button
                     onClick={() => handleDelete(role)}
-                    className="rounded-lg p-1.5 text-gray-400 hover:bg-red-50 hover:text-red-500"
+                    className="rounded-lg p-1.5 text-slate-500 hover:bg-red-50 hover:text-red-500"
                     aria-label="Remover"
                   >
                     <Trash2 className="h-4 w-4" />
                   </button>
                 </div>
               </div>
-              <p className="mt-2 text-sm text-gray-500">{role.description || "Sem descrição"}</p>
+              <p className="mt-2 text-sm text-slate-400">{role.description || "Sem descrição"}</p>
               <div className="mt-3 flex flex-wrap gap-1">
                 {(role.permissions || []).includes("*") ? (
                   <span className="rounded-full bg-red-50 px-2 py-0.5 text-xs font-medium text-red-600">
@@ -356,7 +356,7 @@ export default function AdminRolesPage() {
                     return (
                       <span
                         key={p}
-                        className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600"
+                        className="rounded-full bg-slate-900 px-2 py-0.5 text-xs text-slate-400"
                       >
                         {perm?.label || p}
                       </span>
@@ -364,16 +364,16 @@ export default function AdminRolesPage() {
                   })
                 )}
                 {role.permissions.length > 3 && !role.permissions.includes("*") && (
-                  <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">
+                  <span className="rounded-full bg-slate-900 px-2 py-0.5 text-xs text-slate-400">
                     +{role.permissions.length - 3}
                   </span>
                 )}
               </div>
-              <div className="mt-4 flex items-center justify-between border-t border-gray-100 pt-3">
-                <span className="flex items-center gap-1 text-sm text-gray-400">
+              <div className="mt-4 flex items-center justify-between border-t border-slate-800 pt-3">
+                <span className="flex items-center gap-1 text-sm text-slate-500">
                   <Users className="h-3 w-3" /> {role.userCount} usuário(s)
                 </span>
-                <span className="text-xs text-gray-400">Nível {role.level}</span>
+                <span className="text-xs text-slate-500">Nível {role.level}</span>
               </div>
             </div>
           ))}
@@ -384,14 +384,14 @@ export default function AdminRolesPage() {
       {(creating || editing) && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={closeModal}>
           <div
-            className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl"
+            className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl bg-slate-950 p-6 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-4 flex items-center justify-between">
-              <h3 className="text-xl font-bold text-gray-900">
+              <h3 className="text-xl font-bold text-slate-100">
                 {editing ? "Editar Cargo" : "Novo Cargo"}
               </h3>
-              <button onClick={closeModal} className="rounded-lg p-1 text-gray-400 hover:bg-gray-100">
+              <button onClick={closeModal} className="rounded-lg p-1 text-slate-500 hover:bg-slate-900">
                 <X className="h-5 w-5" />
               </button>
             </div>
@@ -399,7 +399,7 @@ export default function AdminRolesPage() {
             <div className="space-y-4">
               {/* Nome */}
               <div>
-                <label className="block text-sm font-medium text-gray-700">Nome</label>
+                <label className="block text-sm font-medium text-slate-300">Nome</label>
                 <input
                   type="text"
                   value={form.name}
@@ -411,7 +411,7 @@ export default function AdminRolesPage() {
 
               {/* Descrição */}
               <div>
-                <label className="block text-sm font-medium text-gray-700">Descrição</label>
+                <label className="block text-sm font-medium text-slate-300">Descrição</label>
                 <input
                   type="text"
                   value={form.description}
@@ -423,14 +423,14 @@ export default function AdminRolesPage() {
 
               {/* Tipo */}
               <div>
-                <label className="block text-sm font-medium text-gray-700">Tipo</label>
+                <label className="block text-sm font-medium text-slate-300">Tipo</label>
                 <div className="mt-1 flex gap-2">
                   <button
                     onClick={() => setForm({ ...form, type: "CLIENT", permissions: [] })}
                     className={`flex-1 rounded-xl border-2 px-4 py-2.5 text-sm font-medium transition-colors ${
                       form.type === "CLIENT"
                         ? "border-brand-500 bg-brand-50 text-brand-700"
-                        : "border-gray-200 text-gray-600 hover:bg-gray-50"
+                        : "border-slate-700 text-slate-400 hover:bg-slate-900"
                     }`}
                   >
                     <Tag className="mr-1 inline h-4 w-4" /> Cliente
@@ -440,7 +440,7 @@ export default function AdminRolesPage() {
                     className={`flex-1 rounded-xl border-2 px-4 py-2.5 text-sm font-medium transition-colors ${
                       form.type === "TEAM"
                         ? "border-red-500 bg-red-50 text-red-700"
-                        : "border-gray-200 text-gray-600 hover:bg-gray-50"
+                        : "border-slate-700 text-slate-400 hover:bg-slate-900"
                     }`}
                   >
                     <Shield className="mr-1 inline h-4 w-4" /> Equipe
@@ -450,7 +450,7 @@ export default function AdminRolesPage() {
 
               {/* Cor */}
               <div>
-                <label className="block text-sm font-medium text-gray-700">Cor do Badge</label>
+                <label className="block text-sm font-medium text-slate-300">Cor do Badge</label>
                 <div className="mt-1 flex flex-wrap gap-2">
                   {COLORS.map((c) => (
                     <button
@@ -469,7 +469,7 @@ export default function AdminRolesPage() {
               {/* Nível + Desconto (cliente) */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Nível</label>
+                  <label className="block text-sm font-medium text-slate-300">Nível</label>
                   <input
                     type="number"
                     value={form.level}
@@ -479,7 +479,7 @@ export default function AdminRolesPage() {
                 </div>
                 {form.type === "CLIENT" && (
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-slate-300">
                       Desconto (%)
                     </label>
                     <input
@@ -496,16 +496,16 @@ export default function AdminRolesPage() {
 
               {/* Cargo padrão */}
               {form.type === "CLIENT" && (
-                <label className="flex items-center gap-2 rounded-lg border p-3 cursor-pointer hover:bg-gray-50">
+                <label className="flex items-center gap-2 rounded-lg border p-3 cursor-pointer hover:bg-slate-900">
                   <input
                     type="checkbox"
                     checked={form.isDefault}
                     onChange={(e) => setForm({ ...form, isDefault: e.target.checked })}
-                    className="h-5 w-5 rounded border-gray-300 text-brand-600 focus:ring-brand-500"
+                    className="h-5 w-5 rounded border-slate-700 text-brand-600 focus:ring-brand-500"
                   />
                   <div>
-                    <p className="text-sm font-medium text-gray-900">Cargo padrão</p>
-                    <p className="text-xs text-gray-500">Novos usuários recebem este cargo automaticamente</p>
+                    <p className="text-sm font-medium text-slate-100">Cargo padrão</p>
+                    <p className="text-xs text-slate-400">Novos usuários recebem este cargo automaticamente</p>
                   </div>
                 </label>
               )}
@@ -513,22 +513,22 @@ export default function AdminRolesPage() {
               {/* Permissões (equipe) */}
               {form.type === "TEAM" && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-slate-300">
                     Permissões
                   </label>
                   <div className="mt-2 grid grid-cols-2 gap-2">
                     {ALL_PERMISSIONS.map((perm) => (
                       <label
                         key={perm.id}
-                        className="flex items-center gap-2 rounded-lg border p-2 cursor-pointer hover:bg-gray-50"
+                        className="flex items-center gap-2 rounded-lg border p-2 cursor-pointer hover:bg-slate-900"
                       >
                         <input
                           type="checkbox"
                           checked={form.permissions.includes(perm.id)}
                           onChange={() => togglePermission(perm.id)}
-                          className="h-4 w-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500"
+                          className="h-4 w-4 rounded border-slate-700 text-brand-600 focus:ring-brand-500"
                         />
-                        <span className="text-xs text-gray-700">{perm.label}</span>
+                        <span className="text-xs text-slate-300">{perm.label}</span>
                       </label>
                     ))}
                   </div>
@@ -537,8 +537,8 @@ export default function AdminRolesPage() {
 
               {/* Discord Role ID — sincroniza cargo no servidor Discord */}
               <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  ID do Cargo no Discord <span className="text-gray-400 font-normal">(auto)</span>
+                <label className="block text-sm font-medium text-slate-300">
+                  ID do Cargo no Discord <span className="text-slate-500 font-normal">(auto)</span>
                 </label>
                 <input
                   type="text"
@@ -547,7 +547,7 @@ export default function AdminRolesPage() {
                   placeholder="Preenchido automaticamente ao sincronizar"
                   className="input mt-1"
                 />
-                <p className="mt-1 text-xs text-gray-500">
+                <p className="mt-1 text-xs text-slate-400">
                   Preenchido automaticamente quando você clica em "Sincronizar Discord".
                   Só edite manualmente se quiser apontar para um cargo já existente.
                 </p>

@@ -34,6 +34,6 @@ export const ORDER_STATUS_COLORS: Record<string, string> = {
   AWAITING_APPROVAL: "bg-blue-100 text-blue-800",
   PAID: "bg-green-100 text-green-800",
   CANCELLED: "bg-red-100 text-red-800",
-  EXPIRED: "bg-gray-100 text-gray-800",
+  EXPIRED: "bg-slate-900 text-slate-200",
   REFUNDED: "bg-purple-100 text-purple-800",
 };

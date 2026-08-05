@@ -164,8 +164,8 @@ export default function ProductsPage() {
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-100">
           <Lock className="h-8 w-8 text-brand-600" />
         </div>
-        <h1 className="mt-6 text-2xl font-bold text-gray-900">Conta necessária</h1>
-        <p className="mt-2 text-gray-500">
+        <h1 className="mt-6 text-2xl font-bold text-slate-100">Conta necessária</h1>
+        <p className="mt-2 text-slate-400">
           Você precisa estar logado para ver os produtos disponíveis.
         </p>
         <Link href="/login?callbackUrl=/produtos" className="btn-primary mt-8">
@@ -179,8 +179,8 @@ export default function ProductsPage() {
     return (
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <div className="h-8 w-64 animate-pulse rounded bg-gray-200" />
-          <div className="mt-2 h-4 w-48 animate-pulse rounded bg-gray-200" />
+          <div className="h-8 w-64 animate-pulse rounded bg-slate-800" />
+          <div className="mt-2 h-4 w-48 animate-pulse rounded bg-slate-800" />
         </div>
         <ProductGridSkeleton />
       </div>
@@ -190,8 +190,8 @@ export default function ProductsPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Todos os Produtos</h1>
-        <p className="mt-2 text-gray-500">
+        <h1 className="text-3xl font-bold text-slate-100">Todos os Produtos</h1>
+        <p className="mt-2 text-slate-400">
           {filteredProducts.length} {filteredProducts.length === 1 ? "produto" : "produtos"} em {categoryGroups.length} {categoryGroups.length === 1 ? "categoria" : "categorias"}
         </p>
       </div>
@@ -199,18 +199,18 @@ export default function ProductsPage() {
       {/* Barra de busca + ordenação */}
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500" />
           <input
             type="text"
             placeholder="Buscar produtos..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-xl border border-gray-200 pl-10 pr-4 py-2.5 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200"
+            className="w-full rounded-xl border border-slate-700 pl-10 pr-4 py-2.5 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200"
           />
           {search && (
             <button
               onClick={() => setSearch("")}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-400"
             >
               <X className="h-4 w-4" />
             </button>
@@ -220,7 +220,7 @@ export default function ProductsPage() {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as SortOption)}
-            className="rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200"
+            className="rounded-xl border border-slate-700 px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200"
           >
             <option value="newest">Mais Recentes</option>
             <option value="price_low">Menor Preço</option>
@@ -230,7 +230,7 @@ export default function ProductsPage() {
           <button
             onClick={() => setShowFilters(!showFilters)}
             className={`flex items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors ${
-              showFilters ? "border-brand-500 bg-brand-50 text-brand-700" : "border-gray-200 text-gray-600 hover:bg-gray-50"
+              showFilters ? "border-brand-500 bg-brand-50 text-brand-700" : "border-slate-700 text-slate-400 hover:bg-slate-900"
             }`}
           >
             <SlidersHorizontal className="h-4 w-4" /> Filtros
@@ -240,11 +240,11 @@ export default function ProductsPage() {
 
       {/* Filtros */}
       {showFilters && (
-        <div className="mb-6 rounded-xl border bg-white p-5 shadow-sm">
+        <div className="mb-6 rounded-xl border bg-slate-950 p-5 shadow-sm">
           <div className="grid gap-5 sm:grid-cols-1">
             {/* Preço */}
             <div>
-              <h3 className="mb-2 text-sm font-semibold text-gray-900">
+              <h3 className="mb-2 text-sm font-semibold text-slate-100">
                 Preço: R$ {priceRange[0]} - R$ {priceRange[1]}
               </h3>
               <div className="space-y-2">
@@ -274,7 +274,7 @@ export default function ProductsPage() {
       {/* Chips de filtros ativos */}
       {!showFilters && hasActiveFilters && (
         <div className="mb-6 flex flex-wrap items-center gap-2">
-          <button onClick={clearFilters} className="text-xs text-gray-500 hover:text-gray-700">
+          <button onClick={clearFilters} className="text-xs text-slate-400 hover:text-slate-300">
             Limpar tudo
           </button>
         </div>
@@ -282,7 +282,7 @@ export default function ProductsPage() {
 
       {/* Navegação por categorias (sticky) */}
       {categoryGroups.length > 0 && (
-        <div className="sticky top-[72px] z-30 mb-8 -mx-4 border-b border-gray-100 bg-white/90 px-4 py-3 backdrop-blur-lg sm:mx-0 sm:rounded-xl sm:border sm:px-4">
+        <div className="sticky top-[72px] z-30 mb-8 -mx-4 border-b border-slate-800 bg-slate-950/90 px-4 py-3 backdrop-blur-lg sm:mx-0 sm:rounded-xl sm:border sm:px-4">
           <div className="flex items-center gap-2 overflow-x-auto pb-1">
             <button
               onClick={() => {
@@ -292,7 +292,7 @@ export default function ProductsPage() {
               className={`whitespace-nowrap rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
                 activeCategory === "all"
                   ? "bg-brand-600 text-white"
-                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  : "bg-slate-900 text-slate-400 hover:bg-slate-800"
               }`}
             >
               Todas
@@ -304,11 +304,11 @@ export default function ProductsPage() {
                 className={`flex items-center gap-1 whitespace-nowrap rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
                   activeCategory === group.category.id
                     ? "bg-brand-600 text-white"
-                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                    : "bg-slate-900 text-slate-400 hover:bg-slate-800"
                 }`}
               >
                 {group.category.name}
-                <span className={`text-xs ${activeCategory === group.category.id ? "text-brand-100" : "text-gray-400"}`}>
+                <span className={`text-xs ${activeCategory === group.category.id ? "text-brand-100" : "text-slate-500"}`}>
                   ({group.products.length})
                 </span>
               </button>
@@ -319,8 +319,8 @@ export default function ProductsPage() {
 
       {/* Seções por categoria */}
       {categoryGroups.length === 0 ? (
-        <div className="rounded-xl border bg-white py-20 text-center">
-          <p className="text-gray-500">Nenhum produto encontrado com esses filtros.</p>
+        <div className="rounded-xl border bg-slate-950 py-20 text-center">
+          <p className="text-slate-400">Nenhum produto encontrado com esses filtros.</p>
           <button onClick={clearFilters} className="mt-3 text-sm text-brand-600 hover:underline">
             Limpar filtros
           </button>
@@ -335,13 +335,13 @@ export default function ProductsPage() {
               className="scroll-mt-32"
             >
               {/* Header da categoria */}
-              <div className="mb-6 flex items-end justify-between border-b border-gray-200 pb-4">
+              <div className="mb-6 flex items-end justify-between border-b border-slate-700 pb-4">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900">{group.category.name}</h2>
+                  <h2 className="text-2xl font-bold text-slate-100">{group.category.name}</h2>
                   {group.category.description && (
-                    <p className="mt-1 text-sm text-gray-500">{group.category.description}</p>
+                    <p className="mt-1 text-sm text-slate-400">{group.category.description}</p>
                   )}
-                  <p className="mt-1 text-xs text-gray-400">
+                  <p className="mt-1 text-xs text-slate-500">
                     {group.products.length} {group.products.length === 1 ? "produto" : "produtos"}
                   </p>
                 </div>

@@ -32,8 +32,8 @@ export default function CartPage() {
     return (
       <div className="mx-auto max-w-7xl px-4 py-24 text-center sm:px-6 lg:px-8">
         <ShoppingBag className="mx-auto h-16 w-16 text-gray-300" />
-        <h1 className="mt-6 text-2xl font-bold text-gray-900">Carrinho vazio</h1>
-        <p className="mt-2 text-gray-500">Adicione produtos para continuar comprando.</p>
+        <h1 className="mt-6 text-2xl font-bold text-slate-100">Carrinho vazio</h1>
+        <p className="mt-2 text-slate-400">Adicione produtos para continuar comprando.</p>
         <Link href="/produtos" className="btn-primary mt-8">
           Ver Produtos
         </Link>
@@ -43,14 +43,14 @@ export default function CartPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold text-gray-900">Carrinho</h1>
-      <p className="mt-1 text-gray-500">{items.length} item(s) no carrinho</p>
+      <h1 className="text-3xl font-bold text-slate-100">Carrinho</h1>
+      <p className="mt-1 text-slate-400">{items.length} item(s) no carrinho</p>
 
       <div className="mt-8 grid gap-8 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-4">
           {items.map((item) => (
             <div key={item.productId} className="card flex gap-4 p-4">
-              <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-lg bg-gray-100">
+              <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-lg bg-slate-900">
                 <ImageWithFallback
                   src={item.image}
                   alt={item.name}
@@ -62,7 +62,7 @@ export default function CartPage() {
                 <div className="flex items-start justify-between">
                   <div>
                     <Link href={`/produtos/${item.productId}`}>
-                      <h3 className="font-semibold text-gray-900 hover:text-brand-600 transition-colors">
+                      <h3 className="font-semibold text-slate-100 hover:text-brand-600 transition-colors">
                         {item.name}
                       </h3>
                     </Link>
@@ -73,7 +73,7 @@ export default function CartPage() {
                   <button
                     onClick={() => handleRemove(item.productId, item.name)}
                     aria-label={`Remover ${item.name} do carrinho`}
-                    className="rounded-lg p-2 text-gray-400 transition-colors hover:bg-red-50 hover:text-red-500"
+                    className="rounded-lg p-2 text-slate-500 transition-colors hover:bg-red-50 hover:text-red-500"
                   >
                     <Trash2 className="h-4 w-4" />
                   </button>
@@ -82,7 +82,7 @@ export default function CartPage() {
                   <button
                     onClick={() => handleDecrease(item.productId, item.quantity)}
                     aria-label="Diminuir quantidade"
-                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 transition-transform hover:bg-gray-50 active:scale-90"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-700 transition-transform hover:bg-slate-900 active:scale-90"
                   >
                     <Minus className="h-3 w-3" />
                   </button>
@@ -90,11 +90,11 @@ export default function CartPage() {
                   <button
                     onClick={() => handleIncrease(item.productId, item.quantity)}
                     aria-label="Aumentar quantidade"
-                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 transition-transform hover:bg-gray-50 active:scale-90"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-700 transition-transform hover:bg-slate-900 active:scale-90"
                   >
                     <Plus className="h-3 w-3" />
                   </button>
-                  <span className="ml-auto font-semibold text-gray-900">
+                  <span className="ml-auto font-semibold text-slate-100">
                     {formatCurrency(item.price * item.quantity)}
                   </span>
                 </div>
@@ -104,19 +104,19 @@ export default function CartPage() {
         </div>
 
         <div className="card h-fit p-6">
-          <h2 className="text-lg font-bold text-gray-900">Resumo do Pedido</h2>
+          <h2 className="text-lg font-bold text-slate-100">Resumo do Pedido</h2>
           <div className="mt-4 space-y-3">
             <div className="flex justify-between text-sm">
-              <span className="text-gray-500">Subtotal</span>
+              <span className="text-slate-400">Subtotal</span>
               <span className="font-medium">{formatCurrency(total)}</span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-gray-500">Frete</span>
+              <span className="text-slate-400">Frete</span>
               <span className="font-medium text-green-600">Grátis</span>
             </div>
-            <div className="border-t border-gray-100 pt-3">
+            <div className="border-t border-slate-800 pt-3">
               <div className="flex justify-between">
-                <span className="font-bold text-gray-900">Total</span>
+                <span className="font-bold text-slate-100">Total</span>
                 <span className="text-xl font-bold text-brand-600">
                   {formatCurrency(total)}
                 </span>
@@ -125,23 +125,23 @@ export default function CartPage() {
           </div>
 
           {/* Métodos de pagamento aceitos */}
-          <div className="mt-4 rounded-lg bg-gray-50 p-3">
-            <p className="mb-2 text-center text-xs font-medium text-gray-600">
+          <div className="mt-4 rounded-lg bg-slate-900 p-3">
+            <p className="mb-2 text-center text-xs font-medium text-slate-400">
               Formas de pagamento
             </p>
             <div className="flex items-center justify-center gap-3">
-              <div className="flex items-center gap-1 text-xs text-gray-500" title="Cartão via Stripe">
+              <div className="flex items-center gap-1 text-xs text-slate-400" title="Cartão via Stripe">
                 <CreditCard className="h-4 w-4" /> Cartão
               </div>
               <span className="text-gray-300">|</span>
-              <div className="flex items-center gap-1 text-xs text-gray-500" title="PayPal ou cartão via PayPal">
+              <div className="flex items-center gap-1 text-xs text-slate-400" title="PayPal ou cartão via PayPal">
                 <svg className="h-3 w-3" viewBox="0 0 24 24" fill="#003087">
                   <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.77.77 0 0 1 .757-.629h6.69c2.884 0 5.108.558 6.006 2.885.396 1.028.477 2.104.093 3.168-.53 1.473-1.617 2.504-3.067 2.98h.002c1.246.337 2.095.94 2.617 1.865.52.924.66 2.107.36 3.38-.328 1.38-1.002 2.48-1.995 3.26-1.19.94-2.78 1.383-4.578 1.383H9.84a.77.77 0 0 0-.757.63l-.003-.001-.002.006c-.002.004-.002.008-.002.012L7.076 21.337z" />
                 </svg>
                 PayPal
               </div>
               <span className="text-gray-300">|</span>
-              <div className="flex items-center gap-1 text-xs text-gray-500" title="PIX manual">
+              <div className="flex items-center gap-1 text-xs text-slate-400" title="PIX manual">
                 <QrCode className="h-3 w-3" /> PIX
               </div>
             </div>

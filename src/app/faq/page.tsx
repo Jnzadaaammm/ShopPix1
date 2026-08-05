@@ -51,25 +51,25 @@ const faqs = [
 export default function FAQPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold text-gray-900">Perguntas Frequentes</h1>
-      <p className="mt-2 text-sm text-gray-500">Tire suas dúvidas sobre a ShopPix</p>
+      <h1 className="text-3xl font-bold text-slate-100">Perguntas Frequentes</h1>
+      <p className="mt-2 text-sm text-slate-400">Tire suas dúvidas sobre a ShopPix</p>
 
       <div className="mt-8 space-y-4">
         {faqs.map((faq, i) => (
-          <details key={i} className="group rounded-xl border bg-white p-5 shadow-sm">
-            <summary className="flex cursor-pointer items-center justify-between font-semibold text-gray-900">
+          <details key={i} className="group rounded-xl border bg-slate-950 p-5 shadow-sm">
+            <summary className="flex cursor-pointer items-center justify-between font-semibold text-slate-100">
               {faq.q}
-              <span className="ml-4 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-500 transition-transform group-open:rotate-45">
+              <span className="ml-4 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-slate-900 text-slate-400 transition-transform group-open:rotate-45">
                 +
               </span>
             </summary>
-            <p className="mt-3 text-sm leading-relaxed text-gray-600">{faq.a}</p>
+            <p className="mt-3 text-sm leading-relaxed text-slate-400">{faq.a}</p>
           </details>
         ))}
       </div>
 
       <div className="mt-8 rounded-xl bg-brand-50 p-6 text-center">
-        <p className="text-gray-700">Ainda tem dúvidas?</p>
+        <p className="text-slate-300">Ainda tem dúvidas?</p>
         <a
           href="mailto:contato@shoppix.com.br"
           className="mt-2 inline-block rounded-lg bg-brand-600 px-6 py-2.5 text-white hover:bg-brand-700"

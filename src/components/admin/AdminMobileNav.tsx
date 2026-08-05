@@ -60,23 +60,23 @@ export default function AdminMobileNav() {
 
   return (
     <div className="lg:hidden">
-      <div className="sticky top-0 z-40 flex h-14 items-center justify-between border-b border-gray-200 bg-white px-4">
+      <div className="sticky top-0 z-40 flex h-14 items-center justify-between border-b border-slate-700 bg-slate-950 px-4">
         <div className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600">
             <Store className="h-5 w-5 text-white" />
           </div>
-          <span className="font-bold text-gray-900">Admin</span>
+          <span className="font-bold text-slate-100">Admin</span>
         </div>
         <button
           onClick={() => setOpen(!open)}
-          className="rounded-lg p-2 text-gray-600 hover:bg-gray-100"
+          className="rounded-lg p-2 text-slate-400 hover:bg-slate-900"
         >
           {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
       {open && (
-        <nav className="absolute left-0 right-0 z-30 border-b border-gray-200 bg-white shadow-lg">
+        <nav className="absolute left-0 right-0 z-30 border-b border-slate-700 bg-slate-950 shadow-lg">
           {visibleItems.map((item) => {
             const isActive =
               item.href === "/admin"
@@ -88,10 +88,10 @@ export default function AdminMobileNav() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className={`flex items-center gap-3 border-b border-gray-100 px-4 py-3 text-sm font-medium ${
+                className={`flex items-center gap-3 border-b border-slate-800 px-4 py-3 text-sm font-medium ${
                   isActive
                     ? "bg-brand-50 text-brand-700"
-                    : "text-gray-600 hover:bg-gray-50"
+                    : "text-slate-400 hover:bg-slate-900"
                 }`}
               >
                 <Icon className="h-5 w-5" />

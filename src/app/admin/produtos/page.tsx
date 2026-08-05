@@ -224,7 +224,7 @@ export default function AdminProductsPage() {
     return (
       <PermissionGuard permission="products.manage">
         <div className="flex items-center justify-center py-12">
-          <div className="text-gray-500">Carregando...</div>
+          <div className="text-slate-400">Carregando...</div>
         </div>
       </PermissionGuard>
     );
@@ -235,8 +235,8 @@ export default function AdminProductsPage() {
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Gerenciar Produtos</h1>
-          <p className="mt-2 text-gray-600">
+          <h1 className="text-3xl font-bold text-slate-100">Gerenciar Produtos</h1>
+          <p className="mt-2 text-slate-400">
             {products.length} produtos cadastrados
           </p>
         </div>
@@ -252,13 +252,13 @@ export default function AdminProductsPage() {
       </div>
 
       {/* Abas */}
-      <div className="mb-6 flex gap-1 border-b border-gray-200">
+      <div className="mb-6 flex gap-1 border-b border-slate-700">
         <button
           onClick={() => setActiveTab("produtos")}
           className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-colors ${
             activeTab === "produtos"
               ? "border-b-2 border-brand-600 text-brand-600"
-              : "text-gray-500 hover:text-gray-700"
+              : "text-slate-400 hover:text-slate-300"
           }`}
         >
           <Package className="h-4 w-4" />
@@ -269,7 +269,7 @@ export default function AdminProductsPage() {
           className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-colors ${
             activeTab === "excluir"
               ? "border-b-2 border-red-600 text-red-600"
-              : "text-gray-500 hover:text-gray-700"
+              : "text-slate-400 hover:text-slate-300"
           }`}
         >
           <Trash2 className="h-4 w-4" />
@@ -284,7 +284,7 @@ export default function AdminProductsPage() {
 
       <div className="mb-6">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500" />
           <input
             type="text"
             placeholder="Buscar produtos por nome ou categoria..."
@@ -297,34 +297,34 @@ export default function AdminProductsPage() {
 
       {/* ABA: PRODUTOS (listagem padrão) */}
       {activeTab === "produtos" && (
-        <div className="rounded-lg border bg-white shadow-sm">
+        <div className="rounded-lg border bg-slate-950 shadow-sm">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="border-b bg-gray-50">
+              <thead className="border-b bg-slate-900">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">
                     Produto
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">
                     Categoria
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">
                     Preço
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">
                     Tipo
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">
                     Destaque
                   </th>
-                  <th className="px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500">
+                  <th className="px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-slate-400">
                     Ações
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y">
                 {filteredProducts.map((product) => (
-                  <tr key={product.id} className="hover:bg-gray-50">
+                  <tr key={product.id} className="hover:bg-slate-900">
                     <td className="px-6 py-4">
                       <div className="flex items-center">
                         <ImageWithFallback
@@ -335,13 +335,13 @@ export default function AdminProductsPage() {
                           className="rounded object-cover"
                         />
                         <div className="ml-4">
-                          <p className="font-medium text-gray-900">{product.name}</p>
-                          <p className="text-sm text-gray-500">{product.description.slice(0, 50)}...</p>
+                          <p className="font-medium text-slate-100">{product.name}</p>
+                          <p className="text-sm text-slate-400">{product.description.slice(0, 50)}...</p>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-gray-600">{product.category.name}</td>
-                    <td className="px-6 py-4 font-medium text-gray-900">
+                    <td className="px-6 py-4 text-slate-400">{product.category.name}</td>
+                    <td className="px-6 py-4 font-medium text-slate-100">
                       R$ {product.price.toFixed(2)}
                     </td>
                     <td className="px-6 py-4">
@@ -362,7 +362,7 @@ export default function AdminProductsPage() {
                           Sim
                         </span>
                       ) : (
-                        <span className="inline-flex rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-gray-800">
+                        <span className="inline-flex rounded-full bg-slate-900 px-2 py-1 text-xs font-medium text-slate-200">
                           Não
                         </span>
                       )}
@@ -400,20 +400,20 @@ export default function AdminProductsPage() {
 
       {/* ABA: EXCLUIR (deletar em lote) */}
       {activeTab === "excluir" && (
-        <div className="rounded-lg border bg-white shadow-sm">
+        <div className="rounded-lg border bg-slate-950 shadow-sm">
           {/* Barra de ações em lote */}
-          <div className="flex items-center justify-between border-b bg-gray-50 px-6 py-3">
+          <div className="flex items-center justify-between border-b bg-slate-900 px-6 py-3">
             <div className="flex items-center gap-4">
-              <label className="flex items-center gap-2 text-sm font-medium text-gray-700">
+              <label className="flex items-center gap-2 text-sm font-medium text-slate-300">
                 <input
                   type="checkbox"
                   checked={selectedIds.size === filteredProducts.length && filteredProducts.length > 0}
                   onChange={toggleSelectAll}
-                  className="h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-500"
+                  className="h-4 w-4 rounded border-slate-700 text-red-600 focus:ring-red-500"
                 />
                 Selecionar todos
               </label>
-              <span className="text-sm text-gray-500">
+              <span className="text-sm text-slate-400">
                 {selectedIds.size} selecionado(s)
               </span>
             </div>
@@ -430,22 +430,22 @@ export default function AdminProductsPage() {
 
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="border-b bg-gray-50">
+              <thead className="border-b bg-slate-900">
                 <tr>
                   <th className="w-12 px-6 py-3"></th>
-                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">
                     Produto
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">
                     Categoria
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">
                     Preço
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">
                     Tipo
                   </th>
-                  <th className="px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500">
+                  <th className="px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-slate-400">
                     Ação
                   </th>
                 </tr>
@@ -453,7 +453,7 @@ export default function AdminProductsPage() {
               <tbody className="divide-y">
                 {filteredProducts.length === 0 ? (
                   <tr>
-                    <td colSpan={6} className="px-6 py-12 text-center text-gray-400">
+                    <td colSpan={6} className="px-6 py-12 text-center text-slate-500">
                       Nenhum produto encontrado.
                     </td>
                   </tr>
@@ -462,7 +462,7 @@ export default function AdminProductsPage() {
                     <tr
                       key={product.id}
                       className={`transition-colors ${
-                        selectedIds.has(product.id) ? "bg-red-50" : "hover:bg-gray-50"
+                        selectedIds.has(product.id) ? "bg-red-50" : "hover:bg-slate-900"
                       }`}
                     >
                       <td className="px-6 py-4">
@@ -470,7 +470,7 @@ export default function AdminProductsPage() {
                           type="checkbox"
                           checked={selectedIds.has(product.id)}
                           onChange={() => toggleSelect(product.id)}
-                          className="h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-500"
+                          className="h-4 w-4 rounded border-slate-700 text-red-600 focus:ring-red-500"
                         />
                       </td>
                       <td className="px-6 py-4">
@@ -483,13 +483,13 @@ export default function AdminProductsPage() {
                             className="rounded object-cover"
                           />
                           <div className="ml-3">
-                            <p className="font-medium text-gray-900">{product.name}</p>
-                            <p className="text-xs text-gray-500">{product.description.slice(0, 40)}...</p>
+                            <p className="font-medium text-slate-100">{product.name}</p>
+                            <p className="text-xs text-slate-400">{product.description.slice(0, 40)}...</p>
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 text-gray-600">{product.category.name}</td>
-                      <td className="px-6 py-4 font-medium text-gray-900">
+                      <td className="px-6 py-4 text-slate-400">{product.category.name}</td>
+                      <td className="px-6 py-4 font-medium text-slate-100">
                         R$ {product.price.toFixed(2)}
                       </td>
                       <td className="px-6 py-4">
@@ -525,15 +525,15 @@ export default function AdminProductsPage() {
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={closeModal}>
           <div
-            className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white shadow-2xl"
+            className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-slate-950 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-gray-100 bg-white px-6 py-4">
-              <h2 className="text-lg font-bold text-gray-900">
+            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-slate-800 bg-slate-950 px-6 py-4">
+              <h2 className="text-lg font-bold text-slate-100">
                 {editingProduct ? "Editar Produto" : "Novo Produto"}
               </h2>
-              <button onClick={closeModal} className="rounded-lg p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-600">
+              <button onClick={closeModal} className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-900 hover:text-slate-400">
                 <Plus className="h-5 w-5 rotate-45" />
               </button>
             </div>
@@ -542,7 +542,7 @@ export default function AdminProductsPage() {
               {/* Nome + Categoria */}
               <div className="grid gap-4 sm:grid-cols-3">
                 <div className="sm:col-span-2">
-                  <label className="block text-xs font-medium text-gray-600">Nome</label>
+                  <label className="block text-xs font-medium text-slate-400">Nome</label>
                   <input
                     type="text"
                     required
@@ -553,7 +553,7 @@ export default function AdminProductsPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-600">Categoria</label>
+                  <label className="block text-xs font-medium text-slate-400">Categoria</label>
                   <select
                     required
                     value={formData.categoryId}
@@ -570,7 +570,7 @@ export default function AdminProductsPage() {
 
               {/* Descrição */}
               <div>
-                <label className="block text-xs font-medium text-gray-600">Descrição</label>
+                <label className="block text-xs font-medium text-slate-400">Descrição</label>
                 <textarea
                   required
                   value={formData.description}
@@ -584,7 +584,7 @@ export default function AdminProductsPage() {
               {/* Preço + Destaque */}
               <div className="grid gap-4 sm:grid-cols-2">
                 <div>
-                  <label className="block text-xs font-medium text-gray-600">Preço (R$)</label>
+                  <label className="block text-xs font-medium text-slate-400">Preço (R$)</label>
                   <input
                     type="number"
                     step="0.01"
@@ -596,23 +596,23 @@ export default function AdminProductsPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-600">Destaque</label>
-                  <label className="mt-1 flex h-[46px] cursor-pointer items-center gap-2 rounded-xl border border-gray-300 px-4 hover:bg-gray-50">
+                  <label className="block text-xs font-medium text-slate-400">Destaque</label>
+                  <label className="mt-1 flex h-[46px] cursor-pointer items-center gap-2 rounded-xl border border-slate-700 px-4 hover:bg-slate-900">
                     <input
                       type="checkbox"
                       id="featured"
                       checked={formData.featured}
                       onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
-                      className="h-4 w-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500"
+                      className="h-4 w-4 rounded border-slate-700 text-brand-600 focus:ring-brand-500"
                     />
-                    <span className="text-sm text-gray-700">Mostrar na home</span>
+                    <span className="text-sm text-slate-300">Mostrar na home</span>
                   </label>
                 </div>
               </div>
 
               {/* URL da Imagem */}
               <div>
-                <label className="block text-xs font-medium text-gray-600">URL da Imagem</label>
+                <label className="block text-xs font-medium text-slate-400">URL da Imagem</label>
                 <div className="mt-1 flex gap-2">
                   <input
                     type="url"
@@ -628,7 +628,7 @@ export default function AdminProductsPage() {
                       alt="Preview"
                       width={44}
                       height={44}
-                      className="shrink-0 rounded-lg border border-gray-200 object-cover"
+                      className="shrink-0 rounded-lg border border-slate-700 object-cover"
                     />
                   )}
                 </div>
@@ -636,7 +636,7 @@ export default function AdminProductsPage() {
 
               {/* TIPO DE PRODUTO DIGITAL */}
               <div>
-                <label className="block text-xs font-medium text-gray-600">Tipo de Produto Digital</label>
+                <label className="block text-xs font-medium text-slate-400">Tipo de Produto Digital</label>
                 <div className="mt-1 grid grid-cols-2 gap-2">
                   <button
                     type="button"
@@ -644,12 +644,12 @@ export default function AdminProductsPage() {
                     className={`flex flex-col items-center gap-1.5 rounded-xl border p-3 text-center transition-all ${
                       formData.stockMode === "SIMPLE"
                         ? "border-brand-500 bg-brand-50 ring-2 ring-brand-500/20"
-                        : "border-gray-200 hover:bg-gray-50"
+                        : "border-slate-700 hover:bg-slate-900"
                     }`}
                   >
                     <InfinityIcon className="h-5 w-5 text-brand-600" />
-                    <span className="text-xs font-medium text-gray-900">Download Ilimitado</span>
-                    <span className="text-[10px] text-gray-400">Arquivo único</span>
+                    <span className="text-xs font-medium text-slate-100">Download Ilimitado</span>
+                    <span className="text-[10px] text-slate-500">Arquivo único</span>
                   </button>
                   <button
                     type="button"
@@ -657,12 +657,12 @@ export default function AdminProductsPage() {
                     className={`flex flex-col items-center gap-1.5 rounded-xl border p-3 text-center transition-all ${
                       formData.stockMode === "CREDENTIALS"
                         ? "border-brand-500 bg-brand-50 ring-2 ring-brand-500/20"
-                        : "border-gray-200 hover:bg-gray-50"
+                        : "border-slate-700 hover:bg-slate-900"
                     }`}
                   >
                     <KeyRound className="h-5 w-5 text-brand-600" />
-                    <span className="text-xs font-medium text-gray-900">Credenciais</span>
-                    <span className="text-[10px] text-gray-400">Uma por cliente</span>
+                    <span className="text-xs font-medium text-slate-100">Credenciais</span>
+                    <span className="text-[10px] text-slate-500">Uma por cliente</span>
                   </button>
                 </div>
               </div>
@@ -672,7 +672,7 @@ export default function AdminProductsPage() {
               {formData.stockMode === "SIMPLE" && (
                 <div className="grid gap-4 sm:grid-cols-3">
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-medium text-gray-600">URL do Arquivo</label>
+                    <label className="block text-xs font-medium text-slate-400">URL do Arquivo</label>
                     <input
                       type="url"
                       value={formData.fileUrl}
@@ -682,7 +682,7 @@ export default function AdminProductsPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-gray-600">Limite de Downloads</label>
+                    <label className="block text-xs font-medium text-slate-400">Limite de Downloads</label>
                     <input
                       type="number"
                       min="1"
@@ -713,11 +713,11 @@ export default function AdminProductsPage() {
               )}
 
               {/* Botões */}
-              <div className="flex justify-end gap-3 border-t border-gray-100 pt-4">
+              <div className="flex justify-end gap-3 border-t border-slate-800 pt-4">
                 <button
                   type="button"
                   onClick={closeModal}
-                  className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                  className="rounded-lg border border-slate-700 px-4 py-2 text-sm font-medium text-slate-300 hover:bg-slate-900"
                 >
                   Cancelar
                 </button>
@@ -739,7 +739,7 @@ export default function AdminProductsPage() {
       {deleteTargets.length > 0 && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={closeDeleteModal}>
           <div
-            className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl"
+            className="w-full max-w-md rounded-2xl bg-slate-950 p-6 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-4 flex items-start gap-3">
@@ -747,20 +747,20 @@ export default function AdminProductsPage() {
                 <AlertTriangle className="h-5 w-5 text-red-600" />
               </div>
               <div>
-                <h2 className="text-lg font-bold text-gray-900">
+                <h2 className="text-lg font-bold text-slate-100">
                   Excluir {deleteTargets.length > 1 ? `${deleteTargets.length} produtos` : "produto"}
                 </h2>
-                <p className="mt-1 text-sm text-gray-500">
+                <p className="mt-1 text-sm text-slate-400">
                   Esta ação não pode ser desfeita.
                 </p>
               </div>
             </div>
 
-            <div className="mb-4 max-h-40 space-y-2 overflow-y-auto rounded-xl bg-gray-50 p-3">
+            <div className="mb-4 max-h-40 space-y-2 overflow-y-auto rounded-xl bg-slate-900 p-3">
               {deleteTargets.map((p) => (
                 <div key={p.id} className="flex items-center gap-2 text-sm">
                   <ImageWithFallback src={p.image} alt="" width={32} height={32} className="rounded object-cover" />
-                  <span className="font-medium text-gray-900">{p.name}</span>
+                  <span className="font-medium text-slate-100">{p.name}</span>
                 </div>
               ))}
             </div>
@@ -775,7 +775,7 @@ export default function AdminProductsPage() {
               <button
                 onClick={closeDeleteModal}
                 disabled={deleting}
-                className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
+                className="rounded-lg border border-slate-700 px-4 py-2 text-sm font-medium text-slate-300 hover:bg-slate-900 disabled:opacity-50"
               >
                 Cancelar
               </button>

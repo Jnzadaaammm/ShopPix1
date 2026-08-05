@@ -115,9 +115,9 @@ export async function ensureDefaultRoles() {
  */
 export const ROLE_COLOR_CLASSES: Record<string, { badge: string; text: string; bg: string }> = {
   gray: {
-    badge: "bg-gray-100 text-gray-700",
-    text: "text-gray-600",
-    bg: "bg-gray-100",
+    badge: "bg-slate-900 text-slate-300",
+    text: "text-slate-400",
+    bg: "bg-slate-900",
   },
   blue: {
     badge: "bg-blue-100 text-blue-700",

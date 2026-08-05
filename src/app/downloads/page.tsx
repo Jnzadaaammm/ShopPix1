@@ -79,8 +79,8 @@ export default function DownloadsPage() {
     return (
       <div className="mx-auto max-w-7xl px-4 py-24 text-center sm:px-6 lg:px-8">
         <Download className="mx-auto h-16 w-16 text-gray-300" />
-        <h1 className="mt-6 text-2xl font-bold text-gray-900">Nenhum download ainda</h1>
-        <p className="mt-2 text-gray-500">
+        <h1 className="mt-6 text-2xl font-bold text-slate-100">Nenhum download ainda</h1>
+        <p className="mt-2 text-slate-400">
           Compre produtos digitais e eles aparecerão aqui!
         </p>
         <Link href="/produtos" className="btn-primary mt-8">
@@ -92,8 +92,8 @@ export default function DownloadsPage() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold text-gray-900">Meus Downloads</h1>
-      <p className="mt-1 text-gray-500">{(downloads || []).length} produto(s) digital(is)</p>
+      <h1 className="text-3xl font-bold text-slate-100">Meus Downloads</h1>
+      <p className="mt-1 text-slate-400">{(downloads || []).length} produto(s) digital(is)</p>
 
       <div className="mt-8 space-y-4">
         {(downloads || []).map((download) => {
@@ -111,12 +111,12 @@ export default function DownloadsPage() {
                   className="rounded-lg object-cover"
                 />
                 <div className="flex-1 min-w-0">
-                  <h2 className="font-bold text-gray-900">{download.product.name}</h2>
-                  <p className="text-sm text-gray-500">
+                  <h2 className="font-bold text-slate-100">{download.product.name}</h2>
+                  <p className="text-sm text-slate-400">
                     Pedido #{download.order.id.slice(-8).toUpperCase()} •{" "}
                     {formatDate(download.order.createdAt)}
                   </p>
-                  <div className="mt-2 flex flex-wrap items-center gap-3 text-xs text-gray-500">
+                  <div className="mt-2 flex flex-wrap items-center gap-3 text-xs text-slate-400">
                     <span className="flex items-center gap-1">
                       <Download className="h-3 w-3" />
                       {download.downloadsUsed}/{download.maxDownloads} downloads

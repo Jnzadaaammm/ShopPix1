@@ -86,15 +86,15 @@ export default function WishlistPage() {
       <div className="mb-8 flex items-center gap-3">
         <Heart className="h-8 w-8 text-red-500" />
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Meus Favoritos</h1>
-          <p className="mt-1 text-gray-500">{items.length} itens salvos</p>
+          <h1 className="text-3xl font-bold text-slate-100">Meus Favoritos</h1>
+          <p className="mt-1 text-slate-400">{items.length} itens salvos</p>
         </div>
       </div>
 
       {items.length === 0 ? (
-        <div className="rounded-xl border bg-white py-20 text-center">
+        <div className="rounded-xl border bg-slate-950 py-20 text-center">
           <Heart className="mx-auto h-12 w-12 text-gray-300" />
-          <p className="mt-4 text-gray-500">Você ainda não tem favoritos.</p>
+          <p className="mt-4 text-slate-400">Você ainda não tem favoritos.</p>
           <Link href="/produtos" className="mt-4 inline-block text-brand-600 hover:underline">
             Explorar produtos →
           </Link>
@@ -104,7 +104,7 @@ export default function WishlistPage() {
           {items.map((item) => (
             <div
               key={item.id}
-              className="flex items-center gap-4 rounded-xl border bg-white p-4 shadow-sm transition-all hover:shadow-md"
+              className="flex items-center gap-4 rounded-xl border bg-slate-950 p-4 shadow-sm transition-all hover:shadow-md"
             >
               <Link href={`/produtos/${item.product.id}`} className="flex-shrink-0">
                 <ImageWithFallback
@@ -117,11 +117,11 @@ export default function WishlistPage() {
               </Link>
               <div className="flex-1 min-w-0">
                 <Link href={`/produtos/${item.product.id}`}>
-                  <h3 className="font-semibold text-gray-900 truncate hover:text-brand-600">
+                  <h3 className="font-semibold text-slate-100 truncate hover:text-brand-600">
                     {item.product.name}
                   </h3>
                 </Link>
-                <p className="text-sm text-gray-500">{item.product.category.name}</p>
+                <p className="text-sm text-slate-400">{item.product.category.name}</p>
                 <p className="mt-1 text-lg font-bold text-brand-600">
                   {formatCurrency(item.product.price)}
                 </p>

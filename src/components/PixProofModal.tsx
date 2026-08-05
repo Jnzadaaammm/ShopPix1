@@ -61,19 +61,19 @@ export default function PixProofModal({ orderId, onClose, onSubmitted }: PixProo
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-      <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-lg">
+      <div className="w-full max-w-md rounded-xl bg-slate-950 p-6 shadow-lg">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-gray-900">Enviar comprovante PIX</h2>
+          <h2 className="text-lg font-semibold text-slate-100">Enviar comprovante PIX</h2>
           <button
             onClick={onClose}
-            className="rounded-lg p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
+            className="rounded-lg p-1 text-slate-500 hover:bg-slate-900 hover:text-slate-400"
             aria-label="Fechar"
           >
             <X className="h-5 w-5" />
           </button>
         </div>
 
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-slate-400">
           Tire um print do comprovante de pagamento e anexe aqui para que o dono possa aprovar o pedido.
         </p>
 
@@ -87,7 +87,7 @@ export default function PixProofModal({ orderId, onClose, onSubmitted }: PixProo
 
         <button
           onClick={() => inputRef.current?.click()}
-          className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border-2 border-dashed border-gray-300 p-6 text-gray-600 transition-colors hover:border-brand-300 hover:bg-brand-50 hover:text-brand-600"
+          className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border-2 border-dashed border-slate-700 p-6 text-slate-400 transition-colors hover:border-brand-300 hover:bg-brand-50 hover:text-brand-600"
         >
           {preview ? (
             <>
@@ -101,7 +101,7 @@ export default function PixProofModal({ orderId, onClose, onSubmitted }: PixProo
         </button>
 
         {preview && (
-          <div className="mt-4 overflow-hidden rounded-lg border bg-gray-50 p-2">
+          <div className="mt-4 overflow-hidden rounded-lg border bg-slate-900 p-2">
             <img
               src={preview}
               alt="Prévia do comprovante"
@@ -113,7 +113,7 @@ export default function PixProofModal({ orderId, onClose, onSubmitted }: PixProo
         <div className="mt-6 flex justify-end gap-3">
           <button
             onClick={onClose}
-            className="rounded-lg border px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+            className="rounded-lg border px-4 py-2 text-sm font-medium text-slate-300 hover:bg-slate-900"
           >
             Cancelar
           </button>

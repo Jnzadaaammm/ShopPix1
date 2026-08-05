@@ -160,7 +160,7 @@ export default function AdminRefundsPage() {
     return (
       <PermissionGuard permission="refunds.manage">
         <div className="flex items-center justify-center py-12">
-          <div className="text-gray-500">Carregando...</div>
+          <div className="text-slate-400">Carregando...</div>
         </div>
       </PermissionGuard>
     );
@@ -170,70 +170,70 @@ export default function AdminRefundsPage() {
     <PermissionGuard permission="refunds.manage">
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Gerenciar Reembolsos</h1>
-        <p className="mt-2 text-gray-600">
+        <h1 className="text-3xl font-bold text-slate-100">Gerenciar Reembolsos</h1>
+        <p className="mt-2 text-slate-400">
           {(refunds || []).length} solicitações de reembolso
         </p>
       </div>
 
-      <div className="rounded-lg border bg-white shadow-sm">
+      <div className="rounded-lg border bg-slate-950 shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="border-b bg-gray-50">
+            <thead className="border-b bg-slate-900">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">
                   Pedido
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">
                   Usuário
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">
                   Valor
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">
                   Motivo
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">
                   Status
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">
                   Chave PIX
                 </th>
-                <th className="px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500">
+                <th className="px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-slate-400">
                   Ações
                 </th>
               </tr>
             </thead>
             <tbody className="divide-y">
               {(refunds || []).map((refund) => (
-                <tr key={refund.id} className="hover:bg-gray-50">
+                <tr key={refund.id} className="hover:bg-slate-900">
                   <td className="px-6 py-4">
                     <div>
-                      <p className="font-medium text-gray-900">
+                      <p className="font-medium text-slate-100">
                         #{refund.order.id.slice(0, 8)}
                       </p>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-slate-400">
                         {new Date(refund.createdAt).toLocaleDateString("pt-BR")}
                       </p>
                     </div>
                   </td>
                   <td className="px-6 py-4">
                     <div>
-                      <p className="font-medium text-gray-900">{refund.user.name}</p>
-                      <p className="text-sm text-gray-500">{refund.user.email}</p>
+                      <p className="font-medium text-slate-100">{refund.user.name}</p>
+                      <p className="text-sm text-slate-400">{refund.user.email}</p>
                     </div>
                   </td>
-                  <td className="px-6 py-4 font-medium text-gray-900">
+                  <td className="px-6 py-4 font-medium text-slate-100">
                     {formatCurrency(refund.amount)}
                   </td>
                   <td className="px-6 py-4">
-                    <p className="max-w-xs truncate text-sm text-gray-600">
+                    <p className="max-w-xs truncate text-sm text-slate-400">
                       {refund.reason}
                     </p>
                   </td>
                   <td className="px-6 py-4">{getStatusBadge(refund.status)}</td>
                   <td className="px-6 py-4">
-                    <p className="max-w-xs truncate text-sm text-gray-600">
+                    <p className="max-w-xs truncate text-sm text-slate-400">
                       {refund.pixKey || "Não informada"}
                     </p>
                   </td>
@@ -264,28 +264,28 @@ export default function AdminRefundsPage() {
 
       {selectedRefund && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="w-full max-w-lg rounded-lg bg-white p-6">
-            <h2 className="mb-4 text-xl font-semibold text-gray-900">
+          <div className="w-full max-w-lg rounded-lg bg-slate-950 p-6">
+            <h2 className="mb-4 text-xl font-semibold text-slate-100">
               Analisar Reembolso
             </h2>
 
             <div className="space-y-4 mb-6">
               <div>
-                <p className="text-sm text-gray-500">Valor</p>
-                <p className="text-lg font-bold text-gray-900">
+                <p className="text-sm text-slate-400">Valor</p>
+                <p className="text-lg font-bold text-slate-100">
                   {formatCurrency(selectedRefund.amount)}
                 </p>
               </div>
               <div>
-                <p className="text-sm text-gray-500">Motivo</p>
-                <p className="text-gray-900">{selectedRefund.reason}</p>
+                <p className="text-sm text-slate-400">Motivo</p>
+                <p className="text-slate-100">{selectedRefund.reason}</p>
               </div>
               <div>
-                <p className="text-sm text-gray-500">Chave PIX do Cliente</p>
-                <p className="text-gray-900">{selectedRefund.pixKey || "Não informada"}</p>
+                <p className="text-sm text-slate-400">Chave PIX do Cliente</p>
+                <p className="text-slate-100">{selectedRefund.pixKey || "Não informada"}</p>
               </div>
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700">
+                <label className="mb-2 block text-sm font-medium text-slate-300">
                   Chave PIX para Reembolso
                 </label>
                 <input
@@ -297,7 +297,7 @@ export default function AdminRefundsPage() {
                 />
               </div>
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700">
+                <label className="mb-2 block text-sm font-medium text-slate-300">
                   Nota do Admin
                 </label>
                 <textarea
@@ -317,7 +317,7 @@ export default function AdminRefundsPage() {
                   setAdminNote("");
                   setPixKey("");
                 }}
-                className="rounded-lg border px-4 py-2 text-gray-700 hover:bg-gray-50"
+                className="rounded-lg border px-4 py-2 text-slate-300 hover:bg-slate-900"
               >
                 Cancelar
               </button>

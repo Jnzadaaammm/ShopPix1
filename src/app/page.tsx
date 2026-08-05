@@ -99,7 +99,7 @@ export default async function HomePage() {
       {/* Produtos em Destaque */}
       <section className="bg-slate-950 py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between border-b-2 border-gray-100 pb-4">
+          <div className="flex items-end justify-between border-b-2 border-slate-800 pb-4">
             <div className="flex items-center gap-3">
               <div className="h-10 w-1.5 rounded-full bg-gradient-to-b from-brand-400 to-brand-600" />
               <div>
@@ -138,7 +138,7 @@ export default async function HomePage() {
       {categoriesWithProducts.map((cat, idx) => (
         <section key={cat.id} className={`py-16 ${idx % 2 === 0 ? "bg-slate-900" : "bg-slate-950"}`}>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex items-end justify-between border-b-2 border-gray-100 pb-4">
+            <div className="flex items-end justify-between border-b-2 border-slate-800 pb-4">
               <div className="flex items-center gap-3">
                 <div className="h-10 w-1.5 rounded-full bg-gradient-to-b from-brand-400 to-brand-600" />
                 <div>
@@ -153,7 +153,7 @@ export default async function HomePage() {
               </div>
               <Link
                 href={`/produtos#categoria-${cat.slug}`}
-                className="hidden items-center gap-1 rounded-lg border border-gray-200 px-3 py-1.5 text-sm font-medium text-brand-600 transition-all hover:bg-brand-50 hover:text-brand-700 sm:inline-flex"
+                className="hidden items-center gap-1 rounded-lg border border-slate-700 px-3 py-1.5 text-sm font-medium text-brand-600 transition-all hover:bg-brand-50 hover:text-brand-700 sm:inline-flex"
               >
                 Ver todos <ArrowRight className="h-4 w-4" />
               </Link>

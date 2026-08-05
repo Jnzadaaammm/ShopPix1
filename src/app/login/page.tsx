@@ -16,8 +16,8 @@ function LoginContent() {
           <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-600 text-2xl font-bold text-white">
             S
           </div>
-          <h1 className="mt-6 text-2xl font-bold text-gray-900">Entrar na ShopPix</h1>
-          <p className="mt-2 text-gray-500">
+          <h1 className="mt-6 text-2xl font-bold text-slate-100">Entrar na ShopPix</h1>
+          <p className="mt-2 text-slate-400">
             Faça login para comprar e acompanhar seus pedidos
           </p>
         </div>
@@ -31,7 +31,7 @@ function LoginContent() {
         <div className="mt-8 space-y-4">
           <button
             onClick={() => signIn("google", { callbackUrl })}
-            className="flex w-full items-center justify-center gap-3 rounded-lg border-2 border-gray-200 bg-white px-6 py-3.5 font-semibold text-gray-700 transition-all hover:border-gray-300 hover:bg-gray-50 active:scale-[0.98]"
+            className="flex w-full items-center justify-center gap-3 rounded-lg border-2 border-slate-700 bg-slate-950 px-6 py-3.5 font-semibold text-slate-300 transition-all hover:border-slate-700 hover:bg-slate-900 active:scale-[0.98]"
           >
             <svg className="h-5 w-5" viewBox="0 0 24 24">
               <path
@@ -65,7 +65,7 @@ function LoginContent() {
           </button>
         </div>
 
-        <p className="mt-8 text-center text-xs text-gray-400">
+        <p className="mt-8 text-center text-xs text-slate-500">
           Ao entrar, você concorda com nossos termos de uso.
           <br />
           Login disponível apenas via Google ou Discord.

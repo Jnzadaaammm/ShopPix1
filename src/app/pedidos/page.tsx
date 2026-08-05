@@ -107,8 +107,8 @@ export default function OrdersPage() {
     return (
       <div className="mx-auto max-w-7xl px-4 py-24 text-center sm:px-6 lg:px-8">
         <Package className="mx-auto h-16 w-16 text-gray-300" />
-        <h1 className="mt-6 text-2xl font-bold text-gray-900">Nenhum pedido ainda</h1>
-        <p className="mt-2 text-gray-500">Faça sua primeira compra!</p>
+        <h1 className="mt-6 text-2xl font-bold text-slate-100">Nenhum pedido ainda</h1>
+        <p className="mt-2 text-slate-400">Faça sua primeira compra!</p>
         <Link href="/produtos" className="btn-primary mt-8">
           Ver Produtos
         </Link>
@@ -127,8 +127,8 @@ export default function OrdersPage() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold text-gray-900">Meus Pedidos</h1>
-      <p className="mt-1 text-gray-500">{ordersList.length} pedido(s) no total</p>
+      <h1 className="text-3xl font-bold text-slate-100">Meus Pedidos</h1>
+      <p className="mt-1 text-slate-400">{ordersList.length} pedido(s) no total</p>
 
       {/* Filtro por status */}
       <div className="mt-6 flex flex-wrap gap-2">
@@ -142,7 +142,7 @@ export default function OrdersPage() {
               className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
                 statusFilter === opt.id
                   ? "bg-brand-600 text-white"
-                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  : "bg-slate-900 text-slate-400 hover:bg-slate-800"
               }`}
             >
               {opt.label} ({count})
@@ -153,8 +153,8 @@ export default function OrdersPage() {
 
       {/* Lista de pedidos */}
       {filteredOrders.length === 0 ? (
-        <div className="mt-8 rounded-xl border bg-white py-16 text-center">
-          <p className="text-gray-500">Nenhum pedido com este status.</p>
+        <div className="mt-8 rounded-xl border bg-slate-950 py-16 text-center">
+          <p className="text-slate-400">Nenhum pedido com este status.</p>
         </div>
       ) : (
         <div className="mt-8 space-y-4">
@@ -162,15 +162,15 @@ export default function OrdersPage() {
             <div key={order.id} className="card p-6">
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-slate-400">
                     Pedido #{order.id.slice(-8).toUpperCase()}
                   </p>
-                  <p className="text-sm text-gray-400">{formatDate(order.createdAt)}</p>
+                  <p className="text-sm text-slate-500">{formatDate(order.createdAt)}</p>
                 </div>
                 <div className="flex items-center gap-4">
                   <span
                     className={`rounded-full px-3 py-1 text-xs font-medium ${
-                      ORDER_STATUS_COLORS[order.status as keyof typeof ORDER_STATUS_COLORS] || "bg-gray-100 text-gray-800"
+                      ORDER_STATUS_COLORS[order.status as keyof typeof ORDER_STATUS_COLORS] || "bg-slate-900 text-slate-200"
                     }`}
                   >
                     {ORDER_STATUS_LABELS[order.status as keyof typeof ORDER_STATUS_LABELS] || order.status}
@@ -195,7 +195,7 @@ export default function OrdersPage() {
                 {order.items.map((item) => (
                   <div key={item.id} className="rounded-lg border p-3">
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-600">
+                      <span className="text-slate-400">
                         {item.product?.name || item.productName || "Produto removido"} x{item.quantity}
                       </span>
                       <span className="font-medium">
@@ -213,10 +213,10 @@ export default function OrdersPage() {
                         {item.credentials.map((cred, idx) => (
                           <div
                             key={cred.id}
-                            className="flex items-center gap-2 rounded-lg bg-gray-50 p-2"
+                            className="flex items-center gap-2 rounded-lg bg-slate-900 p-2"
                           >
-                            <span className="text-xs text-gray-400">#{idx + 1}</span>
-                            <code className="flex-1 truncate font-mono text-sm text-gray-800">
+                            <span className="text-xs text-slate-500">#{idx + 1}</span>
+                            <code className="flex-1 truncate font-mono text-sm text-slate-200">
                               {cred.content}
                             </code>
                             <button
@@ -225,7 +225,7 @@ export default function OrdersPage() {
                               className={`flex items-center gap-1 rounded px-2 py-1 text-xs font-medium transition-colors ${
                                 copiedId === cred.id
                                   ? "bg-green-100 text-green-700"
-                                  : "bg-white text-gray-600 hover:bg-gray-100 border"
+                                  : "bg-slate-950 text-slate-400 hover:bg-slate-900 border"
                               }`}
                             >
                               {copiedId === cred.id ? (

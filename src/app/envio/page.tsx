@@ -8,12 +8,12 @@ export const metadata: Metadata = {
 export default function EnvioPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold text-gray-900">Política de Envio e Entrega</h1>
-      <p className="mt-2 text-sm text-gray-500">Última atualização: {new Date().toLocaleDateString("pt-BR")}</p>
+      <h1 className="text-3xl font-bold text-slate-100">Política de Envio e Entrega</h1>
+      <p className="mt-2 text-sm text-slate-400">Última atualização: {new Date().toLocaleDateString("pt-BR")}</p>
 
-      <div className="prose mt-8 max-w-none space-y-6 text-gray-700">
+      <div className="prose mt-8 max-w-none space-y-6 text-slate-300">
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">1. Produtos Digitais</h2>
+          <h2 className="text-xl font-semibold text-slate-100">1. Produtos Digitais</h2>
           <p className="mt-2 text-sm leading-relaxed">
             A entrega de produtos digitais é <strong>imediata</strong> após a confirmação do pagamento. Você receberá:
           </p>
@@ -27,7 +27,7 @@ export default function EnvioPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">2. Confirmação de Pagamento</h2>
+          <h2 className="text-xl font-semibold text-slate-100">2. Confirmação de Pagamento</h2>
           <p className="mt-2 text-sm leading-relaxed">
             O prazo de entrega começa a contar após a confirmação do pagamento:
           </p>
@@ -39,7 +39,7 @@ export default function EnvioPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">3. Problemas com Entrega Digital</h2>
+          <h2 className="text-xl font-semibold text-slate-100">3. Problemas com Entrega Digital</h2>
           <p className="mt-2 text-sm leading-relaxed">
             Se você não recebeu o email de entrega ou não consegue acessar o download:
           </p>
@@ -51,21 +51,21 @@ export default function EnvioPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">4. Reenvio de Link</h2>
+          <h2 className="text-xl font-semibold text-slate-100">4. Reenvio de Link</h2>
           <p className="mt-2 text-sm leading-relaxed">
             Caso o link de download expire, você pode solicitar um novo reenvio pelo email de contato, sujeito a análise e disponibilidade do produto.
           </p>
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">5. Compatibilidade</h2>
+          <h2 className="text-xl font-semibold text-slate-100">5. Compatibilidade</h2>
           <p className="mt-2 text-sm leading-relaxed">
             Os produtos digitais são entregues nos formatos especificados em cada página de produto. Verifique os requisitos de sistema e compatibilidade antes da compra. Não nos responsabilizamos por incompatibilidades de software ou hardware.
           </p>
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">6. Contato</h2>
+          <h2 className="text-xl font-semibold text-slate-100">6. Contato</h2>
           <p className="mt-2 text-sm leading-relaxed">
             Dúvidas sobre entrega: <a href="mailto:contato@shoppix.com.br" className="text-brand-600 hover:underline">contato@shoppix.com.br</a>
           </p>

@@ -8,19 +8,19 @@ export const metadata: Metadata = {
 export default function TermosPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold text-gray-900">Termos de Uso</h1>
-      <p className="mt-2 text-sm text-gray-500">Última atualização: {new Date().toLocaleDateString("pt-BR")}</p>
+      <h1 className="text-3xl font-bold text-slate-100">Termos de Uso</h1>
+      <p className="mt-2 text-sm text-slate-400">Última atualização: {new Date().toLocaleDateString("pt-BR")}</p>
 
-      <div className="prose mt-8 max-w-none space-y-6 text-gray-700">
+      <div className="prose mt-8 max-w-none space-y-6 text-slate-300">
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">1. Aceitação dos Termos</h2>
+          <h2 className="text-xl font-semibold text-slate-100">1. Aceitação dos Termos</h2>
           <p className="mt-2 text-sm leading-relaxed">
             Ao acessar e utilizar a plataforma ShopPix (aqui &ldquo;Plataforma&rdquo;), você concorda com estes Termos de Uso e com nossa Política de Privacidade. Caso não concorde com qualquer um dos termos, não utilize a Plataforma.
           </p>
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">2. Cadastro e Conta</h2>
+          <h2 className="text-xl font-semibold text-slate-100">2. Cadastro e Conta</h2>
           <p className="mt-2 text-sm leading-relaxed">
             Para realizar compras, você deve criar uma conta fornecendo informações verdadeiras, completas e atualizadas. Você é responsável por manter a confidencialidade de sua senha e por todas as atividades realizadas em sua conta.
           </p>
@@ -30,7 +30,7 @@ export default function TermosPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">3. Produtos e Preços</h2>
+          <h2 className="text-xl font-semibold text-slate-100">3. Produtos e Preços</h2>
           <p className="mt-2 text-sm leading-relaxed">
             Os produtos oferecidos podem ser físicos ou digitais. Os preços exibidos estão em Reais (R$) e incluem todos os impostos aplicáveis. Nos reservamos o direito de alterar preços e disponibilidade de produtos a qualquer momento, sem aviso prévio.
           </p>
@@ -40,7 +40,7 @@ export default function TermosPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">4. Pagamentos</h2>
+          <h2 className="text-xl font-semibold text-slate-100">4. Pagamentos</h2>
           <p className="mt-2 text-sm leading-relaxed">
             Aceitamos as seguintes formas de pagamento:
           </p>
@@ -55,7 +55,7 @@ export default function TermosPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">5. Produtos Digitais</h2>
+          <h2 className="text-xl font-semibold text-slate-100">5. Produtos Digitais</h2>
           <p className="mt-2 text-sm leading-relaxed">
             Ao adquirir um produto digital, você recebe um link de download temporário com número limitado de acessos. O link expira após o período estabelecido ou após o número máximo de downloads.
           </p>
@@ -65,7 +65,7 @@ export default function TermosPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">6. Responsabilidades do Usuário</h2>
+          <h2 className="text-xl font-semibold text-slate-100">6. Responsabilidades do Usuário</h2>
           <p className="mt-2 text-sm leading-relaxed">Você concorda em:</p>
           <ul className="mt-2 list-disc pl-6 text-sm space-y-1">
             <li>Utilizar a Plataforma apenas para fins legais</li>
@@ -77,28 +77,28 @@ export default function TermosPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">7. Limitação de Responsabilidade</h2>
+          <h2 className="text-xl font-semibold text-slate-100">7. Limitação de Responsabilidade</h2>
           <p className="mt-2 text-sm leading-relaxed">
             A ShopPix não se responsabiliza por danos indiretos, incidentais ou consequenciais decorrentes do uso da Plataforma. A responsabilidade da empresa está limitada ao valor da compra realizada.
           </p>
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">8. Modificações</h2>
+          <h2 className="text-xl font-semibold text-slate-100">8. Modificações</h2>
           <p className="mt-2 text-sm leading-relaxed">
             Podemos modificar estes Termos de Uso a qualquer momento. As alterações entram em vigor imediatamente após sua publicação na Plataforma. Recomendamos que você revise periodicamente esta página.
           </p>
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">9. Lei Aplicável</h2>
+          <h2 className="text-xl font-semibold text-slate-100">9. Lei Aplicável</h2>
           <p className="mt-2 text-sm leading-relaxed">
             Estes Termos são regidos pelas leis da República Federativa do Brasil. Qualquer disputa será resolvida no foro da comarca do usuário, salvo disposição legal em contrário.
           </p>
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">10. Contato</h2>
+          <h2 className="text-xl font-semibold text-slate-100">10. Contato</h2>
           <p className="mt-2 text-sm leading-relaxed">
             Em caso de dúvidas sobre estes Termos de Uso, entre em contato pelo email: <a href="mailto:contato@shoppix.com.br" className="text-brand-600 hover:underline">contato@shoppix.com.br</a>
           </p>

@@ -57,15 +57,15 @@ export default function PayPalPaymentForm({
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="mb-8 text-3xl font-bold text-gray-900">Pagamento com PayPal</h1>
+      <h1 className="mb-8 text-3xl font-bold text-slate-100">Pagamento com PayPal</h1>
 
       <div className="card p-6">
-        <p className="mb-4 text-sm text-gray-600">
+        <p className="mb-4 text-sm text-slate-400">
           Escolha pagar com sua conta PayPal ou cartão de crédito/débito através do PayPal.
         </p>
 
         {loading && (
-          <div className="mb-4 flex items-center justify-center gap-2 text-sm text-gray-600">
+          <div className="mb-4 flex items-center justify-center gap-2 text-sm text-slate-400">
             <Loader2 className="h-4 w-4 animate-spin" />
             Confirmando pagamento...
           </div>

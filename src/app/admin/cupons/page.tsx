@@ -132,7 +132,7 @@ export default function AdminCouponsPage() {
   if (loading) {
     return (
       <PermissionGuard permission="coupons.manage">
-        <div className="flex items-center justify-center py-12 text-gray-500">Carregando...</div>
+        <div className="flex items-center justify-center py-12 text-slate-400">Carregando...</div>
       </PermissionGuard>
     );
   }
@@ -142,8 +142,8 @@ export default function AdminCouponsPage() {
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Cupons de Desconto</h1>
-          <p className="mt-2 text-gray-600">{(coupons || []).length} cupons cadastrados</p>
+          <h1 className="text-3xl font-bold text-slate-100">Cupons de Desconto</h1>
+          <p className="mt-2 text-slate-400">{(coupons || []).length} cupons cadastrados</p>
         </div>
         <button
           onClick={() => openModal()}
@@ -153,50 +153,50 @@ export default function AdminCouponsPage() {
         </button>
       </div>
 
-      <div className="rounded-xl border bg-white shadow-sm overflow-hidden">
+      <div className="rounded-xl border bg-slate-950 shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="border-b bg-gray-50">
+            <thead className="border-b bg-slate-900">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase text-gray-500">Código</th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase text-gray-500">Tipo</th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase text-gray-500">Valor</th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase text-gray-500">Pedido Mín.</th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase text-gray-500">Usos</th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase text-gray-500">Validade</th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase text-gray-500">Status</th>
-                <th className="px-6 py-3 text-right text-xs font-medium uppercase text-gray-500">Ações</th>
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase text-slate-400">Código</th>
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase text-slate-400">Tipo</th>
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase text-slate-400">Valor</th>
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase text-slate-400">Pedido Mín.</th>
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase text-slate-400">Usos</th>
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase text-slate-400">Validade</th>
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase text-slate-400">Status</th>
+                <th className="px-6 py-3 text-right text-xs font-medium uppercase text-slate-400">Ações</th>
               </tr>
             </thead>
             <tbody className="divide-y">
               {(coupons || []).map((coupon) => (
-                <tr key={coupon.id} className="hover:bg-gray-50">
+                <tr key={coupon.id} className="hover:bg-slate-900">
                   <td className="px-6 py-4">
                     <span className="flex items-center gap-2">
                       <Ticket className="h-4 w-4 text-brand-600" />
-                      <span className="font-mono font-bold text-gray-900">{coupon.code}</span>
+                      <span className="font-mono font-bold text-slate-100">{coupon.code}</span>
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-600">
+                  <td className="px-6 py-4 text-sm text-slate-400">
                     {coupon.type === "PERCENTAGE" ? "Percentual" : "Fixo"}
                   </td>
-                  <td className="px-6 py-4 font-medium text-gray-900">
+                  <td className="px-6 py-4 font-medium text-slate-100">
                     {coupon.type === "PERCENTAGE" ? `${coupon.value}%` : formatCurrency(coupon.value)}
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-600">
+                  <td className="px-6 py-4 text-sm text-slate-400">
                     {coupon.minOrder ? formatCurrency(coupon.minOrder) : "—"}
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-600">
+                  <td className="px-6 py-4 text-sm text-slate-400">
                     {coupon.usesCount}{coupon.maxUses ? `/${coupon.maxUses}` : ""}
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-600">
+                  <td className="px-6 py-4 text-sm text-slate-400">
                     {coupon.validUntil ? new Date(coupon.validUntil).toLocaleDateString("pt-BR") : "Ilimitado"}
                   </td>
                   <td className="px-6 py-4">
                     <button
                       onClick={() => toggleActive(coupon)}
                       className={`flex items-center gap-1 rounded-full px-2 py-1 text-xs font-medium ${
-                        coupon.active ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-500"
+                        coupon.active ? "bg-green-100 text-green-700" : "bg-slate-900 text-slate-400"
                       }`}
                     >
                       {coupon.active ? <Power className="h-3 w-3" /> : <PowerOff className="h-3 w-3" />}
@@ -215,7 +215,7 @@ export default function AdminCouponsPage() {
               ))}
               {(coupons || []).length === 0 && (
                 <tr>
-                  <td colSpan={8} className="px-6 py-12 text-center text-gray-500">
+                  <td colSpan={8} className="px-6 py-12 text-center text-slate-400">
                     Nenhum cupom cadastrado. Clique em "Novo Cupom" para criar.
                   </td>
                 </tr>
@@ -227,13 +227,13 @@ export default function AdminCouponsPage() {
 
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-          <div className="w-full max-w-lg rounded-xl bg-white p-6">
-            <h2 className="mb-4 text-xl font-semibold text-gray-900">
+          <div className="w-full max-w-lg rounded-xl bg-slate-950 p-6">
+            <h2 className="mb-4 text-xl font-semibold text-slate-100">
               {editing ? "Editar Cupom" : "Novo Cupom"}
             </h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">Código</label>
+                <label className="block text-sm font-medium text-slate-300">Código</label>
                 <input
                   type="text"
                   required
@@ -245,7 +245,7 @@ export default function AdminCouponsPage() {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Tipo</label>
+                  <label className="block text-sm font-medium text-slate-300">Tipo</label>
                   <select
                     value={form.type}
                     onChange={(e) => setForm({ ...form, type: e.target.value as "PERCENTAGE" | "FIXED" })}
@@ -256,7 +256,7 @@ export default function AdminCouponsPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium text-slate-300">
                     {form.type === "PERCENTAGE" ? "Percentual (%)" : "Valor (R$)"}
                   </label>
                   <input
@@ -272,7 +272,7 @@ export default function AdminCouponsPage() {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Pedido Mínimo (R$)</label>
+                  <label className="block text-sm font-medium text-slate-300">Pedido Mínimo (R$)</label>
                   <input
                     type="number"
                     step="0.01"
@@ -284,7 +284,7 @@ export default function AdminCouponsPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Máximo de Usos</label>
+                  <label className="block text-sm font-medium text-slate-300">Máximo de Usos</label>
                   <input
                     type="number"
                     min="0"
@@ -296,7 +296,7 @@ export default function AdminCouponsPage() {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Válido Até</label>
+                <label className="block text-sm font-medium text-slate-300">Válido Até</label>
                 <input
                   type="date"
                   value={form.validUntil}
@@ -305,7 +305,7 @@ export default function AdminCouponsPage() {
                 />
               </div>
               <div className="flex justify-end gap-3">
-                <button type="button" onClick={closeModal} className="rounded-lg border px-4 py-2 text-gray-700 hover:bg-gray-50">
+                <button type="button" onClick={closeModal} className="rounded-lg border px-4 py-2 text-slate-300 hover:bg-slate-900">
                   Cancelar
                 </button>
                 <button type="submit" className="rounded-lg bg-brand-600 px-4 py-2 text-white hover:bg-brand-700">

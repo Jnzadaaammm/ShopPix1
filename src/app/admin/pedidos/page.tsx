@@ -166,7 +166,7 @@ export default function AdminOrdersPage() {
   const awaitingApprovalCount = useMemo(() => orderList.filter(o => o.status === "AWAITING_APPROVAL").length, [orderList]);
 
   const getStatusColor = (status: string) =>
-    ORDER_STATUS_COLORS[status] || "bg-gray-100 text-gray-800";
+    ORDER_STATUS_COLORS[status] || "bg-slate-900 text-slate-200";
   const getStatusLabel = (status: string) =>
     ORDER_STATUS_LABELS[status] || status;
 
@@ -184,18 +184,18 @@ export default function AdminOrdersPage() {
     <PermissionGuard permission="orders.view">
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Gerenciar Pedidos</h1>
-        <p className="mt-2 text-gray-600">
+        <h1 className="text-3xl font-bold text-slate-100">Gerenciar Pedidos</h1>
+        <p className="mt-2 text-slate-400">
           {orderList.length} pedidos cadastrados
           {filteredOrders.length !== orderList.length && (
-            <span className="text-gray-400"> · {filteredOrders.length} filtrados</span>
+            <span className="text-slate-500"> · {filteredOrders.length} filtrados</span>
           )}
         </p>
       </div>
 
       <div className="mb-6 flex flex-wrap gap-4">
         <div className="relative flex-1 min-w-[200px]">
-          <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500" />
           <input
             type="text"
             placeholder="Buscar por ID, email ou nome..."
@@ -205,7 +205,7 @@ export default function AdminOrdersPage() {
           />
         </div>
         <div className="relative">
-          <Filter className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
+          <Filter className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500" />
           <select
             value={statusFilter}
             onChange={(e) => { setStatusFilter(e.target.value); setCurrentPage(1); }}
@@ -242,17 +242,17 @@ export default function AdminOrdersPage() {
         </div>
       )}
 
-      <div className="rounded-lg border bg-white shadow-sm">
+      <div className="rounded-lg border bg-slate-950 shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="border-b bg-gray-50">
+            <thead className="border-b bg-slate-900">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Pedido</th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Cliente</th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Total</th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Status</th>
-                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Data</th>
-                <th className="px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500">Ações</th>
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">Pedido</th>
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">Cliente</th>
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">Total</th>
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">Status</th>
+                <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400">Data</th>
+                <th className="px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-slate-400">Ações</th>
               </tr>
             </thead>
             <tbody className="divide-y">
@@ -260,20 +260,20 @@ export default function AdminOrdersPage() {
                 <tr>
                   <td colSpan={6} className="px-6 py-16 text-center">
                     <Package className="mx-auto h-12 w-12 text-gray-300" />
-                    <p className="mt-4 text-gray-500">Nenhum pedido encontrado com estes filtros.</p>
+                    <p className="mt-4 text-slate-400">Nenhum pedido encontrado com estes filtros.</p>
                   </td>
                 </tr>
               ) : paginatedOrders.map((order) => (
-                <tr key={order.id} className="hover:bg-gray-50">
+                <tr key={order.id} className="hover:bg-slate-900">
                   <td className="px-6 py-4">
-                    <p className="font-medium text-gray-900">#{order.id.slice(0, 8)}</p>
-                    <p className="text-sm text-gray-500">{order.items.length} itens</p>
+                    <p className="font-medium text-slate-100">#{order.id.slice(0, 8)}</p>
+                    <p className="text-sm text-slate-400">{order.items.length} itens</p>
                   </td>
                   <td className="px-6 py-4">
-                    <p className="font-medium text-gray-900">{order.user?.name || "Cliente"}</p>
-                    <p className="text-sm text-gray-500">{order.user?.email}</p>
+                    <p className="font-medium text-slate-100">{order.user?.name || "Cliente"}</p>
+                    <p className="text-sm text-slate-400">{order.user?.email}</p>
                   </td>
-                  <td className="px-6 py-4 font-medium text-gray-900">
+                  <td className="px-6 py-4 font-medium text-slate-100">
                     {formatCurrency(order.total)}
                   </td>
                   <td className="px-6 py-4">
@@ -286,7 +286,7 @@ export default function AdminOrdersPage() {
                       </span>
                     )}
                   </td>
-                  <td className="px-6 py-4 text-gray-600">
+                  <td className="px-6 py-4 text-slate-400">
                     {formatDate(order.createdAt)}
                   </td>
                   <td className="px-6 py-4 text-right">
@@ -306,14 +306,14 @@ export default function AdminOrdersPage() {
         {/* Paginação */}
         {totalPages > 1 && (
           <div className="flex items-center justify-between border-t px-6 py-3">
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-slate-400">
               Página {currentPageSafe} de {totalPages} · {filteredOrders.length} pedido(s)
             </p>
             <div className="flex gap-2">
               <button
                 onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                 disabled={currentPageSafe === 1}
-                className="rounded-lg border px-3 py-1.5 text-sm disabled:opacity-40 hover:bg-gray-50"
+                className="rounded-lg border px-3 py-1.5 text-sm disabled:opacity-40 hover:bg-slate-900"
                 aria-label="Página anterior"
               >
                 <ChevronLeft className="h-4 w-4" />
@@ -321,7 +321,7 @@ export default function AdminOrdersPage() {
               <button
                 onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                 disabled={currentPageSafe === totalPages}
-                className="rounded-lg border px-3 py-1.5 text-sm disabled:opacity-40 hover:bg-gray-50"
+                className="rounded-lg border px-3 py-1.5 text-sm disabled:opacity-40 hover:bg-slate-900"
                 aria-label="Próxima página"
               >
                 <ChevronRight className="h-4 w-4" />
@@ -335,32 +335,32 @@ export default function AdminOrdersPage() {
       {selectedOrder && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={() => !actionLoading && setSelectedOrder(null)}>
           <div
-            className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-lg bg-white p-6"
+            className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-lg bg-slate-950 p-6"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-gray-900">
+              <h2 className="text-xl font-semibold text-slate-100">
                 Detalhes do Pedido #{selectedOrder.id.slice(0, 8)}
               </h2>
               <button
                 onClick={() => setSelectedOrder(null)}
-                className="rounded-lg p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
+                className="rounded-lg p-1 text-slate-500 hover:bg-slate-900 hover:text-slate-400"
                 aria-label="Fechar"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
-            <div className="mb-6 rounded-lg bg-gray-50 p-4">
+            <div className="mb-6 rounded-lg bg-slate-900 p-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm text-gray-600">Cliente</p>
-                  <p className="font-medium text-gray-900">{selectedOrder.user?.name || "Cliente"}</p>
-                  <p className="text-sm text-gray-500">{selectedOrder.user?.email}</p>
+                  <p className="text-sm text-slate-400">Cliente</p>
+                  <p className="font-medium text-slate-100">{selectedOrder.user?.name || "Cliente"}</p>
+                  <p className="text-sm text-slate-400">{selectedOrder.user?.email}</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Método de Pagamento</p>
-                  <p className="font-medium text-gray-900">{selectedOrder.paymentMethod.toUpperCase()}</p>
+                  <p className="text-sm text-slate-400">Método de Pagamento</p>
+                  <p className="font-medium text-slate-100">{selectedOrder.paymentMethod.toUpperCase()}</p>
                 </div>
               </div>
             </div>
@@ -380,8 +380,8 @@ export default function AdminOrdersPage() {
 
             {/* Comprovante PIX */}
             {selectedOrder.paymentMethod === "pix" && (
-              <div className="mb-6 rounded-lg border bg-gray-50 p-4">
-                <h3 className="mb-3 font-semibold text-gray-900">Comprovante PIX</h3>
+              <div className="mb-6 rounded-lg border bg-slate-900 p-4">
+                <h3 className="mb-3 font-semibold text-slate-100">Comprovante PIX</h3>
                 {selectedOrder.paymentProof ? (
                   <img
                     src={selectedOrder.paymentProof}
@@ -389,13 +389,13 @@ export default function AdminOrdersPage() {
                     className="max-h-96 rounded-lg border"
                   />
                 ) : (
-                  <p className="text-sm text-gray-600">Comprovante ainda não enviado.</p>
+                  <p className="text-sm text-slate-400">Comprovante ainda não enviado.</p>
                 )}
               </div>
             )}
 
             <div className="mb-6">
-              <h3 className="mb-3 font-semibold text-gray-900">Itens</h3>
+              <h3 className="mb-3 font-semibold text-slate-100">Itens</h3>
               <div className="space-y-3">
                 {selectedOrder.items.map((item) => (
                   <div key={item.id} className="flex items-center justify-between border-b pb-3">
@@ -408,20 +408,20 @@ export default function AdminOrdersPage() {
                         className="rounded object-cover"
                       />
                       <div className="ml-4">
-                        <p className="font-medium text-gray-900">
+                        <p className="font-medium text-slate-100">
                           {item.product?.name || item.productName || "Produto removido"}
                         </p>
-                        <p className="text-sm text-gray-500">Qtd: {item.quantity}</p>
+                        <p className="text-sm text-slate-400">Qtd: {item.quantity}</p>
                       </div>
                     </div>
-                    <p className="font-medium text-gray-900">
+                    <p className="font-medium text-slate-100">
                       {formatCurrency(item.price * item.quantity)}
                     </p>
                   </div>
                 ))}
               </div>
               <div className="mt-4 flex justify-end">
-                <p className="text-xl font-bold text-gray-900">
+                <p className="text-xl font-bold text-slate-100">
                   Total: {formatCurrency(selectedOrder.total)}
                 </p>
               </div>
@@ -451,7 +451,7 @@ export default function AdminOrdersPage() {
                     <button
                       onClick={() => setRejectMode(true)}
                       disabled={actionLoading !== null}
-                      className="flex items-center gap-2 rounded-lg border border-red-300 bg-white px-5 py-2.5 text-sm font-medium text-red-600 hover:bg-red-50 disabled:opacity-50"
+                      className="flex items-center gap-2 rounded-lg border border-red-300 bg-slate-950 px-5 py-2.5 text-sm font-medium text-red-600 hover:bg-red-50 disabled:opacity-50"
                     >
                       <X className="h-4 w-4" />
                       Rejeitar
@@ -459,7 +459,7 @@ export default function AdminOrdersPage() {
                   </div>
                 ) : (
                   <div className="space-y-3">
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-slate-300">
                       Motivo da rejeição (opcional)
                     </label>
                     <textarea
@@ -485,7 +485,7 @@ export default function AdminOrdersPage() {
                       <button
                         onClick={() => { setRejectMode(false); setRejectReason(""); }}
                         disabled={actionLoading !== null}
-                        className="rounded-lg border px-5 py-2.5 text-sm text-gray-700 hover:bg-gray-50"
+                        className="rounded-lg border px-5 py-2.5 text-sm text-slate-300 hover:bg-slate-900"
                       >
                         Cancelar
                       </button>
@@ -498,7 +498,7 @@ export default function AdminOrdersPage() {
             {/* Mudança manual de status (só dono) */}
             {isOwner && (
               <div className="mb-6">
-                <h3 className="mb-3 font-semibold text-gray-900">Alterar Status Manualmente</h3>
+                <h3 className="mb-3 font-semibold text-slate-100">Alterar Status Manualmente</h3>
                 <div className="flex flex-wrap gap-2">
                   {["PENDING", "AWAITING_APPROVAL", "PAID", "CANCELLED", "EXPIRED"].map((status) => (
                     <button
@@ -508,7 +508,7 @@ export default function AdminOrdersPage() {
                       className={`flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium transition-colors disabled:opacity-50 ${
                         selectedOrder.status === status
                           ? "bg-blue-600 text-white"
-                          : "border border-gray-300 text-gray-700 hover:bg-gray-50"
+                          : "border border-slate-700 text-slate-300 hover:bg-slate-900"
                       }`}
                     >
                       {actionLoading === `status-${status}` && <Loader2 className="h-3 w-3 animate-spin" />}
@@ -517,7 +517,7 @@ export default function AdminOrdersPage() {
                   ))}
                 </div>
                 {!isOwner && (
-                  <p className="mt-2 text-xs text-gray-400">Apenas o dono pode alterar status manualmente.</p>
+                  <p className="mt-2 text-xs text-slate-500">Apenas o dono pode alterar status manualmente.</p>
                 )}
               </div>
             )}
@@ -525,7 +525,7 @@ export default function AdminOrdersPage() {
             <div className="flex justify-end">
               <button
                 onClick={() => setSelectedOrder(null)}
-                className="rounded-lg border px-4 py-2 text-gray-700 hover:bg-gray-50"
+                className="rounded-lg border px-4 py-2 text-slate-300 hover:bg-slate-900"
               >
                 Fechar
               </button>

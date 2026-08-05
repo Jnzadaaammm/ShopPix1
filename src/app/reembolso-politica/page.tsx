@@ -8,12 +8,12 @@ export const metadata: Metadata = {
 export default function ReembolsoPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold text-gray-900">Política de Reembolso</h1>
-      <p className="mt-2 text-sm text-gray-500">Última atualização: {new Date().toLocaleDateString("pt-BR")}</p>
+      <h1 className="text-3xl font-bold text-slate-100">Política de Reembolso</h1>
+      <p className="mt-2 text-sm text-slate-400">Última atualização: {new Date().toLocaleDateString("pt-BR")}</p>
 
-      <div className="prose mt-8 max-w-none space-y-6 text-gray-700">
+      <div className="prose mt-8 max-w-none space-y-6 text-slate-300">
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">1. Direito de Arrependimento</h2>
+          <h2 className="text-xl font-semibold text-slate-100">1. Direito de Arrependimento</h2>
           <p className="mt-2 text-sm leading-relaxed">
             Conforme o Código de Defesa do Consumidor (Lei nº 8.078/1990, Art. 49), você tem o direito de se arrepender da compra em até <strong>7 dias corridos</strong> contados da confirmação do pagamento.
           </p>
@@ -23,7 +23,7 @@ export default function ReembolsoPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">2. Produtos Digitais</h2>
+          <h2 className="text-xl font-semibold text-slate-100">2. Produtos Digitais</h2>
           <p className="mt-2 text-sm leading-relaxed">
             Para produtos digitais, o direito de arrependimento de 7 dias se aplica <strong>apenas se o link de download ainda não tiver sido acessado</strong>. Após o primeiro download, o reembolso não é garantido, pois o produto foi entregue e utilizado.
           </p>
@@ -33,7 +33,7 @@ export default function ReembolsoPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">3. Produtos com Defeito</h2>
+          <h2 className="text-xl font-semibold text-slate-100">3. Produtos com Defeito</h2>
           <p className="mt-2 text-sm leading-relaxed">
             Se um produto digital apresentar defeito ou não corresponder à descrição, você tem direito a:
           </p>
@@ -44,7 +44,7 @@ export default function ReembolsoPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">4. Como Solicitar Reembolso</h2>
+          <h2 className="text-xl font-semibold text-slate-100">4. Como Solicitar Reembolso</h2>
           <p className="mt-2 text-sm leading-relaxed">
             Para solicitar um reembolso:
           </p>
@@ -57,7 +57,7 @@ export default function ReembolsoPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">5. Processamento do Reembolso</h2>
+          <h2 className="text-xl font-semibold text-slate-100">5. Processamento do Reembolso</h2>
           <p className="mt-2 text-sm leading-relaxed">
             Após a aprovação do reembolso:
           </p>
@@ -72,7 +72,7 @@ export default function ReembolsoPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">6. Reembolsos Não Aceitos</h2>
+          <h2 className="text-xl font-semibold text-slate-100">6. Reembolsos Não Aceitos</h2>
           <p className="mt-2 text-sm leading-relaxed">
             Não aceitamos solicitações de reembolso nas seguintes situações:
           </p>
@@ -85,21 +85,21 @@ export default function ReembolsoPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">7. Estorno via Cartão de Crédito</h2>
+          <h2 className="text-xl font-semibold text-slate-100">7. Estorno via Cartão de Crédito</h2>
           <p className="mt-2 text-sm leading-relaxed">
             Para pagamentos realizados via cartão de crédito (Stripe), o reembolso será processado como estorno na fatura do cartão. O prazo para o estorno aparecer na fatura pode variar de <strong>5 a 30 dias</strong>, dependendo da operadora do cartão.
           </p>
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">8. Cancelamento de Pedido</h2>
+          <h2 className="text-xl font-semibold text-slate-100">8. Cancelamento de Pedido</h2>
           <p className="mt-2 text-sm leading-relaxed">
             Pedidos pendentes (não pagos) podem ser cancelados a qualquer momento sem custos. Após o pagamento, aplica-se a política de reembolso descrita acima.
           </p>
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-gray-900">9. Contato</h2>
+          <h2 className="text-xl font-semibold text-slate-100">9. Contato</h2>
           <p className="mt-2 text-sm leading-relaxed">
             Em caso de dúvidas sobre nossa política de reembolso: <a href="mailto:contato@shoppix.com.br" className="text-brand-600 hover:underline">contato@shoppix.com.br</a>
           </p>

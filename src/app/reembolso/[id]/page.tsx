@@ -99,7 +99,7 @@ export default function RefundRequestPage({
   if (loading) {
     return (
       <div className="flex min-h-[50vh] items-center justify-center">
-        <div className="text-gray-500">Carregando...</div>
+        <div className="text-slate-400">Carregando...</div>
       </div>
     );
   }
@@ -172,22 +172,22 @@ export default function RefundRequestPage({
     <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8">
       <button
         onClick={() => router.push("/pedidos")}
-        className="mb-6 inline-flex items-center gap-2 text-sm text-gray-500 hover:text-brand-600"
+        className="mb-6 inline-flex items-center gap-2 text-sm text-slate-400 hover:text-brand-600"
       >
         <ArrowLeft className="h-4 w-4" /> Voltar aos pedidos
       </button>
 
-      <h1 className="text-3xl font-bold text-gray-900">Solicitar Reembolso</h1>
-      <p className="mt-2 text-gray-500">
+      <h1 className="text-3xl font-bold text-slate-100">Solicitar Reembolso</h1>
+      <p className="mt-2 text-slate-400">
         Preencha o formulário abaixo para solicitar o reembolso via PIX
       </p>
 
       <div className="card mt-8 p-6">
-        <h2 className="font-semibold text-gray-900">Detalhes do Pedido</h2>
+        <h2 className="font-semibold text-slate-100">Detalhes do Pedido</h2>
         <div className="mt-4 space-y-3">
           {order.items.map((item, index) => (
             <div key={index} className="flex justify-between text-sm">
-              <span className="text-gray-600">
+              <span className="text-slate-400">
                 {item.product?.name || item.productName || "Produto removido"} x{item.quantity}
               </span>
               <span className="font-medium">
@@ -196,7 +196,7 @@ export default function RefundRequestPage({
             </div>
           ))}
         </div>
-        <div className="mt-4 border-t border-gray-100 pt-4">
+        <div className="mt-4 border-t border-slate-800 pt-4">
           <div className="flex justify-between">
             <span className="font-bold">Total do Pedido</span>
             <span className="text-xl font-bold text-brand-600">
@@ -208,7 +208,7 @@ export default function RefundRequestPage({
 
       <form onSubmit={handleSubmit} className="card mt-6 p-6 space-y-4">
         <div>
-          <label className="mb-2 block text-sm font-medium text-gray-700">
+          <label className="mb-2 block text-sm font-medium text-slate-300">
             Valor do Reembolso
           </label>
           <input
@@ -220,13 +220,13 @@ export default function RefundRequestPage({
             className="input"
             required
           />
-          <p className="mt-1 text-xs text-gray-500">
+          <p className="mt-1 text-xs text-slate-400">
             Máximo: {formatCurrency(order.total)}
           </p>
         </div>
 
         <div>
-          <label className="mb-2 block text-sm font-medium text-gray-700">
+          <label className="mb-2 block text-sm font-medium text-slate-300">
             Motivo do Reembolso
           </label>
           <textarea
@@ -240,7 +240,7 @@ export default function RefundRequestPage({
         </div>
 
         <div>
-          <label className="mb-2 block text-sm font-medium text-gray-700">
+          <label className="mb-2 block text-sm font-medium text-slate-300">
             Chave PIX para Recebimento (Opcional)
           </label>
           <input
@@ -250,7 +250,7 @@ export default function RefundRequestPage({
             className="input"
             placeholder="CPF, e-mail, telefone ou chave aleatória"
           />
-          <p className="mt-1 text-xs text-gray-500">
+          <p className="mt-1 text-xs text-slate-400">
             Informe para onde deseja receber o reembolso via PIX
           </p>
         </div>

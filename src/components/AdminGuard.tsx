@@ -28,10 +28,10 @@ export default function AdminGuard({ children }: AdminGuardProps) {
 
   if (status === "loading" || (status === "authenticated" && !hasAccess)) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gray-50">
+      <div className="flex min-h-screen items-center justify-center bg-slate-900">
         <div className="text-center">
           <Loader2 className="mx-auto h-8 w-8 animate-spin text-brand-600" />
-          <p className="mt-2 text-gray-600">Verificando permissões...</p>
+          <p className="mt-2 text-slate-400">Verificando permissões...</p>
         </div>
       </div>
     );

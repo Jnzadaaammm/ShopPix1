@@ -55,12 +55,12 @@ export default function AdminSidebar() {
   const visibleItems = navItems.filter(canSee);
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 border-r border-gray-200 bg-white lg:block">
-      <div className="flex h-16 items-center gap-2 border-b border-gray-200 px-6">
+    <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 border-r border-slate-700 bg-slate-950 lg:block">
+      <div className="flex h-16 items-center gap-2 border-b border-slate-700 px-6">
         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600">
           <Store className="h-5 w-5 text-white" />
         </div>
-        <span className="text-lg font-bold text-gray-900">Admin</span>
+        <span className="text-lg font-bold text-slate-100">Admin</span>
       </div>
 
       <nav className="flex flex-1 flex-col gap-1 p-4">
@@ -77,7 +77,7 @@ export default function AdminSidebar() {
               className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
                 isActive
                   ? "bg-brand-50 text-brand-700"
-                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                  : "text-slate-400 hover:bg-slate-900 hover:text-slate-100"
               }`}
             >
               <Icon className="h-5 w-5" />
@@ -87,10 +87,10 @@ export default function AdminSidebar() {
         })}
       </nav>
 
-      <div className="border-t border-gray-200 p-4">
+      <div className="border-t border-slate-700 p-4">
         <Link
           href="/"
-          className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-900"
+          className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-slate-900 hover:text-slate-100"
         >
           <Store className="h-4 w-4" />
           Ver Loja

@@ -155,11 +155,11 @@ export default function CheckoutPage() {
     if (order.paymentMethod === "pix") {
       return (
         <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8">
-          <h1 className="mb-8 text-3xl font-bold text-gray-900">Pagamento via PIX</h1>
+          <h1 className="mb-8 text-3xl font-bold text-slate-100">Pagamento via PIX</h1>
           <div className="card p-6">
             <div className="mb-6">
-              <p className="text-sm text-gray-500">Valor a transferir</p>
-              <p className="text-3xl font-bold text-gray-900">{formatCurrency(order.total)}</p>
+              <p className="text-sm text-slate-400">Valor a transferir</p>
+              <p className="text-3xl font-bold text-slate-100">{formatCurrency(order.total)}</p>
             </div>
 
             {order.status === "AWAITING_APPROVAL" ? (
@@ -171,7 +171,7 @@ export default function CheckoutPage() {
               <>
                 {order.pixQrCode ? (
                   <div className="mb-4 flex flex-col items-center">
-                    <p className="text-sm text-gray-500">Escaneie o QR Code</p>
+                    <p className="text-sm text-slate-400">Escaneie o QR Code</p>
                     <img
                       src={order.pixQrCode}
                       alt="QR Code PIX"
@@ -180,9 +180,9 @@ export default function CheckoutPage() {
                   </div>
                 ) : (
                   <div className="mb-4">
-                    <p className="text-sm text-gray-500">Chave PIX</p>
-                    <div className="mt-1 flex items-center gap-2 rounded-lg border bg-gray-50 p-3">
-                      <p className="flex-1 break-all font-mono text-sm text-gray-900">
+                    <p className="text-sm text-slate-400">Chave PIX</p>
+                    <div className="mt-1 flex items-center gap-2 rounded-lg border bg-slate-900 p-3">
+                      <p className="flex-1 break-all font-mono text-sm text-slate-100">
                         {settings?.pixKey || "Chave PIX não configurada"}
                       </p>
                       {settings?.pixKey && (
@@ -203,9 +203,9 @@ export default function CheckoutPage() {
                 )}
 
                 <div className="mb-4">
-                  <p className="text-sm text-gray-500">Pix Copia e Cola</p>
-                  <div className="mt-1 flex items-center gap-2 rounded-lg border bg-gray-50 p-3">
-                    <p className="flex-1 break-all font-mono text-xs text-gray-900">
+                  <p className="text-sm text-slate-400">Pix Copia e Cola</p>
+                  <div className="mt-1 flex items-center gap-2 rounded-lg border bg-slate-900 p-3">
+                    <p className="flex-1 break-all font-mono text-xs text-slate-100">
                       {order.pixCopyPaste || "---"}
                     </p>
                     {order.pixCopyPaste && (
@@ -224,7 +224,7 @@ export default function CheckoutPage() {
                   </div>
                 </div>
 
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-slate-400">
                   Faça o pagamento e depois clique no botão abaixo para anexar o comprovante.
                 </p>
 
@@ -272,7 +272,7 @@ export default function CheckoutPage() {
 
     return (
       <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8">
-        <h1 className="mb-8 text-3xl font-bold text-gray-900">Pagamento</h1>
+        <h1 className="mb-8 text-3xl font-bold text-slate-100">Pagamento</h1>
         <StripeCardForm
           orderId={order.id}
           total={order.total}
@@ -293,12 +293,12 @@ export default function CheckoutPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <h1 className="mb-8 text-3xl font-bold text-gray-900">Checkout</h1>
+      <h1 className="mb-8 text-3xl font-bold text-slate-100">Checkout</h1>
 
       <div className="grid gap-8 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-6">
           <div className="card p-6">
-            <h2 className="text-lg font-semibold text-gray-900">Itens do Carrinho</h2>
+            <h2 className="text-lg font-semibold text-slate-100">Itens do Carrinho</h2>
             <div className="mt-4 space-y-4">
               {items.map((item) => (
                 <div key={item.productId} className="flex items-center gap-4">
@@ -310,10 +310,10 @@ export default function CheckoutPage() {
                     className="rounded-lg object-cover"
                   />
                   <div className="flex-1">
-                    <p className="font-medium text-gray-900">{item.name}</p>
-                    <p className="text-sm text-gray-500">Qtd: {item.quantity}</p>
+                    <p className="font-medium text-slate-100">{item.name}</p>
+                    <p className="text-sm text-slate-400">Qtd: {item.quantity}</p>
                   </div>
-                  <p className="font-semibold text-gray-900">
+                  <p className="font-semibold text-slate-100">
                     {formatCurrency(item.price * item.quantity)}
                   </p>
                 </div>
@@ -322,13 +322,13 @@ export default function CheckoutPage() {
 
             <div className="mt-6 border-t pt-6">
               <div className="flex items-center gap-2">
-                <Ticket className="h-5 w-5 text-gray-400" />
+                <Ticket className="h-5 w-5 text-slate-500" />
                 <input
                   type="text"
                   value={couponCode}
                   onChange={(e) => setCouponCode(e.target.value)}
                   placeholder="Código do cupom"
-                  className="flex-1 rounded-lg border border-gray-200 px-3 py-2 text-sm"
+                  className="flex-1 rounded-lg border border-slate-700 px-3 py-2 text-sm"
                   disabled={!!appliedCoupon}
                 />
                 {appliedCoupon ? (
@@ -357,7 +357,7 @@ export default function CheckoutPage() {
           </div>
 
           <div className="card p-6">
-            <h2 className="font-semibold text-gray-900">Forma de Pagamento</h2>
+            <h2 className="font-semibold text-slate-100">Forma de Pagamento</h2>
             <div className="mt-4 space-y-3">
               {(settings?.stripeEnabled !== false) && (
                 <button
@@ -365,13 +365,13 @@ export default function CheckoutPage() {
                   className={`flex w-full items-center gap-3 rounded-lg border p-4 text-left transition-colors ${
                     paymentMethod === "stripe"
                       ? "border-brand-600 bg-brand-50"
-                      : "border-gray-200 hover:bg-gray-50"
+                      : "border-slate-700 hover:bg-slate-900"
                   }`}
                 >
                   <CreditCard className="h-5 w-5 text-brand-600" />
                   <div>
-                    <p className="font-medium text-gray-900">Cartão de Crédito/Débito (Stripe)</p>
-                    <p className="text-sm text-gray-500">Pagamento processado com segurança pelo Stripe.</p>
+                    <p className="font-medium text-slate-100">Cartão de Crédito/Débito (Stripe)</p>
+                    <p className="text-sm text-slate-400">Pagamento processado com segurança pelo Stripe.</p>
                   </div>
                 </button>
               )}
@@ -382,15 +382,15 @@ export default function CheckoutPage() {
                   className={`flex w-full items-center gap-3 rounded-lg border p-4 text-left transition-colors ${
                     paymentMethod === "paypal"
                       ? "border-brand-600 bg-brand-50"
-                      : "border-gray-200 hover:bg-gray-50"
+                      : "border-slate-700 hover:bg-slate-900"
                   }`}
                 >
                   <svg className="h-5 w-5" viewBox="0 0 24 24" fill="#003087">
                   <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.77.77 0 0 1 .757-.629h6.69c2.884 0 5.108.558 6.006 2.885.396 1.028.477 2.104.093 3.168-.53 1.473-1.617 2.504-3.067 2.98h.002c1.246.337 2.095.94 2.617 1.865.52.924.66 2.107.36 3.38-.328 1.38-1.002 2.48-1.995 3.26-1.19.94-2.78 1.383-4.578 1.383H9.84a.77.77 0 0 0-.757.63l-.003-.001-.002.006c-.002.004-.002.008-.002.012L7.076 21.337z" />
                 </svg>
                 <div>
-                  <p className="font-medium text-gray-900">PayPal ou Cartão (PayPal)</p>
-                  <p className="text-sm text-gray-500">Pague com conta PayPal ou cartão via PayPal.</p>
+                  <p className="font-medium text-slate-100">PayPal ou Cartão (PayPal)</p>
+                  <p className="text-sm text-slate-400">Pague com conta PayPal ou cartão via PayPal.</p>
                 </div>
               </button>
               )}
@@ -401,13 +401,13 @@ export default function CheckoutPage() {
                   className={`flex w-full items-center gap-3 rounded-lg border p-4 text-left transition-colors ${
                     paymentMethod === "pix"
                       ? "border-brand-600 bg-brand-50"
-                      : "border-gray-200 hover:bg-gray-50"
+                      : "border-slate-700 hover:bg-slate-900"
                   }`}
                 >
                   <QrCode className="h-5 w-5 text-green-600" />
                   <div>
-                    <p className="font-medium text-gray-900">PIX Manual</p>
-                    <p className="text-sm text-gray-500">Transfira via PIX e envie o comprovante.</p>
+                    <p className="font-medium text-slate-100">PIX Manual</p>
+                    <p className="text-sm text-slate-400">Transfira via PIX e envie o comprovante.</p>
                   </div>
                 </button>
               )}
@@ -416,14 +416,14 @@ export default function CheckoutPage() {
 
           {session && (
             <div className="card p-6">
-              <h2 className="font-semibold text-gray-900">Conta</h2>
+              <h2 className="font-semibold text-slate-100">Conta</h2>
               <div className="mt-3 flex items-center gap-3">
                 {session.user?.image && (
                   <ImageWithFallback src={session.user.image} alt="" width={40} height={40} className="rounded-full" />
                 )}
                 <div>
                   <p className="font-medium">{session.user?.name}</p>
-                  <p className="text-sm text-gray-500">{session.user?.email}</p>
+                  <p className="text-sm text-slate-400">{session.user?.email}</p>
                 </div>
               </div>
             </div>
@@ -456,9 +456,9 @@ export default function CheckoutPage() {
 
         <div className="lg:col-span-1">
           <div className="card p-6 sticky top-24">
-            <h2 className="text-lg font-semibold text-gray-900">Resumo</h2>
+            <h2 className="text-lg font-semibold text-slate-100">Resumo</h2>
             <div className="mt-4 space-y-2">
-              <div className="flex justify-between text-sm text-gray-600">
+              <div className="flex justify-between text-sm text-slate-400">
                 <span>Subtotal</span>
                 <span>{formatCurrency(total)}</span>
               </div>
@@ -474,7 +474,7 @@ export default function CheckoutPage() {
                   <span>-{formatCurrency(appliedCoupon.discount)}</span>
                 </div>
               )}
-              <div className="border-t pt-2 mt-2 flex justify-between text-lg font-semibold text-gray-900">
+              <div className="border-t pt-2 mt-2 flex justify-between text-lg font-semibold text-slate-100">
                 <span>Total</span>
                 <span>{formatCurrency(finalTotal)}</span>
               </div>

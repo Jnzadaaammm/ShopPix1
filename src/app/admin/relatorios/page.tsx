@@ -75,7 +75,7 @@ export default function AdminReportsPage() {
     return (
       <PermissionGuard permission="reports.view">
         <div className="flex items-center justify-center py-12">
-          <div className="text-gray-500">Carregando relatório...</div>
+          <div className="text-slate-400">Carregando relatório...</div>
         </div>
       </PermissionGuard>
     );
@@ -118,8 +118,8 @@ export default function AdminReportsPage() {
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Relatórios</h1>
-          <p className="mt-2 text-gray-600">Análise de vendas e performance</p>
+          <h1 className="text-3xl font-bold text-slate-100">Relatórios</h1>
+          <p className="mt-2 text-slate-400">Análise de vendas e performance</p>
         </div>
         <div className="flex items-center gap-3">
           <select
@@ -144,12 +144,12 @@ export default function AdminReportsPage() {
       {/* Summary Stats */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
-          <div key={stat.title} className="rounded-xl border bg-white p-5 shadow-sm">
+          <div key={stat.title} className="rounded-xl border bg-slate-950 p-5 shadow-sm">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">{stat.title}</p>
-                <p className="mt-2 text-2xl font-bold text-gray-900">{stat.value}</p>
-                {"sub" in stat && <p className="mt-1 text-xs text-gray-500">{stat.sub}</p>}
+                <p className="text-sm font-medium text-slate-400">{stat.title}</p>
+                <p className="mt-2 text-2xl font-bold text-slate-100">{stat.value}</p>
+                {"sub" in stat && <p className="mt-1 text-xs text-slate-400">{stat.sub}</p>}
               </div>
               <div className={`rounded-lg p-2.5 ${stat.color}`}>
                 <stat.icon className="h-5 w-5 text-white" />
@@ -160,8 +160,8 @@ export default function AdminReportsPage() {
       </div>
 
       {/* Gráfico de Receita */}
-      <div className="mt-6 rounded-xl border bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-lg font-semibold text-gray-900">Receita Diária</h2>
+      <div className="mt-6 rounded-xl border bg-slate-950 p-6 shadow-sm">
+        <h2 className="mb-4 text-lg font-semibold text-slate-100">Receita Diária</h2>
         <div className="flex items-end justify-between gap-1 h-64">
           {data.dailyData.map((day, i) => (
             <div key={i} className="flex flex-1 flex-col items-center gap-1 group">
@@ -179,7 +179,7 @@ export default function AdminReportsPage() {
                 </div>
               </div>
               {data.period <= 30 && (
-                <span className="text-[10px] text-gray-500 rotate-45 origin-left">
+                <span className="text-[10px] text-slate-400 rotate-45 origin-left">
                   {new Date(day.date).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" })}
                 </span>
               )}
@@ -190,25 +190,25 @@ export default function AdminReportsPage() {
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
         {/* Vendas por Categoria */}
-        <div className="rounded-xl border bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-lg font-semibold text-gray-900">Vendas por Categoria</h2>
+        <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
+          <h2 className="mb-4 text-lg font-semibold text-slate-100">Vendas por Categoria</h2>
           {data.categorySales.length === 0 ? (
-            <p className="text-gray-500 text-sm">Nenhuma venda no período</p>
+            <p className="text-slate-400 text-sm">Nenhuma venda no período</p>
           ) : (
             <div className="space-y-3">
               {data.categorySales.map((cat) => (
                 <div key={cat.name}>
                   <div className="mb-1 flex items-center justify-between text-sm">
-                    <span className="font-medium text-gray-900">{cat.name}</span>
-                    <span className="text-gray-600">{formatCurrency(cat.revenue)}</span>
+                    <span className="font-medium text-slate-100">{cat.name}</span>
+                    <span className="text-slate-400">{formatCurrency(cat.revenue)}</span>
                   </div>
-                  <div className="h-2 rounded-full bg-gray-100">
+                  <div className="h-2 rounded-full bg-slate-900">
                     <div
                       className="h-2 rounded-full bg-brand-500"
                       style={{ width: `${(cat.revenue / maxCatRevenue) * 100}%` }}
                     />
                   </div>
-                  <p className="mt-0.5 text-xs text-gray-500">{cat.qty} unidades vendidas</p>
+                  <p className="mt-0.5 text-xs text-slate-400">{cat.qty} unidades vendidas</p>
                 </div>
               ))}
             </div>
@@ -216,10 +216,10 @@ export default function AdminReportsPage() {
         </div>
 
         {/* Métodos de Pagamento */}
-        <div className="rounded-xl border bg-white p-6 shadow-sm">
-          <h2 className="mb-4 text-lg font-semibold text-gray-900">Métodos de Pagamento</h2>
+        <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
+          <h2 className="mb-4 text-lg font-semibold text-slate-100">Métodos de Pagamento</h2>
           {data.paymentMethods.length === 0 ? (
-            <p className="text-gray-500 text-sm">Nenhum pagamento no período</p>
+            <p className="text-slate-400 text-sm">Nenhum pagamento no período</p>
           ) : (
             <div className="space-y-4">
               {data.paymentMethods.map((pm) => {
@@ -228,14 +228,14 @@ export default function AdminReportsPage() {
                 return (
                   <div key={pm.method}>
                     <div className="mb-1 flex items-center justify-between">
-                      <span className="font-medium text-gray-900 capitalize">
+                      <span className="font-medium text-slate-100 capitalize">
                         {pm.method === "pix" ? "PIX" : pm.method === "stripe" ? "Cartão (Stripe)" : pm.method === "paypal" ? "PayPal" : "Mercado Pago"}
                       </span>
-                      <span className="text-sm text-gray-600">
+                      <span className="text-sm text-slate-400">
                         {pm.count} pedidos · {formatCurrency(pm.revenue)}
                       </span>
                     </div>
-                    <div className="h-2 rounded-full bg-gray-100">
+                    <div className="h-2 rounded-full bg-slate-900">
                       <div
                         className={`h-2 rounded-full ${
                           pm.method === "pix" ? "bg-green-500" :
@@ -245,7 +245,7 @@ export default function AdminReportsPage() {
                         style={{ width: `${pct}%` }}
                       />
                     </div>
-                    <p className="mt-0.5 text-xs text-gray-500">{pct.toFixed(1)}% da receita</p>
+                    <p className="mt-0.5 text-xs text-slate-400">{pct.toFixed(1)}% da receita</p>
                   </div>
                 );
               })}
@@ -255,16 +255,16 @@ export default function AdminReportsPage() {
       </div>
 
       {/* Status dos Pedidos */}
-      <div className="mt-6 rounded-xl border bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-lg font-semibold text-gray-900">Status dos Pedidos</h2>
+      <div className="mt-6 rounded-xl border bg-slate-950 p-6 shadow-sm">
+        <h2 className="mb-4 text-lg font-semibold text-slate-100">Status dos Pedidos</h2>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           {Object.entries(data.statusCounts).map(([status, count]) => (
             <div key={status} className="rounded-lg border p-4 text-center">
-              <p className="text-2xl font-bold text-gray-900">{count}</p>
+              <p className="text-2xl font-bold text-slate-100">{count}</p>
               <p className={`text-sm font-medium ${
                 status === "PAID" ? "text-green-600" :
                 status === "PENDING" ? "text-yellow-600" :
-                status === "CANCELLED" ? "text-red-600" : "text-gray-600"
+                status === "CANCELLED" ? "text-red-600" : "text-slate-400"
               }`}>
                 {status}
               </p>
@@ -274,28 +274,28 @@ export default function AdminReportsPage() {
       </div>
 
       {/* Top Produtos */}
-      <div className="mt-6 rounded-xl border bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-lg font-semibold text-gray-900">Top 10 Produtos</h2>
+      <div className="mt-6 rounded-xl border bg-slate-950 p-6 shadow-sm">
+        <h2 className="mb-4 text-lg font-semibold text-slate-100">Top 10 Produtos</h2>
         {data.productSales.length === 0 ? (
-          <p className="text-gray-500 text-sm">Nenhuma venda no período</p>
+          <p className="text-slate-400 text-sm">Nenhuma venda no período</p>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead className="border-b">
                 <tr>
-                  <th className="py-2 text-left text-xs font-medium uppercase text-gray-500">#</th>
-                  <th className="py-2 text-left text-xs font-medium uppercase text-gray-500">Produto</th>
-                  <th className="py-2 text-right text-xs font-medium uppercase text-gray-500">Qtd</th>
-                  <th className="py-2 text-right text-xs font-medium uppercase text-gray-500">Receita</th>
+                  <th className="py-2 text-left text-xs font-medium uppercase text-slate-400">#</th>
+                  <th className="py-2 text-left text-xs font-medium uppercase text-slate-400">Produto</th>
+                  <th className="py-2 text-right text-xs font-medium uppercase text-slate-400">Qtd</th>
+                  <th className="py-2 text-right text-xs font-medium uppercase text-slate-400">Receita</th>
                 </tr>
               </thead>
               <tbody className="divide-y">
                 {data.productSales.map((product, i) => (
-                  <tr key={product.name} className="hover:bg-gray-50">
-                    <td className="py-3 text-sm text-gray-500">{i + 1}</td>
-                    <td className="py-3 text-sm font-medium text-gray-900">{product.name}</td>
-                    <td className="py-3 text-right text-sm text-gray-600">{product.qty}</td>
-                    <td className="py-3 text-right text-sm font-medium text-gray-900">{formatCurrency(product.revenue)}</td>
+                  <tr key={product.name} className="hover:bg-slate-900">
+                    <td className="py-3 text-sm text-slate-400">{i + 1}</td>
+                    <td className="py-3 text-sm font-medium text-slate-100">{product.name}</td>
+                    <td className="py-3 text-right text-sm text-slate-400">{product.qty}</td>
+                    <td className="py-3 text-right text-sm font-medium text-slate-100">{formatCurrency(product.revenue)}</td>
                   </tr>
                 ))}
               </tbody>

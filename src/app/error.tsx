@@ -16,17 +16,17 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 px-4">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-slate-900 px-4">
       <div className="text-center">
         <h1 className="text-6xl font-bold text-red-500">Oops!</h1>
-        <h2 className="mt-4 text-2xl font-bold text-gray-900">
+        <h2 className="mt-4 text-2xl font-bold text-slate-100">
           Algo deu errado
         </h2>
-        <p className="mt-2 text-gray-600">
+        <p className="mt-2 text-slate-400">
           Ocorreu um erro inesperado. Tente novamente.
         </p>
         {error.digest && (
-          <p className="mt-2 text-xs text-gray-400">
+          <p className="mt-2 text-xs text-slate-500">
             Código: {error.digest}
           </p>
         )}

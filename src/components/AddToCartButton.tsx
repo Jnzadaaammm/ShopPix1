@@ -53,7 +53,7 @@ export default function AddToCartButton({ product }: AddToCartButtonProps) {
         <button disabled className="btn-primary w-full cursor-not-allowed opacity-50 sm:w-auto">
           <AlertCircle className="h-5 w-5" /> Esgotado
         </button>
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-slate-400">
           As credenciais deste produto acabaram. Volte em breve!
         </p>
       </div>
@@ -64,11 +64,11 @@ export default function AddToCartButton({ product }: AddToCartButtonProps) {
     <div className="space-y-4">
       {/* Seletor de quantidade */}
       <div className="flex items-center gap-4">
-        <span className="text-sm font-medium text-gray-700">Quantidade:</span>
+        <span className="text-sm font-medium text-slate-300">Quantidade:</span>
         <div className="flex items-center rounded-lg border">
           <button
             onClick={() => setQuantity(Math.max(1, quantity - 1))}
-            className="flex h-10 w-10 items-center justify-center text-gray-600 hover:bg-gray-50"
+            className="flex h-10 w-10 items-center justify-center text-slate-400 hover:bg-slate-900"
             disabled={quantity <= 1}
           >
             <Minus className="h-4 w-4" />
@@ -76,14 +76,14 @@ export default function AddToCartButton({ product }: AddToCartButtonProps) {
           <span className="w-12 text-center font-medium">{quantity}</span>
           <button
             onClick={() => setQuantity(Math.min(maxQuantity, quantity + 1))}
-            className="flex h-10 w-10 items-center justify-center text-gray-600 hover:bg-gray-50"
+            className="flex h-10 w-10 items-center justify-center text-slate-400 hover:bg-slate-900"
             disabled={quantity >= maxQuantity}
           >
             <Plus className="h-4 w-4" />
           </button>
         </div>
         {isCredentials && (
-          <span className="text-sm text-gray-500">
+          <span className="text-sm text-slate-400">
             {product.stock} {product.stock === 1 ? "credencial" : "credenciais"} disponível{product.stock === 1 ? "" : "is"}
           </span>
         )}

@@ -130,25 +130,25 @@ export default function AdminCredentialsPage() {
   }
 
   if (!product) {
-    return <div className="py-12 text-center text-gray-500">Produto não encontrado</div>;
+    return <div className="py-12 text-center text-slate-400">Produto não encontrado</div>;
   }
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
       <Link
         href="/admin/produtos"
-        className="mb-6 inline-flex items-center gap-2 text-sm text-gray-500 hover:text-brand-600"
+        className="mb-6 inline-flex items-center gap-2 text-sm text-slate-400 hover:text-brand-600"
       >
         <ArrowLeft className="h-4 w-4" /> Voltar a Produtos
       </Link>
 
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
+          <h1 className="text-3xl font-bold text-slate-100 flex items-center gap-3">
             <Key className="h-8 w-8 text-purple-600" />
             Credenciais
           </h1>
-          <p className="mt-2 text-gray-600">{product.name}</p>
+          <p className="mt-2 text-slate-400">{product.name}</p>
         </div>
         <button
           onClick={() => setShowAddModal(true)}
@@ -160,25 +160,25 @@ export default function AdminCredentialsPage() {
 
       {/* Stats */}
       <div className="mb-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
-        <div className="rounded-xl border bg-white p-4 shadow-sm text-center">
+        <div className="rounded-xl border bg-slate-950 p-4 shadow-sm text-center">
           <CheckCircle className="mx-auto h-6 w-6 text-green-500 mb-1" />
-          <p className="text-2xl font-bold text-gray-900">{stats.available}</p>
-          <p className="text-xs text-gray-500">Disponíveis</p>
+          <p className="text-2xl font-bold text-slate-100">{stats.available}</p>
+          <p className="text-xs text-slate-400">Disponíveis</p>
         </div>
-        <div className="rounded-xl border bg-white p-4 shadow-sm text-center">
+        <div className="rounded-xl border bg-slate-950 p-4 shadow-sm text-center">
           <Key className="mx-auto h-6 w-6 text-blue-500 mb-1" />
-          <p className="text-2xl font-bold text-gray-900">{stats.sold}</p>
-          <p className="text-xs text-gray-500">Vendidas</p>
+          <p className="text-2xl font-bold text-slate-100">{stats.sold}</p>
+          <p className="text-xs text-slate-400">Vendidas</p>
         </div>
-        <div className="rounded-xl border bg-white p-4 shadow-sm text-center">
+        <div className="rounded-xl border bg-slate-950 p-4 shadow-sm text-center">
           <AlertCircle className="mx-auto h-6 w-6 text-yellow-500 mb-1" />
-          <p className="text-2xl font-bold text-gray-900">{stats.reserved}</p>
-          <p className="text-xs text-gray-500">Reservadas</p>
+          <p className="text-2xl font-bold text-slate-100">{stats.reserved}</p>
+          <p className="text-xs text-slate-400">Reservadas</p>
         </div>
-        <div className="rounded-xl border bg-white p-4 shadow-sm text-center">
-          <Key className="mx-auto h-6 w-6 text-gray-400 mb-1" />
-          <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
-          <p className="text-xs text-gray-500">Total</p>
+        <div className="rounded-xl border bg-slate-950 p-4 shadow-sm text-center">
+          <Key className="mx-auto h-6 w-6 text-slate-500 mb-1" />
+          <p className="text-2xl font-bold text-slate-100">{stats.total}</p>
+          <p className="text-xs text-slate-400">Total</p>
         </div>
       </div>
 
@@ -192,7 +192,7 @@ export default function AdminCredentialsPage() {
               className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
                 filter === f
                   ? "bg-brand-600 text-white"
-                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  : "bg-slate-900 text-slate-400 hover:bg-slate-800"
               }`}
             >
               {f === "ALL" ? "Todas" : f === "AVAILABLE" ? "Disponíveis" : "Vendidas"}
@@ -210,11 +210,11 @@ export default function AdminCredentialsPage() {
       </div>
 
       {/* Lista */}
-      <div className="rounded-xl border bg-white shadow-sm overflow-hidden">
+      <div className="rounded-xl border bg-slate-950 shadow-sm overflow-hidden">
         {credentials.length === 0 ? (
           <div className="py-16 text-center">
             <Key className="mx-auto h-12 w-12 text-gray-300" />
-            <p className="mt-4 text-gray-500">Nenhuma credencial cadastrada.</p>
+            <p className="mt-4 text-slate-400">Nenhuma credencial cadastrada.</p>
             <button
               onClick={() => setShowAddModal(true)}
               className="mt-4 text-purple-600 hover:underline"
@@ -225,9 +225,9 @@ export default function AdminCredentialsPage() {
         ) : (
           <div className="divide-y max-h-[600px] overflow-y-auto">
             {credentials.map((cred, idx) => (
-              <div key={cred.id} className="flex items-center gap-3 p-4 hover:bg-gray-50">
-                <span className="w-8 text-xs text-gray-400">#{idx + 1}</span>
-                <code className="flex-1 truncate font-mono text-sm text-gray-800">
+              <div key={cred.id} className="flex items-center gap-3 p-4 hover:bg-slate-900">
+                <span className="w-8 text-xs text-slate-500">#{idx + 1}</span>
+                <code className="flex-1 truncate font-mono text-sm text-slate-200">
                   {cred.content}
                 </code>
                 <span
@@ -242,7 +242,7 @@ export default function AdminCredentialsPage() {
                   {cred.status === "AVAILABLE" ? "Disponível" : cred.status === "SOLD" ? "Vendida" : "Reservada"}
                 </span>
                 {cred.status === "SOLD" && cred.orderItem && (
-                  <span className="hidden text-xs text-gray-400 sm:inline">
+                  <span className="hidden text-xs text-slate-500 sm:inline">
                     {cred.orderItem.order.user?.email || "—"}
                   </span>
                 )}
@@ -263,15 +263,15 @@ export default function AdminCredentialsPage() {
       {/* Modal de adicionar */}
       {showAddModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-          <div className="w-full max-w-2xl rounded-xl bg-white p-6">
-            <h2 className="mb-4 text-xl font-semibold text-gray-900">Adicionar Credenciais</h2>
+          <div className="w-full max-w-2xl rounded-xl bg-slate-950 p-6">
+            <h2 className="mb-4 text-xl font-semibold text-slate-100">Adicionar Credenciais</h2>
 
             {/* Toggle de modo */}
             <div className="mb-4 flex gap-2">
               <button
                 onClick={() => setAddMode("BULK")}
                 className={`flex-1 rounded-lg border p-3 text-sm font-medium transition-colors ${
-                  addMode === "BULK" ? "border-purple-500 bg-purple-50 text-purple-700" : "border-gray-200 text-gray-600"
+                  addMode === "BULK" ? "border-purple-500 bg-purple-50 text-purple-700" : "border-slate-700 text-slate-400"
                 }`}
               >
                 <Upload className="mx-auto mb-1 h-5 w-5" />
@@ -280,7 +280,7 @@ export default function AdminCredentialsPage() {
               <button
                 onClick={() => setAddMode("SINGLE")}
                 className={`flex-1 rounded-lg border p-3 text-sm font-medium transition-colors ${
-                  addMode === "SINGLE" ? "border-purple-500 bg-purple-50 text-purple-700" : "border-gray-200 text-gray-600"
+                  addMode === "SINGLE" ? "border-purple-500 bg-purple-50 text-purple-700" : "border-slate-700 text-slate-400"
                 }`}
               >
                 <Plus className="mx-auto mb-1 h-5 w-5" />
@@ -290,7 +290,7 @@ export default function AdminCredentialsPage() {
 
             {addMode === "BULK" ? (
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-slate-300">
                   Cole as credenciais (uma por linha)
                 </label>
                 <textarea
@@ -300,13 +300,13 @@ export default function AdminCredentialsPage() {
                   placeholder={"senha1\nsenha2\nsenha3\nuser:pass\nlogin@email.com:123456"}
                   className="mt-1 w-full rounded-lg border px-3 py-2 font-mono text-sm focus:ring-2 focus:ring-purple-500"
                 />
-                <p className="mt-1 text-xs text-gray-500">
+                <p className="mt-1 text-xs text-slate-400">
                   {bulkText.split("\n").filter((l) => l.trim()).length} credencial(is) detectada(s)
                 </p>
               </div>
             ) : (
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-slate-300">
                   Credencial (senha, login:senha, etc)
                 </label>
                 <input
@@ -326,7 +326,7 @@ export default function AdminCredentialsPage() {
                   setBulkText("");
                   setSingleCred("");
                 }}
-                className="rounded-lg border px-4 py-2 text-gray-700 hover:bg-gray-50"
+                className="rounded-lg border px-4 py-2 text-slate-300 hover:bg-slate-900"
               >
                 Cancelar
               </button>

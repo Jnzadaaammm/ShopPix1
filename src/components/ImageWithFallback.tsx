@@ -47,7 +47,7 @@ export default function ImageWithFallback({
   if (error || !src) {
     return (
       <div
-        className={`flex items-center justify-center bg-gray-100 ${fallbackClassName || className || ""}`}
+        className={`flex items-center justify-center bg-slate-900 ${fallbackClassName || className || ""}`}
         role="img"
         aria-label={alt}
       >

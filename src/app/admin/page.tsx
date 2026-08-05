@@ -143,8 +143,8 @@ function AdminDashboard() {
 
   if (loading || !dashboard) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-gray-50">
-        <div className="text-gray-500">Carregando...</div>
+      <div className="flex min-h-screen items-center justify-center bg-slate-900">
+        <div className="text-slate-400">Carregando...</div>
       </div>
     );
   }
@@ -152,18 +152,18 @@ function AdminDashboard() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-        <p className="mt-2 text-gray-600">Visão geral do seu e-commerce</p>
+        <h1 className="text-3xl font-bold text-slate-100">Dashboard</h1>
+        <p className="mt-2 text-slate-400">Visão geral do seu e-commerce</p>
       </div>
 
       {/* Stats Cards */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
-          <div key={stat.title} className="rounded-xl border bg-white p-5 shadow-sm">
+          <div key={stat.title} className="rounded-xl border bg-slate-950 p-5 shadow-sm">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600">{stat.title}</p>
-                <p className="mt-2 text-2xl font-bold text-gray-900">{stat.value}</p>
+                <p className="text-sm font-medium text-slate-400">{stat.title}</p>
+                <p className="mt-2 text-2xl font-bold text-slate-100">{stat.value}</p>
                 <div className="mt-1 flex items-center gap-1">
                   {"change" in stat && stat.change !== undefined && (
                     <span className={`flex items-center text-xs font-medium ${
@@ -177,7 +177,7 @@ function AdminDashboard() {
                       {Math.abs(stat.change).toFixed(1)}%
                     </span>
                   )}
-                  <span className="text-xs text-gray-500">{stat.sub}</span>
+                  <span className="text-xs text-slate-400">{stat.sub}</span>
                 </div>
               </div>
               <div className={`rounded-lg p-2.5 ${stat.color}`}>
@@ -189,9 +189,9 @@ function AdminDashboard() {
       </div>
 
       {/* Gráfico de Receita 7 dias */}
-      <div className="mt-6 rounded-xl border bg-white p-6 shadow-sm">
+      <div className="mt-6 rounded-xl border bg-slate-950 p-6 shadow-sm">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-gray-900">Receita - Últimos 7 dias</h2>
+          <h2 className="text-lg font-semibold text-slate-100">Receita - Últimos 7 dias</h2>
           <Link href="/admin/relatorios" className="text-sm text-brand-600 hover:underline">
             Ver relatórios
           </Link>
@@ -209,7 +209,7 @@ function AdminDashboard() {
                   </div>
                 </div>
               </div>
-              <span className="text-xs text-gray-500">
+              <span className="text-xs text-slate-400">
                 {new Date(day.date).toLocaleDateString("pt-BR", { weekday: "short" })}
               </span>
             </div>
@@ -219,15 +219,15 @@ function AdminDashboard() {
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
         {/* Pedidos Recentes */}
-        <div className="rounded-xl border bg-white p-6 shadow-sm">
+        <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-gray-900">Pedidos Recentes</h2>
+            <h2 className="text-lg font-semibold text-slate-100">Pedidos Recentes</h2>
             <Link href="/admin/pedidos" className="text-sm text-brand-600 hover:underline">
               Ver todos
             </Link>
           </div>
           {dashboard.recentOrders.length === 0 ? (
-            <p className="text-gray-500 text-sm">Nenhum pedido ainda</p>
+            <p className="text-slate-400 text-sm">Nenhum pedido ainda</p>
           ) : (
             <div className="space-y-3">
               {dashboard.recentOrders.map((order) => (
@@ -236,26 +236,26 @@ function AdminDashboard() {
                     <div className={`flex h-9 w-9 items-center justify-center rounded-full ${
                       order.status === "PAID" ? "bg-green-100" :
                       order.status === "PENDING" ? "bg-yellow-100" :
-                      order.status === "CANCELLED" ? "bg-red-100" : "bg-gray-100"
+                      order.status === "CANCELLED" ? "bg-red-100" : "bg-slate-900"
                     }`}>
                       {order.status === "PAID" ? (
                         <CheckCircle className="h-5 w-5 text-green-600" />
                       ) : order.status === "PENDING" ? (
                         <Clock className="h-5 w-5 text-yellow-600" />
                       ) : (
-                        <Package className="h-5 w-5 text-gray-500" />
+                        <Package className="h-5 w-5 text-slate-400" />
                       )}
                     </div>
                     <div>
-                      <p className="font-medium text-gray-900">#{order.id.slice(0, 8)}</p>
-                      <p className="text-xs text-gray-500">
+                      <p className="font-medium text-slate-100">#{order.id.slice(0, 8)}</p>
+                      <p className="text-xs text-slate-400">
                         {order.user?.name || order.user?.email || "Cliente"} ·{" "}
                         {new Date(order.createdAt).toLocaleDateString("pt-BR")}
                       </p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="font-semibold text-gray-900">{formatCurrency(order.total)}</p>
+                    <p className="font-semibold text-slate-100">{formatCurrency(order.total)}</p>
                     <span className={`text-xs font-medium ${
                       order.status === "PAID" ? "text-green-600" :
                       order.status === "PENDING" ? "text-yellow-600" : "text-red-600"
@@ -272,26 +272,26 @@ function AdminDashboard() {
         {/* Top Produtos + Alertas de Estoque */}
         <div className="space-y-6">
           {/* Top Produtos */}
-          <div className="rounded-xl border bg-white p-6 shadow-sm">
-            <h2 className="mb-4 text-lg font-semibold text-gray-900">Produtos Mais Vendidos</h2>
+          <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
+            <h2 className="mb-4 text-lg font-semibold text-slate-100">Produtos Mais Vendidos</h2>
             {dashboard.topProducts.length === 0 ? (
-              <p className="text-gray-500 text-sm">Nenhuma venda ainda</p>
+              <p className="text-slate-400 text-sm">Nenhuma venda ainda</p>
             ) : (
               <div className="space-y-3">
                 {dashboard.topProducts.map((product, i) => (
                   <div key={product.name} className="flex items-center gap-3">
                     <span className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold ${
                       i === 0 ? "bg-yellow-100 text-yellow-700" :
-                      i === 1 ? "bg-gray-100 text-gray-700" :
-                      i === 2 ? "bg-orange-100 text-orange-700" : "bg-gray-50 text-gray-500"
+                      i === 1 ? "bg-slate-900 text-slate-300" :
+                      i === 2 ? "bg-orange-100 text-orange-700" : "bg-slate-900 text-slate-400"
                     }`}>
                       {i + 1}
                     </span>
                     <div className="flex-1">
-                      <p className="text-sm font-medium text-gray-900 truncate">{product.name}</p>
-                      <p className="text-xs text-gray-500">{product.qty} vendidos</p>
+                      <p className="text-sm font-medium text-slate-100 truncate">{product.name}</p>
+                      <p className="text-xs text-slate-400">{product.qty} vendidos</p>
                     </div>
-                    <p className="text-sm font-semibold text-gray-900">{formatCurrency(product.revenue)}</p>
+                    <p className="text-sm font-semibold text-slate-100">{formatCurrency(product.revenue)}</p>
                   </div>
                 ))}
               </div>
@@ -318,40 +318,40 @@ function AdminDashboard() {
 
       {/* Links Rápidos */}
       <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Link href="/admin/produtos" className="flex items-center gap-3 rounded-xl border bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
+        <Link href="/admin/produtos" className="flex items-center gap-3 rounded-xl border bg-slate-950 p-4 shadow-sm hover:shadow-md transition-shadow">
           <div className="rounded-lg bg-purple-100 p-2.5">
             <Package className="h-5 w-5 text-purple-600" />
           </div>
           <div>
-            <p className="font-medium text-gray-900 text-sm">Produtos</p>
-            <p className="text-xs text-gray-500">Gerenciar catálogo</p>
+            <p className="font-medium text-slate-100 text-sm">Produtos</p>
+            <p className="text-xs text-slate-400">Gerenciar catálogo</p>
           </div>
         </Link>
-        <Link href="/admin/pedidos" className="flex items-center gap-3 rounded-xl border bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
+        <Link href="/admin/pedidos" className="flex items-center gap-3 rounded-xl border bg-slate-950 p-4 shadow-sm hover:shadow-md transition-shadow">
           <div className="rounded-lg bg-blue-100 p-2.5">
             <ShoppingCart className="h-5 w-5 text-blue-600" />
           </div>
           <div>
-            <p className="font-medium text-gray-900 text-sm">Pedidos</p>
-            <p className="text-xs text-gray-500">{dashboard.pendingOrders} pendentes</p>
+            <p className="font-medium text-slate-100 text-sm">Pedidos</p>
+            <p className="text-xs text-slate-400">{dashboard.pendingOrders} pendentes</p>
           </div>
         </Link>
-        <Link href="/admin/clientes" className="flex items-center gap-3 rounded-xl border bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
+        <Link href="/admin/clientes" className="flex items-center gap-3 rounded-xl border bg-slate-950 p-4 shadow-sm hover:shadow-md transition-shadow">
           <div className="rounded-lg bg-pink-100 p-2.5">
             <Users className="h-5 w-5 text-pink-600" />
           </div>
           <div>
-            <p className="font-medium text-gray-900 text-sm">Clientes</p>
-            <p className="text-xs text-gray-500">{dashboard.userCount} cadastrados</p>
+            <p className="font-medium text-slate-100 text-sm">Clientes</p>
+            <p className="text-xs text-slate-400">{dashboard.userCount} cadastrados</p>
           </div>
         </Link>
-        <Link href="/admin/reembolsos" className="flex items-center gap-3 rounded-xl border bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
+        <Link href="/admin/reembolsos" className="flex items-center gap-3 rounded-xl border bg-slate-950 p-4 shadow-sm hover:shadow-md transition-shadow">
           <div className="rounded-lg bg-red-100 p-2.5">
             <RefreshCw className="h-5 w-5 text-red-600" />
           </div>
           <div>
-            <p className="font-medium text-gray-900 text-sm">Reembolsos</p>
-            <p className="text-xs text-gray-500">Solicitações</p>
+            <p className="font-medium text-slate-100 text-sm">Reembolsos</p>
+            <p className="text-xs text-slate-400">Solicitações</p>
           </div>
         </Link>
       </div>

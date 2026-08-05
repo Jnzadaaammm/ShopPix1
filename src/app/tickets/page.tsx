@@ -44,7 +44,7 @@ const CATEGORY_LABELS: Record<string, string> = {
 const STATUS_CONFIG: Record<string, { label: string; color: string; icon: typeof Clock }> = {
   OPEN: { label: "Aberto", color: "bg-blue-100 text-blue-700", icon: AlertCircle },
   ANSWERED: { label: "Respondido", color: "bg-green-100 text-green-700", icon: CheckCircle },
-  CLOSED: { label: "Fechado", color: "bg-gray-100 text-gray-600", icon: CheckCircle },
+  CLOSED: { label: "Fechado", color: "bg-slate-900 text-slate-400", icon: CheckCircle },
 };
 
 export default function TicketsPage() {
@@ -190,22 +190,22 @@ export default function TicketsPage() {
       <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
         <button
           onClick={() => closeTicket()}
-          className="mb-6 inline-flex items-center gap-2 text-sm text-gray-500 hover:text-brand-600"
+          className="mb-6 inline-flex items-center gap-2 text-sm text-slate-400 hover:text-brand-600"
         >
           <ArrowLeft className="h-4 w-4" /> Voltar aos tickets
         </button>
 
         <div className="card overflow-hidden">
           {/* Header */}
-          <div className="border-b border-gray-100 p-6">
+          <div className="border-b border-slate-800 p-6">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <h1 className="text-xl font-bold text-gray-900">{selectedTicket.subject}</h1>
+                <h1 className="text-xl font-bold text-slate-100">{selectedTicket.subject}</h1>
                 <div className="mt-2 flex flex-wrap items-center gap-2">
                   <span className={`rounded-full px-3 py-1 text-xs font-medium ${statusCfg.color}`}>
                     {statusCfg.label}
                   </span>
-                  <span className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-600">
+                  <span className="rounded-full bg-slate-900 px-3 py-1 text-xs text-slate-400">
                     {CATEGORY_LABELS[selectedTicket.category] || selectedTicket.category}
                   </span>
                 </div>
@@ -225,7 +225,7 @@ export default function TicketsPage() {
                 </div>
                 <div className={`max-w-[75%] ${msg.isStaff ? "" : "text-right"}`}>
                   <div className="mb-1 flex items-center gap-2">
-                    <span className="text-xs font-medium text-gray-700">
+                    <span className="text-xs font-medium text-slate-300">
                       {msg.isStaff ? "Suporte" : msg.user?.name || "Você"}
                     </span>
                     {msg.isStaff && (
@@ -237,13 +237,13 @@ export default function TicketsPage() {
                   <div
                     className={`inline-block rounded-2xl px-4 py-2.5 text-sm ${
                       msg.isStaff
-                        ? "bg-gray-100 text-gray-800"
+                        ? "bg-slate-900 text-slate-200"
                         : "bg-brand-600 text-white"
                     }`}
                   >
                     {msg.content}
                   </div>
-                  <p className="mt-1 text-[10px] text-gray-400">
+                  <p className="mt-1 text-[10px] text-slate-500">
                     {new Date(msg.createdAt).toLocaleString("pt-BR")}
                   </p>
                 </div>
@@ -254,7 +254,7 @@ export default function TicketsPage() {
 
           {/* Resposta */}
           {selectedTicket.status !== "CLOSED" ? (
-            <div className="border-t border-gray-100 p-4">
+            <div className="border-t border-slate-800 p-4">
               <div className="flex gap-2">
                 <input
                   type="text"
@@ -274,7 +274,7 @@ export default function TicketsPage() {
               </div>
             </div>
           ) : (
-            <div className="border-t border-gray-100 p-4 text-center text-sm text-gray-500">
+            <div className="border-t border-slate-800 p-4 text-center text-sm text-slate-400">
               Este ticket foi fechado. Abra um novo se precisar de mais ajuda.
             </div>
           )}
@@ -288,10 +288,10 @@ export default function TicketsPage() {
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="flex items-center gap-2 text-3xl font-bold text-gray-900">
+          <h1 className="flex items-center gap-2 text-3xl font-bold text-slate-100">
             <TicketIcon className="h-8 w-8 text-brand-600" /> Meus Tickets
           </h1>
-          <p className="mt-2 text-gray-600">Central de suporte — tire suas dúvidas</p>
+          <p className="mt-2 text-slate-400">Central de suporte — tire suas dúvidas</p>
         </div>
         <button onClick={() => setShowCreate(true)} className="btn-primary">
           <Plus className="h-5 w-5" /> Novo Ticket
@@ -301,8 +301,8 @@ export default function TicketsPage() {
       {(tickets?.length ?? 0) === 0 ? (
         <div className="card py-20 text-center">
           <MessageCircle className="mx-auto h-16 w-16 text-gray-300" />
-          <h2 className="mt-6 text-xl font-bold text-gray-900">Nenhum ticket ainda</h2>
-          <p className="mt-2 text-gray-500">Abra um ticket para falar com nossa equipe.</p>
+          <h2 className="mt-6 text-xl font-bold text-slate-100">Nenhum ticket ainda</h2>
+          <p className="mt-2 text-slate-400">Abra um ticket para falar com nossa equipe.</p>
           <button onClick={() => setShowCreate(true)} className="btn-primary mt-6">
             <Plus className="h-5 w-5" /> Abrir Primeiro Ticket
           </button>
@@ -323,12 +323,12 @@ export default function TicketsPage() {
                   <StatusIcon className="h-5 w-5" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-gray-900 truncate">{ticket.subject}</h3>
-                  <p className="text-sm text-gray-500 truncate">
+                  <h3 className="font-semibold text-slate-100 truncate">{ticket.subject}</h3>
+                  <p className="text-sm text-slate-400 truncate">
                     {lastMsg?.content || "Sem mensagens"}
                   </p>
-                  <div className="mt-1 flex items-center gap-2 text-xs text-gray-400">
-                    <span className="rounded-full bg-gray-100 px-2 py-0.5">
+                  <div className="mt-1 flex items-center gap-2 text-xs text-slate-500">
+                    <span className="rounded-full bg-slate-900 px-2 py-0.5">
                       {CATEGORY_LABELS[ticket.category] || ticket.category}
                     </span>
                     <span>{ticket._count?.messages || 0} mensagem(s)</span>
@@ -348,19 +348,19 @@ export default function TicketsPage() {
       {showCreate && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={() => setShowCreate(false)}>
           <div
-            className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl"
+            className="w-full max-w-lg rounded-2xl bg-slate-950 p-6 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-4 flex items-center justify-between">
-              <h3 className="text-xl font-bold text-gray-900">Novo Ticket</h3>
-              <button onClick={() => setShowCreate(false)} className="rounded-lg p-1 text-gray-400 hover:bg-gray-100">
+              <h3 className="text-xl font-bold text-slate-100">Novo Ticket</h3>
+              <button onClick={() => setShowCreate(false)} className="rounded-lg p-1 text-slate-500 hover:bg-slate-900">
                 <X className="h-5 w-5" />
               </button>
             </div>
 
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">Assunto</label>
+                <label className="block text-sm font-medium text-slate-300">Assunto</label>
                 <input
                   type="text"
                   value={form.subject}
@@ -371,7 +371,7 @@ export default function TicketsPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700">Categoria</label>
+                <label className="block text-sm font-medium text-slate-300">Categoria</label>
                 <select
                   value={form.category}
                   onChange={(e) => setForm({ ...form, category: e.target.value })}
@@ -384,7 +384,7 @@ export default function TicketsPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700">Mensagem</label>
+                <label className="block text-sm font-medium text-slate-300">Mensagem</label>
                 <textarea
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}

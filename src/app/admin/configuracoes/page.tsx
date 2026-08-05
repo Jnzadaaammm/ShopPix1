@@ -118,32 +118,32 @@ export default function AdminSettingsPage() {
     <PermissionGuard permission="settings.manage">
     <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Configurações</h1>
-        <p className="mt-2 text-gray-600">Gerencie as configurações da sua loja</p>
+        <h1 className="text-3xl font-bold text-slate-100">Configurações</h1>
+        <p className="mt-2 text-slate-400">Gerencie as configurações da sua loja</p>
       </div>
 
       {/* === Informações da Loja === */}
-      <div className="rounded-xl border bg-white p-6 shadow-sm">
+      <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
         <div className="mb-4 flex items-center gap-2">
           <div className="rounded-lg bg-brand-100 p-2">
             <Store className="h-5 w-5 text-brand-600" />
           </div>
           <div>
-            <h2 className="text-lg font-semibold text-gray-900">Informações da Loja</h2>
-            <p className="text-sm text-gray-500">Nome, descrição e contato exibidos no site</p>
+            <h2 className="text-lg font-semibold text-slate-100">Informações da Loja</h2>
+            <p className="text-sm text-slate-400">Nome, descrição e contato exibidos no site</p>
           </div>
         </div>
 
         {loading ? (
           <div className="space-y-3">
             {[1, 2].map((i) => (
-              <div key={i} className="h-12 animate-pulse rounded-lg bg-gray-100" />
+              <div key={i} className="h-12 animate-pulse rounded-lg bg-slate-900" />
             ))}
           </div>
         ) : (
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Nome da Loja</label>
+              <label className="block text-sm font-medium text-slate-300">Nome da Loja</label>
               <input
                 type="text"
                 value={settings.storeName}
@@ -153,7 +153,7 @@ export default function AdminSettingsPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Descrição</label>
+              <label className="block text-sm font-medium text-slate-300">Descrição</label>
               <textarea
                 value={settings.storeDescription}
                 onChange={(e) => setSettings({ ...settings, storeDescription: e.target.value })}
@@ -163,7 +163,7 @@ export default function AdminSettingsPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Email de Suporte</label>
+              <label className="block text-sm font-medium text-slate-300">Email de Suporte</label>
               <input
                 type="email"
                 value={settings.supportEmail}
@@ -171,28 +171,28 @@ export default function AdminSettingsPage() {
                 className="mt-1 w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                 placeholder="suporte@sualoja.com"
               />
-              <p className="mt-1 text-xs text-gray-500">Email exibido para clientes em caso de dúvidas.</p>
+              <p className="mt-1 text-xs text-slate-400">Email exibido para clientes em caso de dúvidas.</p>
             </div>
           </div>
         )}
       </div>
 
       {/* === Métodos de Pagamento === */}
-      <div className="mt-6 rounded-xl border bg-white p-6 shadow-sm">
+      <div className="mt-6 rounded-xl border bg-slate-950 p-6 shadow-sm">
         <div className="mb-4 flex items-center gap-2">
           <div className="rounded-lg bg-green-100 p-2">
             <CreditCard className="h-5 w-5 text-green-600" />
           </div>
           <div>
-            <h2 className="text-lg font-semibold text-gray-900">Métodos de Pagamento</h2>
-            <p className="text-sm text-gray-500">Ative ou desative as formas de pagamento do checkout</p>
+            <h2 className="text-lg font-semibold text-slate-100">Métodos de Pagamento</h2>
+            <p className="text-sm text-slate-400">Ative ou desative as formas de pagamento do checkout</p>
           </div>
         </div>
 
         {loading ? (
           <div className="space-y-3">
             {[1].map((i) => (
-              <div key={i} className="h-16 animate-pulse rounded-lg bg-gray-100" />
+              <div key={i} className="h-16 animate-pulse rounded-lg bg-slate-900" />
             ))}
           </div>
         ) : (
@@ -203,15 +203,15 @@ export default function AdminSettingsPage() {
               return (
                 <label
                   key={method.key}
-                  className="flex cursor-pointer items-center justify-between rounded-lg border p-4 transition-colors hover:bg-gray-50"
+                  className="flex cursor-pointer items-center justify-between rounded-lg border p-4 transition-colors hover:bg-slate-900"
                 >
                   <div className="flex items-center gap-3">
                     <div className={`rounded-lg p-2 ${colorMap[method.color]}`}>
                       <Icon className="h-5 w-5" />
                     </div>
                     <div>
-                      <p className="font-medium text-gray-900">{method.label}</p>
-                      <p className="text-sm text-gray-500">{method.desc}</p>
+                      <p className="font-medium text-slate-100">{method.label}</p>
+                      <p className="text-sm text-slate-400">{method.desc}</p>
                     </div>
                   </div>
                   <button
@@ -229,7 +229,7 @@ export default function AdminSettingsPage() {
                     }`}
                   >
                     <span
-                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                      className={`inline-block h-4 w-4 transform rounded-full bg-slate-950 transition-transform ${
                         enabled ? "translate-x-6" : "translate-x-1"
                       }`}
                     />
@@ -240,17 +240,17 @@ export default function AdminSettingsPage() {
           </div>
         )}
 
-        <div className="mt-4 rounded-lg border bg-gray-50 p-4">
-          <p className="text-sm font-medium text-gray-700">Chave PIX</p>
+        <div className="mt-4 rounded-lg border bg-slate-900 p-4">
+          <p className="text-sm font-medium text-slate-300">Chave PIX</p>
           {settings.pixKey ? (
-            <p className="mt-1 break-all font-mono text-sm text-gray-900">{settings.pixKey}</p>
+            <p className="mt-1 break-all font-mono text-sm text-slate-100">{settings.pixKey}</p>
           ) : (
             <p className="mt-1 flex items-center gap-2 text-sm text-amber-700">
               <AlertCircle className="h-4 w-4" /> Chave PIX não configurada no arquivo .env
             </p>
           )}
-          <p className="mt-2 text-xs text-gray-500">
-            Configure a variável <code className="rounded bg-gray-200 px-1">PIX_KEY</code> no arquivo .env e faça o redeploy para alterar.
+          <p className="mt-2 text-xs text-slate-400">
+            Configure a variável <code className="rounded bg-slate-800 px-1">PIX_KEY</code> no arquivo .env e faça o redeploy para alterar.
           </p>
         </div>
 
@@ -262,25 +262,25 @@ export default function AdminSettingsPage() {
       </div>
 
       {/* === Configurações de Pedido === */}
-      <div className="mt-6 rounded-xl border bg-white p-6 shadow-sm">
+      <div className="mt-6 rounded-xl border bg-slate-950 p-6 shadow-sm">
         <div className="mb-4 flex items-center gap-2">
           <div className="rounded-lg bg-orange-100 p-2">
             <Clock className="h-5 w-5 text-orange-600" />
           </div>
           <div>
-            <h2 className="text-lg font-semibold text-gray-900">Configurações de Pedido</h2>
-            <p className="text-sm text-gray-500">Aprovação automática e expiração de PIX</p>
+            <h2 className="text-lg font-semibold text-slate-100">Configurações de Pedido</h2>
+            <p className="text-sm text-slate-400">Aprovação automática e expiração de PIX</p>
           </div>
         </div>
 
         {loading ? (
           <div className="space-y-3">
-            <div className="h-16 animate-pulse rounded-lg bg-gray-100" />
+            <div className="h-16 animate-pulse rounded-lg bg-slate-900" />
           </div>
         ) : (
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-slate-300">
                 Expiração de PIX (horas)
               </label>
               <input
@@ -291,19 +291,19 @@ export default function AdminSettingsPage() {
                 onChange={(e) => setSettings({ ...settings, pixExpirationHours: e.target.value })}
                 className="mt-1 w-32 rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
               />
-              <p className="mt-1 text-xs text-gray-500">
+              <p className="mt-1 text-xs text-slate-400">
                 Pedidos PIX pendentes expiram automaticamente após este período.
               </p>
             </div>
 
-            <label className="flex cursor-pointer items-center justify-between rounded-lg border p-4 transition-colors hover:bg-gray-50">
+            <label className="flex cursor-pointer items-center justify-between rounded-lg border p-4 transition-colors hover:bg-slate-900">
               <div className="flex items-center gap-3">
                 <div className="rounded-lg bg-green-100 p-2">
                   <Zap className="h-5 w-5 text-green-600" />
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900">Aprovar Stripe automaticamente</p>
-                  <p className="text-sm text-gray-500">Pula a aprovação manual para pagamentos Stripe confirmados</p>
+                  <p className="font-medium text-slate-100">Aprovar Stripe automaticamente</p>
+                  <p className="text-sm text-slate-400">Pula a aprovação manual para pagamentos Stripe confirmados</p>
                 </div>
               </div>
               <button
@@ -316,21 +316,21 @@ export default function AdminSettingsPage() {
                 }`}
               >
                 <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                  className={`inline-block h-4 w-4 transform rounded-full bg-slate-950 transition-transform ${
                     settings.autoApproveStripe ? "translate-x-6" : "translate-x-1"
                   }`}
                 />
               </button>
             </label>
 
-            <label className="flex cursor-pointer items-center justify-between rounded-lg border p-4 transition-colors hover:bg-gray-50">
+            <label className="flex cursor-pointer items-center justify-between rounded-lg border p-4 transition-colors hover:bg-slate-900">
               <div className="flex items-center gap-3">
                 <div className="rounded-lg bg-blue-100 p-2">
                   <Zap className="h-5 w-5 text-blue-600" />
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900">Aprovar PayPal automaticamente</p>
-                  <p className="text-sm text-gray-500">Pula a aprovação manual para pagamentos PayPal capturados</p>
+                  <p className="font-medium text-slate-100">Aprovar PayPal automaticamente</p>
+                  <p className="text-sm text-slate-400">Pula a aprovação manual para pagamentos PayPal capturados</p>
                 </div>
               </div>
               <button
@@ -343,7 +343,7 @@ export default function AdminSettingsPage() {
                 }`}
               >
                 <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                  className={`inline-block h-4 w-4 transform rounded-full bg-slate-950 transition-transform ${
                     settings.autoApprovePaypal ? "translate-x-6" : "translate-x-1"
                   }`}
                 />
@@ -354,22 +354,22 @@ export default function AdminSettingsPage() {
       </div>
 
       {/* === Notificações Discord === */}
-      <div className="mt-6 rounded-xl border bg-white p-6 shadow-sm">
+      <div className="mt-6 rounded-xl border bg-slate-950 p-6 shadow-sm">
         <div className="mb-4 flex items-center gap-2">
           <div className="rounded-lg bg-purple-100 p-2">
             <Bell className="h-5 w-5 text-purple-600" />
           </div>
           <div>
-            <h2 className="text-lg font-semibold text-gray-900">Notificações Discord</h2>
-            <p className="text-sm text-gray-500">Receba um alerta no Discord quando chegar um pedido novo</p>
+            <h2 className="text-lg font-semibold text-slate-100">Notificações Discord</h2>
+            <p className="text-sm text-slate-400">Receba um alerta no Discord quando chegar um pedido novo</p>
           </div>
         </div>
 
         {loading ? (
-          <div className="h-12 animate-pulse rounded-lg bg-gray-100" />
+          <div className="h-12 animate-pulse rounded-lg bg-slate-900" />
         ) : (
           <div>
-            <label className="block text-sm font-medium text-gray-700">URL do Webhook do Discord</label>
+            <label className="block text-sm font-medium text-slate-300">URL do Webhook do Discord</label>
             <input
               type="url"
               value={settings.discordWebhookUrl}
@@ -377,9 +377,9 @@ export default function AdminSettingsPage() {
               className="mt-1 w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
               placeholder="https://discord.com/api/webhooks/..."
             />
-            <p className="mt-2 text-xs text-gray-500">
+            <p className="mt-2 text-xs text-slate-400">
               Crie um Webhook em: Configurações do Servidor &gt; Integrações &gt; Webhooks.
-              Copie a URL e cole aqui. Se vazio, usa a variável <code className="rounded bg-gray-200 px-1">DISCORD_ORDERS_WEBHOOK_URL</code> do .env.
+              Copie a URL e cole aqui. Se vazio, usa a variável <code className="rounded bg-slate-800 px-1">DISCORD_ORDERS_WEBHOOK_URL</code> do .env.
             </p>
           </div>
         )}
