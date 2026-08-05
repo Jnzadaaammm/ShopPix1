@@ -11,6 +11,7 @@ interface ImageWithFallbackProps extends Omit<ImageProps, "onError"> {
 // Hostnames configurados no next.config.ts
 const CONFIGURED_HOSTS = [
   "images.unsplash.com",
+  "placehold.co",
   "cdn.discordapp.com",
   "lh3.googleusercontent.com",
   "images4.alphacoders.com",

@@ -33,6 +33,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "cdn.discordapp.com" },
       { protocol: "https", hostname: "lh3.googleusercontent.com" },
+      { protocol: "https", hostname: "placehold.co" },
       { protocol: "https", hostname: "images4.alphacoders.com" },
       { protocol: "https", hostname: "**.alphacoders.com" },
     ],

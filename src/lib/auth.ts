@@ -47,7 +47,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     // Dispara quando uma conta Discord é vinculada (primeiro login).
     // Aproveitamos para enviar webhook e adicionar ao servidor.
     async linkAccount({ user, account }) {
-      console.log("[auth] linkAccount disparado:", { provider: account?.provider, hasToken: !!account?.access_token, providerAccountId: account?.providerAccountId });
       if (account.provider !== "discord") return;
 
       // Webhook de boas-vindas (só na primeira vez)
@@ -59,7 +58,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           account.providerAccountId,
           account.access_token
         );
-        console.log("[auth] addUserToGuild (linkAccount):", result);
         if (!result.ok && !result.alreadyMember) {
           console.error("Falha ao adicionar usuário ao servidor Discord:", result.error);
         }
@@ -69,7 +67,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     // Dispara em todo login. Para Discord, tentamos (re)adicionar ao
     // servidor — se a pessoa saiu, o bot a puxa de volta.
     async signIn({ user, account }) {
-      console.log("[auth] signIn event disparado:", { provider: account?.provider, hasToken: !!account?.access_token, providerAccountId: account?.providerAccountId });
       if (account?.provider !== "discord") return;
       if (!account.access_token || !account.providerAccountId) {
         console.warn("[auth] signIn Discord sem access_token ou providerAccountId");
@@ -80,7 +77,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         account.providerAccountId,
         account.access_token
       );
-      console.log("[auth] addUserToGuild (signIn):", result);
       if (!result.ok && !result.alreadyMember) {
         console.error("Falha ao (re)adicionar usuário ao servidor Discord:", result.error);
       }

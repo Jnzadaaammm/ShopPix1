@@ -144,8 +144,6 @@ export async function sendLoginWebhook(user: WebhookUser): Promise<void> {
     console.warn("[discord] DISCORD_WEBHOOK_URL não configurado — webhook pulado");
     return;
   }
-  console.log("[discord] Enviando webhook para:", webhookUrl.slice(0, 50) + "...");
-
   const username = user.name || "Usuário sem nome";
   const email = user.email || "sem email";
   const avatar = user.image || undefined;
