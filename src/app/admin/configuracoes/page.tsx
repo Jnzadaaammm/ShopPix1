@@ -108,10 +108,10 @@ export default function AdminSettingsPage() {
 
   const colorMap: Record<string, string> = {
     brand: "bg-slate-800 text-brand-400",
-    green: "bg-green-100 text-green-600",
-    blue: "bg-blue-100 text-blue-600",
-    purple: "bg-purple-100 text-purple-600",
-    orange: "bg-orange-100 text-orange-600",
+    green: "bg-green-900/40 text-green-400",
+    blue: "bg-blue-900/40 text-blue-400",
+    purple: "bg-purple-900/40 text-purple-400",
+    orange: "bg-orange-900/40 text-orange-400",
   };
 
   return (
@@ -148,7 +148,7 @@ export default function AdminSettingsPage() {
                 type="text"
                 value={settings.storeName}
                 onChange={(e) => setSettings({ ...settings, storeName: e.target.value })}
-                className="mt-1 w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="mt-1 w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20"
                 placeholder="ShopPix"
               />
             </div>
@@ -157,7 +157,7 @@ export default function AdminSettingsPage() {
               <textarea
                 value={settings.storeDescription}
                 onChange={(e) => setSettings({ ...settings, storeDescription: e.target.value })}
-                className="mt-1 w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="mt-1 w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20"
                 rows={2}
                 placeholder="Compre produtos digitais com segurança. Entrega imediata."
               />
@@ -168,7 +168,7 @@ export default function AdminSettingsPage() {
                 type="email"
                 value={settings.supportEmail}
                 onChange={(e) => setSettings({ ...settings, supportEmail: e.target.value })}
-                className="mt-1 w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="mt-1 w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20"
                 placeholder="suporte@sualoja.com"
               />
               <p className="mt-1 text-xs text-slate-400">Email exibido para clientes em caso de dúvidas.</p>
@@ -180,8 +180,8 @@ export default function AdminSettingsPage() {
       {/* === Métodos de Pagamento === */}
       <div className="mt-6 card p-6">
         <div className="mb-4 flex items-center gap-2">
-          <div className="rounded-lg bg-green-100 p-2">
-            <CreditCard className="h-5 w-5 text-green-600" />
+          <div className="rounded-lg bg-green-900/40 p-2">
+            <CreditCard className="h-5 w-5 text-green-400" />
           </div>
           <div>
             <h2 className="text-lg font-semibold text-slate-100">Métodos de Pagamento</h2>
@@ -203,7 +203,7 @@ export default function AdminSettingsPage() {
               return (
                 <label
                   key={method.key}
-                  className="flex cursor-pointer items-center justify-between rounded-lg border p-4 transition-colors hover:bg-slate-900"
+                  className="flex cursor-pointer items-center justify-between rounded-lg border border-slate-800 p-4 transition-colors hover:bg-slate-900"
                 >
                   <div className="flex items-center gap-3">
                     <div className={`rounded-lg p-2 ${colorMap[method.color]}`}>
@@ -240,12 +240,12 @@ export default function AdminSettingsPage() {
           </div>
         )}
 
-        <div className="mt-4 rounded-lg border bg-slate-900 p-4">
+        <div className="mt-4 rounded-lg border border-slate-800 bg-slate-900 p-4">
           <p className="text-sm font-medium text-slate-300">Chave PIX</p>
           {settings.pixKey ? (
             <p className="mt-1 break-all font-mono text-sm text-slate-100">{settings.pixKey}</p>
           ) : (
-            <p className="mt-1 flex items-center gap-2 text-sm text-amber-700">
+            <p className="mt-1 flex items-center gap-2 text-sm text-amber-300">
               <AlertCircle className="h-4 w-4" /> Chave PIX não configurada no arquivo .env
             </p>
           )}
@@ -254,18 +254,18 @@ export default function AdminSettingsPage() {
           </p>
         </div>
 
-        <div className="mt-4 rounded-lg bg-amber-50 border border-amber-200 p-3 text-sm text-amber-800">
+        <div className="mt-4 rounded-lg bg-amber-900/30 border border-amber-700/50 p-3 text-sm text-amber-300">
           <strong>Atenção:</strong> Para que um método funcione, além de ativá-lo aqui,
           as credenciais correspondentes devem estar configuradas no arquivo{" "}
-          <code className="bg-amber-100 px-1 rounded">.env</code>.
+          <code className="bg-amber-900/40 px-1 rounded">.env</code>.
         </div>
       </div>
 
       {/* === Configurações de Pedido === */}
       <div className="mt-6 card p-6">
         <div className="mb-4 flex items-center gap-2">
-          <div className="rounded-lg bg-orange-100 p-2">
-            <Clock className="h-5 w-5 text-orange-600" />
+          <div className="rounded-lg bg-orange-900/40 p-2">
+            <Clock className="h-5 w-5 text-orange-400" />
           </div>
           <div>
             <h2 className="text-lg font-semibold text-slate-100">Configurações de Pedido</h2>
@@ -289,17 +289,17 @@ export default function AdminSettingsPage() {
                 max="168"
                 value={settings.pixExpirationHours}
                 onChange={(e) => setSettings({ ...settings, pixExpirationHours: e.target.value })}
-                className="mt-1 w-32 rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="mt-1 w-32 rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20"
               />
               <p className="mt-1 text-xs text-slate-400">
                 Pedidos PIX pendentes expiram automaticamente após este período.
               </p>
             </div>
 
-            <label className="flex cursor-pointer items-center justify-between rounded-lg border p-4 transition-colors hover:bg-slate-900">
+            <label className="flex cursor-pointer items-center justify-between rounded-lg border border-slate-800 p-4 transition-colors hover:bg-slate-900">
               <div className="flex items-center gap-3">
-                <div className="rounded-lg bg-green-100 p-2">
-                  <Zap className="h-5 w-5 text-green-600" />
+                <div className="rounded-lg bg-green-900/40 p-2">
+                  <Zap className="h-5 w-5 text-green-400" />
                 </div>
                 <div>
                   <p className="font-medium text-slate-100">Aprovar Stripe automaticamente</p>
@@ -323,10 +323,10 @@ export default function AdminSettingsPage() {
               </button>
             </label>
 
-            <label className="flex cursor-pointer items-center justify-between rounded-lg border p-4 transition-colors hover:bg-slate-900">
+            <label className="flex cursor-pointer items-center justify-between rounded-lg border border-slate-800 p-4 transition-colors hover:bg-slate-900">
               <div className="flex items-center gap-3">
-                <div className="rounded-lg bg-blue-100 p-2">
-                  <Zap className="h-5 w-5 text-blue-600" />
+                <div className="rounded-lg bg-blue-900/40 p-2">
+                  <Zap className="h-5 w-5 text-blue-400" />
                 </div>
                 <div>
                   <p className="font-medium text-slate-100">Aprovar PayPal automaticamente</p>
@@ -356,8 +356,8 @@ export default function AdminSettingsPage() {
       {/* === Notificações Discord === */}
       <div className="mt-6 card p-6">
         <div className="mb-4 flex items-center gap-2">
-          <div className="rounded-lg bg-purple-100 p-2">
-            <Bell className="h-5 w-5 text-purple-600" />
+          <div className="rounded-lg bg-purple-900/40 p-2">
+            <Bell className="h-5 w-5 text-purple-400" />
           </div>
           <div>
             <h2 className="text-lg font-semibold text-slate-100">Notificações Discord</h2>
@@ -374,7 +374,7 @@ export default function AdminSettingsPage() {
               type="url"
               value={settings.discordWebhookUrl}
               onChange={(e) => setSettings({ ...settings, discordWebhookUrl: e.target.value })}
-              className="mt-1 w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+              className="mt-1 w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20"
               placeholder="https://discord.com/api/webhooks/..."
             />
             <p className="mt-2 text-xs text-slate-400">

@@ -25,12 +25,12 @@ interface Role {
 
 const COLORS = [
   { id: "gray", label: "Cinza", class: "bg-slate-900 text-slate-300" },
-  { id: "blue", label: "Azul", class: "bg-blue-100 text-blue-700" },
-  { id: "green", label: "Verde", class: "bg-green-100 text-green-700" },
-  { id: "purple", label: "Roxo", class: "bg-purple-100 text-purple-700" },
+  { id: "blue", label: "Azul", class: "bg-blue-900/40 text-blue-700" },
+  { id: "green", label: "Verde", class: "bg-green-900/40 text-green-700" },
+  { id: "purple", label: "Roxo", class: "bg-purple-900/40 text-purple-700" },
   { id: "gold", label: "Dourado", class: "bg-yellow-100 text-yellow-800" },
-  { id: "orange", label: "Laranja", class: "bg-orange-100 text-orange-700" },
-  { id: "red", label: "Vermelho", class: "bg-red-100 text-red-700" },
+  { id: "orange", label: "Laranja", class: "bg-orange-900/40 text-orange-700" },
+  { id: "red", label: "Vermelho", class: "bg-red-900/40 text-red-700" },
 ];
 
 export default function AdminRolesPage() {
@@ -310,7 +310,7 @@ export default function AdminRolesPage() {
       {/* Cargos de Equipe */}
       <div>
         <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-100">
-          <Shield className="h-5 w-5 text-red-600" /> Cargos de Equipe
+          <Shield className="h-5 w-5 text-red-400" /> Cargos de Equipe
           <span className="text-sm font-normal text-slate-500">
             ({teamRoles.length}) — permissões administrativas
           </span>
@@ -347,7 +347,7 @@ export default function AdminRolesPage() {
               <p className="mt-2 text-sm text-slate-400">{role.description || "Sem descrição"}</p>
               <div className="mt-3 flex flex-wrap gap-1">
                 {(role.permissions || []).includes("*") ? (
-                  <span className="rounded-full bg-red-50 px-2 py-0.5 text-xs font-medium text-red-600">
+                  <span className="rounded-full bg-red-50 px-2 py-0.5 text-xs font-medium text-red-400">
                     Acesso Total
                   </span>
                 ) : (

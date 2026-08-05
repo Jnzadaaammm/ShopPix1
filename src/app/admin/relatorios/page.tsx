@@ -125,7 +125,7 @@ export default function AdminReportsPage() {
           <select
             value={period}
             onChange={(e) => setPeriod(e.target.value)}
-            className="rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="7">Últimos 7 dias</option>
             <option value="30">Últimos 30 dias</option>
@@ -259,12 +259,12 @@ export default function AdminReportsPage() {
         <h2 className="mb-4 text-lg font-semibold text-slate-100">Status dos Pedidos</h2>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           {Object.entries(data.statusCounts).map(([status, count]) => (
-            <div key={status} className="rounded-lg border p-4 text-center">
+            <div key={status} className="rounded-lg border border-slate-800 p-4 text-center">
               <p className="text-2xl font-bold text-slate-100">{count}</p>
               <p className={`text-sm font-medium ${
-                status === "PAID" ? "text-green-600" :
+                status === "PAID" ? "text-green-400" :
                 status === "PENDING" ? "text-yellow-600" :
-                status === "CANCELLED" ? "text-red-600" : "text-slate-400"
+                status === "CANCELLED" ? "text-red-400" : "text-slate-400"
               }`}>
                 {status}
               </p>

@@ -196,7 +196,7 @@ export default function AdminCouponsPage() {
                     <button
                       onClick={() => toggleActive(coupon)}
                       className={`flex items-center gap-1 rounded-full px-2 py-1 text-xs font-medium ${
-                        coupon.active ? "bg-green-100 text-green-700" : "bg-slate-900 text-slate-400"
+                        coupon.active ? "bg-green-900/40 text-green-700" : "bg-slate-900 text-slate-400"
                       }`}
                     >
                       {coupon.active ? <Power className="h-3 w-3" /> : <PowerOff className="h-3 w-3" />}
@@ -204,10 +204,10 @@ export default function AdminCouponsPage() {
                     </button>
                   </td>
                   <td className="px-6 py-4 text-right">
-                    <button onClick={() => openModal(coupon)} className="mr-2 rounded p-2 text-blue-600 hover:bg-blue-50">
+                    <button onClick={() => openModal(coupon)} className="mr-2 rounded p-2 text-blue-400 hover:bg-blue-50">
                       <Edit className="h-4 w-4" />
                     </button>
-                    <button onClick={() => handleDelete(coupon.id)} className="rounded p-2 text-red-600 hover:bg-red-950">
+                    <button onClick={() => handleDelete(coupon.id)} className="rounded p-2 text-red-400 hover:bg-red-950">
                       <Trash2 className="h-4 w-4" />
                     </button>
                   </td>
@@ -240,7 +240,7 @@ export default function AdminCouponsPage() {
                   value={form.code}
                   onChange={(e) => setForm({ ...form, code: e.target.value.toUpperCase() })}
                   placeholder="EX: PROMO10"
-                  className="mt-1 w-full rounded-lg border px-3 py-2 font-mono uppercase focus:ring-2 focus:ring-brand-500"
+                  className="mt-1 w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 font-mono uppercase focus:ring-2 focus:ring-brand-500/20"
                 />
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -249,7 +249,7 @@ export default function AdminCouponsPage() {
                   <select
                     value={form.type}
                     onChange={(e) => setForm({ ...form, type: e.target.value as "PERCENTAGE" | "FIXED" })}
-                    className="mt-1 w-full rounded-lg border px-3 py-2 focus:ring-2 focus:ring-brand-500"
+                    className="mt-1 w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 focus:ring-2 focus:ring-brand-500/20"
                   >
                     <option value="PERCENTAGE">Percentual (%)</option>
                     <option value="FIXED">Valor Fixo (R$)</option>
@@ -266,7 +266,7 @@ export default function AdminCouponsPage() {
                     min="0"
                     value={form.value}
                     onChange={(e) => setForm({ ...form, value: e.target.value })}
-                    className="mt-1 w-full rounded-lg border px-3 py-2 focus:ring-2 focus:ring-brand-500"
+                    className="mt-1 w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 focus:ring-2 focus:ring-brand-500/20"
                   />
                 </div>
               </div>
@@ -280,7 +280,7 @@ export default function AdminCouponsPage() {
                     value={form.minOrder}
                     onChange={(e) => setForm({ ...form, minOrder: e.target.value })}
                     placeholder="Opcional"
-                    className="mt-1 w-full rounded-lg border px-3 py-2 focus:ring-2 focus:ring-brand-500"
+                    className="mt-1 w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 focus:ring-2 focus:ring-brand-500/20"
                   />
                 </div>
                 <div>
@@ -291,7 +291,7 @@ export default function AdminCouponsPage() {
                     value={form.maxUses}
                     onChange={(e) => setForm({ ...form, maxUses: e.target.value })}
                     placeholder="Ilimitado"
-                    className="mt-1 w-full rounded-lg border px-3 py-2 focus:ring-2 focus:ring-brand-500"
+                    className="mt-1 w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 focus:ring-2 focus:ring-brand-500/20"
                   />
                 </div>
               </div>
@@ -301,7 +301,7 @@ export default function AdminCouponsPage() {
                   type="date"
                   value={form.validUntil}
                   onChange={(e) => setForm({ ...form, validUntil: e.target.value })}
-                  className="mt-1 w-full rounded-lg border px-3 py-2 focus:ring-2 focus:ring-brand-500"
+                  className="mt-1 w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 focus:ring-2 focus:ring-brand-500/20"
                 />
               </div>
               <div className="flex justify-end gap-3">

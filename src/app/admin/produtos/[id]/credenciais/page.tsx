@@ -145,7 +145,7 @@ export default function AdminCredentialsPage() {
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-slate-100 flex items-center gap-3">
-            <Key className="h-8 w-8 text-purple-600" />
+            <Key className="h-8 w-8 text-purple-400" />
             Credenciais
           </h1>
           <p className="mt-2 text-slate-400">{product.name}</p>
@@ -202,7 +202,7 @@ export default function AdminCredentialsPage() {
         {stats.available > 0 && (
           <button
             onClick={handleClearAvailable}
-            className="text-sm text-red-500 hover:text-red-600"
+            className="text-sm text-red-500 hover:text-red-400"
           >
             Limpar disponíveis
           </button>
@@ -217,7 +217,7 @@ export default function AdminCredentialsPage() {
             <p className="mt-4 text-slate-400">Nenhuma credencial cadastrada.</p>
             <button
               onClick={() => setShowAddModal(true)}
-              className="mt-4 text-purple-600 hover:underline"
+              className="mt-4 text-purple-400 hover:underline"
             >
               Adicionar credenciais →
             </button>
@@ -233,9 +233,9 @@ export default function AdminCredentialsPage() {
                 <span
                   className={`rounded-full px-2 py-0.5 text-xs font-medium ${
                     cred.status === "AVAILABLE"
-                      ? "bg-green-100 text-green-700"
+                      ? "bg-green-900/40 text-green-700"
                       : cred.status === "SOLD"
-                      ? "bg-blue-100 text-blue-700"
+                      ? "bg-blue-900/40 text-blue-700"
                       : "bg-yellow-100 text-yellow-700"
                   }`}
                 >
@@ -298,7 +298,7 @@ export default function AdminCredentialsPage() {
                   onChange={(e) => setBulkText(e.target.value)}
                   rows={10}
                   placeholder={"senha1\nsenha2\nsenha3\nuser:pass\nlogin@email.com:123456"}
-                  className="mt-1 w-full rounded-lg border px-3 py-2 font-mono text-sm focus:ring-2 focus:ring-purple-500"
+                  className="mt-1 w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 font-mono text-sm focus:ring-2 focus:ring-purple-500"
                 />
                 <p className="mt-1 text-xs text-slate-400">
                   {bulkText.split("\n").filter((l) => l.trim()).length} credencial(is) detectada(s)
@@ -314,7 +314,7 @@ export default function AdminCredentialsPage() {
                   value={singleCred}
                   onChange={(e) => setSingleCred(e.target.value)}
                   placeholder="ex: senha123 ou user:pass"
-                  className="mt-1 w-full rounded-lg border px-3 py-2 font-mono text-sm focus:ring-2 focus:ring-purple-500"
+                  className="mt-1 w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 font-mono text-sm focus:ring-2 focus:ring-purple-500"
                 />
               </div>
             )}

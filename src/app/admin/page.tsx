@@ -167,7 +167,7 @@ function AdminDashboard() {
                 <div className="mt-1 flex items-center gap-1">
                   {"change" in stat && stat.change !== undefined && (
                     <span className={`flex items-center text-xs font-medium ${
-                      stat.change >= 0 ? "text-green-600" : "text-red-600"
+                      stat.change >= 0 ? "text-green-400" : "text-red-400"
                     }`}>
                       {stat.change >= 0 ? (
                         <ArrowUpRight className="h-3 w-3" />
@@ -234,12 +234,12 @@ function AdminDashboard() {
                 <div key={order.id} className="flex items-center justify-between border-b pb-3 last:border-0">
                   <div className="flex items-center gap-3">
                     <div className={`flex h-9 w-9 items-center justify-center rounded-full ${
-                      order.status === "PAID" ? "bg-green-100" :
+                      order.status === "PAID" ? "bg-green-900/40" :
                       order.status === "PENDING" ? "bg-yellow-100" :
-                      order.status === "CANCELLED" ? "bg-red-100" : "bg-slate-900"
+                      order.status === "CANCELLED" ? "bg-red-900/40" : "bg-slate-900"
                     }`}>
                       {order.status === "PAID" ? (
-                        <CheckCircle className="h-5 w-5 text-green-600" />
+                        <CheckCircle className="h-5 w-5 text-green-400" />
                       ) : order.status === "PENDING" ? (
                         <Clock className="h-5 w-5 text-yellow-600" />
                       ) : (
@@ -257,8 +257,8 @@ function AdminDashboard() {
                   <div className="text-right">
                     <p className="font-semibold text-slate-100">{formatCurrency(order.total)}</p>
                     <span className={`text-xs font-medium ${
-                      order.status === "PAID" ? "text-green-600" :
-                      order.status === "PENDING" ? "text-yellow-600" : "text-red-600"
+                      order.status === "PAID" ? "text-green-400" :
+                      order.status === "PENDING" ? "text-yellow-600" : "text-red-400"
                     }`}>
                       {order.status}
                     </span>
@@ -283,7 +283,7 @@ function AdminDashboard() {
                     <span className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold ${
                       i === 0 ? "bg-yellow-100 text-yellow-700" :
                       i === 1 ? "bg-slate-900 text-slate-300" :
-                      i === 2 ? "bg-orange-100 text-orange-700" : "bg-slate-900 text-slate-400"
+                      i === 2 ? "bg-orange-900/40 text-orange-700" : "bg-slate-900 text-slate-400"
                     }`}>
                       {i + 1}
                     </span>
@@ -302,7 +302,7 @@ function AdminDashboard() {
           {dashboard.lowStockCount > 0 && (
             <div className="rounded-xl border border-orange-200 bg-orange-50 p-6">
               <div className="mb-3 flex items-center gap-2">
-                <AlertTriangle className="h-5 w-5 text-orange-600" />
+                <AlertTriangle className="h-5 w-5 text-orange-400" />
                 <h2 className="text-lg font-semibold text-orange-900">Estoque Baixo</h2>
               </div>
               <p className="text-sm text-orange-800">
@@ -319,8 +319,8 @@ function AdminDashboard() {
       {/* Links Rápidos */}
       <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Link href="/admin/produtos" className="flex items-center gap-3 card p-4 hover:shadow-md transition-shadow">
-          <div className="rounded-lg bg-purple-100 p-2.5">
-            <Package className="h-5 w-5 text-purple-600" />
+          <div className="rounded-lg bg-purple-900/40 p-2.5">
+            <Package className="h-5 w-5 text-purple-400" />
           </div>
           <div>
             <p className="font-medium text-slate-100 text-sm">Produtos</p>
@@ -328,8 +328,8 @@ function AdminDashboard() {
           </div>
         </Link>
         <Link href="/admin/pedidos" className="flex items-center gap-3 card p-4 hover:shadow-md transition-shadow">
-          <div className="rounded-lg bg-blue-100 p-2.5">
-            <ShoppingCart className="h-5 w-5 text-blue-600" />
+          <div className="rounded-lg bg-blue-900/40 p-2.5">
+            <ShoppingCart className="h-5 w-5 text-blue-400" />
           </div>
           <div>
             <p className="font-medium text-slate-100 text-sm">Pedidos</p>
@@ -346,8 +346,8 @@ function AdminDashboard() {
           </div>
         </Link>
         <Link href="/admin/reembolsos" className="flex items-center gap-3 card p-4 hover:shadow-md transition-shadow">
-          <div className="rounded-lg bg-red-100 p-2.5">
-            <RefreshCw className="h-5 w-5 text-red-600" />
+          <div className="rounded-lg bg-red-900/40 p-2.5">
+            <RefreshCw className="h-5 w-5 text-red-400" />
           </div>
           <div>
             <p className="font-medium text-slate-100 text-sm">Reembolsos</p>

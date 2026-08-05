@@ -268,14 +268,14 @@ export default function AdminProductsPage() {
           onClick={() => setActiveTab("excluir")}
           className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-colors ${
             activeTab === "excluir"
-              ? "border-b-2 border-red-600 text-red-600"
+              ? "border-b-2 border-red-600 text-red-400"
               : "text-slate-400 hover:text-slate-300"
           }`}
         >
           <Trash2 className="h-4 w-4" />
           Excluir
           {selectedIds.size > 0 && (
-            <span className="ml-1 rounded-full bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-700">
+            <span className="ml-1 rounded-full bg-red-900/40 px-2 py-0.5 text-xs font-semibold text-red-700">
               {selectedIds.size}
             </span>
           )}
@@ -358,7 +358,7 @@ export default function AdminProductsPage() {
                     </td>
                     <td className="px-6 py-4">
                       {product.featured ? (
-                        <span className="inline-flex rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800">
+                        <span className="inline-flex rounded-full bg-green-900/40 px-2 py-1 text-xs font-medium text-green-800">
                           Sim
                         </span>
                       ) : (
@@ -370,14 +370,14 @@ export default function AdminProductsPage() {
                     <td className="px-6 py-4 text-right">
                       <button
                         onClick={() => openModal(product)}
-                        className="mr-2 rounded p-2 text-blue-600 hover:bg-blue-50"
+                        className="mr-2 rounded p-2 text-blue-400 hover:bg-blue-50"
                       >
                         <Edit className="h-5 w-5" />
                       </button>
                       {product.stockMode === "CREDENTIALS" && (
                         <Link
                           href={`/admin/produtos/${product.id}/credenciais`}
-                          className="mr-2 rounded p-2 text-purple-600 hover:bg-purple-50"
+                          className="mr-2 rounded p-2 text-purple-400 hover:bg-purple-50"
                           title="Gerenciar Credenciais"
                         >
                           <Key className="h-5 w-5" />
@@ -385,7 +385,7 @@ export default function AdminProductsPage() {
                       )}
                       <button
                         onClick={() => requestDelete([product.id])}
-                        className="rounded p-2 text-red-600 hover:bg-red-950"
+                        className="rounded p-2 text-red-400 hover:bg-red-950"
                       >
                         <Trash2 className="h-5 w-5" />
                       </button>
@@ -409,7 +409,7 @@ export default function AdminProductsPage() {
                   type="checkbox"
                   checked={selectedIds.size === filteredProducts.length && filteredProducts.length > 0}
                   onChange={toggleSelectAll}
-                  className="h-4 w-4 rounded border-slate-700 text-red-600 focus:ring-red-500"
+                  className="h-4 w-4 rounded border-slate-700 text-red-400 focus:ring-red-500"
                 />
                 Selecionar todos
               </label>
@@ -470,7 +470,7 @@ export default function AdminProductsPage() {
                           type="checkbox"
                           checked={selectedIds.has(product.id)}
                           onChange={() => toggleSelect(product.id)}
-                          className="h-4 w-4 rounded border-slate-700 text-red-600 focus:ring-red-500"
+                          className="h-4 w-4 rounded border-slate-700 text-red-400 focus:ring-red-500"
                         />
                       </td>
                       <td className="px-6 py-4">
@@ -507,7 +507,7 @@ export default function AdminProductsPage() {
                       <td className="px-6 py-4 text-right">
                         <button
                           onClick={() => requestDelete([product.id])}
-                          className="flex items-center gap-1.5 rounded-lg border border-red-200 px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-950"
+                          className="flex items-center gap-1.5 rounded-lg border border-red-200 px-3 py-1.5 text-sm font-medium text-red-400 hover:bg-red-950"
                         >
                           <Trash2 className="h-4 w-4" />
                           Excluir
@@ -696,16 +696,16 @@ export default function AdminProductsPage() {
 
               {/* Credenciais: link para gerenciar */}
               {formData.stockMode === "CREDENTIALS" && (
-                <div className="rounded-xl border border-amber-200 bg-amber-50 p-3">
+                <div className="rounded-xl border border-amber-700/50 bg-amber-900/30 p-3">
                   {editingProduct ? (
                     <Link
                       href={`/admin/produtos/${editingProduct.id}/credenciais`}
-                      className="inline-flex items-center gap-1.5 text-sm font-medium text-amber-700 hover:underline"
+                      className="inline-flex items-center gap-1.5 text-sm font-medium text-amber-300 hover:underline"
                     >
                       <Key className="h-4 w-4" /> Gerenciar Credenciais →
                     </Link>
                   ) : (
-                    <p className="text-sm text-amber-700">
+                    <p className="text-sm text-amber-300">
                       Salve o produto para adicionar credenciais (senhas/logins individuais).
                     </p>
                   )}
@@ -743,8 +743,8 @@ export default function AdminProductsPage() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-4 flex items-start gap-3">
-              <div className="rounded-full bg-red-100 p-2.5">
-                <AlertTriangle className="h-5 w-5 text-red-600" />
+              <div className="rounded-full bg-red-900/40 p-2.5">
+                <AlertTriangle className="h-5 w-5 text-red-400" />
               </div>
               <div>
                 <h2 className="text-lg font-bold text-slate-100">

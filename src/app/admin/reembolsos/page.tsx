@@ -140,9 +140,9 @@ export default function AdminRefundsPage() {
   const getStatusBadge = (status: string) => {
     const statusConfig = {
       PENDING: { bg: "bg-yellow-100", text: "text-yellow-800", icon: Clock },
-      APPROVED: { bg: "bg-blue-100", text: "text-blue-800", icon: Check },
-      REJECTED: { bg: "bg-red-100", text: "text-red-800", icon: X },
-      COMPLETED: { bg: "bg-green-100", text: "text-green-800", icon: CheckCircle },
+      APPROVED: { bg: "bg-blue-900/40", text: "text-blue-800", icon: Check },
+      REJECTED: { bg: "bg-red-900/40", text: "text-red-800", icon: X },
+      COMPLETED: { bg: "bg-green-900/40", text: "text-green-800", icon: CheckCircle },
     };
 
     const config = statusConfig[status as keyof typeof statusConfig] || statusConfig.PENDING;

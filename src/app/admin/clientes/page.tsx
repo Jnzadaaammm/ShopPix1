@@ -221,7 +221,7 @@ export default function AdminCustomersPage() {
                     </td>
                     <td className="px-6 py-4">
                       {user.isAdmin ? (
-                        <span className="inline-flex items-center gap-1 rounded-full bg-purple-100 px-2 py-1 text-xs font-medium text-purple-800">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-purple-900/40 px-2 py-1 text-xs font-medium text-purple-800">
                           <Shield className="h-3 w-3" /> Admin
                         </span>
                       ) : (
@@ -233,7 +233,7 @@ export default function AdminCustomersPage() {
                     <td className="px-6 py-4 text-right">
                       <button
                         onClick={() => setSelectedUser(user)}
-                        className="rounded-lg border px-3 py-1 text-sm text-blue-600 hover:bg-blue-50"
+                        className="rounded-lg border border-slate-800 bg-slate-900 px-3 py-1 text-sm text-blue-400 hover:bg-blue-50"
                       >
                         Ver Detalhes
                       </button>
@@ -280,7 +280,7 @@ export default function AdminCustomersPage() {
                 <p className="text-xs text-slate-400">Pedidos</p>
               </div>
               <div className="rounded-lg bg-slate-900 p-4 text-center">
-                <p className="text-2xl font-bold text-green-600">{formatCurrency(getUserRevenue(selectedUser.id))}</p>
+                <p className="text-2xl font-bold text-green-400">{formatCurrency(getUserRevenue(selectedUser.id))}</p>
                 <p className="text-xs text-slate-400">Total Gasto</p>
               </div>
               <div className="rounded-lg bg-slate-900 p-4 text-center">
@@ -308,8 +308,8 @@ export default function AdminCustomersPage() {
                       <div className="text-right">
                         <p className="text-sm font-medium">{formatCurrency(order.total)}</p>
                         <span className={`text-xs ${
-                          order.status === "PAID" ? "text-green-600" :
-                          order.status === "PENDING" ? "text-yellow-600" : "text-red-600"
+                          order.status === "PAID" ? "text-green-400" :
+                          order.status === "PENDING" ? "text-yellow-600" : "text-red-400"
                         }`}>
                           {order.status}
                         </span>
@@ -320,7 +320,7 @@ export default function AdminCustomersPage() {
               </div>
             </div>
 
-            <div className="flex items-center justify-between rounded-lg border p-4">
+            <div className="flex items-center justify-between rounded-lg border border-slate-800 p-4">
               <div>
                 <p className="font-medium text-slate-100">Acesso de Administrador</p>
                 <p className="text-sm text-slate-400">
@@ -332,8 +332,8 @@ export default function AdminCustomersPage() {
                 disabled={updating}
                 className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
                   selectedUser.isAdmin
-                    ? "bg-red-50 text-red-600 hover:bg-red-100"
-                    : "bg-purple-50 text-purple-600 hover:bg-purple-100"
+                    ? "bg-red-50 text-red-400 hover:bg-red-900/40"
+                    : "bg-purple-50 text-purple-400 hover:bg-purple-900/40"
                 } disabled:opacity-50`}
               >
                 {selectedUser.isAdmin ? (
@@ -345,7 +345,7 @@ export default function AdminCustomersPage() {
             </div>
 
             {/* Seletor de Cargos (múltiplos) */}
-            <div className="rounded-lg border p-4">
+            <div className="rounded-lg border border-slate-800 p-4">
               <div className="mb-3 flex items-center gap-2">
                 <Crown className="h-5 w-5 text-brand-400" />
                 <p className="font-medium text-slate-100">Cargos do Usuário</p>

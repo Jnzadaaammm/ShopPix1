@@ -231,14 +231,14 @@ export default function AdminCategoriesPage() {
           onClick={() => setActiveTab("excluir")}
           className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-colors ${
             activeTab === "excluir"
-              ? "border-b-2 border-red-600 text-red-600"
+              ? "border-b-2 border-red-600 text-red-400"
               : "text-slate-400 hover:text-slate-300"
           }`}
         >
           <Trash2 className="h-4 w-4" />
           Excluir
           {selectedIds.size > 0 && (
-            <span className="ml-1 rounded-full bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-700">
+            <span className="ml-1 rounded-full bg-red-900/40 px-2 py-0.5 text-xs font-semibold text-red-700">
               {selectedIds.size}
             </span>
           )}
@@ -285,13 +285,13 @@ export default function AdminCategoriesPage() {
                     <td className="px-6 py-4 text-right">
                       <button
                         onClick={() => openModal(category)}
-                        className="mr-2 rounded p-2 text-blue-600 hover:bg-blue-50"
+                        className="mr-2 rounded p-2 text-blue-400 hover:bg-blue-50"
                       >
                         <Edit className="h-5 w-5" />
                       </button>
                       <button
                         onClick={() => requestDelete([category.id])}
-                        className="rounded p-2 text-red-600 hover:bg-red-950"
+                        className="rounded p-2 text-red-400 hover:bg-red-950"
                       >
                         <Trash2 className="h-5 w-5" />
                       </button>
@@ -315,7 +315,7 @@ export default function AdminCategoriesPage() {
                   type="checkbox"
                   checked={selectedIds.size === (categories || []).length && (categories || []).length > 0}
                   onChange={toggleSelectAll}
-                  className="h-4 w-4 rounded border-slate-700 text-red-600 focus:ring-red-500"
+                  className="h-4 w-4 rounded border-slate-700 text-red-400 focus:ring-red-500"
                 />
                 Selecionar todas
               </label>
@@ -373,7 +373,7 @@ export default function AdminCategoriesPage() {
                           type="checkbox"
                           checked={selectedIds.has(category.id)}
                           onChange={() => toggleSelect(category.id)}
-                          className="h-4 w-4 rounded border-slate-700 text-red-600 focus:ring-red-500"
+                          className="h-4 w-4 rounded border-slate-700 text-red-400 focus:ring-red-500"
                         />
                       </td>
                       <td className="px-6 py-4 font-medium text-slate-100">
@@ -383,7 +383,7 @@ export default function AdminCategoriesPage() {
                       <td className="px-6 py-4">
                         <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-medium ${
                           (category._count?.products || 0) > 0
-                            ? "bg-amber-50 text-amber-700"
+                            ? "bg-amber-900/30 text-amber-300"
                             : "bg-slate-900 text-slate-400"
                         }`}>
                           {category._count?.products || 0} produto(s)
@@ -392,7 +392,7 @@ export default function AdminCategoriesPage() {
                       <td className="px-6 py-4 text-right">
                         <button
                           onClick={() => requestDelete([category.id])}
-                          className="flex items-center gap-1.5 rounded-lg border border-red-200 px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-950"
+                          className="flex items-center gap-1.5 rounded-lg border border-red-200 px-3 py-1.5 text-sm font-medium text-red-400 hover:bg-red-950"
                         >
                           <Trash2 className="h-4 w-4" />
                           Excluir
@@ -429,7 +429,7 @@ export default function AdminCategoriesPage() {
                       slug: generateSlug(e.target.value),
                     });
                   }}
-                  className="mt-1 w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="mt-1 w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
               <div>
@@ -443,7 +443,7 @@ export default function AdminCategoriesPage() {
                   onChange={(e) =>
                     setFormData({ ...formData, slug: e.target.value })
                   }
-                  className="mt-1 w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="mt-1 w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
               <div>
@@ -456,7 +456,7 @@ export default function AdminCategoriesPage() {
                     setFormData({ ...formData, description: e.target.value })
                   }
                   rows={3}
-                  className="mt-1 w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="mt-1 w-full rounded-lg border border-slate-800 bg-slate-900 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
               <div className="flex justify-end gap-3">
@@ -487,8 +487,8 @@ export default function AdminCategoriesPage() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-4 flex items-start gap-3">
-              <div className="rounded-full bg-red-100 p-2.5">
-                <AlertTriangle className="h-5 w-5 text-red-600" />
+              <div className="rounded-full bg-red-900/40 p-2.5">
+                <AlertTriangle className="h-5 w-5 text-red-400" />
               </div>
               <div>
                 <h2 className="text-lg font-bold text-slate-100">
@@ -509,7 +509,7 @@ export default function AdminCategoriesPage() {
                 <div key={cat.id} className="flex items-center justify-between text-sm">
                   <span className="font-medium text-slate-100">{cat.name}</span>
                   {(cat._count?.products || 0) > 0 && (
-                    <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-700">
+                    <span className="rounded-full bg-amber-900/40 px-2 py-0.5 text-xs font-medium text-amber-300">
                       {cat._count?.products} produto(s)
                     </span>
                   )}

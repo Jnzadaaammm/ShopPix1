@@ -224,7 +224,7 @@ export default function AdminOrdersPage() {
       {/* Banner: pedidos aguardando aprovação (só dono vê) */}
       {isOwner && awaitingApprovalCount > 0 && (
         <div className="mb-6 flex items-center gap-3 rounded-lg border border-blue-200 bg-blue-50 p-4">
-          <Clock className="h-5 w-5 flex-shrink-0 text-blue-600" />
+          <Clock className="h-5 w-5 flex-shrink-0 text-blue-400" />
           <div>
             <p className="font-medium text-blue-900">
               {awaitingApprovalCount} pedido(s) aguardando sua aprovação
@@ -281,7 +281,7 @@ export default function AdminOrdersPage() {
                       {getStatusLabel(order.status)}
                     </span>
                     {order.status === "AWAITING_APPROVAL" && (
-                      <span className="ml-1 inline-flex items-center rounded-full bg-blue-100 px-1.5 py-0.5 text-[10px] font-bold text-blue-700">
+                      <span className="ml-1 inline-flex items-center rounded-full bg-blue-900/40 px-1.5 py-0.5 text-[10px] font-bold text-blue-700">
                         ⚡
                       </span>
                     )}
@@ -292,7 +292,7 @@ export default function AdminOrdersPage() {
                   <td className="px-6 py-4 text-right">
                     <button
                       onClick={() => setSelectedOrder(order)}
-                      className="rounded-lg border px-3 py-1 text-sm text-blue-600 hover:bg-blue-50"
+                      className="rounded-lg border border-slate-800 bg-slate-900 px-3 py-1 text-sm text-blue-400 hover:bg-blue-50"
                     >
                       Ver Detalhes
                     </button>
@@ -313,7 +313,7 @@ export default function AdminOrdersPage() {
               <button
                 onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                 disabled={currentPageSafe === 1}
-                className="rounded-lg border px-3 py-1.5 text-sm disabled:opacity-40 hover:bg-slate-900"
+                className="rounded-lg border border-slate-800 bg-slate-900 px-3 py-1.5 text-sm disabled:opacity-40 hover:bg-slate-900"
                 aria-label="Página anterior"
               >
                 <ChevronLeft className="h-4 w-4" />
@@ -321,7 +321,7 @@ export default function AdminOrdersPage() {
               <button
                 onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                 disabled={currentPageSafe === totalPages}
-                className="rounded-lg border px-3 py-1.5 text-sm disabled:opacity-40 hover:bg-slate-900"
+                className="rounded-lg border border-slate-800 bg-slate-900 px-3 py-1.5 text-sm disabled:opacity-40 hover:bg-slate-900"
                 aria-label="Próxima página"
               >
                 <ChevronRight className="h-4 w-4" />
@@ -368,7 +368,7 @@ export default function AdminOrdersPage() {
             {/* Aviso aguardando aprovação */}
             {selectedOrder.status === "AWAITING_APPROVAL" && (
               <div className="mb-6 flex items-start gap-3 rounded-lg border border-blue-200 bg-blue-50 p-4">
-                <AlertCircle className="h-5 w-5 flex-shrink-0 text-blue-600" />
+                <AlertCircle className="h-5 w-5 flex-shrink-0 text-blue-400" />
                 <div>
                   <p className="font-medium text-blue-900">Pagamento confirmado — aguardando sua aprovação</p>
                   <p className="text-sm text-blue-700">
@@ -380,7 +380,7 @@ export default function AdminOrdersPage() {
 
             {/* Comprovante PIX */}
             {selectedOrder.paymentMethod === "pix" && (
-              <div className="mb-6 rounded-lg border bg-slate-900 p-4">
+              <div className="mb-6 rounded-lg border border-slate-800 bg-slate-900 p-4">
                 <h3 className="mb-3 font-semibold text-slate-100">Comprovante PIX</h3>
                 {selectedOrder.paymentProof ? (
                   <img
@@ -451,7 +451,7 @@ export default function AdminOrdersPage() {
                     <button
                       onClick={() => setRejectMode(true)}
                       disabled={actionLoading !== null}
-                      className="flex items-center gap-2 rounded-lg border border-red-300 bg-slate-950 px-5 py-2.5 text-sm font-medium text-red-600 hover:bg-red-950 disabled:opacity-50"
+                      className="flex items-center gap-2 rounded-lg border border-red-300 bg-slate-950 px-5 py-2.5 text-sm font-medium text-red-400 hover:bg-red-950 disabled:opacity-50"
                     >
                       <X className="h-4 w-4" />
                       Rejeitar
