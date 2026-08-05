@@ -44,14 +44,18 @@ export default function ImageWithFallback({
     }
   }, [src]);
 
-  if (error) {
+  if (error || !src) {
     return (
       <div
         className={`flex items-center justify-center bg-gray-100 ${fallbackClassName || className || ""}`}
         role="img"
         aria-label={alt}
       >
-        <Package className="h-10 w-10 text-gray-400" />
+        <img
+          src="/logo.svg"
+          alt="ShopPix"
+          className="h-full w-full object-contain p-4"
+        />
       </div>
     );
   }
