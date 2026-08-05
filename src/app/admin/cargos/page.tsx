@@ -285,7 +285,7 @@ export default function AdminRolesPage() {
                   </button>
                   <button
                     onClick={() => handleDelete(role)}
-                    className="rounded-lg p-1.5 text-slate-500 hover:bg-red-50 hover:text-red-500"
+                    className="rounded-lg p-1.5 text-slate-500 hover:bg-red-950 hover:text-red-500"
                     aria-label="Remover"
                   >
                     <Trash2 className="h-4 w-4" />
@@ -337,7 +337,7 @@ export default function AdminRolesPage() {
                   </button>
                   <button
                     onClick={() => handleDelete(role)}
-                    className="rounded-lg p-1.5 text-slate-500 hover:bg-red-50 hover:text-red-500"
+                    className="rounded-lg p-1.5 text-slate-500 hover:bg-red-950 hover:text-red-500"
                     aria-label="Remover"
                   >
                     <Trash2 className="h-4 w-4" />

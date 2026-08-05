@@ -153,7 +153,7 @@ export default function AdminCouponsPage() {
         </button>
       </div>
 
-      <div className="rounded-xl border bg-slate-950 shadow-sm overflow-hidden">
+      <div className="card overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="border-b bg-slate-900">
@@ -207,7 +207,7 @@ export default function AdminCouponsPage() {
                     <button onClick={() => openModal(coupon)} className="mr-2 rounded p-2 text-blue-600 hover:bg-blue-50">
                       <Edit className="h-4 w-4" />
                     </button>
-                    <button onClick={() => handleDelete(coupon.id)} className="rounded p-2 text-red-600 hover:bg-red-50">
+                    <button onClick={() => handleDelete(coupon.id)} className="rounded p-2 text-red-600 hover:bg-red-950">
                       <Trash2 className="h-4 w-4" />
                     </button>
                   </td>

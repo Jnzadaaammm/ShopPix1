@@ -242,7 +242,7 @@ export default function AdminOrdersPage() {
         </div>
       )}
 
-      <div className="rounded-lg border bg-slate-950 shadow-sm">
+      <div className="card">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="border-b bg-slate-900">
@@ -259,7 +259,7 @@ export default function AdminOrdersPage() {
               {paginatedOrders.length === 0 ? (
                 <tr>
                   <td colSpan={6} className="px-6 py-16 text-center">
-                    <Package className="mx-auto h-12 w-12 text-gray-300" />
+                    <Package className="mx-auto h-12 w-12 text-slate-500" />
                     <p className="mt-4 text-slate-400">Nenhum pedido encontrado com estes filtros.</p>
                   </td>
                 </tr>
@@ -451,7 +451,7 @@ export default function AdminOrdersPage() {
                     <button
                       onClick={() => setRejectMode(true)}
                       disabled={actionLoading !== null}
-                      className="flex items-center gap-2 rounded-lg border border-red-300 bg-slate-950 px-5 py-2.5 text-sm font-medium text-red-600 hover:bg-red-50 disabled:opacity-50"
+                      className="flex items-center gap-2 rounded-lg border border-red-300 bg-slate-950 px-5 py-2.5 text-sm font-medium text-red-600 hover:bg-red-950 disabled:opacity-50"
                     >
                       <X className="h-4 w-4" />
                       Rejeitar

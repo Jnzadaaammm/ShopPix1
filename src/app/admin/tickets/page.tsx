@@ -360,7 +360,7 @@ export default function AdminTicketsPage() {
         </div>
       ) : filteredTickets.length === 0 ? (
         <div className="card py-20 text-center">
-          <MessageCircle className="mx-auto h-16 w-16 text-gray-300" />
+          <MessageCircle className="mx-auto h-16 w-16 text-slate-500" />
           <p className="mt-4 text-slate-400">Nenhum ticket encontrado.</p>
         </div>
       ) : (

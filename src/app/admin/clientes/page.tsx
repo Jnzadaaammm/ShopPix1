@@ -175,7 +175,7 @@ export default function AdminCustomersPage() {
         </div>
       </div>
 
-      <div className="rounded-xl border bg-slate-950 shadow-sm overflow-hidden">
+      <div className="card overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="border-b bg-slate-900">

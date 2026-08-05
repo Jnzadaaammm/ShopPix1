@@ -160,22 +160,22 @@ export default function AdminCredentialsPage() {
 
       {/* Stats */}
       <div className="mb-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
-        <div className="rounded-xl border bg-slate-950 p-4 shadow-sm text-center">
+        <div className="card p-4 text-center">
           <CheckCircle className="mx-auto h-6 w-6 text-green-500 mb-1" />
           <p className="text-2xl font-bold text-slate-100">{stats.available}</p>
           <p className="text-xs text-slate-400">Disponíveis</p>
         </div>
-        <div className="rounded-xl border bg-slate-950 p-4 shadow-sm text-center">
+        <div className="card p-4 text-center">
           <Key className="mx-auto h-6 w-6 text-blue-500 mb-1" />
           <p className="text-2xl font-bold text-slate-100">{stats.sold}</p>
           <p className="text-xs text-slate-400">Vendidas</p>
         </div>
-        <div className="rounded-xl border bg-slate-950 p-4 shadow-sm text-center">
+        <div className="card p-4 text-center">
           <AlertCircle className="mx-auto h-6 w-6 text-yellow-500 mb-1" />
           <p className="text-2xl font-bold text-slate-100">{stats.reserved}</p>
           <p className="text-xs text-slate-400">Reservadas</p>
         </div>
-        <div className="rounded-xl border bg-slate-950 p-4 shadow-sm text-center">
+        <div className="card p-4 text-center">
           <Key className="mx-auto h-6 w-6 text-slate-500 mb-1" />
           <p className="text-2xl font-bold text-slate-100">{stats.total}</p>
           <p className="text-xs text-slate-400">Total</p>
@@ -210,10 +210,10 @@ export default function AdminCredentialsPage() {
       </div>
 
       {/* Lista */}
-      <div className="rounded-xl border bg-slate-950 shadow-sm overflow-hidden">
+      <div className="card overflow-hidden">
         {credentials.length === 0 ? (
           <div className="py-16 text-center">
-            <Key className="mx-auto h-12 w-12 text-gray-300" />
+            <Key className="mx-auto h-12 w-12 text-slate-500" />
             <p className="mt-4 text-slate-400">Nenhuma credencial cadastrada.</p>
             <button
               onClick={() => setShowAddModal(true)}
@@ -249,7 +249,7 @@ export default function AdminCredentialsPage() {
                 {cred.status === "AVAILABLE" && (
                   <button
                     onClick={() => handleDelete(cred.id)}
-                    className="rounded p-1.5 text-red-500 hover:bg-red-50"
+                    className="rounded p-1.5 text-red-500 hover:bg-red-950"
                   >
                     <Trash2 className="h-4 w-4" />
                   </button>

@@ -247,7 +247,7 @@ export default function AdminCategoriesPage() {
 
       {/* ABA: CATEGORIAS (listagem padrão) */}
       {activeTab === "categorias" && (
-        <div className="rounded-lg border bg-slate-950 shadow-sm">
+        <div className="card">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead className="border-b bg-slate-900">
@@ -291,7 +291,7 @@ export default function AdminCategoriesPage() {
                       </button>
                       <button
                         onClick={() => requestDelete([category.id])}
-                        className="rounded p-2 text-red-600 hover:bg-red-50"
+                        className="rounded p-2 text-red-600 hover:bg-red-950"
                       >
                         <Trash2 className="h-5 w-5" />
                       </button>
@@ -306,7 +306,7 @@ export default function AdminCategoriesPage() {
 
       {/* ABA: EXCLUIR (deletar em lote) */}
       {activeTab === "excluir" && (
-        <div className="rounded-lg border bg-slate-950 shadow-sm">
+        <div className="card">
           {/* Barra de ações em lote */}
           <div className="flex items-center justify-between border-b bg-slate-900 px-6 py-3">
             <div className="flex items-center gap-4">
@@ -392,7 +392,7 @@ export default function AdminCategoriesPage() {
                       <td className="px-6 py-4 text-right">
                         <button
                           onClick={() => requestDelete([category.id])}
-                          className="flex items-center gap-1.5 rounded-lg border border-red-200 px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-50"
+                          className="flex items-center gap-1.5 rounded-lg border border-red-200 px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-950"
                         >
                           <Trash2 className="h-4 w-4" />
                           Excluir

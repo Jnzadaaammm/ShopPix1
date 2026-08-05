@@ -144,7 +144,7 @@ export default function AdminReportsPage() {
       {/* Summary Stats */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
-          <div key={stat.title} className="rounded-xl border bg-slate-950 p-5 shadow-sm">
+          <div key={stat.title} className="card p-5">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-sm font-medium text-slate-400">{stat.title}</p>
@@ -160,7 +160,7 @@ export default function AdminReportsPage() {
       </div>
 
       {/* Gráfico de Receita */}
-      <div className="mt-6 rounded-xl border bg-slate-950 p-6 shadow-sm">
+      <div className="mt-6 card p-6">
         <h2 className="mb-4 text-lg font-semibold text-slate-100">Receita Diária</h2>
         <div className="flex items-end justify-between gap-1 h-64">
           {data.dailyData.map((day, i) => (
@@ -173,7 +173,7 @@ export default function AdminReportsPage() {
                     minHeight: day.revenue > 0 ? "4px" : "1px",
                   }}
                 >
-                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 hidden group-hover:block whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white z-10">
+                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 hidden group-hover:block whitespace-nowrap rounded bg-slate-950 px-2 py-1 text-xs text-white z-10">
                     {formatCurrency(day.revenue)}
                   </div>
                 </div>
@@ -190,7 +190,7 @@ export default function AdminReportsPage() {
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
         {/* Vendas por Categoria */}
-        <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
+        <div className="card p-6">
           <h2 className="mb-4 text-lg font-semibold text-slate-100">Vendas por Categoria</h2>
           {data.categorySales.length === 0 ? (
             <p className="text-slate-400 text-sm">Nenhuma venda no período</p>
@@ -216,7 +216,7 @@ export default function AdminReportsPage() {
         </div>
 
         {/* Métodos de Pagamento */}
-        <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
+        <div className="card p-6">
           <h2 className="mb-4 text-lg font-semibold text-slate-100">Métodos de Pagamento</h2>
           {data.paymentMethods.length === 0 ? (
             <p className="text-slate-400 text-sm">Nenhum pagamento no período</p>
@@ -255,7 +255,7 @@ export default function AdminReportsPage() {
       </div>
 
       {/* Status dos Pedidos */}
-      <div className="mt-6 rounded-xl border bg-slate-950 p-6 shadow-sm">
+      <div className="mt-6 card p-6">
         <h2 className="mb-4 text-lg font-semibold text-slate-100">Status dos Pedidos</h2>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           {Object.entries(data.statusCounts).map(([status, count]) => (
@@ -274,7 +274,7 @@ export default function AdminReportsPage() {
       </div>
 
       {/* Top Produtos */}
-      <div className="mt-6 rounded-xl border bg-slate-950 p-6 shadow-sm">
+      <div className="mt-6 card p-6">
         <h2 className="mb-4 text-lg font-semibold text-slate-100">Top 10 Produtos</h2>
         {data.productSales.length === 0 ? (
           <p className="text-slate-400 text-sm">Nenhuma venda no período</p>

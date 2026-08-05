@@ -123,7 +123,7 @@ export default function AdminSettingsPage() {
       </div>
 
       {/* === Informações da Loja === */}
-      <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
+      <div className="card p-6">
         <div className="mb-4 flex items-center gap-2">
           <div className="rounded-lg bg-slate-800 p-2">
             <Store className="h-5 w-5 text-brand-400" />
@@ -178,7 +178,7 @@ export default function AdminSettingsPage() {
       </div>
 
       {/* === Métodos de Pagamento === */}
-      <div className="mt-6 rounded-xl border bg-slate-950 p-6 shadow-sm">
+      <div className="mt-6 card p-6">
         <div className="mb-4 flex items-center gap-2">
           <div className="rounded-lg bg-green-100 p-2">
             <CreditCard className="h-5 w-5 text-green-600" />
@@ -225,7 +225,7 @@ export default function AdminSettingsPage() {
                       })
                     }
                     className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors ${
-                      enabled ? "bg-brand-600" : "bg-gray-300"
+                      enabled ? "bg-brand-600" : "bg-slate-600"
                     }`}
                   >
                     <span
@@ -262,7 +262,7 @@ export default function AdminSettingsPage() {
       </div>
 
       {/* === Configurações de Pedido === */}
-      <div className="mt-6 rounded-xl border bg-slate-950 p-6 shadow-sm">
+      <div className="mt-6 card p-6">
         <div className="mb-4 flex items-center gap-2">
           <div className="rounded-lg bg-orange-100 p-2">
             <Clock className="h-5 w-5 text-orange-600" />
@@ -312,7 +312,7 @@ export default function AdminSettingsPage() {
                 aria-checked={settings.autoApproveStripe}
                 onClick={() => setSettings({ ...settings, autoApproveStripe: !settings.autoApproveStripe })}
                 className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors ${
-                  settings.autoApproveStripe ? "bg-brand-600" : "bg-gray-300"
+                  settings.autoApproveStripe ? "bg-brand-600" : "bg-slate-600"
                 }`}
               >
                 <span
@@ -339,7 +339,7 @@ export default function AdminSettingsPage() {
                 aria-checked={settings.autoApprovePaypal}
                 onClick={() => setSettings({ ...settings, autoApprovePaypal: !settings.autoApprovePaypal })}
                 className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors ${
-                  settings.autoApprovePaypal ? "bg-brand-600" : "bg-gray-300"
+                  settings.autoApprovePaypal ? "bg-brand-600" : "bg-slate-600"
                 }`}
               >
                 <span
@@ -354,7 +354,7 @@ export default function AdminSettingsPage() {
       </div>
 
       {/* === Notificações Discord === */}
-      <div className="mt-6 rounded-xl border bg-slate-950 p-6 shadow-sm">
+      <div className="mt-6 card p-6">
         <div className="mb-4 flex items-center gap-2">
           <div className="rounded-lg bg-purple-100 p-2">
             <Bell className="h-5 w-5 text-purple-600" />

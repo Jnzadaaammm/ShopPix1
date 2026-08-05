@@ -159,7 +159,7 @@ function AdminDashboard() {
       {/* Stats Cards */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
-          <div key={stat.title} className="rounded-xl border bg-slate-950 p-5 shadow-sm">
+          <div key={stat.title} className="card p-5">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-sm font-medium text-slate-400">{stat.title}</p>
@@ -189,7 +189,7 @@ function AdminDashboard() {
       </div>
 
       {/* Gráfico de Receita 7 dias */}
-      <div className="mt-6 rounded-xl border bg-slate-950 p-6 shadow-sm">
+      <div className="mt-6 card p-6">
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-lg font-semibold text-slate-100">Receita - Últimos 7 dias</h2>
           <Link href="/admin/relatorios" className="text-sm text-brand-400 hover:underline">
@@ -204,7 +204,7 @@ function AdminDashboard() {
                   className="w-full rounded-t-md bg-gradient-to-t from-brand-500 to-brand-400 transition-all hover:from-brand-600 hover:to-brand-500 relative group"
                   style={{ height: `${(day.revenue / maxRevenue) * 100}%`, minHeight: day.revenue > 0 ? "8px" : "2px" }}
                 >
-                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 hidden group-hover:block whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white">
+                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 hidden group-hover:block whitespace-nowrap rounded bg-slate-950 px-2 py-1 text-xs text-white">
                     {formatCurrency(day.revenue)}
                   </div>
                 </div>
@@ -219,7 +219,7 @@ function AdminDashboard() {
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
         {/* Pedidos Recentes */}
-        <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
+        <div className="card p-6">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-lg font-semibold text-slate-100">Pedidos Recentes</h2>
             <Link href="/admin/pedidos" className="text-sm text-brand-400 hover:underline">
@@ -272,7 +272,7 @@ function AdminDashboard() {
         {/* Top Produtos + Alertas de Estoque */}
         <div className="space-y-6">
           {/* Top Produtos */}
-          <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
+          <div className="card p-6">
             <h2 className="mb-4 text-lg font-semibold text-slate-100">Produtos Mais Vendidos</h2>
             {dashboard.topProducts.length === 0 ? (
               <p className="text-slate-400 text-sm">Nenhuma venda ainda</p>
@@ -318,7 +318,7 @@ function AdminDashboard() {
 
       {/* Links Rápidos */}
       <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Link href="/admin/produtos" className="flex items-center gap-3 rounded-xl border bg-slate-950 p-4 shadow-sm hover:shadow-md transition-shadow">
+        <Link href="/admin/produtos" className="flex items-center gap-3 card p-4 hover:shadow-md transition-shadow">
           <div className="rounded-lg bg-purple-100 p-2.5">
             <Package className="h-5 w-5 text-purple-600" />
           </div>
@@ -327,7 +327,7 @@ function AdminDashboard() {
             <p className="text-xs text-slate-400">Gerenciar catálogo</p>
           </div>
         </Link>
-        <Link href="/admin/pedidos" className="flex items-center gap-3 rounded-xl border bg-slate-950 p-4 shadow-sm hover:shadow-md transition-shadow">
+        <Link href="/admin/pedidos" className="flex items-center gap-3 card p-4 hover:shadow-md transition-shadow">
           <div className="rounded-lg bg-blue-100 p-2.5">
             <ShoppingCart className="h-5 w-5 text-blue-600" />
           </div>
@@ -336,7 +336,7 @@ function AdminDashboard() {
             <p className="text-xs text-slate-400">{dashboard.pendingOrders} pendentes</p>
           </div>
         </Link>
-        <Link href="/admin/clientes" className="flex items-center gap-3 rounded-xl border bg-slate-950 p-4 shadow-sm hover:shadow-md transition-shadow">
+        <Link href="/admin/clientes" className="flex items-center gap-3 card p-4 hover:shadow-md transition-shadow">
           <div className="rounded-lg bg-pink-100 p-2.5">
             <Users className="h-5 w-5 text-pink-600" />
           </div>
@@ -345,7 +345,7 @@ function AdminDashboard() {
             <p className="text-xs text-slate-400">{dashboard.userCount} cadastrados</p>
           </div>
         </Link>
-        <Link href="/admin/reembolsos" className="flex items-center gap-3 rounded-xl border bg-slate-950 p-4 shadow-sm hover:shadow-md transition-shadow">
+        <Link href="/admin/reembolsos" className="flex items-center gap-3 card p-4 hover:shadow-md transition-shadow">
           <div className="rounded-lg bg-red-100 p-2.5">
             <RefreshCw className="h-5 w-5 text-red-600" />
           </div>

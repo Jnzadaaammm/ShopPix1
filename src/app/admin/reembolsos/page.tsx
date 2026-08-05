@@ -176,7 +176,7 @@ export default function AdminRefundsPage() {
         </p>
       </div>
 
-      <div className="rounded-lg border bg-slate-950 shadow-sm">
+      <div className="card">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="border-b bg-slate-900">
