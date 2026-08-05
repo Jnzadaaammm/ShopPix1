@@ -129,7 +129,7 @@ export async function POST(request: Request) {
     ? (subtotal * roleDiscountPercent) / 100
     : 0;
 
-  const total = Math.max(0, subtotal - discount - roleDiscountAmount);
+  const total = Math.max(0.01, subtotal - discount - roleDiscountAmount);
 
   // Criar pedido + decrementar estoque + incrementar cupom em transação
   const order = await prisma.$transaction(async (tx) => {
