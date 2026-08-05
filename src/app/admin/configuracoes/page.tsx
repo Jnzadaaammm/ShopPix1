@@ -1,36 +1,60 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Store, Mail, CreditCard, Save, Check, QrCode, AlertCircle } from "lucide-react";
+import {
+  Store, Mail, CreditCard, Save, Check, QrCode, AlertCircle,
+  Bell, Clock, Settings, Zap,
+} from "lucide-react";
 import PermissionGuard from "@/components/admin/PermissionGuard";
 
-interface PaymentSettings {
+interface AllSettings {
   stripeEnabled: boolean;
   paypalEnabled: boolean;
   pixEnabled: boolean;
   pixKey: string;
+  storeName: string;
+  storeDescription: string;
+  supportEmail: string;
+  discordWebhookUrl: string;
+  pixExpirationHours: string;
+  autoApproveStripe: boolean;
+  autoApprovePaypal: boolean;
 }
 
 export default function AdminSettingsPage() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [paymentSettings, setPaymentSettings] = useState<PaymentSettings>({
+  const [settings, setSettings] = useState<AllSettings>({
     stripeEnabled: true,
     paypalEnabled: true,
     pixEnabled: true,
     pixKey: "",
+    storeName: "ShopPix",
+    storeDescription: "",
+    supportEmail: "",
+    discordWebhookUrl: "",
+    pixExpirationHours: "24",
+    autoApproveStripe: false,
+    autoApprovePaypal: false,
   });
 
   useEffect(() => {
     fetch("/api/settings")
       .then((r) => r.json())
       .then((data) => {
-        setPaymentSettings({
+        setSettings({
           stripeEnabled: data.stripeEnabled ?? true,
           paypalEnabled: data.paypalEnabled ?? true,
           pixEnabled: data.pixEnabled ?? true,
           pixKey: data.pixKey || "",
+          storeName: data.storeName || "ShopPix",
+          storeDescription: data.storeDescription || "",
+          supportEmail: data.supportEmail || "",
+          discordWebhookUrl: data.discordWebhookUrl || "",
+          pixExpirationHours: data.pixExpirationHours || "24",
+          autoApproveStripe: data.autoApproveStripe ?? false,
+          autoApprovePaypal: data.autoApprovePaypal ?? false,
         });
         setLoading(false);
       })
@@ -43,7 +67,7 @@ export default function AdminSettingsPage() {
       const res = await fetch("/api/settings", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(paymentSettings),
+        body: JSON.stringify(settings),
       });
       if (res.ok) {
         setSaved(true);
@@ -84,6 +108,8 @@ export default function AdminSettingsPage() {
     brand: "bg-brand-100 text-brand-600",
     green: "bg-green-100 text-green-600",
     blue: "bg-blue-100 text-blue-600",
+    purple: "bg-purple-100 text-purple-600",
+    orange: "bg-orange-100 text-orange-600",
   };
 
   return (
@@ -94,8 +120,63 @@ export default function AdminSettingsPage() {
         <p className="mt-2 text-gray-600">Gerencie as configurações da sua loja</p>
       </div>
 
-      {/* Métodos de Pagamento */}
+      {/* === Informações da Loja === */}
       <div className="rounded-xl border bg-white p-6 shadow-sm">
+        <div className="mb-4 flex items-center gap-2">
+          <div className="rounded-lg bg-brand-100 p-2">
+            <Store className="h-5 w-5 text-brand-600" />
+          </div>
+          <div>
+            <h2 className="text-lg font-semibold text-gray-900">Informações da Loja</h2>
+            <p className="text-sm text-gray-500">Nome, descrição e contato exibidos no site</p>
+          </div>
+        </div>
+
+        {loading ? (
+          <div className="space-y-3">
+            {[1, 2].map((i) => (
+              <div key={i} className="h-12 animate-pulse rounded-lg bg-gray-100" />
+            ))}
+          </div>
+        ) : (
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Nome da Loja</label>
+              <input
+                type="text"
+                value={settings.storeName}
+                onChange={(e) => setSettings({ ...settings, storeName: e.target.value })}
+                className="mt-1 w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+                placeholder="ShopPix"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Descrição</label>
+              <textarea
+                value={settings.storeDescription}
+                onChange={(e) => setSettings({ ...settings, storeDescription: e.target.value })}
+                className="mt-1 w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+                rows={2}
+                placeholder="Compre produtos digitais com segurança. Entrega imediata."
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Email de Suporte</label>
+              <input
+                type="email"
+                value={settings.supportEmail}
+                onChange={(e) => setSettings({ ...settings, supportEmail: e.target.value })}
+                className="mt-1 w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+                placeholder="suporte@sualoja.com"
+              />
+              <p className="mt-1 text-xs text-gray-500">Email exibido para clientes em caso de dúvidas.</p>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* === Métodos de Pagamento === */}
+      <div className="mt-6 rounded-xl border bg-white p-6 shadow-sm">
         <div className="mb-4 flex items-center gap-2">
           <div className="rounded-lg bg-green-100 p-2">
             <CreditCard className="h-5 w-5 text-green-600" />
@@ -116,7 +197,7 @@ export default function AdminSettingsPage() {
           <div className="space-y-3">
             {paymentMethods.map((method) => {
               const Icon = method.icon;
-              const enabled = paymentSettings[method.key];
+              const enabled = settings[method.key];
               return (
                 <label
                   key={method.key}
@@ -131,14 +212,13 @@ export default function AdminSettingsPage() {
                       <p className="text-sm text-gray-500">{method.desc}</p>
                     </div>
                   </div>
-                  {/* Toggle switch */}
                   <button
                     type="button"
                     role="switch"
                     aria-checked={enabled}
                     onClick={() =>
-                      setPaymentSettings({
-                        ...paymentSettings,
+                      setSettings({
+                        ...settings,
                         [method.key]: !enabled,
                       })
                     }
@@ -160,8 +240,8 @@ export default function AdminSettingsPage() {
 
         <div className="mt-4 rounded-lg border bg-gray-50 p-4">
           <p className="text-sm font-medium text-gray-700">Chave PIX</p>
-          {paymentSettings.pixKey ? (
-            <p className="mt-1 break-all font-mono text-sm text-gray-900">{paymentSettings.pixKey}</p>
+          {settings.pixKey ? (
+            <p className="mt-1 break-all font-mono text-sm text-gray-900">{settings.pixKey}</p>
           ) : (
             <p className="mt-1 flex items-center gap-2 text-sm text-amber-700">
               <AlertCircle className="h-4 w-4" /> Chave PIX não configurada no arquivo .env
@@ -179,7 +259,131 @@ export default function AdminSettingsPage() {
         </div>
       </div>
 
-      {/* Botão Salvar */}
+      {/* === Configurações de Pedido === */}
+      <div className="mt-6 rounded-xl border bg-white p-6 shadow-sm">
+        <div className="mb-4 flex items-center gap-2">
+          <div className="rounded-lg bg-orange-100 p-2">
+            <Clock className="h-5 w-5 text-orange-600" />
+          </div>
+          <div>
+            <h2 className="text-lg font-semibold text-gray-900">Configurações de Pedido</h2>
+            <p className="text-sm text-gray-500">Aprovação automática e expiração de PIX</p>
+          </div>
+        </div>
+
+        {loading ? (
+          <div className="space-y-3">
+            <div className="h-16 animate-pulse rounded-lg bg-gray-100" />
+          </div>
+        ) : (
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Expiração de PIX (horas)
+              </label>
+              <input
+                type="number"
+                min="1"
+                max="168"
+                value={settings.pixExpirationHours}
+                onChange={(e) => setSettings({ ...settings, pixExpirationHours: e.target.value })}
+                className="mt-1 w-32 rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+              />
+              <p className="mt-1 text-xs text-gray-500">
+                Pedidos PIX pendentes expiram automaticamente após este período.
+              </p>
+            </div>
+
+            <label className="flex cursor-pointer items-center justify-between rounded-lg border p-4 transition-colors hover:bg-gray-50">
+              <div className="flex items-center gap-3">
+                <div className="rounded-lg bg-green-100 p-2">
+                  <Zap className="h-5 w-5 text-green-600" />
+                </div>
+                <div>
+                  <p className="font-medium text-gray-900">Aprovar Stripe automaticamente</p>
+                  <p className="text-sm text-gray-500">Pula a aprovação manual para pagamentos Stripe confirmados</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                role="switch"
+                aria-checked={settings.autoApproveStripe}
+                onClick={() => setSettings({ ...settings, autoApproveStripe: !settings.autoApproveStripe })}
+                className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors ${
+                  settings.autoApproveStripe ? "bg-brand-600" : "bg-gray-300"
+                }`}
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    settings.autoApproveStripe ? "translate-x-6" : "translate-x-1"
+                  }`}
+                />
+              </button>
+            </label>
+
+            <label className="flex cursor-pointer items-center justify-between rounded-lg border p-4 transition-colors hover:bg-gray-50">
+              <div className="flex items-center gap-3">
+                <div className="rounded-lg bg-blue-100 p-2">
+                  <Zap className="h-5 w-5 text-blue-600" />
+                </div>
+                <div>
+                  <p className="font-medium text-gray-900">Aprovar PayPal automaticamente</p>
+                  <p className="text-sm text-gray-500">Pula a aprovação manual para pagamentos PayPal capturados</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                role="switch"
+                aria-checked={settings.autoApprovePaypal}
+                onClick={() => setSettings({ ...settings, autoApprovePaypal: !settings.autoApprovePaypal })}
+                className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors ${
+                  settings.autoApprovePaypal ? "bg-brand-600" : "bg-gray-300"
+                }`}
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                    settings.autoApprovePaypal ? "translate-x-6" : "translate-x-1"
+                  }`}
+                />
+              </button>
+            </label>
+          </div>
+        )}
+      </div>
+
+      {/* === Notificações Discord === */}
+      <div className="mt-6 rounded-xl border bg-white p-6 shadow-sm">
+        <div className="mb-4 flex items-center gap-2">
+          <div className="rounded-lg bg-purple-100 p-2">
+            <Bell className="h-5 w-5 text-purple-600" />
+          </div>
+          <div>
+            <h2 className="text-lg font-semibold text-gray-900">Notificações Discord</h2>
+            <p className="text-sm text-gray-500">Receba um alerta no Discord quando chegar um pedido novo</p>
+          </div>
+        </div>
+
+        {loading ? (
+          <div className="h-12 animate-pulse rounded-lg bg-gray-100" />
+        ) : (
+          <div>
+            <label className="block text-sm font-medium text-gray-700">URL do Webhook do Discord</label>
+            <input
+              type="url"
+              value={settings.discordWebhookUrl}
+              onChange={(e) => setSettings({ ...settings, discordWebhookUrl: e.target.value })}
+              className="mt-1 w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+              placeholder="https://discord.com/api/webhooks/..."
+            />
+            <p className="mt-2 text-xs text-gray-500">
+              Crie um Webhook em: Configurações do Servidor &gt; Integrações &gt; Webhooks.
+              Copie a URL e cole aqui. Se vazio, usa a variável <code className="rounded bg-gray-200 px-1">DISCORD_ORDERS_WEBHOOK_URL</code> do .env.
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* === Botão Salvar === */}
       <div className="mt-6 flex justify-end">
         <button
           onClick={handleSave}

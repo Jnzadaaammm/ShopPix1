@@ -2,6 +2,7 @@ import { prisma } from "./db";
 import { deliverDigitalProducts } from "./digital-delivery";
 import { checkAndUpgradeRole } from "./roles";
 import { emit, REALTIME_EVENTS } from "./event-bus";
+import { getStoreSettings } from "./settings";
 
 /**
  * Pagamento confirmado pelo gateway. NÃO entrega o produto: o pedido fica
@@ -90,7 +91,12 @@ export async function releaseReservedCredentials(orderId: string) {
  * Libera as credenciais reservadas e marca como EXPIRED.
  */
 export async function expirePendingPixOrders(): Promise<number> {
-  const pixExpirationHours = parseInt(process.env.PIX_EXPIRATION_HOURS || "24");
+  let pixExpirationHours = parseInt(process.env.PIX_EXPIRATION_HOURS || "24");
+  try {
+    const store = await getStoreSettings();
+    const h = parseInt(store.pixExpirationHours);
+    if (!isNaN(h) && h > 0) pixExpirationHours = h;
+  } catch {}
   const cutoff = new Date(Date.now() - pixExpirationHours * 60 * 60 * 1000);
 
   const expired = await prisma.order.findMany({

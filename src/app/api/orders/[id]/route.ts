@@ -10,6 +10,7 @@ import {
   approveAndDeliver,
   releaseReservedCredentials,
 } from "@/lib/order-approval";
+import { getStoreSettings } from "@/lib/settings";
 
 export async function GET(
   _request: Request,
@@ -122,6 +123,13 @@ export async function PATCH(
         );
       }
 
+      // Verificar aprovação automática
+      const store = await getStoreSettings();
+      if (store.autoApproveStripe) {
+        const approved = await approveAndDeliver(order.id, "auto-stripe");
+        return NextResponse.json(approved);
+      }
+
       const updated = await markAwaitingApproval(order.id);
       return NextResponse.json(updated);
     } catch (error) {
@@ -153,6 +161,13 @@ export async function PATCH(
         where: { id: order.id },
         data: { paypalCaptureId: result.paypalCaptureId },
       });
+
+      // Verificar aprovação automática
+      const store = await getStoreSettings();
+      if (store.autoApprovePaypal) {
+        const approved = await approveAndDeliver(order.id, "auto-paypal");
+        return NextResponse.json(approved);
+      }
 
       const updated = await markAwaitingApproval(order.id);
       return NextResponse.json(updated);

@@ -1,11 +1,16 @@
 import { prisma } from "./db";
+import { getStoreSettings } from "./settings";
 
 /**
  * Envia uma notificação via Discord Webhook quando um pedido é criado.
- * Requer a variável de ambiente DISCORD_WEBHOOK_URL.
+ * Usa a URL salva no banco (configurações) ou a variável de ambiente.
  */
 export async function notifyOrderCreated(orderId: string) {
-  const webhookUrl = process.env.DISCORD_ORDERS_WEBHOOK_URL;
+  let webhookUrl = process.env.DISCORD_ORDERS_WEBHOOK_URL;
+  try {
+    const store = await getStoreSettings();
+    if (store.discordWebhookUrl) webhookUrl = store.discordWebhookUrl;
+  } catch {}
   if (!webhookUrl) return;
 
   try {

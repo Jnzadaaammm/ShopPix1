@@ -18,6 +18,29 @@ export interface PaymentSettings {
 }
 
 /**
+ * Configurações gerais da loja (salvas no banco).
+ */
+export const DEFAULT_STORE_SETTINGS = {
+  storeName: "ShopPix",
+  storeDescription: "Compre produtos digitais com segurança. Entrega imediata.",
+  supportEmail: "",
+  discordWebhookUrl: "",
+  pixExpirationHours: "24",
+  autoApproveStripe: false,
+  autoApprovePaypal: false,
+};
+
+export interface StoreSettings {
+  storeName: string;
+  storeDescription: string;
+  supportEmail: string;
+  discordWebhookUrl: string;
+  pixExpirationHours: string;
+  autoApproveStripe: boolean;
+  autoApprovePaypal: boolean;
+}
+
+/**
  * Lê as configurações de pagamento do banco (Setting key-value).
  * Retorna os defaults se não houver configuração salva.
  */
@@ -46,6 +69,55 @@ export async function getPaymentSettings(): Promise<PaymentSettings> {
 export async function savePaymentSettings(settings: Partial<PaymentSettings>): Promise<void> {
   const entries = Object.entries(settings).filter(([key]) =>
     key in DEFAULT_PAYMENT_SETTINGS
+  );
+
+  await Promise.all(
+    entries.map(([key, value]) =>
+      prisma.setting.upsert({
+        where: { key },
+        update: { value: String(value) },
+        create: { key, value: String(value) },
+      })
+    )
+  );
+}
+
+/**
+ * Lê as configurações gerais da loja do banco.
+ */
+export async function getStoreSettings(): Promise<StoreSettings> {
+  const rows = await prisma.setting.findMany({
+    where: {
+      key: {
+        in: Object.keys(DEFAULT_STORE_SETTINGS),
+      },
+    },
+  });
+
+  const settings: StoreSettings = { ...DEFAULT_STORE_SETTINGS };
+  const rowMap = Object.fromEntries(rows.map((r) => [r.key, r.value]));
+  for (const key of Object.keys(DEFAULT_STORE_SETTINGS) as (keyof StoreSettings)[]) {
+    if (rowMap[key] !== undefined) {
+      if (key === "autoApproveStripe" || key === "autoApprovePaypal") {
+        (settings as any)[key] = rowMap[key] === "true";
+      } else {
+        (settings as any)[key] = rowMap[key];
+      }
+    }
+  }
+  // Discord webhook vem do env se não estiver no banco
+  if (!settings.discordWebhookUrl) {
+    settings.discordWebhookUrl = process.env.DISCORD_ORDERS_WEBHOOK_URL || "";
+  }
+  return settings;
+}
+
+/**
+ * Salva as configurações gerais da loja no banco.
+ */
+export async function saveStoreSettings(settings: Partial<StoreSettings>): Promise<void> {
+  const entries = Object.entries(settings).filter(([key]) =>
+    key in DEFAULT_STORE_SETTINGS
   );
 
   await Promise.all(
