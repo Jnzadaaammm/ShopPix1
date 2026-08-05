@@ -138,9 +138,8 @@ export async function POST(request: Request) {
 
   return NextResponse.json({
     success: true,
-    added: newLines.length,
-    duplicates,
-    message: `${newLines.length} credencial(is) adicionada(s)${duplicates > 0 ? `, ${duplicates} duplicada(s) ignorada(s)` : ""}`,
+    added: lines.length,
+    message: `${lines.length} credencial(is) adicionada(s)`,
   });
 }
 
