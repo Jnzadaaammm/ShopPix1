@@ -84,3 +84,32 @@ export async function releaseReservedCredentials(orderId: string) {
     }
   }
 }
+
+/**
+ * Expira pedidos PIX pendentes que passaram do prazo (padrão: 24h).
+ * Libera as credenciais reservadas e marca como EXPIRED.
+ */
+export async function expirePendingPixOrders(): Promise<number> {
+  const pixExpirationHours = parseInt(process.env.PIX_EXPIRATION_HOURS || "24");
+  const cutoff = new Date(Date.now() - pixExpirationHours * 60 * 60 * 1000);
+
+  const expired = await prisma.order.findMany({
+    where: {
+      paymentMethod: "pix",
+      status: "PENDING",
+      createdAt: { lt: cutoff },
+    },
+    select: { id: true },
+  });
+
+  for (const order of expired) {
+    await releaseReservedCredentials(order.id);
+    await prisma.order.update({
+      where: { id: order.id },
+      data: { status: "EXPIRED" },
+    });
+    emit(REALTIME_EVENTS.ORDER_UPDATED, { orderId: order.id });
+  }
+
+  return expired.length;
+}

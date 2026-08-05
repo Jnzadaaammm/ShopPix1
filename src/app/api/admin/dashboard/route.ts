@@ -24,6 +24,10 @@ export async function GET() {
   const last7Days = new Date(today);
   last7Days.setDate(last7Days.getDate() - 7);
 
+  const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+  const startOfLastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+  const endOfLastMonth = new Date(today.getFullYear(), today.getMonth(), 0, 23, 59, 59);
+
   const [
     totalRevenue,
     totalOrders,
@@ -39,6 +43,9 @@ export async function GET() {
     recentOrders,
     topProducts,
     dailyRevenue,
+    monthRevenue,
+    lastMonthRevenue,
+    awaitingApprovalCount,
   ] = await Promise.all([
     // Receita total
     prisma.order.aggregate({
@@ -119,6 +126,21 @@ export async function GET() {
       select: { total: true, createdAt: true },
       orderBy: { createdAt: "asc" },
     }),
+
+    // Receita do mês atual
+    prisma.order.aggregate({
+      where: { status: "PAID", createdAt: { gte: startOfMonth } },
+      _sum: { total: true },
+    }),
+
+    // Receita do mês passado
+    prisma.order.aggregate({
+      where: { status: "PAID", createdAt: { gte: startOfLastMonth, lte: endOfLastMonth } },
+      _sum: { total: true },
+    }),
+
+    // Pedidos aguardando aprovação
+    prisma.order.count({ where: { status: "AWAITING_APPROVAL" } }),
   ]);
 
   // Agregar top produtos
@@ -156,8 +178,12 @@ export async function GET() {
     paidOrders: paidOrdersCount,
     pendingOrders: pendingOrdersCount,
     cancelledOrders: cancelledOrdersCount,
+    awaitingApproval: awaitingApprovalCount,
     todayRevenue: todayRevenue._sum.total || 0,
     yesterdayRevenue: yesterdayRevenue._sum.total || 0,
+    monthRevenue: monthRevenue._sum.total || 0,
+    lastMonthRevenue: lastMonthRevenue._sum.total || 0,
+    conversionRate: totalOrders > 0 ? (paidOrdersCount / totalOrders) * 100 : 0,
     productCount,
     lowStockCount,
     userCount,

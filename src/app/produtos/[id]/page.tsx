@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Download, Star, Shield, Zap, ChevronRight, Package, Lock } from "lucide-react";
+import type { Metadata } from "next";
 import { prisma } from "@/lib/db";
 import { formatCurrency } from "@/lib/utils";
 import { auth } from "@/lib/auth";
@@ -9,6 +10,49 @@ import ProductReviews from "@/components/ProductReviews";
 import ProductCard from "@/components/ProductCard";
 import ProductDetailActions from "@/components/ProductDetailActions";
 import { notFound } from "next/navigation";
+
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const product = await prisma.product.findUnique({
+    where: { id },
+    select: { name: true, description: true, image: true, price: true, category: { select: { name: true } } },
+  });
+
+  if (!product) {
+    return { title: "Produto não encontrado" };
+  }
+
+  const title = `${product.name} - ${formatCurrency(product.price)}`;
+  const description = product.description.slice(0, 160);
+
+  return {
+    title: product.name,
+    description,
+    alternates: { canonical: `${baseUrl}/produtos/${id}` },
+    openGraph: {
+      type: "website",
+      locale: "pt_BR",
+      title,
+      description,
+      url: `${baseUrl}/produtos/${id}`,
+      siteName: "ShopPix",
+      images: [{ url: product.image, width: 500, height: 500, alt: product.name }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [product.image],
+    },
+    keywords: [product.name, product.category?.name, "produto digital", "comprar", "download"],
+  };
+}
 
 export default async function ProductDetailPage({
   params,

@@ -4,6 +4,8 @@ import { prisma } from "@/lib/db";
 import { userHasPermission, forbiddenResponse } from "@/lib/roles";
 import { createStripePayment } from "@/lib/stripe";
 import { createPayPalOrder } from "@/lib/paypal";
+import { notifyOrderCreated } from "@/lib/discord-notify";
+import { expirePendingPixOrders } from "@/lib/order-approval";
 import { generateStaticBrCode, projectReceiverName, projectCity, buildBrCodeRef } from "@thiagoprazeres/pix-static-brcode";
 import QRCode from "qrcode";
 import { emit, REALTIME_EVENTS } from "@/lib/event-bus";
@@ -210,6 +212,7 @@ export async function POST(request: Request) {
   });
 
   emit(REALTIME_EVENTS.ORDER_CREATED, { orderId: order.id });
+  notifyOrderCreated(order.id).catch(() => {});
 
   if (paymentMethod === "stripe") {
     const stripePayment = await createStripePayment(total, order.id);
@@ -280,6 +283,9 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
+  // Expira pedidos PIX pendentes (executa em background, não bloqueia a resposta)
+  expirePendingPixOrders().catch(() => {});
+
   const { searchParams } = new URL(request.url);
   const admin = searchParams.get("admin");
   const page = parseInt(searchParams.get("page") || "1");

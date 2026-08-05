@@ -26,8 +26,12 @@ interface DashboardData {
   paidOrders: number;
   pendingOrders: number;
   cancelledOrders: number;
+  awaitingApproval: number;
   todayRevenue: number;
   yesterdayRevenue: number;
+  monthRevenue: number;
+  lastMonthRevenue: number;
+  conversionRate: number;
   productCount: number;
   lowStockCount: number;
   userCount: number;
@@ -64,6 +68,13 @@ function AdminDashboard() {
     return Math.max(...dashboard.dailyRevenue.map(d => d.revenue), 1);
   }, [dashboard?.dailyRevenue]);
 
+  const monthChange = useMemo(() => {
+    const last = dashboard?.lastMonthRevenue || 0;
+    const current = dashboard?.monthRevenue || 0;
+    if (last > 0) return ((current - last) / last) * 100;
+    return current > 0 ? 100 : 0;
+  }, [dashboard?.monthRevenue, dashboard?.lastMonthRevenue]);
+
   const stats = useMemo(() => {
     if (!dashboard) return [];
     return [
@@ -79,8 +90,16 @@ function AdminDashboard() {
         value: formatCurrency(dashboard.todayRevenue),
         icon: TrendingUp,
         color: "bg-emerald-500",
-        sub: revenueChange >= 0 ? "vs ontem" : "vs ontem",
+        sub: "vs ontem",
         change: revenueChange,
+      },
+      {
+        title: "Receita do Mês",
+        value: formatCurrency(dashboard.monthRevenue),
+        icon: BarChart3,
+        color: "bg-indigo-500",
+        sub: "vs mês passado",
+        change: monthChange,
       },
       {
         title: "Ticket Médio",
@@ -90,18 +109,25 @@ function AdminDashboard() {
         sub: "por pedido pago",
       },
       {
-        title: "Pedidos Pendentes",
-        value: dashboard.pendingOrders.toString(),
+        title: "Aguardando Aprovação",
+        value: dashboard.awaitingApproval.toString(),
         icon: Clock,
-        color: "bg-yellow-500",
-        sub: `${dashboard.cancelledOrders} cancelados`,
+        color: "bg-orange-500",
+        sub: `${dashboard.pendingOrders} pendentes`,
+      },
+      {
+        title: "Taxa de Conversão",
+        value: `${dashboard.conversionRate.toFixed(1)}%`,
+        icon: TrendingUp,
+        color: "bg-purple-500",
+        sub: `${dashboard.paidOrders}/${dashboard.totalOrders} pedidos`,
       },
       {
         title: "Produtos",
         value: dashboard.productCount.toString(),
         icon: Package,
         color: "bg-purple-500",
-        sub: `${dashboard.productCount} digitais`,
+        sub: dashboard.lowStockCount > 0 ? `${dashboard.lowStockCount} com estoque baixo` : "estoque OK",
       },
       {
         title: "Clientes",
@@ -111,7 +137,7 @@ function AdminDashboard() {
         sub: `${dashboard.adminCount} admins`,
       },
     ];
-  }, [dashboard, revenueChange]);
+  }, [dashboard, revenueChange, monthChange]);
 
   if (loading || !dashboard) {
     return (
@@ -129,7 +155,7 @@ function AdminDashboard() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
           <div key={stat.title} className="rounded-xl border bg-white p-5 shadow-sm">
             <div className="flex items-start justify-between">
