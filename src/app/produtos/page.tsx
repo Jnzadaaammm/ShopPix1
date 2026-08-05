@@ -205,7 +205,7 @@ export default function ProductsPage() {
             placeholder="Buscar produtos..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-xl border border-slate-700 pl-10 pr-4 py-2.5 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200"
+            className="w-full rounded-xl border border-slate-700 bg-slate-900 pl-10 pr-4 py-2.5 text-slate-100 placeholder:text-slate-500 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
           />
           {search && (
             <button
@@ -220,7 +220,7 @@ export default function ProductsPage() {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as SortOption)}
-            className="rounded-xl border border-slate-700 px-4 py-2.5 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200"
+            className="rounded-xl border border-slate-700 bg-slate-900 px-4 py-2.5 text-sm text-slate-100 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
           >
             <option value="newest">Mais Recentes</option>
             <option value="price_low">Menor Preço</option>
@@ -240,7 +240,7 @@ export default function ProductsPage() {
 
       {/* Filtros */}
       {showFilters && (
-        <div className="mb-6 rounded-xl border bg-slate-950 p-5 shadow-sm">
+        <div className="card mb-6 p-5">
           <div className="grid gap-5 sm:grid-cols-1">
             {/* Preço */}
             <div>

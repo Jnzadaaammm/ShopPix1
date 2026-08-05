@@ -346,7 +346,7 @@ export default function AdminTicketsPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Buscar..."
-            className="w-full rounded-xl border border-slate-700 pl-9 pr-3 py-2 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200"
+            className="w-full rounded-xl border border-slate-700 bg-slate-900 pl-9 pr-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
           />
         </div>
       </div>
