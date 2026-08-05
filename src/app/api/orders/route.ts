@@ -7,10 +7,11 @@ import { createPayPalOrder } from "@/lib/paypal";
 import { emit, REALTIME_EVENTS } from "@/lib/event-bus";
 
 export async function POST(request: Request) {
-  const session = await auth();
-  if (!session?.user?.id) {
-    return NextResponse.json({ error: "Não autenticado" }, { status: 401 });
-  }
+  try {
+    const session = await auth();
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: "Não autenticado" }, { status: 401 });
+    }
 
   const { items, paymentMethod, couponCode } = await request.json();
   if (!items?.length) {
@@ -220,6 +221,11 @@ export async function POST(request: Request) {
   }
 
   return NextResponse.json(order);
+  } catch (error) {
+    console.error("Erro ao criar pedido:", error);
+    const message = error instanceof Error ? error.message : "Erro ao criar pedido";
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 }
 
 export async function GET(request: Request) {

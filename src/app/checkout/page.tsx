@@ -73,7 +73,7 @@ export default function CheckoutPage() {
       });
 
       if (!res.ok) {
-        const data = await res.json();
+        const data = await res.json().catch(() => ({ error: `Erro ${res.status}` }));
         throw new Error(data.error || "Erro ao criar pedido");
       }
 
