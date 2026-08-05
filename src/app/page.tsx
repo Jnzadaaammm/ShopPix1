@@ -1,47 +1,40 @@
 import Link from "next/link";
-import { ArrowRight, Zap, Shield, CreditCard, Download, Star, Lock } from "lucide-react";
+import { ArrowRight, Zap, Shield, CreditCard, Download } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
 import HeroSection from "@/components/HeroSection";
 import { prisma } from "@/lib/db";
-import { auth } from "@/lib/auth";
+import { calculateRating } from "@/lib/rating";
 
 export default async function HomePage() {
-  const session = await auth();
-  const isLoggedIn = !!session?.user;
-
-  // Só busca produtos se o usuário estiver logado
-  const [featuredProducts, categories] = isLoggedIn
-    ? await Promise.all([
-        prisma.product.findMany({
+  const [featuredProducts, categories] = await Promise.all([
+    prisma.product.findMany({
+      where: { featured: true },
+      take: 4,
+      include: {
+        category: true,
+        reviews: { select: { rating: true } },
+      },
+    }),
+    prisma.category.findMany({
+      include: {
+        products: {
           where: { featured: true },
           take: 4,
+          orderBy: { createdAt: "desc" },
           include: {
             category: true,
             reviews: { select: { rating: true } },
           },
-        }),
-        prisma.category.findMany({
-          include: {
-            products: {
-              where: { featured: true },
-              take: 4,
-              orderBy: { createdAt: "desc" },
-              include: {
-                category: true,
-                reviews: { select: { rating: true } },
-              },
-            },
-            _count: { select: { products: true } },
-          },
-          orderBy: { name: "asc" },
-        }),
-      ])
-    : [[], []];
+        },
+        _count: { select: { products: true } },
+      },
+      orderBy: { name: "asc" },
+    }),
+  ]);
 
   const productsWithRating = featuredProducts.map((p) => ({
     ...p,
-    rating: p.reviews.length > 0 ? p.reviews.reduce((s, r) => s + r.rating, 0) / p.reviews.length : 0,
-    reviewCount: p.reviews.length,
+    ...calculateRating(p.reviews),
   }));
 
   const categoriesWithProducts = (categories as any[])
@@ -50,8 +43,7 @@ export default async function HomePage() {
       ...c,
       products: c.products.map((p: any) => ({
         ...p,
-        rating: p.reviews.length > 0 ? p.reviews.reduce((s: number, r: any) => s + r.rating, 0) / p.reviews.length : 0,
-        reviewCount: p.reviews.length,
+        ...calculateRating(p.reviews),
       })),
     }));
 
@@ -101,26 +93,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Aviso de login necessário */}
-      {!isLoggedIn && (
-        <section className="mx-auto max-w-2xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="rounded-2xl border-2 border-dashed border-brand-200 bg-brand-50/50 p-10 text-center">
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-100">
-              <Lock className="h-8 w-8 text-brand-600" />
-            </div>
-            <h2 className="mt-6 text-2xl font-bold text-gray-900">Faça login para ver os produtos</h2>
-            <p className="mt-2 text-gray-500">
-              Crie uma conta gratuita ou entre para acessar nosso catálogo completo com produtos digitais e físicos.
-            </p>
-            <Link href="/login?callbackUrl=/" className="btn-primary mt-6">
-              Entrar / Criar Conta <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </section>
-      )}
-
       {/* Produtos em Destaque */}
-      {isLoggedIn && (
       <section className="bg-white py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-end justify-between border-b-2 border-gray-100 pb-4">
@@ -157,11 +130,9 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-      )}
 
       {/* Seções por Categoria */}
-      {isLoggedIn && (
-        categoriesWithProducts.map((cat, idx) => (
+      {categoriesWithProducts.map((cat, idx) => (
         <section key={cat.id} className={`py-16 ${idx % 2 === 0 ? "bg-gray-50" : "bg-white"}`}>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex items-end justify-between border-b-2 border-gray-100 pb-4">
@@ -209,7 +180,7 @@ export default async function HomePage() {
             </div>
           </div>
         </section>
-        )))}
+      ))}
 
 
       {/* CTA */}
@@ -222,10 +193,10 @@ export default async function HomePage() {
             Explore nosso catálogo de produtos digitais e receba seus arquivos imediatamente após o pagamento.
           </p>
           <Link
-            href={isLoggedIn ? "/produtos" : "/login"}
+            href="/produtos"
             className="mt-8 inline-flex items-center gap-2 rounded-xl bg-white px-8 py-4 font-semibold text-brand-600 shadow-xl shadow-brand-900/20 transition-all hover:bg-brand-50 hover:shadow-2xl active:scale-[0.98]"
           >
-            {isLoggedIn ? "Ver Produtos" : "Entrar Agora"} <ArrowRight className="h-5 w-5" />
+            Ver Produtos <ArrowRight className="h-5 w-5" />
           </Link>
         </div>
       </section>

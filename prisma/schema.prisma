@@ -128,7 +128,7 @@ model ProductCredential {
   id          String     @id @default(cuid())
   productId   String
   product     Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
-  content     String     // a senha/credencial em si (ex: "senha1" ou "user:pass")
+  content     String     // conteúdo criptografado com AES-256-GCM em base64
   status      String     @default("AVAILABLE") // "AVAILABLE", "SOLD", "RESERVED"
   orderItemId String?    // vinculado ao item do pedido quando vendido
   orderItem   OrderItem? @relation(fields: [orderItemId], references: [id])

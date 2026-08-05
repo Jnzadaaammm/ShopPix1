@@ -9,7 +9,15 @@ import { expirePendingPixOrders } from "@/lib/order-approval";
 import { generateStaticBrCode, projectReceiverName, projectCity, buildBrCodeRef } from "@thiagoprazeres/pix-static-brcode";
 import QRCode from "qrcode";
 import { emit, REALTIME_EVENTS } from "@/lib/event-bus";
+import { decryptCredential } from "@/lib/crypto";
 
+function safeDecryptCredential(content: string): string {
+  try {
+    return decryptCredential(content);
+  } catch {
+    return content;
+  }
+}
 export async function POST(request: Request) {
   try {
     const session = await auth();
@@ -358,7 +366,16 @@ export async function GET(request: Request) {
         items: order.items.map((item) => ({ ...item, credentials: [] })),
       };
     }
-    return order;
+    return {
+      ...order,
+      items: order.items.map((item) => ({
+        ...item,
+        credentials: item.credentials.map((c) => ({
+          ...c,
+          content: safeDecryptCredential(c.content),
+        })),
+      })),
+    };
   });
 
   return NextResponse.json(filteredOrders);

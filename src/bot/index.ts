@@ -34,7 +34,7 @@ const client = new Client({
 });
 
 client.once("ready", async () => {
-  console.log(`[bot] ✅ Online como ${client.user?.tag}`);
+  // console.log(`[bot] ✅ Online como ${client.user?.tag}`);
 
   // Definir presença: "online" com atividade personalizada
   client.user?.setPresence({
@@ -49,7 +49,7 @@ client.once("ready", async () => {
 
   // Sincronizar cargos automaticamente ao iniciar
   if (GUILD_ID) {
-    console.log("[bot] Sincronizando cargos com o site...");
+    // console.log("[bot] Sincronizando cargos com o site...");
     try {
       const result = await setupDiscordRoles();
       if (result.ok) {
@@ -57,7 +57,7 @@ client.once("ready", async () => {
         if (result.created?.length) parts.push(`${result.created.length} criados`);
         if (result.updated?.length) parts.push(`${result.updated.length} atualizados`);
         if (result.skipped?.length) parts.push(`${result.skipped.length} pulados`);
-        console.log(`[bot] Cargos sincronizados: ${parts.join(", ") || "nada a fazer"}`);
+        // console.log(`[bot] Cargos sincronizados: ${parts.join(", ") || "nada a fazer"}`);
       } else {
         console.warn("[bot] Falha ao sincronizar cargos:", result.error);
       }
@@ -66,17 +66,17 @@ client.once("ready", async () => {
     }
   }
 
-  console.log("[bot] Pronto para receber eventos!");
+  // console.log("[bot] Pronto para receber eventos!");
 });
 
 // Logar quando um membro entra no servidor
 client.on("guildMemberAdd", (member) => {
-  console.log(`[bot] 👋 ${member.user.tag} entrou no servidor ${member.guild.name}`);
+  // console.log(`[bot] 👋 ${member.user.tag} entrou no servidor ${member.guild.name}`);
 });
 
 // Logar quando um membro sai
 client.on("guildMemberRemove", (member) => {
-  console.log(`[bot] 👋 ${member.user.tag} saiu do servidor ${member.guild.name}`);
+  // console.log(`[bot] 👋 ${member.user.tag} saiu do servidor ${member.guild.name}`);
 });
 
 // Logar mudanças de cargo
@@ -87,10 +87,10 @@ client.on("guildMemberUpdate", (oldMember, newMember) => {
   const removed = oldRoles.filter((r) => !newRoles.includes(r));
 
   if (added.length > 0) {
-    console.log(`[bot] ⬆️ ${newMember.user.tag} recebeu cargo(s): ${added.join(", ")}`);
+    // console.log(`[bot] ⬆️ ${newMember.user.tag} recebeu cargo(s): ${added.join(", ")}`);
   }
   if (removed.length > 0) {
-    console.log(`[bot] ⬇️ ${newMember.user.tag} perdeu cargo(s): ${removed.join(", ")}`);
+    // console.log(`[bot] ⬇️ ${newMember.user.tag} perdeu cargo(s): ${removed.join(", ")}`);
   }
 });
 
@@ -112,11 +112,11 @@ client.on("shardDisconnect", (event) => {
 });
 
 client.on("shardReconnecting", () => {
-  console.log("[bot] Reconectando ao Discord...");
+  // console.log("[bot] Reconectando ao Discord...");
 });
 
 client.on("shardResume", () => {
-  console.log("[bot] Reconexão bem-sucedida!");
+  // console.log("[bot] Reconexão bem-sucedida!");
 });
 
 // Login
@@ -127,14 +127,14 @@ client.login(TOKEN).catch((error) => {
 
 // Graceful shutdown
 process.on("SIGINT", () => {
-  console.log("[bot] Desligando...");
+  // console.log("[bot] Desligando...");
   client.destroy();
   prisma.$disconnect();
   process.exit(0);
 });
 
 process.on("SIGTERM", () => {
-  console.log("[bot] SIGTERM recebido, desligando...");
+  // console.log("[bot] SIGTERM recebido, desligando...");
   client.destroy();
   prisma.$disconnect();
   process.exit(0);

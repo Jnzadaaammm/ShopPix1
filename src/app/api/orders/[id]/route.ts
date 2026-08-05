@@ -11,7 +11,15 @@ import {
   releaseReservedCredentials,
 } from "@/lib/order-approval";
 import { getStoreSettings } from "@/lib/settings";
+import { decryptCredential } from "@/lib/crypto";
 
+function safeDecryptCredential(content: string): string {
+  try {
+    return decryptCredential(content);
+  } catch {
+    return content;
+  }
+}
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ id: string }> }
@@ -43,7 +51,18 @@ export async function GET(
     return NextResponse.json({ error: "Pedido não encontrado" }, { status: 404 });
   }
 
-  return NextResponse.json(order);
+  const decryptedOrder = {
+    ...order,
+    items: order.items.map((item) => ({
+      ...item,
+      credentials: item.credentials.map((c) => ({
+        ...c,
+        content: safeDecryptCredential(c.content),
+      })),
+    })),
+  };
+
+  return NextResponse.json(decryptedOrder);
 }
 
 export async function PATCH(

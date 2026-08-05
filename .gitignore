@@ -3,6 +3,7 @@ node_modules/
 .env
 .env.local
 .env.*
+!.env.example
 *.db
 *.db-journal
 tsc_err.txt

@@ -2,6 +2,15 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { userHasPermission, forbiddenResponse } from "@/lib/roles";
+import { decryptCredential, encryptCredential } from "@/lib/crypto";
+
+function safeDecrypt(content: string): string {
+  try {
+    return decryptCredential(content);
+  } catch {
+    return content;
+  }
+}
 
 // GET - admin: lista credenciais de um produto
 export async function GET(request: Request) {
@@ -51,8 +60,13 @@ export async function GET(request: Request) {
   const sold = stats.find((s) => s.status === "SOLD")?._count || 0;
   const reserved = stats.find((s) => s.status === "RESERVED")?._count || 0;
 
+  const decryptedCredentials = credentials.map((c) => ({
+    ...c,
+    content: safeDecrypt(c.content),
+  }));
+
   return NextResponse.json({
-    credentials,
+    credentials: decryptedCredentials,
     stats: { available, sold, reserved, total: available + sold + reserved },
   });
 }
@@ -101,28 +115,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Nenhuma credencial válida fornecida" }, { status: 400 });
   }
 
-  // Verificar duplicatas dentro do produto
-  const existing = await prisma.productCredential.findMany({
-    where: { productId, content: { in: lines } },
-    select: { content: true },
-  });
-  const existingSet = new Set(existing.map((e) => e.content));
-  const newLines = lines.filter((l) => !existingSet.has(l));
-  const duplicates = lines.length - newLines.length;
+  // Criptografar e criar
+  const encrypted = lines.map((line) => ({
+    productId,
+    content: encryptCredential(line).content,
+  }));
 
-  if (newLines.length === 0) {
-    return NextResponse.json({
-      error: "Todas as credenciais já existem",
-      duplicates,
-    }, { status: 400 });
-  }
-
-  // Criar credenciais
   await prisma.productCredential.createMany({
-    data: newLines.map((content) => ({
-      productId,
-      content,
-    })),
+    data: encrypted,
   });
 
   // Atualizar stock do produto para refletir credenciais disponíveis

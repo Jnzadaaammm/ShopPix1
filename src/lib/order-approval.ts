@@ -44,9 +44,7 @@ export async function approveAndDeliver(orderId: string, ownerEmail: string) {
   try {
     const result = await checkAndUpgradeRole(updated.userId);
     if (result.upgraded) {
-      console.log(
-        `Cargo atualizado: ${result.oldRoleName} → ${result.newRoleName} (user ${updated.userId})`
-      );
+      // Promoção de cargo aplicada silenciosamente
     }
   } catch (error) {
     console.error("Erro ao verificar promoção de cargo:", error);

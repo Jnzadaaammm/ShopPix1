@@ -175,7 +175,7 @@ export async function sendLoginWebhook(user: WebhookUser): Promise<void> {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ embeds: [embed] }),
     });
-    console.log("[discord] Webhook enviado, status:", res.status);
+    // console.log("[discord] Webhook enviado, status:", res.status);
     if (!res.ok) {
       const text = await res.text().catch(() => "");
       console.error("[discord] Webhook falhou:", res.status, text);
@@ -302,7 +302,7 @@ export async function syncDiscordRoles(
     });
   }
 
-  console.log(
+  // console.log(
     `[discord] Cargos sincronizados para ${discordUserId}: removidos=${rolesToRemove.length}, adicionados=${rolesToAdd.length}`
   );
 
@@ -494,14 +494,14 @@ export async function setupDiscordRoles(): Promise<{
     });
 
     if (reorderRes.ok) {
-      console.log(`[discord] Cargos reordenados hierarquicamente (posições ${startPos}-${startPos + siteToDiscordId.length - 1})`);
+      // console.log(`[discord] Cargos reordenados hierarquicamente (posições ${startPos}-${startPos + siteToDiscordId.length - 1})`);
     } else {
       const text = await reorderRes.text().catch(() => "");
       skipped.push(`Reordenação falhou: ${reorderRes.status} ${text}`);
     }
   }
 
-  console.log(
+  // console.log(
     `[discord] setupDiscordRoles: criados=${created.length}, atualizados=${updated.length}, pulados=${skipped.length}`
   );
 

@@ -3,6 +3,7 @@ import { prisma } from "@/lib/db";
 import { auth } from "@/lib/auth";
 import { userHasPermission, forbiddenResponse } from "@/lib/roles";
 import { emit, REALTIME_EVENTS } from "@/lib/event-bus";
+import { calculateRating } from "@/lib/rating";
 
 // GET - público, com busca, filtros e paginação
 export async function GET(request: Request) {
@@ -72,15 +73,11 @@ export async function GET(request: Request) {
 
   // Adicionar campos calculados
   const productsWithStats = products.map((p) => {
-    const reviews = p.reviews || [];
-    const avgRating =
-      reviews.length > 0
-        ? reviews.reduce((s, r) => s + r.rating, 0) / reviews.length
-        : 0;
+    const { rating, reviewCount } = calculateRating(p.reviews);
     return {
       ...p,
-      avgRating,
-      reviewCount: reviews.length,
+      avgRating: rating,
+      reviewCount,
       inStock: true,
       effectiveStock: p.stockMode === "CREDENTIALS" ? p.stock : null,
     };
