@@ -275,7 +275,7 @@ export default function AdminProductsPage() {
           <Trash2 className="h-4 w-4" />
           Excluir
           {selectedIds.size > 0 && (
-            <span className="ml-1 rounded-full bg-red-900/40 px-2 py-0.5 text-xs font-semibold text-red-700">
+            <span className="ml-1 rounded-full bg-red-900/40 px-2 py-0.5 text-xs font-semibold text-red-300">
               {selectedIds.size}
             </span>
           )}
@@ -290,7 +290,7 @@ export default function AdminProductsPage() {
             placeholder="Buscar produtos por nome ou categoria..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full rounded-lg border pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full rounded-lg border border-slate-800 bg-slate-900 pl-10 pr-4 py-2 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
           />
         </div>
       </div>
@@ -346,7 +346,7 @@ export default function AdminProductsPage() {
                     </td>
                     <td className="px-6 py-4">
                       {product.stockMode === "SIMPLE" && (
-                        <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-700">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-blue-900/30 px-2.5 py-1 text-xs font-medium text-blue-300">
                           <InfinityIcon className="h-3 w-3" /> Ilimitado
                         </span>
                       )}
@@ -370,7 +370,7 @@ export default function AdminProductsPage() {
                     <td className="px-6 py-4 text-right">
                       <button
                         onClick={() => openModal(product)}
-                        className="mr-2 rounded p-2 text-blue-400 hover:bg-blue-50"
+                        className="mr-2 rounded p-2 text-blue-400 hover:bg-blue-900/30"
                       >
                         <Edit className="h-5 w-5" />
                       </button>
@@ -462,7 +462,7 @@ export default function AdminProductsPage() {
                     <tr
                       key={product.id}
                       className={`transition-colors ${
-                        selectedIds.has(product.id) ? "bg-red-50" : "hover:bg-slate-900"
+                        selectedIds.has(product.id) ? "bg-red-900/30" : "hover:bg-slate-900"
                       }`}
                     >
                       <td className="px-6 py-4">
@@ -494,7 +494,7 @@ export default function AdminProductsPage() {
                       </td>
                       <td className="px-6 py-4">
                         {product.stockMode === "SIMPLE" && (
-                          <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-700">
+                          <span className="inline-flex items-center gap-1 rounded-full bg-blue-900/30 px-2.5 py-1 text-xs font-medium text-blue-300">
                             <InfinityIcon className="h-3 w-3" /> Ilimitado
                           </span>
                         )}
@@ -507,7 +507,7 @@ export default function AdminProductsPage() {
                       <td className="px-6 py-4 text-right">
                         <button
                           onClick={() => requestDelete([product.id])}
-                          className="flex items-center gap-1.5 rounded-lg border border-red-200 px-3 py-1.5 text-sm font-medium text-red-400 hover:bg-red-950"
+                          className="flex items-center gap-1.5 rounded-lg border border-red-900/50 px-3 py-1.5 text-sm font-medium text-red-400 hover:bg-red-950"
                         >
                           <Trash2 className="h-4 w-4" />
                           Excluir
@@ -766,8 +766,8 @@ export default function AdminProductsPage() {
             </div>
 
             {deleteError && (
-              <div className="mb-4 rounded-xl border border-red-200 bg-red-50 p-3">
-                <p className="whitespace-pre-line text-sm text-red-700">{deleteError}</p>
+              <div className="mb-4 rounded-xl border border-red-900/50 bg-red-900/30 p-3">
+                <p className="whitespace-pre-line text-sm text-red-300">{deleteError}</p>
               </div>
             )}
 

@@ -89,14 +89,14 @@ export default function AdminReportsPage() {
       title: "Receita Total",
       value: formatCurrency(data.summary.totalRevenue),
       icon: DollarSign,
-      color: "bg-green-500",
+      color: "bg-green-900/300",
     },
     {
       title: "Pedidos Pagos",
       value: data.summary.paidOrders.toString(),
       sub: `${data.summary.totalOrders} total`,
       icon: ShoppingCart,
-      color: "bg-blue-500",
+      color: "bg-blue-900/300",
     },
     {
       title: "Ticket Médio",
@@ -109,7 +109,7 @@ export default function AdminReportsPage() {
       value: `${data.summary.conversionRate.toFixed(1)}%`,
       sub: "pagos/total",
       icon: Percent,
-      color: "bg-orange-500",
+      color: "bg-orange-900/300",
     },
   ];
 
@@ -238,9 +238,9 @@ export default function AdminReportsPage() {
                     <div className="h-2 rounded-full bg-slate-900">
                       <div
                         className={`h-2 rounded-full ${
-                          pm.method === "pix" ? "bg-green-500" :
+                          pm.method === "pix" ? "bg-green-900/300" :
                           pm.method === "stripe" ? "bg-purple-500" :
-                          pm.method === "paypal" ? "bg-blue-600" : "bg-blue-500"
+                          pm.method === "paypal" ? "bg-blue-600" : "bg-blue-900/300"
                         }`}
                         style={{ width: `${pct}%` }}
                       />
@@ -263,7 +263,7 @@ export default function AdminReportsPage() {
               <p className="text-2xl font-bold text-slate-100">{count}</p>
               <p className={`text-sm font-medium ${
                 status === "PAID" ? "text-green-400" :
-                status === "PENDING" ? "text-yellow-600" :
+                status === "PENDING" ? "text-yellow-400" :
                 status === "CANCELLED" ? "text-red-400" : "text-slate-400"
               }`}>
                 {status}

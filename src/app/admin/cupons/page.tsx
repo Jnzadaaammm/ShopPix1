@@ -196,7 +196,7 @@ export default function AdminCouponsPage() {
                     <button
                       onClick={() => toggleActive(coupon)}
                       className={`flex items-center gap-1 rounded-full px-2 py-1 text-xs font-medium ${
-                        coupon.active ? "bg-green-900/40 text-green-700" : "bg-slate-900 text-slate-400"
+                        coupon.active ? "bg-green-900/40 text-green-300" : "bg-slate-900 text-slate-400"
                       }`}
                     >
                       {coupon.active ? <Power className="h-3 w-3" /> : <PowerOff className="h-3 w-3" />}
@@ -204,7 +204,7 @@ export default function AdminCouponsPage() {
                     </button>
                   </td>
                   <td className="px-6 py-4 text-right">
-                    <button onClick={() => openModal(coupon)} className="mr-2 rounded p-2 text-blue-400 hover:bg-blue-50">
+                    <button onClick={() => openModal(coupon)} className="mr-2 rounded p-2 text-blue-400 hover:bg-blue-900/30">
                       <Edit className="h-4 w-4" />
                     </button>
                     <button onClick={() => handleDelete(coupon.id)} className="rounded p-2 text-red-400 hover:bg-red-950">

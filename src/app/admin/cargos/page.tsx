@@ -25,12 +25,12 @@ interface Role {
 
 const COLORS = [
   { id: "gray", label: "Cinza", class: "bg-slate-900 text-slate-300" },
-  { id: "blue", label: "Azul", class: "bg-blue-900/40 text-blue-700" },
-  { id: "green", label: "Verde", class: "bg-green-900/40 text-green-700" },
+  { id: "blue", label: "Azul", class: "bg-blue-900/40 text-blue-300" },
+  { id: "green", label: "Verde", class: "bg-green-900/40 text-green-300" },
   { id: "purple", label: "Roxo", class: "bg-purple-900/40 text-purple-700" },
   { id: "gold", label: "Dourado", class: "bg-yellow-100 text-yellow-800" },
-  { id: "orange", label: "Laranja", class: "bg-orange-900/40 text-orange-700" },
-  { id: "red", label: "Vermelho", class: "bg-red-900/40 text-red-700" },
+  { id: "orange", label: "Laranja", class: "bg-orange-900/40 text-orange-300" },
+  { id: "red", label: "Vermelho", class: "bg-red-900/40 text-red-300" },
 ];
 
 export default function AdminRolesPage() {
@@ -347,7 +347,7 @@ export default function AdminRolesPage() {
               <p className="mt-2 text-sm text-slate-400">{role.description || "Sem descrição"}</p>
               <div className="mt-3 flex flex-wrap gap-1">
                 {(role.permissions || []).includes("*") ? (
-                  <span className="rounded-full bg-red-50 px-2 py-0.5 text-xs font-medium text-red-400">
+                  <span className="rounded-full bg-red-900/30 px-2 py-0.5 text-xs font-medium text-red-400">
                     Acesso Total
                   </span>
                 ) : (
@@ -439,7 +439,7 @@ export default function AdminRolesPage() {
                     onClick={() => setForm({ ...form, type: "TEAM", discount: 0 })}
                     className={`flex-1 rounded-xl border-2 px-4 py-2.5 text-sm font-medium transition-colors ${
                       form.type === "TEAM"
-                        ? "border-red-500 bg-red-50 text-red-700"
+                        ? "border-red-500 bg-red-900/30 text-red-300"
                         : "border-slate-700 text-slate-400 hover:bg-slate-900"
                     }`}
                   >

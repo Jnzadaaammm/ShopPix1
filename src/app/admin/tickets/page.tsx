@@ -37,8 +37,8 @@ const CATEGORY_LABELS: Record<string, string> = {
 };
 
 const STATUS_CONFIG: Record<string, { label: string; color: string; icon: typeof Clock }> = {
-  OPEN: { label: "Aberto", color: "bg-blue-900/40 text-blue-700", icon: AlertCircle },
-  ANSWERED: { label: "Respondido", color: "bg-green-900/40 text-green-700", icon: CheckCircle },
+  OPEN: { label: "Aberto", color: "bg-blue-900/40 text-blue-300", icon: AlertCircle },
+  ANSWERED: { label: "Respondido", color: "bg-green-900/40 text-green-300", icon: CheckCircle },
   CLOSED: { label: "Fechado", color: "bg-slate-900 text-slate-400", icon: CheckCircle },
 };
 
@@ -238,7 +238,7 @@ export default function AdminTicketsPage() {
                 {selectedTicket.status === "CLOSED" && (
                   <button
                     onClick={() => updateStatus("OPEN")}
-                    className="rounded-lg bg-blue-50 px-3 py-1.5 text-xs font-medium text-blue-400 hover:bg-blue-900/40"
+                    className="rounded-lg bg-blue-900/30 px-3 py-1.5 text-xs font-medium text-blue-400 hover:bg-blue-900/40"
                   >
                     Reabrir
                   </button>
@@ -346,7 +346,7 @@ export default function AdminTicketsPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Buscar..."
-            className="w-full rounded-xl border border-slate-700 bg-slate-900 pl-9 pr-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20/20"
+            className="w-full rounded-xl border border-slate-700 bg-slate-900 pl-9 pr-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
           />
         </div>
       </div>

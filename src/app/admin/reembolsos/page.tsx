@@ -141,7 +141,7 @@ export default function AdminRefundsPage() {
     const statusConfig = {
       PENDING: { bg: "bg-yellow-100", text: "text-yellow-800", icon: Clock },
       APPROVED: { bg: "bg-blue-900/40", text: "text-blue-800", icon: Check },
-      REJECTED: { bg: "bg-red-900/40", text: "text-red-800", icon: X },
+      REJECTED: { bg: "bg-red-900/40", text: "text-red-300", icon: X },
       COMPLETED: { bg: "bg-green-900/40", text: "text-green-800", icon: CheckCircle },
     };
 

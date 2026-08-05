@@ -201,7 +201,7 @@ export default function AdminOrdersPage() {
             placeholder="Buscar por ID, email ou nome..."
             value={searchTerm}
             onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
-            className="w-full rounded-lg border pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full rounded-lg border border-slate-800 bg-slate-900 pl-10 pr-4 py-2 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
           />
         </div>
         <div className="relative">
@@ -209,7 +209,7 @@ export default function AdminOrdersPage() {
           <select
             value={statusFilter}
             onChange={(e) => { setStatusFilter(e.target.value); setCurrentPage(1); }}
-            className="rounded-lg border pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="rounded-lg border border-slate-800 bg-slate-900 pl-10 pr-4 py-2 text-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
           >
             <option value="all">Todos os status</option>
             <option value="PENDING">Aguardando pagamento</option>
@@ -223,13 +223,13 @@ export default function AdminOrdersPage() {
 
       {/* Banner: pedidos aguardando aprovação (só dono vê) */}
       {isOwner && awaitingApprovalCount > 0 && (
-        <div className="mb-6 flex items-center gap-3 rounded-lg border border-blue-200 bg-blue-50 p-4">
+        <div className="mb-6 flex items-center gap-3 rounded-lg border border-blue-900/50 bg-blue-900/30 p-4">
           <Clock className="h-5 w-5 flex-shrink-0 text-blue-400" />
           <div>
-            <p className="font-medium text-blue-900">
+            <p className="font-medium text-blue-300">
               {awaitingApprovalCount} pedido(s) aguardando sua aprovação
             </p>
-            <p className="text-sm text-blue-700">
+            <p className="text-sm text-blue-300">
               Abra o pedido e clique em "Aprovar" para liberar os produtos ao cliente.
             </p>
           </div>
@@ -281,7 +281,7 @@ export default function AdminOrdersPage() {
                       {getStatusLabel(order.status)}
                     </span>
                     {order.status === "AWAITING_APPROVAL" && (
-                      <span className="ml-1 inline-flex items-center rounded-full bg-blue-900/40 px-1.5 py-0.5 text-[10px] font-bold text-blue-700">
+                      <span className="ml-1 inline-flex items-center rounded-full bg-blue-900/40 px-1.5 py-0.5 text-[10px] font-bold text-blue-300">
                         ⚡
                       </span>
                     )}
@@ -292,7 +292,7 @@ export default function AdminOrdersPage() {
                   <td className="px-6 py-4 text-right">
                     <button
                       onClick={() => setSelectedOrder(order)}
-                      className="rounded-lg border border-slate-800 bg-slate-900 px-3 py-1 text-sm text-blue-400 hover:bg-blue-50"
+                      className="rounded-lg border border-slate-800 bg-slate-900 px-3 py-1 text-sm text-blue-400 hover:bg-blue-900/30"
                     >
                       Ver Detalhes
                     </button>
@@ -367,11 +367,11 @@ export default function AdminOrdersPage() {
 
             {/* Aviso aguardando aprovação */}
             {selectedOrder.status === "AWAITING_APPROVAL" && (
-              <div className="mb-6 flex items-start gap-3 rounded-lg border border-blue-200 bg-blue-50 p-4">
+              <div className="mb-6 flex items-start gap-3 rounded-lg border border-blue-900/50 bg-blue-900/30 p-4">
                 <AlertCircle className="h-5 w-5 flex-shrink-0 text-blue-400" />
                 <div>
-                  <p className="font-medium text-blue-900">Pagamento confirmado — aguardando sua aprovação</p>
-                  <p className="text-sm text-blue-700">
+                  <p className="font-medium text-blue-300">Pagamento confirmado — aguardando sua aprovação</p>
+                  <p className="text-sm text-blue-300">
                     Aprove para entregar os produtos ao cliente, ou rejeite para cancelar o pedido.
                   </p>
                 </div>
@@ -429,8 +429,8 @@ export default function AdminOrdersPage() {
 
             {/* === Ações exclusivas do dono: Aprovar / Rejeitar === */}
             {isOwner && selectedOrder.status === "AWAITING_APPROVAL" && (
-              <div className="mb-6 rounded-lg border-2 border-blue-200 bg-blue-50 p-4">
-                <h3 className="mb-3 flex items-center gap-2 font-semibold text-blue-900">
+              <div className="mb-6 rounded-lg border-2 border-blue-900/50 bg-blue-900/30 p-4">
+                <h3 className="mb-3 flex items-center gap-2 font-semibold text-blue-300">
                   <Check className="h-5 w-5" /> Aprovação do Dono
                 </h3>
 

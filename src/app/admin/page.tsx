@@ -84,7 +84,7 @@ function AdminDashboard() {
         title: "Receita Total",
         value: formatCurrency(dashboard.totalRevenue),
         icon: DollarSign,
-        color: "bg-green-500",
+        color: "bg-green-900/300",
         sub: `${dashboard.paidOrders} pedidos pagos`,
       },
       {
@@ -107,14 +107,14 @@ function AdminDashboard() {
         title: "Ticket Médio",
         value: formatCurrency(dashboard.paidOrders > 0 ? dashboard.totalRevenue / dashboard.paidOrders : 0),
         icon: BarChart3,
-        color: "bg-blue-500",
+        color: "bg-blue-900/300",
         sub: "por pedido pago",
       },
       {
         title: "Aguardando Aprovação",
         value: dashboard.awaitingApproval.toString(),
         icon: Clock,
-        color: "bg-orange-500",
+        color: "bg-orange-900/300",
         sub: `${dashboard.pendingOrders} pendentes`,
       },
       {
@@ -241,7 +241,7 @@ function AdminDashboard() {
                       {order.status === "PAID" ? (
                         <CheckCircle className="h-5 w-5 text-green-400" />
                       ) : order.status === "PENDING" ? (
-                        <Clock className="h-5 w-5 text-yellow-600" />
+                        <Clock className="h-5 w-5 text-yellow-400" />
                       ) : (
                         <Package className="h-5 w-5 text-slate-400" />
                       )}
@@ -258,7 +258,7 @@ function AdminDashboard() {
                     <p className="font-semibold text-slate-100">{formatCurrency(order.total)}</p>
                     <span className={`text-xs font-medium ${
                       order.status === "PAID" ? "text-green-400" :
-                      order.status === "PENDING" ? "text-yellow-600" : "text-red-400"
+                      order.status === "PENDING" ? "text-yellow-400" : "text-red-400"
                     }`}>
                       {order.status}
                     </span>
@@ -281,9 +281,9 @@ function AdminDashboard() {
                 {dashboard.topProducts.map((product, i) => (
                   <div key={product.name} className="flex items-center gap-3">
                     <span className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold ${
-                      i === 0 ? "bg-yellow-100 text-yellow-700" :
+                      i === 0 ? "bg-yellow-100 text-yellow-300" :
                       i === 1 ? "bg-slate-900 text-slate-300" :
-                      i === 2 ? "bg-orange-900/40 text-orange-700" : "bg-slate-900 text-slate-400"
+                      i === 2 ? "bg-orange-900/40 text-orange-300" : "bg-slate-900 text-slate-400"
                     }`}>
                       {i + 1}
                     </span>
@@ -300,15 +300,15 @@ function AdminDashboard() {
 
           {/* Alerta de Estoque Baixo */}
           {dashboard.lowStockCount > 0 && (
-            <div className="rounded-xl border border-orange-200 bg-orange-50 p-6">
+            <div className="rounded-xl border border-orange-900/50 bg-orange-900/30 p-6">
               <div className="mb-3 flex items-center gap-2">
                 <AlertTriangle className="h-5 w-5 text-orange-400" />
                 <h2 className="text-lg font-semibold text-orange-900">Estoque Baixo</h2>
               </div>
-              <p className="text-sm text-orange-800">
+              <p className="text-sm text-orange-300">
                 {dashboard.lowStockCount} produto(s) com estoque baixo ou esgotado.
               </p>
-              <Link href="/admin/produtos" className="mt-3 block text-sm text-orange-700 hover:underline">
+              <Link href="/admin/produtos" className="mt-3 block text-sm text-orange-300 hover:underline">
                 Gerenciar estoque →
               </Link>
             </div>

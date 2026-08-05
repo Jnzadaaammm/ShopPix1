@@ -233,10 +233,10 @@ export default function AdminCredentialsPage() {
                 <span
                   className={`rounded-full px-2 py-0.5 text-xs font-medium ${
                     cred.status === "AVAILABLE"
-                      ? "bg-green-900/40 text-green-700"
+                      ? "bg-green-900/40 text-green-300"
                       : cred.status === "SOLD"
-                      ? "bg-blue-900/40 text-blue-700"
-                      : "bg-yellow-100 text-yellow-700"
+                      ? "bg-blue-900/40 text-blue-300"
+                      : "bg-yellow-100 text-yellow-300"
                   }`}
                 >
                   {cred.status === "AVAILABLE" ? "Disponível" : cred.status === "SOLD" ? "Vendida" : "Reservada"}

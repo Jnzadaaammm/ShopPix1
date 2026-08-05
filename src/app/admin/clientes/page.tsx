@@ -170,7 +170,7 @@ export default function AdminCustomersPage() {
             placeholder="Buscar por nome ou email..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full rounded-lg border pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full rounded-lg border border-slate-800 bg-slate-900 pl-10 pr-4 py-2 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20"
           />
         </div>
       </div>
@@ -233,7 +233,7 @@ export default function AdminCustomersPage() {
                     <td className="px-6 py-4 text-right">
                       <button
                         onClick={() => setSelectedUser(user)}
-                        className="rounded-lg border border-slate-800 bg-slate-900 px-3 py-1 text-sm text-blue-400 hover:bg-blue-50"
+                        className="rounded-lg border border-slate-800 bg-slate-900 px-3 py-1 text-sm text-blue-400 hover:bg-blue-900/30"
                       >
                         Ver Detalhes
                       </button>
@@ -309,7 +309,7 @@ export default function AdminCustomersPage() {
                         <p className="text-sm font-medium">{formatCurrency(order.total)}</p>
                         <span className={`text-xs ${
                           order.status === "PAID" ? "text-green-400" :
-                          order.status === "PENDING" ? "text-yellow-600" : "text-red-400"
+                          order.status === "PENDING" ? "text-yellow-400" : "text-red-400"
                         }`}>
                           {order.status}
                         </span>
@@ -332,7 +332,7 @@ export default function AdminCustomersPage() {
                 disabled={updating}
                 className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
                   selectedUser.isAdmin
-                    ? "bg-red-50 text-red-400 hover:bg-red-900/40"
+                    ? "bg-red-900/30 text-red-400 hover:bg-red-900/40"
                     : "bg-purple-50 text-purple-400 hover:bg-purple-900/40"
                 } disabled:opacity-50`}
               >
