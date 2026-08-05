@@ -62,11 +62,11 @@ export default function CartPage() {
                 <div className="flex items-start justify-between">
                   <div>
                     <Link href={`/produtos/${item.productId}`}>
-                      <h3 className="font-semibold text-slate-100 hover:text-brand-600 transition-colors">
+                      <h3 className="font-semibold text-slate-100 hover:text-brand-400 transition-colors">
                         {item.name}
                       </h3>
                     </Link>
-                    <p className="text-sm text-brand-600 font-medium">
+                    <p className="text-sm text-brand-400 font-medium">
                       {formatCurrency(item.price)}
                     </p>
                   </div>
@@ -117,7 +117,7 @@ export default function CartPage() {
             <div className="border-t border-slate-800 pt-3">
               <div className="flex justify-between">
                 <span className="font-bold text-slate-100">Total</span>
-                <span className="text-xl font-bold text-brand-600">
+                <span className="text-xl font-bold text-brand-400">
                   {formatCurrency(total)}
                 </span>
               </div>

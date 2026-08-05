@@ -90,7 +90,7 @@ export default function AdminMobileNav() {
                 onClick={() => setOpen(false)}
                 className={`flex items-center gap-3 border-b border-slate-800 px-4 py-3 text-sm font-medium ${
                   isActive
-                    ? "bg-brand-50 text-brand-700"
+                    ? "bg-slate-900/60 text-brand-400"
                     : "text-slate-400 hover:bg-slate-900"
                 }`}
               >

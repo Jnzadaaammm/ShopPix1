@@ -100,7 +100,7 @@ export default function TermosPage() {
         <section>
           <h2 className="text-xl font-semibold text-slate-100">10. Contato</h2>
           <p className="mt-2 text-sm leading-relaxed">
-            Em caso de dúvidas sobre estes Termos de Uso, entre em contato pelo email: <a href="mailto:contato@shoppix.com.br" className="text-brand-600 hover:underline">contato@shoppix.com.br</a>
+            Em caso de dúvidas sobre estes Termos de Uso, entre em contato pelo email: <a href="mailto:contato@shoppix.com.br" className="text-brand-400 hover:underline">contato@shoppix.com.br</a>
           </p>
         </section>
       </div>

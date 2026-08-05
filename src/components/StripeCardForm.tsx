@@ -141,7 +141,7 @@ function CardForm({
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="mb-6 text-center">
         <p className="text-sm text-slate-400">Valor a pagar</p>
-        <p className="text-3xl font-bold text-brand-600">{formatCurrency(total)}</p>
+        <p className="text-3xl font-bold text-brand-400">{formatCurrency(total)}</p>
       </div>
 
       {/* Seletor Crédito / Débito */}
@@ -155,7 +155,7 @@ function CardForm({
             onClick={() => setCardType("credit")}
             className={`flex items-center gap-3 rounded-xl border-2 p-4 transition-all ${
               cardType === "credit"
-                ? "border-brand-500 bg-brand-50"
+                ? "border-brand-500 bg-slate-900/60"
                 : "border-slate-700 hover:border-slate-700"
             }`}
           >
@@ -174,7 +174,7 @@ function CardForm({
             onClick={() => setCardType("debit")}
             className={`flex items-center gap-3 rounded-xl border-2 p-4 transition-all ${
               cardType === "debit"
-                ? "border-brand-500 bg-brand-50"
+                ? "border-brand-500 bg-slate-900/60"
                 : "border-slate-700 hover:border-slate-700"
             }`}
           >

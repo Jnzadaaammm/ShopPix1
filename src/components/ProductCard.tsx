@@ -146,7 +146,7 @@ function ProductCard({
           <button
             onClick={handleAddCart}
             aria-label={`Adicionar ${name} ao carrinho`}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-600 text-white transition-all hover:bg-brand-500 hover:scale-110 active:scale-90"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-600 text-white transition-all hover:bg-slate-900/600 hover:scale-110 active:scale-90"
             title="Adicionar ao carrinho"
           >
             <ShoppingCart className="h-4 w-4" />

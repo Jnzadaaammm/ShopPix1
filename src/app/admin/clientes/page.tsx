@@ -347,7 +347,7 @@ export default function AdminCustomersPage() {
             {/* Seletor de Cargos (múltiplos) */}
             <div className="rounded-lg border p-4">
               <div className="mb-3 flex items-center gap-2">
-                <Crown className="h-5 w-5 text-brand-600" />
+                <Crown className="h-5 w-5 text-brand-400" />
                 <p className="font-medium text-slate-100">Cargos do Usuário</p>
               </div>
 
@@ -396,7 +396,7 @@ export default function AdminCustomersPage() {
                           )
                         }
                         disabled={updating}
-                        className="h-3.5 w-3.5 rounded border-slate-700 text-brand-600 focus:ring-brand-500"
+                        className="h-3.5 w-3.5 rounded border-slate-700 text-brand-400 focus:ring-brand-500"
                       />
                       <span>
                         {role.name}

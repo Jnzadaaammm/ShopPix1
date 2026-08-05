@@ -63,8 +63,8 @@ export default async function ProductDetailPage({
   if (!session?.user) {
     return (
       <div className="mx-auto max-w-md px-4 py-24 text-center sm:px-6 lg:px-8">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-100">
-          <Lock className="h-8 w-8 text-brand-600" />
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-800">
+          <Lock className="h-8 w-8 text-brand-400" />
         </div>
         <h1 className="mt-6 text-2xl font-bold text-slate-100">Conta necessária</h1>
         <p className="mt-2 text-slate-400">
@@ -116,13 +116,13 @@ export default async function ProductDetailPage({
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       {/* Breadcrumbs */}
       <nav className="mb-6 flex items-center gap-1 text-sm text-slate-400" aria-label="Breadcrumb">
-        <Link href="/" className="hover:text-brand-600">Início</Link>
+        <Link href="/" className="hover:text-brand-400">Início</Link>
         <ChevronRight className="h-3 w-3" />
-        <Link href="/produtos" className="hover:text-brand-600">Produtos</Link>
+        <Link href="/produtos" className="hover:text-brand-400">Produtos</Link>
         <ChevronRight className="h-3 w-3" />
         <Link
           href={`/produtos#categoria-${product.category.slug}`}
-          className="hover:text-brand-600"
+          className="hover:text-brand-400"
         >
           {product.category.name}
         </Link>
@@ -148,7 +148,7 @@ export default async function ProductDetailPage({
 
         {/* Info */}
         <div className="flex flex-col">
-          <span className="inline-flex w-fit rounded-full bg-brand-50 px-3 py-1 text-sm font-medium text-brand-700">
+          <span className="inline-flex w-fit rounded-full bg-slate-900/60 px-3 py-1 text-sm font-medium text-brand-400">
             {product.category.name}
           </span>
           <h1 className="mt-4 text-3xl font-bold text-slate-100">{product.name}</h1>
@@ -176,7 +176,7 @@ export default async function ProductDetailPage({
 
           {/* Preço */}
           <div className="mt-6">
-            <span className="text-4xl font-bold text-brand-600">
+            <span className="text-4xl font-bold text-brand-400">
               {formatCurrency(product.price)}
             </span>
             <p className="mt-1 text-sm text-slate-400">

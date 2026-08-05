@@ -192,7 +192,7 @@ function AdminDashboard() {
       <div className="mt-6 rounded-xl border bg-slate-950 p-6 shadow-sm">
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-lg font-semibold text-slate-100">Receita - Últimos 7 dias</h2>
-          <Link href="/admin/relatorios" className="text-sm text-brand-600 hover:underline">
+          <Link href="/admin/relatorios" className="text-sm text-brand-400 hover:underline">
             Ver relatórios
           </Link>
         </div>
@@ -222,7 +222,7 @@ function AdminDashboard() {
         <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-lg font-semibold text-slate-100">Pedidos Recentes</h2>
-            <Link href="/admin/pedidos" className="text-sm text-brand-600 hover:underline">
+            <Link href="/admin/pedidos" className="text-sm text-brand-400 hover:underline">
               Ver todos
             </Link>
           </div>

@@ -174,7 +174,7 @@ export default function AdminOrdersPage() {
     return (
       <PermissionGuard permission="orders.view">
         <div className="flex items-center justify-center py-12">
-          <Loader2 className="h-8 w-8 animate-spin text-brand-600" />
+          <Loader2 className="h-8 w-8 animate-spin text-brand-400" />
         </div>
       </PermissionGuard>
     );

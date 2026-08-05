@@ -99,7 +99,7 @@ export default function PrivacidadePage() {
             <li>Obter informação sobre o compartilhamento de dados</li>
           </ul>
           <p className="mt-2 text-sm leading-relaxed">
-            Para exercer seus direitos, entre em contato pelo email: <a href="mailto:contato@shoppix.com.br" className="text-brand-600 hover:underline">contato@shoppix.com.br</a>
+            Para exercer seus direitos, entre em contato pelo email: <a href="mailto:contato@shoppix.com.br" className="text-brand-400 hover:underline">contato@shoppix.com.br</a>
           </p>
         </section>
 
@@ -120,7 +120,7 @@ export default function PrivacidadePage() {
         <section>
           <h2 className="text-xl font-semibold text-slate-100">11. Contato com o Encarregado (DPO)</h2>
           <p className="mt-2 text-sm leading-relaxed">
-            Para questões relacionadas à privacidade e proteção de dados: <a href="mailto:contato@shoppix.com.br" className="text-brand-600 hover:underline">contato@shoppix.com.br</a>
+            Para questões relacionadas à privacidade e proteção de dados: <a href="mailto:contato@shoppix.com.br" className="text-brand-400 hover:underline">contato@shoppix.com.br</a>
           </p>
         </section>
       </div>

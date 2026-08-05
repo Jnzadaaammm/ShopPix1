@@ -70,7 +70,7 @@ export default function DownloadsPage() {
   if (status === "loading" || loading) {
     return (
       <div className="flex min-h-[50vh] items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-brand-600" />
+        <Loader2 className="h-8 w-8 animate-spin text-brand-400" />
       </div>
     );
   }
@@ -134,7 +134,7 @@ export default function DownloadsPage() {
                     <button
                       onClick={() => handleRenew(download.id)}
                       disabled={renewing === download.id}
-                      className="inline-flex items-center gap-2 rounded-lg border border-brand-600 px-4 py-2 text-sm font-medium text-brand-600 hover:bg-brand-50"
+                      className="inline-flex items-center gap-2 rounded-lg border border-brand-600 px-4 py-2 text-sm font-medium text-brand-400 hover:bg-slate-900/60"
                     >
                       {renewing === download.id ? (
                         <Loader2 className="h-4 w-4 animate-spin" />

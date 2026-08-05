@@ -230,7 +230,7 @@ export default function AdminRolesPage() {
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="flex items-center gap-2 text-3xl font-bold text-slate-100">
-            <Crown className="h-8 w-8 text-brand-600" /> Cargos
+            <Crown className="h-8 w-8 text-brand-400" /> Cargos
           </h1>
           <p className="mt-2 text-slate-400">Gerencie cargos de clientes e equipe</p>
         </div>
@@ -253,7 +253,7 @@ export default function AdminRolesPage() {
       {/* Cargos de Cliente */}
       <div className="mb-8">
         <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-100">
-          <Tag className="h-5 w-5 text-brand-600" /> Cargos de Cliente
+          <Tag className="h-5 w-5 text-brand-400" /> Cargos de Cliente
           <span className="text-sm font-normal text-slate-500">
             ({clientRoles.length}) — desconto automático no checkout
           </span>
@@ -270,7 +270,7 @@ export default function AdminRolesPage() {
                     {role.name}
                   </span>
                   {role.isDefault && (
-                    <span className="rounded-full bg-brand-50 px-2 py-0.5 text-xs font-medium text-brand-600">
+                    <span className="rounded-full bg-slate-900/60 px-2 py-0.5 text-xs font-medium text-brand-400">
                       Padrão
                     </span>
                   )}
@@ -278,7 +278,7 @@ export default function AdminRolesPage() {
                 <div className="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
                   <button
                     onClick={() => openEdit(role)}
-                    className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-900 hover:text-brand-600"
+                    className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-900 hover:text-brand-400"
                     aria-label="Editar"
                   >
                     <Save className="h-4 w-4" />
@@ -295,7 +295,7 @@ export default function AdminRolesPage() {
               <p className="mt-2 text-sm text-slate-400">{role.description || "Sem descrição"}</p>
               <div className="mt-4 flex items-center justify-between border-t border-slate-800 pt-3">
                 <div className="flex items-center gap-3 text-sm">
-                  <span className="font-bold text-brand-600">{role.discount}% OFF</span>
+                  <span className="font-bold text-brand-400">{role.discount}% OFF</span>
                   <span className="flex items-center gap-1 text-slate-500">
                     <Users className="h-3 w-3" /> {role.userCount}
                   </span>
@@ -330,7 +330,7 @@ export default function AdminRolesPage() {
                 <div className="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
                   <button
                     onClick={() => openEdit(role)}
-                    className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-900 hover:text-brand-600"
+                    className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-900 hover:text-brand-400"
                     aria-label="Editar"
                   >
                     <Save className="h-4 w-4" />
@@ -429,7 +429,7 @@ export default function AdminRolesPage() {
                     onClick={() => setForm({ ...form, type: "CLIENT", permissions: [] })}
                     className={`flex-1 rounded-xl border-2 px-4 py-2.5 text-sm font-medium transition-colors ${
                       form.type === "CLIENT"
-                        ? "border-brand-500 bg-brand-50 text-brand-700"
+                        ? "border-brand-500 bg-slate-900/60 text-brand-400"
                         : "border-slate-700 text-slate-400 hover:bg-slate-900"
                     }`}
                   >
@@ -501,7 +501,7 @@ export default function AdminRolesPage() {
                     type="checkbox"
                     checked={form.isDefault}
                     onChange={(e) => setForm({ ...form, isDefault: e.target.checked })}
-                    className="h-5 w-5 rounded border-slate-700 text-brand-600 focus:ring-brand-500"
+                    className="h-5 w-5 rounded border-slate-700 text-brand-400 focus:ring-brand-500"
                   />
                   <div>
                     <p className="text-sm font-medium text-slate-100">Cargo padrão</p>
@@ -526,7 +526,7 @@ export default function AdminRolesPage() {
                           type="checkbox"
                           checked={form.permissions.includes(perm.id)}
                           onChange={() => togglePermission(perm.id)}
-                          className="h-4 w-4 rounded border-slate-700 text-brand-600 focus:ring-brand-500"
+                          className="h-4 w-4 rounded border-slate-700 text-brand-400 focus:ring-brand-500"
                         />
                         <span className="text-xs text-slate-300">{perm.label}</span>
                       </label>

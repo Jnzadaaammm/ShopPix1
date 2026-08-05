@@ -148,7 +148,7 @@ export default function ProfilePage() {
   if (status === "loading" || loading) {
     return (
       <div className="flex min-h-[50vh] items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-brand-600" />
+        <Loader2 className="h-8 w-8 animate-spin text-brand-400" />
       </div>
     );
   }
@@ -180,8 +180,8 @@ export default function ProfilePage() {
                 className="rounded-full ring-4 ring-brand-100"
               />
             ) : (
-              <div className="flex h-24 w-24 items-center justify-center rounded-full bg-brand-100 ring-4 ring-brand-50">
-                <User className="h-10 w-10 text-brand-600" />
+              <div className="flex h-24 w-24 items-center justify-center rounded-full bg-slate-800 ring-4 ring-brand-50">
+                <User className="h-10 w-10 text-brand-400" />
               </div>
             )}
             {profile.isAdmin && (
@@ -266,7 +266,7 @@ export default function ProfilePage() {
             <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
               <h2 className="mb-4 text-lg font-semibold text-slate-100">Pedidos Recentes</h2>
               {orders.length === 0 ? (
-                <p className="text-sm text-slate-400">Nenhum pedido ainda. <Link href="/produtos" className="text-brand-600 hover:underline">Começar a comprar →</Link></p>
+                <p className="text-sm text-slate-400">Nenhum pedido ainda. <Link href="/produtos" className="text-brand-400 hover:underline">Começar a comprar →</Link></p>
               ) : (
                 <div className="space-y-3">
                   {orders.slice(0, 3).map((order) => (
@@ -295,7 +295,7 @@ export default function ProfilePage() {
                   {orders.length > 3 && (
                     <button
                       onClick={() => setActiveTab("orders")}
-                      className="text-sm text-brand-600 hover:underline"
+                      className="text-sm text-brand-400 hover:underline"
                     >
                       Ver todos os {orders.length} pedidos →
                     </button>
@@ -309,7 +309,7 @@ export default function ProfilePage() {
                 <h2 className="mb-3 text-lg font-semibold text-slate-100">Ações Rápidas</h2>
                 <div className="space-y-2">
                   <Link href="/produtos" className="flex items-center gap-3 rounded-lg border p-3 hover:bg-slate-900">
-                    <ShoppingBag className="h-5 w-5 text-brand-600" />
+                    <ShoppingBag className="h-5 w-5 text-brand-400" />
                     <span className="text-sm font-medium">Continuar comprando</span>
                   </Link>
                   <Link href="/downloads" className="flex items-center gap-3 rounded-lg border p-3 hover:bg-slate-900">
@@ -353,7 +353,7 @@ export default function ProfilePage() {
           <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
             <h2 className="mb-4 text-lg font-semibold text-slate-100">Histórico de Pedidos</h2>
             {orders.length === 0 ? (
-              <p className="text-sm text-slate-400">Nenhum pedido realizado. <Link href="/produtos" className="text-brand-600 hover:underline">Ver produtos →</Link></p>
+              <p className="text-sm text-slate-400">Nenhum pedido realizado. <Link href="/produtos" className="text-brand-400 hover:underline">Ver produtos →</Link></p>
             ) : (
               <div className="space-y-3">
                 {orders.map((order) => (
@@ -490,7 +490,7 @@ export default function ProfilePage() {
                 {!editing && (
                   <button
                     onClick={() => setEditing(true)}
-                    className="flex items-center gap-1 text-sm text-brand-600 hover:underline"
+                    className="flex items-center gap-1 text-sm text-brand-400 hover:underline"
                   >
                     <Edit2 className="h-4 w-4" /> Editar
                   </button>
@@ -597,10 +597,10 @@ export default function ProfilePage() {
             <div className="rounded-xl border border-slate-700 bg-slate-900 p-6">
               <h2 className="mb-2 text-sm font-semibold text-slate-100">Links Úteis</h2>
               <div className="flex flex-wrap gap-3 text-sm">
-                <Link href="/termos" className="text-brand-600 hover:underline">Termos de Uso</Link>
-                <Link href="/privacidade" className="text-brand-600 hover:underline">Política de Privacidade</Link>
-                <Link href="/reembolso-politica" className="text-brand-600 hover:underline">Política de Reembolso</Link>
-                <Link href="/faq" className="text-brand-600 hover:underline">FAQ</Link>
+                <Link href="/termos" className="text-brand-400 hover:underline">Termos de Uso</Link>
+                <Link href="/privacidade" className="text-brand-400 hover:underline">Política de Privacidade</Link>
+                <Link href="/reembolso-politica" className="text-brand-400 hover:underline">Política de Reembolso</Link>
+                <Link href="/faq" className="text-brand-400 hover:underline">FAQ</Link>
               </div>
             </div>
           </div>

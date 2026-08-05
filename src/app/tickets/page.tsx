@@ -178,7 +178,7 @@ export default function TicketsPage() {
   if (status === "loading" || loading) {
     return (
       <div className="flex min-h-[50vh] items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-brand-600" />
+        <Loader2 className="h-8 w-8 animate-spin text-brand-400" />
       </div>
     );
   }
@@ -190,7 +190,7 @@ export default function TicketsPage() {
       <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
         <button
           onClick={() => closeTicket()}
-          className="mb-6 inline-flex items-center gap-2 text-sm text-slate-400 hover:text-brand-600"
+          className="mb-6 inline-flex items-center gap-2 text-sm text-slate-400 hover:text-brand-400"
         >
           <ArrowLeft className="h-4 w-4" /> Voltar aos tickets
         </button>
@@ -220,7 +220,7 @@ export default function TicketsPage() {
                 key={msg.id}
                 className={`flex gap-3 ${msg.isStaff ? "flex-row" : "flex-row-reverse"}`}
               >
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-100 text-sm font-medium text-brand-600">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-800 text-sm font-medium text-brand-400">
                   {msg.user?.name?.charAt(0).toUpperCase() || "?"}
                 </div>
                 <div className={`max-w-[75%] ${msg.isStaff ? "" : "text-right"}`}>
@@ -229,7 +229,7 @@ export default function TicketsPage() {
                       {msg.isStaff ? "Suporte" : msg.user?.name || "Você"}
                     </span>
                     {msg.isStaff && (
-                      <span className="rounded bg-brand-100 px-1.5 py-0.5 text-[10px] font-medium text-brand-600">
+                      <span className="rounded bg-slate-800 px-1.5 py-0.5 text-[10px] font-medium text-brand-400">
                         Equipe
                       </span>
                     )}
@@ -289,7 +289,7 @@ export default function TicketsPage() {
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="flex items-center gap-2 text-3xl font-bold text-slate-100">
-            <TicketIcon className="h-8 w-8 text-brand-600" /> Meus Tickets
+            <TicketIcon className="h-8 w-8 text-brand-400" /> Meus Tickets
           </h1>
           <p className="mt-2 text-slate-400">Central de suporte — tire suas dúvidas</p>
         </div>

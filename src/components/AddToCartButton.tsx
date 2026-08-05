@@ -104,7 +104,7 @@ export default function AddToCartButton({ product }: AddToCartButtonProps) {
 
       {/* Aviso se já está no carrinho */}
       {inCart && (
-        <p className="text-sm text-brand-600">
+        <p className="text-sm text-brand-400">
           ✓ {inCart.quantity} {inCart.quantity === 1 ? "unidade" : "unidades"} no carrinho
         </p>
       )}

@@ -124,7 +124,7 @@ export default function AdminCredentialsPage() {
   if (loading) {
     return (
       <div className="flex min-h-[50vh] items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-brand-600" />
+        <Loader2 className="h-8 w-8 animate-spin text-brand-400" />
       </div>
     );
   }
@@ -137,7 +137,7 @@ export default function AdminCredentialsPage() {
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
       <Link
         href="/admin/produtos"
-        className="mb-6 inline-flex items-center gap-2 text-sm text-slate-400 hover:text-brand-600"
+        className="mb-6 inline-flex items-center gap-2 text-sm text-slate-400 hover:text-brand-400"
       >
         <ArrowLeft className="h-4 w-4" /> Voltar a Produtos
       </Link>

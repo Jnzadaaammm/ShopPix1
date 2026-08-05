@@ -18,7 +18,7 @@ export default function ReembolsoPage() {
             Conforme o Código de Defesa do Consumidor (Lei nº 8.078/1990, Art. 49), você tem o direito de se arrepender da compra em até <strong>7 dias corridos</strong> contados da confirmação do pagamento.
           </p>
           <p className="mt-2 text-sm leading-relaxed">
-            Para exercer este direito, acesse a página do pedido em <a href="/pedidos" className="text-brand-600 hover:underline">Meus Pedidos</a> e solicite o reembolso, informando sua chave PIX para receber a devolução.
+            Para exercer este direito, acesse a página do pedido em <a href="/pedidos" className="text-brand-400 hover:underline">Meus Pedidos</a> e solicite o reembolso, informando sua chave PIX para receber a devolução.
           </p>
         </section>
 
@@ -49,7 +49,7 @@ export default function ReembolsoPage() {
             Para solicitar um reembolso:
           </p>
           <ol className="mt-2 list-decimal pl-6 text-sm space-y-1">
-            <li>Acesse <a href="/pedidos" className="text-brand-600 hover:underline">Meus Pedidos</a></li>
+            <li>Acesse <a href="/pedidos" className="text-brand-400 hover:underline">Meus Pedidos</a></li>
             <li>Encontre o pedido e clique em &ldquo;Solicitar Reembolso&rdquo;</li>
             <li>Informe o motivo e sua chave PIX</li>
             <li>Aguarde a análise da nossa equipe (até 5 dias úteis)</li>
@@ -101,7 +101,7 @@ export default function ReembolsoPage() {
         <section>
           <h2 className="text-xl font-semibold text-slate-100">9. Contato</h2>
           <p className="mt-2 text-sm leading-relaxed">
-            Em caso de dúvidas sobre nossa política de reembolso: <a href="mailto:contato@shoppix.com.br" className="text-brand-600 hover:underline">contato@shoppix.com.br</a>
+            Em caso de dúvidas sobre nossa política de reembolso: <a href="mailto:contato@shoppix.com.br" className="text-brand-400 hover:underline">contato@shoppix.com.br</a>
           </p>
         </section>
       </div>

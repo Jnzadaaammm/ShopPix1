@@ -173,7 +173,7 @@ export default function AdminCouponsPage() {
                 <tr key={coupon.id} className="hover:bg-slate-900">
                   <td className="px-6 py-4">
                     <span className="flex items-center gap-2">
-                      <Ticket className="h-4 w-4 text-brand-600" />
+                      <Ticket className="h-4 w-4 text-brand-400" />
                       <span className="font-mono font-bold text-slate-100">{coupon.code}</span>
                     </span>
                   </td>

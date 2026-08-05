@@ -98,7 +98,7 @@ export default function OrdersPage() {
   if (status === "loading" || loading) {
     return (
       <div className="flex min-h-[50vh] items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-brand-600" />
+        <Loader2 className="h-8 w-8 animate-spin text-brand-400" />
       </div>
     );
   }
@@ -175,7 +175,7 @@ export default function OrdersPage() {
                   >
                     {ORDER_STATUS_LABELS[order.status as keyof typeof ORDER_STATUS_LABELS] || order.status}
                   </span>
-                  <span className="text-lg font-bold text-brand-600">
+                  <span className="text-lg font-bold text-brand-400">
                     {formatCurrency(order.total)}
                   </span>
                 </div>
@@ -264,7 +264,7 @@ export default function OrdersPage() {
                   ) : (
                     <Link
                       href={`/checkout/${order.id}`}
-                      className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-brand-600 hover:underline"
+                      className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-brand-400 hover:underline"
                     >
                       Finalizar Pagamento <ArrowRight className="h-3 w-3" />
                     </Link>

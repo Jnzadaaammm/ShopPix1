@@ -194,7 +194,7 @@ export default function AdminTicketsPage() {
       <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
         <button
           onClick={() => closeTicket()}
-          className="mb-6 inline-flex items-center gap-2 text-sm text-slate-400 hover:text-brand-600"
+          className="mb-6 inline-flex items-center gap-2 text-sm text-slate-400 hover:text-brand-400"
         >
           <ArrowLeft className="h-4 w-4" /> Voltar
         </button>
@@ -262,7 +262,7 @@ export default function AdminTicketsPage() {
                 <div className={`max-w-[75%] ${msg.isStaff ? "text-right" : ""}`}>
                   <div className="mb-1 flex items-center gap-2">
                     {msg.isStaff && (
-                      <span className="rounded bg-brand-100 px-1.5 py-0.5 text-[10px] font-medium text-brand-600">
+                      <span className="rounded bg-slate-800 px-1.5 py-0.5 text-[10px] font-medium text-brand-400">
                         Equipe
                       </span>
                     )}
@@ -312,7 +312,7 @@ export default function AdminTicketsPage() {
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-8">
         <h1 className="flex items-center gap-2 text-3xl font-bold text-slate-100">
-          <TicketIcon className="h-8 w-8 text-brand-600" /> Tickets de Suporte
+          <TicketIcon className="h-8 w-8 text-brand-400" /> Tickets de Suporte
         </h1>
         <p className="mt-2 text-slate-400">Gerencie tickets de suporte dos clientes</p>
       </div>

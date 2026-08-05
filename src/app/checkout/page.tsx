@@ -146,7 +146,7 @@ export default function CheckoutPage() {
   if (status === "loading") {
     return (
       <div className="flex min-h-[50vh] items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-brand-600" />
+        <Loader2 className="h-8 w-8 animate-spin text-brand-400" />
       </div>
     );
   }
@@ -192,7 +192,7 @@ export default function CheckoutPage() {
                             setPixKeyCopied(true);
                             setTimeout(() => setPixKeyCopied(false), 2000);
                           }}
-                          className="rounded-lg bg-brand-100 p-2 text-brand-600 hover:bg-brand-200"
+                          className="rounded-lg bg-slate-800 p-2 text-brand-400 hover:bg-brand-200"
                           title="Copiar chave"
                         >
                           {pixKeyCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
@@ -215,7 +215,7 @@ export default function CheckoutPage() {
                           setPixPasteCopied(true);
                           setTimeout(() => setPixPasteCopied(false), 2000);
                         }}
-                        className="rounded-lg bg-brand-100 p-2 text-brand-600 hover:bg-brand-200"
+                        className="rounded-lg bg-slate-800 p-2 text-brand-400 hover:bg-brand-200"
                         title="Copiar código"
                       >
                         {pixPasteCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
@@ -248,7 +248,7 @@ export default function CheckoutPage() {
           </div>
 
           <div className="mt-6 text-center">
-            <Link href="/pedidos" className="text-sm text-brand-600 hover:underline">
+            <Link href="/pedidos" className="text-sm text-brand-400 hover:underline">
               Ver meus pedidos
             </Link>
           </div>
@@ -283,7 +283,7 @@ export default function CheckoutPage() {
           onPaymentError={(err) => setError(err)}
         />
         <div className="mt-6 text-center">
-          <Link href="/pedidos" className="text-sm text-brand-600 hover:underline">
+          <Link href="/pedidos" className="text-sm text-brand-400 hover:underline">
             Ver meus pedidos
           </Link>
         </div>
@@ -342,7 +342,7 @@ export default function CheckoutPage() {
                   <button
                     onClick={applyCoupon}
                     disabled={couponLoading || !couponCode.trim()}
-                    className="rounded-lg bg-brand-50 px-3 py-2 text-sm font-medium text-brand-600 hover:bg-brand-100 disabled:opacity-50"
+                    className="rounded-lg bg-slate-900/60 px-3 py-2 text-sm font-medium text-brand-400 hover:bg-slate-800 disabled:opacity-50"
                   >
                     {couponLoading ? "..." : "Aplicar"}
                   </button>
@@ -364,11 +364,11 @@ export default function CheckoutPage() {
                   onClick={() => setPaymentMethod("stripe")}
                   className={`flex w-full items-center gap-3 rounded-lg border p-4 text-left transition-colors ${
                     paymentMethod === "stripe"
-                      ? "border-brand-600 bg-brand-50"
+                      ? "border-brand-600 bg-slate-900/60"
                       : "border-slate-700 hover:bg-slate-900"
                   }`}
                 >
-                  <CreditCard className="h-5 w-5 text-brand-600" />
+                  <CreditCard className="h-5 w-5 text-brand-400" />
                   <div>
                     <p className="font-medium text-slate-100">Cartão de Crédito/Débito (Stripe)</p>
                     <p className="text-sm text-slate-400">Pagamento processado com segurança pelo Stripe.</p>
@@ -381,7 +381,7 @@ export default function CheckoutPage() {
                   onClick={() => setPaymentMethod("paypal")}
                   className={`flex w-full items-center gap-3 rounded-lg border p-4 text-left transition-colors ${
                     paymentMethod === "paypal"
-                      ? "border-brand-600 bg-brand-50"
+                      ? "border-brand-600 bg-slate-900/60"
                       : "border-slate-700 hover:bg-slate-900"
                   }`}
                 >
@@ -400,7 +400,7 @@ export default function CheckoutPage() {
                   onClick={() => setPaymentMethod("pix")}
                   className={`flex w-full items-center gap-3 rounded-lg border p-4 text-left transition-colors ${
                     paymentMethod === "pix"
-                      ? "border-brand-600 bg-brand-50"
+                      ? "border-brand-600 bg-slate-900/60"
                       : "border-slate-700 hover:bg-slate-900"
                   }`}
                 >

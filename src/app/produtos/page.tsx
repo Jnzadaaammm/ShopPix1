@@ -161,8 +161,8 @@ export default function ProductsPage() {
   if (status === "unauthenticated") {
     return (
       <div className="mx-auto max-w-md px-4 py-24 text-center sm:px-6 lg:px-8">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-100">
-          <Lock className="h-8 w-8 text-brand-600" />
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-800">
+          <Lock className="h-8 w-8 text-brand-400" />
         </div>
         <h1 className="mt-6 text-2xl font-bold text-slate-100">Conta necessária</h1>
         <p className="mt-2 text-slate-400">
@@ -230,7 +230,7 @@ export default function ProductsPage() {
           <button
             onClick={() => setShowFilters(!showFilters)}
             className={`flex items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-colors ${
-              showFilters ? "border-brand-500 bg-brand-50 text-brand-700" : "border-slate-700 text-slate-400 hover:bg-slate-900"
+              showFilters ? "border-brand-500 bg-slate-900/60 text-brand-400" : "border-slate-700 text-slate-400 hover:bg-slate-900"
             }`}
           >
             <SlidersHorizontal className="h-4 w-4" /> Filtros
@@ -321,7 +321,7 @@ export default function ProductsPage() {
       {categoryGroups.length === 0 ? (
         <div className="rounded-xl border bg-slate-950 py-20 text-center">
           <p className="text-slate-400">Nenhum produto encontrado com esses filtros.</p>
-          <button onClick={clearFilters} className="mt-3 text-sm text-brand-600 hover:underline">
+          <button onClick={clearFilters} className="mt-3 text-sm text-brand-400 hover:underline">
             Limpar filtros
           </button>
         </div>

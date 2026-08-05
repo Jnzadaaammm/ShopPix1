@@ -68,11 +68,11 @@ export default function FAQPage() {
         ))}
       </div>
 
-      <div className="mt-8 rounded-xl bg-brand-50 p-6 text-center">
+      <div className="mt-8 rounded-2xl border border-slate-800 bg-slate-900 p-8 text-center">
         <p className="text-slate-300">Ainda tem dúvidas?</p>
         <a
           href="mailto:contato@shoppix.com.br"
-          className="mt-2 inline-block rounded-lg bg-brand-600 px-6 py-2.5 text-white hover:bg-brand-700"
+          className="btn-primary mt-4"
         >
           Entre em contato
         </a>

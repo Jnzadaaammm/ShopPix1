@@ -110,7 +110,7 @@ export default function ProductReviews({ productId }: { productId: string }) {
         {session && (
           <button
             onClick={() => setShowForm(!showForm)}
-            className="flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium text-brand-600 hover:bg-brand-50"
+            className="flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium text-brand-400 hover:bg-slate-900/60"
           >
             <MessageSquare className="h-4 w-4" />
             {showForm ? "Cancelar" : "Avaliar produto"}

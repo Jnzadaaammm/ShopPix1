@@ -257,7 +257,7 @@ export default function AdminProductsPage() {
           onClick={() => setActiveTab("produtos")}
           className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-colors ${
             activeTab === "produtos"
-              ? "border-b-2 border-brand-600 text-brand-600"
+              ? "border-b-2 border-brand-600 text-brand-400"
               : "text-slate-400 hover:text-slate-300"
           }`}
         >
@@ -603,7 +603,7 @@ export default function AdminProductsPage() {
                       id="featured"
                       checked={formData.featured}
                       onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
-                      className="h-4 w-4 rounded border-slate-700 text-brand-600 focus:ring-brand-500"
+                      className="h-4 w-4 rounded border-slate-700 text-brand-400 focus:ring-brand-500"
                     />
                     <span className="text-sm text-slate-300">Mostrar na home</span>
                   </label>
@@ -643,11 +643,11 @@ export default function AdminProductsPage() {
                     onClick={() => setFormData({ ...formData, stockMode: "SIMPLE" })}
                     className={`flex flex-col items-center gap-1.5 rounded-xl border p-3 text-center transition-all ${
                       formData.stockMode === "SIMPLE"
-                        ? "border-brand-500 bg-brand-50 ring-2 ring-brand-500/20"
+                        ? "border-brand-500 bg-slate-900/60 ring-2 ring-brand-500/20"
                         : "border-slate-700 hover:bg-slate-900"
                     }`}
                   >
-                    <InfinityIcon className="h-5 w-5 text-brand-600" />
+                    <InfinityIcon className="h-5 w-5 text-brand-400" />
                     <span className="text-xs font-medium text-slate-100">Download Ilimitado</span>
                     <span className="text-[10px] text-slate-500">Arquivo único</span>
                   </button>
@@ -656,11 +656,11 @@ export default function AdminProductsPage() {
                     onClick={() => setFormData({ ...formData, stockMode: "CREDENTIALS" })}
                     className={`flex flex-col items-center gap-1.5 rounded-xl border p-3 text-center transition-all ${
                       formData.stockMode === "CREDENTIALS"
-                        ? "border-brand-500 bg-brand-50 ring-2 ring-brand-500/20"
+                        ? "border-brand-500 bg-slate-900/60 ring-2 ring-brand-500/20"
                         : "border-slate-700 hover:bg-slate-900"
                     }`}
                   >
-                    <KeyRound className="h-5 w-5 text-brand-600" />
+                    <KeyRound className="h-5 w-5 text-brand-400" />
                     <span className="text-xs font-medium text-slate-100">Credenciais</span>
                     <span className="text-[10px] text-slate-500">Uma por cliente</span>
                   </button>

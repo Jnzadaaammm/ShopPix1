@@ -12,7 +12,7 @@ export default function HeroSection() {
       <div className="absolute bottom-0 right-0 h-[600px] w-[600px] translate-x-1/4 translate-y-1/4 rounded-full bg-indigo-600/10 blur-[120px]" />
 
       <div className="relative mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
-        <span className="inline-flex items-center gap-2 rounded-full border border-brand-500/20 bg-brand-500/10 px-4 py-1.5 text-sm font-medium text-brand-300 backdrop-blur-md">
+        <span className="inline-flex items-center gap-2 rounded-full border border-brand-500/20 bg-slate-900/600/10 px-4 py-1.5 text-sm font-medium text-brand-300 backdrop-blur-md">
           <Sparkles className="h-3.5 w-3.5" />
           Entrega Instantânea
         </span>
@@ -32,7 +32,7 @@ export default function HeroSection() {
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <Link
             href="/produtos"
-            className="inline-flex items-center gap-2 rounded-full bg-brand-600 px-8 py-4 font-semibold text-white shadow-lg shadow-brand-600/25 transition-all hover:bg-brand-500 hover:shadow-xl active:scale-[0.98]"
+            className="inline-flex items-center gap-2 rounded-full bg-brand-600 px-8 py-4 font-semibold text-white shadow-lg shadow-brand-600/25 transition-all hover:bg-slate-900/600 hover:shadow-xl active:scale-[0.98]"
           >
             Ver Catálogo <ArrowRight className="h-4 w-4" />
           </Link>

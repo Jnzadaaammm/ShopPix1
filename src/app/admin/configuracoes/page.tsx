@@ -107,7 +107,7 @@ export default function AdminSettingsPage() {
   ];
 
   const colorMap: Record<string, string> = {
-    brand: "bg-brand-100 text-brand-600",
+    brand: "bg-slate-800 text-brand-400",
     green: "bg-green-100 text-green-600",
     blue: "bg-blue-100 text-blue-600",
     purple: "bg-purple-100 text-purple-600",
@@ -125,8 +125,8 @@ export default function AdminSettingsPage() {
       {/* === Informações da Loja === */}
       <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
         <div className="mb-4 flex items-center gap-2">
-          <div className="rounded-lg bg-brand-100 p-2">
-            <Store className="h-5 w-5 text-brand-600" />
+          <div className="rounded-lg bg-slate-800 p-2">
+            <Store className="h-5 w-5 text-brand-400" />
           </div>
           <div>
             <h2 className="text-lg font-semibold text-slate-100">Informações da Loja</h2>

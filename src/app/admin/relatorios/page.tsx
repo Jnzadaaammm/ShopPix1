@@ -204,7 +204,7 @@ export default function AdminReportsPage() {
                   </div>
                   <div className="h-2 rounded-full bg-slate-900">
                     <div
-                      className="h-2 rounded-full bg-brand-500"
+                      className="h-2 rounded-full bg-slate-900/600"
                       style={{ width: `${(cat.revenue / maxCatRevenue) * 100}%` }}
                     />
                   </div>

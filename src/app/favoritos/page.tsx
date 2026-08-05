@@ -76,7 +76,7 @@ export default function WishlistPage() {
   if (status === "loading" || loading) {
     return (
       <div className="flex min-h-[50vh] items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-brand-600" />
+        <Loader2 className="h-8 w-8 animate-spin text-brand-400" />
       </div>
     );
   }
@@ -95,7 +95,7 @@ export default function WishlistPage() {
         <div className="rounded-xl border bg-slate-950 py-20 text-center">
           <Heart className="mx-auto h-12 w-12 text-gray-300" />
           <p className="mt-4 text-slate-400">Você ainda não tem favoritos.</p>
-          <Link href="/produtos" className="mt-4 inline-block text-brand-600 hover:underline">
+          <Link href="/produtos" className="mt-4 inline-block text-brand-400 hover:underline">
             Explorar produtos →
           </Link>
         </div>
@@ -117,12 +117,12 @@ export default function WishlistPage() {
               </Link>
               <div className="flex-1 min-w-0">
                 <Link href={`/produtos/${item.product.id}`}>
-                  <h3 className="font-semibold text-slate-100 truncate hover:text-brand-600">
+                  <h3 className="font-semibold text-slate-100 truncate hover:text-brand-400">
                     {item.product.name}
                   </h3>
                 </Link>
                 <p className="text-sm text-slate-400">{item.product.category.name}</p>
-                <p className="mt-1 text-lg font-bold text-brand-600">
+                <p className="mt-1 text-lg font-bold text-brand-400">
                   {formatCurrency(item.product.price)}
                 </p>
               </div>

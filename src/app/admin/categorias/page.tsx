@@ -220,7 +220,7 @@ export default function AdminCategoriesPage() {
           onClick={() => setActiveTab("categorias")}
           className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-colors ${
             activeTab === "categorias"
-              ? "border-b-2 border-brand-600 text-brand-600"
+              ? "border-b-2 border-brand-600 text-brand-400"
               : "text-slate-400 hover:text-slate-300"
           }`}
         >

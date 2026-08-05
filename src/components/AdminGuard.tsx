@@ -30,7 +30,7 @@ export default function AdminGuard({ children }: AdminGuardProps) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-slate-900">
         <div className="text-center">
-          <Loader2 className="mx-auto h-8 w-8 animate-spin text-brand-600" />
+          <Loader2 className="mx-auto h-8 w-8 animate-spin text-brand-400" />
           <p className="mt-2 text-slate-400">Verificando permissões...</p>
         </div>
       </div>

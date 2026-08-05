@@ -172,7 +172,7 @@ export default function RefundRequestPage({
     <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6 lg:px-8">
       <button
         onClick={() => router.push("/pedidos")}
-        className="mb-6 inline-flex items-center gap-2 text-sm text-slate-400 hover:text-brand-600"
+        className="mb-6 inline-flex items-center gap-2 text-sm text-slate-400 hover:text-brand-400"
       >
         <ArrowLeft className="h-4 w-4" /> Voltar aos pedidos
       </button>
@@ -199,7 +199,7 @@ export default function RefundRequestPage({
         <div className="mt-4 border-t border-slate-800 pt-4">
           <div className="flex justify-between">
             <span className="font-bold">Total do Pedido</span>
-            <span className="text-xl font-bold text-brand-600">
+            <span className="text-xl font-bold text-brand-400">
               {formatCurrency(order.total)}
             </span>
           </div>

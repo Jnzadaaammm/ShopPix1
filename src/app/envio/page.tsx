@@ -19,7 +19,7 @@ export default function EnvioPage() {
           </p>
           <ul className="mt-2 list-disc pl-6 text-sm space-y-1">
             <li>Um email com o link de download temporário</li>
-            <li>Acesso à área <a href="/downloads" className="text-brand-600 hover:underline">Meus Downloads</a> em sua conta</li>
+            <li>Acesso à área <a href="/downloads" className="text-brand-400 hover:underline">Meus Downloads</a> em sua conta</li>
           </ul>
           <p className="mt-2 text-sm leading-relaxed">
             O link de download tem validade limitada e número máximo de acessos, conforme especificado em cada produto.
@@ -45,8 +45,8 @@ export default function EnvioPage() {
           </p>
           <ul className="mt-2 list-disc pl-6 text-sm space-y-1">
             <li>Verifique sua caixa de spam/lixo eletrônico</li>
-            <li>Acesse a página <a href="/downloads" className="text-brand-600 hover:underline">Meus Downloads</a> diretamente</li>
-            <li>Entre em contato: <a href="mailto:contato@shoppix.com.br" className="text-brand-600 hover:underline">contato@shoppix.com.br</a></li>
+            <li>Acesse a página <a href="/downloads" className="text-brand-400 hover:underline">Meus Downloads</a> diretamente</li>
+            <li>Entre em contato: <a href="mailto:contato@shoppix.com.br" className="text-brand-400 hover:underline">contato@shoppix.com.br</a></li>
           </ul>
         </section>
 
@@ -67,7 +67,7 @@ export default function EnvioPage() {
         <section>
           <h2 className="text-xl font-semibold text-slate-100">6. Contato</h2>
           <p className="mt-2 text-sm leading-relaxed">
-            Dúvidas sobre entrega: <a href="mailto:contato@shoppix.com.br" className="text-brand-600 hover:underline">contato@shoppix.com.br</a>
+            Dúvidas sobre entrega: <a href="mailto:contato@shoppix.com.br" className="text-brand-400 hover:underline">contato@shoppix.com.br</a>
           </p>
         </section>
       </div>
