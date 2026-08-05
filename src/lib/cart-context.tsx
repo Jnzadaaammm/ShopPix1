@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { useSession } from "next-auth/react";
 
 export interface CartItem {
   productId: string;
@@ -22,29 +23,42 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-const CART_KEY = "ecommerce-cart";
+const CART_KEY_GUEST = "ecommerce-cart-guest";
+
+function getCartKey(userId?: string) {
+  return userId ? `ecommerce-cart-${userId}` : CART_KEY_GUEST;
+}
 
 export function CartProvider({ children }: { children: ReactNode }) {
+  const { data: session, status } = useSession();
   const [items, setItems] = useState<CartItem[]>([]);
   const [loaded, setLoaded] = useState(false);
 
+  const userId = session?.user?.id as string | undefined;
+
   useEffect(() => {
-    const saved = localStorage.getItem(CART_KEY);
+    if (status === "loading") return;
+    const key = getCartKey(userId);
+    const saved = localStorage.getItem(key);
     if (saved) {
       try {
         setItems(JSON.parse(saved));
       } catch {
-        localStorage.removeItem(CART_KEY);
+        localStorage.removeItem(key);
       }
+    } else {
+      setItems([]);
     }
     setLoaded(true);
-  }, []);
+  }, [userId, status]);
 
   useEffect(() => {
-    if (loaded) {
-      localStorage.setItem(CART_KEY, JSON.stringify(items));
+    if (loaded && userId) {
+      localStorage.setItem(getCartKey(userId), JSON.stringify(items));
+    } else if (loaded && !userId) {
+      localStorage.setItem(CART_KEY_GUEST, JSON.stringify(items));
     }
-  }, [items, loaded]);
+  }, [items, loaded, userId]);
 
   const addItem = (item: Omit<CartItem, "quantity">) => {
     setItems((prev) => {
