@@ -78,7 +78,7 @@ function ProductCard({
   };
 
   return (
-    <div className="group relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/60 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-slate-700 hover:bg-slate-900 hover:shadow-2xl hover:shadow-brand-900/20">
+    <div className="group relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/60 backdrop-blur-sm transition-all duration-500 hover:-translate-y-1.5 hover:border-slate-700 hover:bg-slate-900 hover:shadow-2xl hover:shadow-brand-900/20">
       <Link href={`/produtos/${id}`}>
         <div className="relative aspect-square overflow-hidden bg-slate-950">
           <ImageWithFallback

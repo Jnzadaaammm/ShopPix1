@@ -30,23 +30,23 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 py-3 font-semibold text-white shadow-lg shadow-brand-600/20 transition-all hover:bg-brand-500 hover:shadow-xl hover:shadow-brand-500/30 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-6 py-3 font-semibold text-white shadow-lg shadow-brand-600/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-500 hover:shadow-xl hover:shadow-brand-500/30 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl border-2 border-slate-700 bg-slate-900 px-6 py-3 font-semibold text-slate-200 transition-all hover:border-brand-500 hover:bg-slate-800 active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border-2 border-slate-700 bg-slate-900 px-6 py-3 font-semibold text-slate-200 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-500 hover:bg-slate-800 active:scale-[0.98];
   }
 
   .btn-outline {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 px-4 py-2 text-sm font-medium text-slate-300 transition-all hover:border-brand-500 hover:bg-slate-800 hover:text-brand-300;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 px-4 py-2 text-sm font-medium text-slate-300 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-500 hover:bg-slate-800 hover:text-brand-300;
   }
 
   .card {
-    @apply rounded-2xl border border-slate-800 bg-slate-900 shadow-sm transition-all duration-300 hover:shadow-xl hover:shadow-brand-900/20;
+    @apply rounded-2xl border border-slate-800 bg-slate-900 shadow-sm transition-all duration-500 hover:shadow-xl hover:shadow-brand-900/20;
   }
 
   .input {
-    @apply w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 placeholder:text-slate-500 transition-all focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10;
+    @apply w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 placeholder:text-slate-500 transition-all duration-300 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/10;
   }
 
   /* Badge com gradiente */
@@ -151,5 +151,32 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  /* Delays escalonados */
+  .delay-100 { animation-delay: 0.1s; }
+  .delay-200 { animation-delay: 0.2s; }
+  .delay-300 { animation-delay: 0.3s; }
+  .delay-400 { animation-delay: 0.4s; }
+  .delay-500 { animation-delay: 0.5s; }
+
+  /* Reveal on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Hover lift */
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -15px rgba(124, 58, 237, 0.2);
   }
 }

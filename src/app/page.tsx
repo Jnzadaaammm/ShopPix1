@@ -85,11 +85,11 @@ export default async function HomePage() {
               from: "from-emerald-500",
               to: "to-emerald-700",
             },
-          ].map((f) => (
+          ].map((f, i) => (
             <div
               key={f.title}
-              className="group rounded-2xl border border-slate-800 bg-slate-900/50 p-6 transition-all hover:-translate-y-1 hover:border-slate-700 hover:bg-slate-900"
-            >
+              className={`group animate-fade-in-up rounded-2xl border border-slate-800 bg-slate-900/50 p-6 transition-all duration-500 hover:-translate-y-1 hover:border-slate-700 hover:bg-slate-900 hover:shadow-2xl hover:shadow-brand-900/20`}
+              style={{ animationDelay: `${i * 100}ms`, opacity: 0 }}
               <div
                 className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${f.from} ${f.to} text-white shadow-lg transition-transform group-hover:scale-110`}
               >
@@ -115,18 +115,19 @@ export default async function HomePage() {
             </Link>
           </div>
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {productsWithRating.map((product) => (
-              <ProductCard
-                key={product.id}
-                id={product.id}
-                name={product.name}
-                price={product.price}
-                image={product.image}
-                category={product.category}
-                stockMode={product.stockMode}
-                rating={product.rating}
-                reviewCount={product.reviewCount}
-              />
+            {productsWithRating.map((product, i) => (
+              <div key={product.id} className="animate-fade-in-up" style={{ animationDelay: `${i * 100}ms`, opacity: 0 }}>
+                <ProductCard
+                  id={product.id}
+                  name={product.name}
+                  price={product.price}
+                  image={product.image}
+                  category={product.category}
+                  stockMode={product.stockMode}
+                  rating={product.rating}
+                  reviewCount={product.reviewCount}
+                />
+              </div>
             ))}
           </div>
           <div className="mt-8 text-center sm:hidden">
@@ -157,18 +158,19 @@ export default async function HomePage() {
               </Link>
             </div>
             <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {cat.products.map((product: any) => (
-                <ProductCard
-                  key={product.id}
-                  id={product.id}
-                  name={product.name}
-                  price={product.price}
-                  image={product.image}
-                  category={product.category}
-                  stockMode={product.stockMode}
-                  rating={product.rating}
-                  reviewCount={product.reviewCount}
-                />
+              {cat.products.map((product: any, i: number) => (
+                <div key={product.id} className="animate-fade-in-up" style={{ animationDelay: `${i * 100}ms`, opacity: 0 }}>
+                  <ProductCard
+                    id={product.id}
+                    name={product.name}
+                    price={product.price}
+                    image={product.image}
+                    category={product.category}
+                    stockMode={product.stockMode}
+                    rating={product.rating}
+                    reviewCount={product.reviewCount}
+                  />
+                </div>
               ))}
             </div>
             <div className="mt-6 text-center sm:hidden">
