@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { useState, useCallback, useEffect, useMemo } from "react";
 import { Search, Shield, ShieldOff, Mail, Package, Calendar, Crown } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";

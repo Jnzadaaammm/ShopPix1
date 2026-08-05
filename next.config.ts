@@ -28,7 +28,23 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Otimizacoes de memoria
+  output: "standalone",
+  productionBrowserSourceMaps: false,
+  experimental: {
+    // Limitar workers paralelos para economizar RAM
+    workerThreads: false,
+    cpus: 1,
+    // Desativar recursos pesados
+    optimizePackageImports: [
+      "lucide-react",
+      "discord.js",
+      "@paypal/react-paypal-js",
+      "@stripe/react-stripe-js",
+    ],
+  },
   images: {
+    formats: ["image/webp"],
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "cdn.discordapp.com" },

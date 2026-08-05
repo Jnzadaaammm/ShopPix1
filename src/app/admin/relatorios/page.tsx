@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { useState, useEffect, useCallback, useRef } from "react";
 import { TrendingUp, ShoppingCart, DollarSign, Percent, Download } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";

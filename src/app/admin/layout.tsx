@@ -1,3 +1,6 @@
+// Admin e sempre dinamico (nao pre-renderizar no build) para economizar RAM
+export const dynamic = "force-dynamic";
+
 import AdminGuard from "@/components/AdminGuard";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 import AdminMobileNav from "@/components/admin/AdminMobileNav";

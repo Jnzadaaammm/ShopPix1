@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { useState, useCallback } from "react";
 import { Plus, Edit, Trash2, Tag, AlertTriangle } from "lucide-react";
 import { usePolling } from "@/lib/use-polling";

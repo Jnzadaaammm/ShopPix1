@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { useState, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import { Crown, Plus, Save, Trash2, X, Users, Shield, Tag, Check, RefreshCw, ShieldAlert } from "lucide-react";
