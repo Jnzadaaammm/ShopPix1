@@ -1,14 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 import { CreditCard, ArrowUp } from "lucide-react";
 
 export default function Footer() {
-  const { data: session } = useSession();
-  const user = session?.user as any;
-  const isAdmin = user?.isAdmin;
-
   return (
     <footer className="mt-auto border-t border-gray-100 bg-white">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
@@ -28,20 +23,6 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="font-semibold text-gray-900">Navegação</h3>
-            <ul className="mt-3 space-y-2 text-sm text-gray-500">
-              <li><Link href="/produtos" className="hover:text-brand-600">Produtos</Link></li>
-              <li><Link href="/carrinho" className="hover:text-brand-600">Carrinho</Link></li>
-              <li><Link href="/pedidos" className="hover:text-brand-600">Meus Pedidos</Link></li>
-              <li><Link href="/downloads" className="hover:text-brand-600">Meus Downloads</Link></li>
-              <li><Link href="/favoritos" className="hover:text-brand-600">Favoritos</Link></li>
-              {isAdmin && (
-                <li><Link href="/admin" className="hover:text-brand-600">Admin</Link></li>
-              )}
-            </ul>
-          </div>
-
-          <div>
             <h3 className="font-semibold text-gray-900">Ajuda</h3>
             <ul className="mt-3 space-y-2 text-sm text-gray-500">
               <li><Link href="/faq" className="hover:text-brand-600">Perguntas Frequentes</Link></li>
@@ -57,8 +38,11 @@ export default function Footer() {
               <li><Link href="/termos" className="hover:text-brand-600">Termos de Uso</Link></li>
               <li><Link href="/privacidade" className="hover:text-brand-600">Política de Privacidade</Link></li>
             </ul>
-            <h3 className="mt-4 font-semibold text-gray-900">Pagamento</h3>
-            <div className="mt-2 flex flex-wrap items-center gap-2">
+          </div>
+
+          <div>
+            <h3 className="font-semibold text-gray-900">Pagamento</h3>
+            <div className="mt-3 flex flex-wrap items-center gap-2">
               <div className="flex items-center gap-1 rounded-lg bg-gray-50 px-2 py-1 text-xs text-gray-600" title="Cartão via Stripe">
                 <CreditCard className="h-3 w-3" /> Cartão
               </div>
