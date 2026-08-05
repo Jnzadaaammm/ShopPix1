@@ -5,7 +5,7 @@ import { prisma } from "./db";
  * Requer a variável de ambiente DISCORD_WEBHOOK_URL.
  */
 export async function notifyOrderCreated(orderId: string) {
-  const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+  const webhookUrl = process.env.DISCORD_ORDERS_WEBHOOK_URL;
   if (!webhookUrl) return;
 
   try {
