@@ -188,8 +188,7 @@ export default async function HomePage() {
 
       {/* CTA */}
       <section className="relative overflow-hidden bg-slate-900 py-24">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(124,58,237,0.08)_1px,transparent_0)] bg-[length:32px_32px]" />
-        <div className="absolute -right-20 top-1/2 h-80 w-80 -translate-y-1/2 rounded-full bg-brand-600/15 blur-[100px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(124,58,237,0.04)_1px,transparent_0)] bg-[length:32px_32px]" />
         <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-white sm:text-4xl">Pronto para começar?</h2>
           <p className="mx-auto mt-4 max-w-xl text-slate-400">
