@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { ShoppingCart, User, LogOut, Package, Menu, X, LayoutDashboard, Download, Heart, Ticket as TicketIcon, Search } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { getRoleColorClass } from "@/lib/roles";
 import ImageWithFallback from "@/components/ImageWithFallback";
 
@@ -23,9 +23,20 @@ export default function Header() {
   const { itemCount } = useCart();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const lastY = useRef(0);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10);
+    const handleScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 10);
+      if (y > lastY.current && y > 80) {
+        setHidden(true);
+      } else if (y < lastY.current) {
+        setHidden(false);
+      }
+      lastY.current = y;
+    };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -35,7 +46,9 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-4 left-1/2 z-50 w-[calc(100%-2rem)] max-w-6xl -translate-x-1/2 rounded-2xl border transition-all duration-300 md:top-6 ${
+      className={`fixed top-4 left-1/2 z-50 w-[calc(100%-2rem)] max-w-6xl -translate-x-1/2 rounded-2xl border transition-all duration-500 md:top-6 ${
+        hidden ? "-translate-y-[150%] opacity-0" : "translate-y-0 opacity-100"
+      } ${
         scrolled
           ? "border-slate-700/60 bg-slate-950/90 shadow-2xl shadow-black/30 backdrop-blur-xl"
           : "border-slate-800/40 bg-slate-950/70 backdrop-blur-lg"
