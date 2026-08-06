@@ -67,8 +67,8 @@ export default function Header() {
               <Link href="/pedidos" prefetch className="text-sm font-medium text-slate-400 transition-colors hover:text-slate-100">
                 Pedidos
               </Link>
-              <Link href="/downloads" prefetch className="text-sm font-medium text-slate-400 transition-colors hover:text-slate-100">
-                Downloads
+              <Link href="/tickets" prefetch className="text-sm font-medium text-slate-400 transition-colors hover:text-slate-100">
+                Suporte
               </Link>
             </>
           )}
@@ -149,8 +149,8 @@ export default function Header() {
                 <Link href="/pedidos" className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-slate-200 transition-colors hover:bg-slate-900" onClick={() => setMobileOpen(false)}>
                   <Package className="h-4 w-4" /> Meus Pedidos
                 </Link>
-                <Link href="/downloads" className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-slate-200 transition-colors hover:bg-slate-900" onClick={() => setMobileOpen(false)}>
-                  <Download className="h-4 w-4" /> Meus Downloads
+                <Link href="/tickets" className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-slate-200 transition-colors hover:bg-slate-900" onClick={() => setMobileOpen(false)}>
+                  <TicketIcon className="h-4 w-4" /> Suporte
                 </Link>
                 <Link href="/favoritos" className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-slate-200 transition-colors hover:bg-slate-900" onClick={() => setMobileOpen(false)}>
                   <Heart className="h-4 w-4" /> Favoritos
