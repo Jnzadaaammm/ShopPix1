@@ -19,6 +19,7 @@ import {
   ShoppingBag,
   TrendingUp,
   Edit2,
+  Ticket as TicketIcon,
 } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
 import { toast } from "@/components/ui/Toaster";
@@ -168,7 +169,7 @@ export default function ProfilePage() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
       {/* Header do perfil */}
-      <div className="rounded-2xl border bg-slate-950 p-6 shadow-sm">
+      <div className="card p-6">
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-start">
           <div className="relative">
             {profile.image ? (
@@ -215,40 +216,48 @@ export default function ProfilePage() {
 
       {/* Stats */}
       <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
-        <div className="rounded-xl border bg-slate-950 p-4 shadow-sm text-center">
-          <ShoppingBag className="mx-auto h-6 w-6 text-blue-500 mb-1" />
-          <p className="text-2xl font-bold text-slate-100">{profile.stats.totalOrders}</p>
+        <div className="card p-4 text-center transition-all hover:-translate-y-1">
+          <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-lg bg-blue-900/30 text-blue-400">
+            <ShoppingBag className="h-5 w-5" />
+          </div>
+          <p className="mt-2 text-2xl font-bold text-slate-100">{profile.stats.totalOrders}</p>
           <p className="text-xs text-slate-400">Pedidos</p>
         </div>
-        <div className="rounded-xl border bg-slate-950 p-4 shadow-sm text-center">
-          <TrendingUp className="mx-auto h-6 w-6 text-green-500 mb-1" />
-          <p className="text-xl font-bold text-slate-100">{formatCurrency(profile.stats.totalSpent)}</p>
+        <div className="card p-4 text-center transition-all hover:-translate-y-1">
+          <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-lg bg-green-900/30 text-green-400">
+            <TrendingUp className="h-5 w-5" />
+          </div>
+          <p className="mt-2 text-xl font-bold text-slate-100">{formatCurrency(profile.stats.totalSpent)}</p>
           <p className="text-xs text-slate-400">Total Gasto</p>
         </div>
-        <div className="rounded-xl border bg-slate-950 p-4 shadow-sm text-center">
-          <Download className="mx-auto h-6 w-6 text-purple-500 mb-1" />
-          <p className="text-2xl font-bold text-slate-100">{profile.stats.downloads}</p>
+        <div className="card p-4 text-center transition-all hover:-translate-y-1">
+          <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-lg bg-purple-900/30 text-purple-400">
+            <Download className="h-5 w-5" />
+          </div>
+          <p className="mt-2 text-2xl font-bold text-slate-100">{profile.stats.downloads}</p>
           <p className="text-xs text-slate-400">Downloads</p>
         </div>
-        <div className="rounded-xl border bg-slate-950 p-4 shadow-sm text-center">
-          <RefreshCw className="mx-auto h-6 w-6 text-orange-500 mb-1" />
-          <p className="text-2xl font-bold text-slate-100">{profile.stats.refunds}</p>
+        <div className="card p-4 text-center transition-all hover:-translate-y-1">
+          <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-lg bg-orange-900/30 text-orange-400">
+            <RefreshCw className="h-5 w-5" />
+          </div>
+          <p className="mt-2 text-2xl font-bold text-slate-100">{profile.stats.refunds}</p>
           <p className="text-xs text-slate-400">Reembolsos</p>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="mt-6 flex gap-1 overflow-x-auto rounded-xl border bg-slate-950 p-1.5 shadow-sm">
+      <div className="mt-6 flex gap-2 overflow-x-auto">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           return (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex flex-shrink-0 items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+              className={`flex flex-shrink-0 items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-all ${
                 activeTab === tab.id
-                  ? "bg-brand-600 text-white"
-                  : "text-slate-400 hover:bg-slate-900"
+                  ? "border-brand-500 bg-brand-600/10 text-brand-400"
+                  : "border-slate-800 bg-slate-900 text-slate-400 hover:border-slate-700 hover:text-slate-200"
               }`}
             >
               <Icon className="h-4 w-4" />
@@ -263,8 +272,15 @@ export default function ProfilePage() {
         {/* Visão Geral */}
         {activeTab === "overview" && (
           <div className="space-y-6">
-            <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
-              <h2 className="mb-4 text-lg font-semibold text-slate-100">Pedidos Recentes</h2>
+            <div className="card p-6">
+              <div className="mb-4 flex items-center justify-between">
+                <h2 className="text-lg font-semibold text-slate-100">Pedidos Recentes</h2>
+                {orders.length > 0 && (
+                  <button onClick={() => setActiveTab("orders")} className="text-sm text-brand-400 hover:underline">
+                    Ver todos
+                  </button>
+                )}
+              </div>
               {orders.length === 0 ? (
                 <p className="text-sm text-slate-400">Nenhum pedido ainda. <Link href="/produtos" className="text-brand-400 hover:underline">Começar a comprar →</Link></p>
               ) : (
@@ -273,7 +289,7 @@ export default function ProfilePage() {
                     <Link
                       key={order.id}
                       href={`/pedidos`}
-                      className="flex items-center justify-between rounded-lg border p-3 hover:bg-slate-900"
+                      className="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950/50 p-3 transition-colors hover:bg-slate-900"
                     >
                       <div>
                         <p className="font-medium text-slate-100">#{order.id.slice(0, 8)}</p>
@@ -284,46 +300,42 @@ export default function ProfilePage() {
                       <div className="text-right">
                         <p className="font-medium">{formatCurrency(order.total)}</p>
                         <span className={`text-xs ${
-                          order.status === "PAID" ? "text-green-600" :
-                          order.status === "PENDING" ? "text-yellow-600" : "text-red-600"
+                          order.status === "PAID" ? "text-green-400" :
+                          order.status === "PENDING" ? "text-yellow-400" : "text-red-400"
                         }`}>
                           {order.status}
                         </span>
                       </div>
                     </Link>
                   ))}
-                  {orders.length > 3 && (
-                    <button
-                      onClick={() => setActiveTab("orders")}
-                      className="text-sm text-brand-400 hover:underline"
-                    >
-                      Ver todos os {orders.length} pedidos →
-                    </button>
-                  )}
                 </div>
               )}
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2">
-              <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
+              <div className="card p-6">
                 <h2 className="mb-3 text-lg font-semibold text-slate-100">Ações Rápidas</h2>
-                <div className="space-y-2">
-                  <Link href="/produtos" className="flex items-center gap-3 rounded-lg border p-3 hover:bg-slate-900">
-                    <ShoppingBag className="h-5 w-5 text-brand-400" />
-                    <span className="text-sm font-medium">Continuar comprando</span>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <Link href="/produtos" className="flex flex-col items-center justify-center gap-2 rounded-xl border border-slate-800 bg-slate-950/50 p-4 text-center transition-all hover:border-brand-500/50 hover:bg-slate-900">
+                    <ShoppingBag className="h-6 w-6 text-brand-400" />
+                    <span className="text-sm font-medium">Comprar</span>
                   </Link>
-                  <Link href="/downloads" className="flex items-center gap-3 rounded-lg border p-3 hover:bg-slate-900">
-                    <Download className="h-5 w-5 text-purple-600" />
-                    <span className="text-sm font-medium">Meus downloads</span>
+                  <Link href="/downloads" className="flex flex-col items-center justify-center gap-2 rounded-xl border border-slate-800 bg-slate-950/50 p-4 text-center transition-all hover:border-purple-500/50 hover:bg-slate-900">
+                    <Download className="h-6 w-6 text-purple-400" />
+                    <span className="text-sm font-medium">Downloads</span>
                   </Link>
-                  <Link href="/pedidos" className="flex items-center gap-3 rounded-lg border p-3 hover:bg-slate-900">
-                    <Package className="h-5 w-5 text-blue-600" />
-                    <span className="text-sm font-medium">Histórico de pedidos</span>
+                  <Link href="/pedidos" className="flex flex-col items-center justify-center gap-2 rounded-xl border border-slate-800 bg-slate-950/50 p-4 text-center transition-all hover:border-blue-500/50 hover:bg-slate-900">
+                    <Package className="h-6 w-6 text-blue-400" />
+                    <span className="text-sm font-medium">Pedidos</span>
+                  </Link>
+                  <Link href="/tickets" className="flex flex-col items-center justify-center gap-2 rounded-xl border border-slate-800 bg-slate-950/50 p-4 text-center transition-all hover:border-emerald-500/50 hover:bg-slate-900">
+                    <TicketIcon className="h-6 w-6 text-emerald-400" />
+                    <span className="text-sm font-medium">Suporte</span>
                   </Link>
                 </div>
               </div>
 
-              <div className="rounded-xl border bg-slate-950 p-6 shadow-sm">
+              <div className="card p-6">
                 <h2 className="mb-3 text-lg font-semibold text-slate-100">Resumo da Conta</h2>
                 <dl className="space-y-2 text-sm">
                   <div className="flex justify-between">
