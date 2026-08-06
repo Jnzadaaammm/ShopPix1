@@ -41,6 +41,7 @@ export default function AdminRolesPage() {
   const [editing, setEditing] = useState<Role | null>(null);
   const [creating, setCreating] = useState(false);
   const [syncing, setSyncing] = useState(false);
+  const [activeTab, setActiveTab] = useState<"cargos" | "excluir">("cargos");
   const [form, setForm] = useState({
     name: "",
     description: "",
@@ -227,7 +228,7 @@ export default function AdminRolesPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <div className="mb-8 flex items-center justify-between">
+      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="flex items-center gap-2 text-3xl font-bold text-slate-100">
             <Crown className="h-8 w-8 text-brand-400" /> Cargos
@@ -235,6 +236,26 @@ export default function AdminRolesPage() {
           <p className="mt-2 text-slate-400">Gerencie cargos de clientes e equipe</p>
         </div>
         <div className="flex gap-2">
+          <button
+            onClick={() => setActiveTab("cargos")}
+            className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+              activeTab === "cargos"
+                ? "bg-brand-600 text-white"
+                : "border border-slate-700 text-slate-300 hover:bg-slate-900"
+            }`}
+          >
+            Cargos
+          </button>
+          <button
+            onClick={() => setActiveTab("excluir")}
+            className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+              activeTab === "excluir"
+                ? "bg-red-600 text-white"
+                : "border border-slate-700 text-slate-300 hover:bg-slate-900"
+            }`}
+          >
+            Excluir
+          </button>
           <button
             onClick={handleSyncDiscord}
             disabled={syncing}
@@ -250,135 +271,180 @@ export default function AdminRolesPage() {
         </div>
       </div>
 
-      {/* Cargos de Cliente */}
-      <div className="mb-8">
-        <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-100">
-          <Tag className="h-5 w-5 text-brand-400" /> Cargos de Cliente
-          <span className="text-sm font-normal text-slate-500">
-            ({clientRoles.length}) — desconto automático no checkout
-          </span>
-        </h2>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {clientRoles.map((role) => (
-            <div
-              key={role.id}
-              className="card group relative overflow-hidden p-5 hover:shadow-lg"
-            >
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-3">
-                  <span className={`rounded-lg px-3 py-1.5 text-sm font-bold ${getColorClass(role.color)}`}>
-                    {role.name}
-                  </span>
-                  {role.isDefault && (
-                    <span className="rounded-full bg-slate-900/60 px-2 py-0.5 text-xs font-medium text-brand-400">
-                      Padrão
-                    </span>
-                  )}
-                </div>
-                <div className="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
-                  <button
-                    onClick={() => openEdit(role)}
-                    className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-900 hover:text-brand-400"
-                    aria-label="Editar"
-                  >
-                    <Save className="h-4 w-4" />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(role)}
-                    className="rounded-lg p-1.5 text-slate-500 hover:bg-red-950 hover:text-red-500"
-                    aria-label="Remover"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </button>
-                </div>
-              </div>
-              <p className="mt-2 text-sm text-slate-400">{role.description || "Sem descrição"}</p>
-              <div className="mt-4 flex items-center justify-between border-t border-slate-800 pt-3">
-                <div className="flex items-center gap-3 text-sm">
-                  <span className="font-bold text-brand-400">{role.discount}% OFF</span>
-                  <span className="flex items-center gap-1 text-slate-500">
-                    <Users className="h-3 w-3" /> {role.userCount}
-                  </span>
-                </div>
-                <span className="text-xs text-slate-500">Nível {role.level}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Cargos de Equipe */}
-      <div>
-        <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-100">
-          <Shield className="h-5 w-5 text-red-400" /> Cargos de Equipe
-          <span className="text-sm font-normal text-slate-500">
-            ({teamRoles.length}) — permissões administrativas
-          </span>
-        </h2>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {teamRoles.map((role) => (
-            <div
-              key={role.id}
-              className="card group relative overflow-hidden p-5 hover:shadow-lg"
-            >
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-3">
-                  <span className={`rounded-lg px-3 py-1.5 text-sm font-bold ${getColorClass(role.color)}`}>
-                    {role.name}
-                  </span>
-                </div>
-                <div className="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
-                  <button
-                    onClick={() => openEdit(role)}
-                    className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-900 hover:text-brand-400"
-                    aria-label="Editar"
-                  >
-                    <Save className="h-4 w-4" />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(role)}
-                    className="rounded-lg p-1.5 text-slate-500 hover:bg-red-950 hover:text-red-500"
-                    aria-label="Remover"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </button>
-                </div>
-              </div>
-              <p className="mt-2 text-sm text-slate-400">{role.description || "Sem descrição"}</p>
-              <div className="mt-3 flex flex-wrap gap-1">
-                {(role.permissions || []).includes("*") ? (
-                  <span className="rounded-full bg-red-900/30 px-2 py-0.5 text-xs font-medium text-red-400">
-                    Acesso Total
-                  </span>
-                ) : (
-                  (role.permissions || []).slice(0, 3).map((p) => {
-                    const perm = ALL_PERMISSIONS.find((ap) => ap.id === p);
-                    return (
-                      <span
-                        key={p}
-                        className="rounded-full bg-slate-900 px-2 py-0.5 text-xs text-slate-400"
-                      >
-                        {perm?.label || p}
+      {activeTab === "cargos" && (
+        <>
+          {/* Cargos de Cliente */}
+          <div className="mb-8">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-100">
+              <Tag className="h-5 w-5 text-brand-400" /> Cargos de Cliente
+              <span className="text-sm font-normal text-slate-500">
+                ({clientRoles.length}) — desconto automático no checkout
+              </span>
+            </h2>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {clientRoles.map((role) => (
+                <div
+                  key={role.id}
+                  className="card group relative overflow-hidden p-5 hover:shadow-lg"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-3">
+                      <span className={`rounded-lg px-3 py-1.5 text-sm font-bold ${getColorClass(role.color)}`}>
+                        {role.name}
                       </span>
-                    );
-                  })
-                )}
-                {role.permissions.length > 3 && !role.permissions.includes("*") && (
-                  <span className="rounded-full bg-slate-900 px-2 py-0.5 text-xs text-slate-400">
-                    +{role.permissions.length - 3}
-                  </span>
-                )}
-              </div>
-              <div className="mt-4 flex items-center justify-between border-t border-slate-800 pt-3">
-                <span className="flex items-center gap-1 text-sm text-slate-500">
-                  <Users className="h-3 w-3" /> {role.userCount} usuário(s)
-                </span>
-                <span className="text-xs text-slate-500">Nível {role.level}</span>
-              </div>
+                      {role.isDefault && (
+                        <span className="rounded-full bg-slate-900/60 px-2 py-0.5 text-xs font-medium text-brand-400">
+                          Padrão
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+                      <button
+                        onClick={() => openEdit(role)}
+                        className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-900 hover:text-brand-400"
+                        aria-label="Editar"
+                      >
+                        <Save className="h-4 w-4" />
+                      </button>
+                      <button
+                        onClick={() => handleDelete(role)}
+                        className="rounded-lg p-1.5 text-slate-500 hover:bg-red-950 hover:text-red-500"
+                        aria-label="Remover"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </div>
+                  <p className="mt-2 text-sm text-slate-400">{role.description || "Sem descrição"}</p>
+                  <div className="mt-4 flex items-center justify-between border-t border-slate-800 pt-3">
+                    <div className="flex items-center gap-3 text-sm">
+                      <span className="font-bold text-brand-400">{role.discount}% OFF</span>
+                      <span className="flex items-center gap-1 text-slate-500">
+                        <Users className="h-3 w-3" /> {role.userCount}
+                      </span>
+                    </div>
+                    <span className="text-xs text-slate-500">Nível {role.level}</span>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          {/* Cargos de Equipe */}
+          <div>
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-100">
+              <Shield className="h-5 w-5 text-red-400" /> Cargos de Equipe
+              <span className="text-sm font-normal text-slate-500">
+                ({teamRoles.length}) — permissões administrativas
+              </span>
+            </h2>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {teamRoles.map((role) => (
+                <div
+                  key={role.id}
+                  className="card group relative overflow-hidden p-5 hover:shadow-lg"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-3">
+                      <span className={`rounded-lg px-3 py-1.5 text-sm font-bold ${getColorClass(role.color)}`}>
+                        {role.name}
+                      </span>
+                    </div>
+                    <div className="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+                      <button
+                        onClick={() => openEdit(role)}
+                        className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-900 hover:text-brand-400"
+                        aria-label="Editar"
+                      >
+                        <Save className="h-4 w-4" />
+                      </button>
+                      <button
+                        onClick={() => handleDelete(role)}
+                        className="rounded-lg p-1.5 text-slate-500 hover:bg-red-950 hover:text-red-500"
+                        aria-label="Remover"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </div>
+                  <p className="mt-2 text-sm text-slate-400">{role.description || "Sem descrição"}</p>
+                  <div className="mt-3 flex flex-wrap gap-1">
+                    {(role.permissions || []).includes("*") ? (
+                      <span className="rounded-full bg-red-900/30 px-2 py-0.5 text-xs font-medium text-red-400">
+                        Acesso Total
+                      </span>
+                    ) : (
+                      (role.permissions || []).slice(0, 3).map((p) => {
+                        const perm = ALL_PERMISSIONS.find((ap) => ap.id === p);
+                        return (
+                          <span
+                            key={p}
+                            className="rounded-full bg-slate-900 px-2 py-0.5 text-xs text-slate-400"
+                          >
+                            {perm?.label || p}
+                          </span>
+                        );
+                      })
+                    )}
+                    {role.permissions.length > 3 && !role.permissions.includes("*") && (
+                      <span className="rounded-full bg-slate-900 px-2 py-0.5 text-xs text-slate-400">
+                        +{role.permissions.length - 3}
+                      </span>
+                    )}
+                  </div>
+                  <div className="mt-4 flex items-center justify-between border-t border-slate-800 pt-3">
+                    <span className="flex items-center gap-1 text-sm text-slate-500">
+                      <Users className="h-3 w-3" /> {role.userCount} usuário(s)
+                    </span>
+                    <span className="text-xs text-slate-500">Nível {role.level}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
+
+      {activeTab === "excluir" && (
+        <div>
+          <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-100">
+            <Trash2 className="h-5 w-5 text-red-400" /> Excluir Cargos
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {(roles || []).map((role) => (
+              <div
+                key={role.id}
+                className="card flex flex-col justify-between p-5"
+              >
+                <div>
+                  <div className="flex items-center gap-3">
+                    <span className={`rounded-lg px-3 py-1.5 text-sm font-bold ${getColorClass(role.color)}`}>
+                      {role.name}
+                    </span>
+                    {role.isDefault && (
+                      <span className="rounded-full bg-slate-900/60 px-2 py-0.5 text-xs font-medium text-brand-400">
+                        Padrão
+                      </span>
+                    )}
+                  </div>
+                  <p className="mt-2 text-sm text-slate-400">{role.description || "Sem descrição"}</p>
+                </div>
+                <div className="mt-4 flex items-center justify-between border-t border-slate-800 pt-3">
+                  <span className="flex items-center gap-1 text-sm text-slate-500">
+                    <Users className="h-3 w-3" /> {role.userCount} usuário(s)
+                  </span>
+                  <button
+                    onClick={() => handleDelete(role)}
+                    className="inline-flex items-center gap-1.5 rounded-lg bg-red-900/20 px-3 py-1.5 text-sm text-red-400 hover:bg-red-900/40"
+                  >
+                    <Trash2 className="h-4 w-4" /> Excluir
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Modal de criação/edição */}
       {(creating || editing) && (
