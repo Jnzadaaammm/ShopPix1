@@ -4,7 +4,7 @@ export const dynamic = "force-dynamic";
 
 import { useState, useCallback } from "react";
 import { useSession } from "next-auth/react";
-import { Crown, Plus, Save, Trash2, X, Users, Shield, Tag, Check, RefreshCw, ShieldAlert } from "lucide-react";
+import { Crown, Plus, Save, Trash2, X, Users, Shield, Tag, Check, RefreshCw, ShieldAlert, AlertTriangle } from "lucide-react";
 import { toast } from "@/components/ui/Toaster";
 import { ALL_PERMISSIONS } from "@/lib/roles";
 import { usePolling } from "@/lib/use-polling";
@@ -42,6 +42,7 @@ export default function AdminRolesPage() {
   const [creating, setCreating] = useState(false);
   const [syncing, setSyncing] = useState(false);
   const [activeTab, setActiveTab] = useState<"cargos" | "excluir">("cargos");
+  const [roleToDelete, setRoleToDelete] = useState<Role | null>(null);
   const [form, setForm] = useState({
     name: "",
     description: "",
@@ -131,7 +132,7 @@ export default function AdminRolesPage() {
     }
   };
 
-  const handleDelete = async (role: Role) => {
+  const handleDelete = (role: Role) => {
     if (role.isDefault) {
       toast.error("Não é possível remover o cargo padrão");
       return;
@@ -140,10 +141,13 @@ export default function AdminRolesPage() {
       toast.error(`${role.userCount} usuário(s) possui(m) este cargo`);
       return;
     }
-    if (!confirm(`Remover o cargo "${role.name}"?`)) return;
+    setRoleToDelete(role);
+  };
 
+  const confirmDelete = async () => {
+    if (!roleToDelete) return;
     try {
-      const res = await fetch(`/api/roles?id=${role.id}`, { method: "DELETE" });
+      const res = await fetch(`/api/roles?id=${roleToDelete.id}`, { method: "DELETE" });
       if (res.ok) {
         toast.success("Cargo removido");
         refetch();
@@ -153,8 +157,12 @@ export default function AdminRolesPage() {
       }
     } catch {
       toast.error("Erro ao remover cargo");
+    } finally {
+      setRoleToDelete(null);
     }
   };
+
+  const closeDelete = () => setRoleToDelete(null);
 
   const handleSyncDiscord = async () => {
     setSyncing(true);
@@ -627,6 +635,38 @@ export default function AdminRolesPage() {
               </button>
               <button onClick={handleSave} className="btn-primary">
                 <Check className="h-4 w-4" /> Salvar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de confirmação de exclusão */}
+      {roleToDelete && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={closeDelete}>
+          <div
+            className="w-full max-w-md rounded-2xl bg-slate-950 p-6 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-red-900/30 text-red-400">
+                <AlertTriangle className="h-5 w-5" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-slate-100">Excluir cargo</h3>
+                <p className="text-sm text-slate-400">Esta ação não pode ser desfeita.</p>
+              </div>
+            </div>
+            <div className="mt-4 rounded-xl border border-slate-800 bg-slate-900 p-4">
+              <p className="font-medium text-slate-100">{roleToDelete.name}</p>
+              <p className="text-sm text-slate-400">{roleToDelete.description || "Sem descrição"}</p>
+            </div>
+            <div className="mt-6 flex justify-end gap-3">
+              <button onClick={closeDelete} className="rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-300 hover:bg-slate-900">
+                Cancelar
+              </button>
+              <button onClick={confirmDelete} className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700">
+                <Trash2 className="inline h-4 w-4" /> Excluir
               </button>
             </div>
           </div>
