@@ -1,10 +1,10 @@
-import { Client, GatewayIntentBits, Partials, ActivityType, Events, Interaction } from "discord.js";
+import { Client, GatewayIntentBits, Partials, ActivityType, Events, Message } from "discord.js";
 import { setupDiscordRoles } from "../lib/discord-guild";
-import { commands } from "./commands";
-import { prisma } from "../lib/db";
+import { handleCommand } from "./commands";
 
 const TOKEN = process.env.DISCORD_BOT_TOKEN;
 const GUILD_ID = process.env.DISCORD_GUILD_ID;
+const PREFIX = ".";
 
 if (!TOKEN) {
   console.warn("[bot] DISCORD_BOT_TOKEN não configurado — bot não vai iniciar.");
@@ -16,6 +16,8 @@ const client = new Client({
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMembers,
     GatewayIntentBits.GuildPresences,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
   ],
   partials: [Partials.GuildMember],
 });
@@ -40,42 +42,25 @@ client.once(Events.ClientReady, async (clientInstance) => {
   }
 });
 
-client.on(Events.InteractionCreate, async (interaction: Interaction) => {
-  if (interaction.isChatInputCommand()) {
-    const command = commands[interaction.commandName];
-    if (command) {
-      try {
-        await command.execute(interaction, client);
-      } catch (error) {
-        console.error(`[bot] Erro no comando ${interaction.commandName}:`, error);
-        await interaction.reply({ content: "Erro ao executar comando.", ephemeral: true }).catch(() => {});
-      }
-    }
-  }
+client.on(Events.MessageCreate, async (message: Message) => {
+  if (message.author.bot) return;
+  if (!message.content.startsWith(PREFIX)) return;
 
-  if (interaction.isButton()) {
-    if (interaction.customId === "fechar_ticket") {
-      if (!interaction.channel || interaction.channel.isDMBased()) return;
-      await interaction.channel.delete().catch(() => {});
-    }
-    if (interaction.customId === "painel_produtos") {
-      const cmd = commands["produtos"];
-      if (cmd) await cmd.execute(interaction as any, client);
-    }
-    if (interaction.customId === "painel_pedidos") {
-      const cmd = commands["pedidos"];
-      if (cmd) await cmd.execute(interaction as any, client);
-    }
-    if (interaction.customId === "painel_ticket") {
-      const cmd = commands["ticket"];
-      if (cmd) await cmd.execute(interaction as any, client);
-    }
+  const args = message.content.slice(PREFIX.length).trim().split(/\s+/);
+  const command = args.shift()?.toLowerCase();
+
+  if (!command) return;
+
+  try {
+    await handleCommand(command, args, message, client);
+  } catch (error) {
+    console.error(`[bot] Erro no comando .${command}:`, error);
+    await message.reply("Erro ao executar comando.").catch(() => {});
   }
 });
 
 client.on(Events.GuildMemberAdd, async (member) => {
   if (member.user.bot) return;
-  // sincronia de cargos no login
 });
 
 client.on(Events.Error, (error) => console.error("[bot] Erro do cliente:", error));
@@ -88,12 +73,10 @@ client.login(TOKEN).catch((error) => {
 
 process.on("SIGINT", () => {
   client.destroy();
-  prisma.$disconnect();
   process.exit(0);
 });
 
 process.on("SIGTERM", () => {
   client.destroy();
-  prisma.$disconnect();
   process.exit(0);
 });

@@ -1,13 +1,12 @@
-import { ChatInputCommandInteraction, Client, SlashCommandBuilder, EmbedBuilder } from "discord.js";
+import { Client, EmbedBuilder, Message } from "discord.js";
 import { prisma } from "@/lib/db";
 import type { BotCommand } from "./index";
 
 const produtos: BotCommand = {
-  data: new SlashCommandBuilder()
-    .setName("produtos")
-    .setDescription("Lista os produtos da loja"),
+  name: "produtos",
+  description: "Lista os produtos da loja",
 
-  async execute(interaction: ChatInputCommandInteraction) {
+  async execute(_args, message) {
     const products = await prisma.product.findMany({
       take: 10,
       orderBy: { createdAt: "desc" },
@@ -29,7 +28,7 @@ const produtos: BotCommand = {
       embed.setDescription(lines.join("\n"));
     }
 
-    await interaction.reply({ embeds: [embed], ephemeral: true });
+    await message.reply({ embeds: [embed] });
   },
 };
 
