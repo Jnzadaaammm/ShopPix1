@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { ShoppingCart, User, LogOut, Package, Menu, X, LayoutDashboard, Download, Heart, Ticket as TicketIcon, Search } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
@@ -20,6 +21,7 @@ const navItems = [
 
 export default function Header() {
   const { data: session } = useSession();
+  const pathname = usePathname();
   const { itemCount } = useCart();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -43,6 +45,8 @@ export default function Header() {
 
   const user = session?.user as any;
   const isTeam = user?.role?.type === "TEAM";
+
+  if (pathname?.startsWith("/admin")) return null;
 
   return (
     <header
