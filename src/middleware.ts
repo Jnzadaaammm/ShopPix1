@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (
@@ -14,11 +14,18 @@ export function middleware(request: NextRequest) {
     const forwarded = request.headers.get("x-forwarded-for");
     const ip = forwarded ? forwarded.split(",")[0].trim() : "127.0.0.1";
 
-    fetch(url.toString(), {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action: "page_view", path: pathname, ip }),
-    }).catch(() => {});
+    try {
+      await Promise.race([
+        fetch(url.toString(), {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "page_view", path: pathname, ip }),
+        }),
+        new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), 1500)),
+      ]);
+    } catch {
+      // ignora timeout/falha
+    }
   }
 
   return NextResponse.next();
