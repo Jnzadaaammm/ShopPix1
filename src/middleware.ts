@@ -15,16 +15,20 @@ export async function middleware(request: NextRequest) {
     const ip = forwarded ? forwarded.split(",")[0].trim() : "127.0.0.1";
 
     try {
+      const cookie = request.headers.get("cookie") || "";
       await Promise.race([
         fetch(url.toString(), {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            cookie,
+          },
           body: JSON.stringify({ action: "page_view", path: pathname, ip }),
         }),
-        new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), 1500)),
+        new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), 2500)),
       ]);
     } catch {
-      // ignora timeout/falha
+      // ignora
     }
   }
 
