@@ -256,7 +256,19 @@ export default async function ProductDetailPage({
               const rating = reviews.length > 0
                 ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
                 : 0;
-              return <ProductCard key={p.id} product={{ ...p, rating }} />;
+              return (
+                <ProductCard
+                  key={p.id}
+                  id={p.id}
+                  name={p.name}
+                  price={p.price}
+                  image={p.image}
+                  category={p.category}
+                  stockMode={p.stockMode}
+                  rating={rating}
+                  reviewCount={reviews.length}
+                />
+              );
             })}
           </div>
         </section>
