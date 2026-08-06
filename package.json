@@ -12,6 +12,7 @@
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
     "bot": "tsx src/bot/index.ts",
+    "bot:register": "tsx register-commands.ts",
     "make-owner": "tsx make-owner.ts"
   },
   "engines": {
