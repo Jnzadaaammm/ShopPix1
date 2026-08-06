@@ -282,7 +282,7 @@ export default function ProductsPage() {
 
       {/* Navegação por categorias (sticky) */}
       {categoryGroups.length > 0 && (
-        <div className="sticky top-[72px] z-30 mb-8 -mx-4 border-b border-slate-800 bg-slate-950/90 px-4 py-3 backdrop-blur-lg sm:mx-0 sm:rounded-xl sm:border sm:px-4">
+        <div className="z-30 mb-8 -mx-4 border-b border-slate-800 bg-slate-950/90 px-4 py-3 backdrop-blur-lg sm:mx-0 sm:rounded-xl sm:border sm:px-4">
           <div className="flex items-center gap-2 overflow-x-auto pb-1">
             <button
               onClick={() => {
