@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Download, Star, Shield, Zap, ChevronRight, Package, Lock } from "lucide-react";
+import { Download, Star, Shield, Zap, ChevronRight, Package, Lock, Check, HelpCircle, ShoppingCart } from "lucide-react";
 import type { Metadata } from "next";
 import { prisma } from "@/lib/db";
 import { formatCurrency } from "@/lib/utils";
@@ -91,7 +91,6 @@ export default async function ProductDetailPage({
 
   if (!product) notFound();
 
-  // Produtos relacionados (mesma categoria)
   const relatedProducts = await prisma.product.findMany({
     where: {
       categoryId: product.categoryId,
@@ -110,29 +109,32 @@ export default async function ProductDetailPage({
       ? product.reviews.reduce((s, r) => s + r.rating, 0) / product.reviews.length
       : 0;
 
-  const inStock = true;
+  const steps = [
+    { icon: ShoppingCart, title: "Pague o pagamento", desc: "Escolha PIX, cartão ou PayPal." },
+    { icon: Package, title: "Receba imediatamente", desc: "Após a confirmação, o produto fica disponível." },
+    { icon: Download, title: "Ative o produto", desc: "Siga as instruções enviadas por email e no painel." },
+    { icon: Shield, title: "Suporte incluso", desc: "Abra um ticket se tiver qualquer dúvida." },
+  ];
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       {/* Breadcrumbs */}
-      <nav className="mb-6 flex items-center gap-1 text-sm text-slate-400" aria-label="Breadcrumb">
-        <Link href="/" className="hover:text-brand-400">Início</Link>
+      <nav className="mb-8 flex items-center gap-1 text-sm text-slate-400" aria-label="Breadcrumb">
+        <Link href="/" className="hover:text-brand-400 transition-colors">Início</Link>
         <ChevronRight className="h-3 w-3" />
-        <Link href="/produtos" className="hover:text-brand-400">Produtos</Link>
+        <Link href="/produtos" className="hover:text-brand-400 transition-colors">Produtos</Link>
         <ChevronRight className="h-3 w-3" />
         <Link
           href={`/produtos#categoria-${product.category.slug}`}
-          className="hover:text-brand-400"
+          className="hover:text-brand-400 transition-colors"
         >
           {product.category.name}
         </Link>
-        <ChevronRight className="h-3 w-3" />
-        <span className="truncate font-medium text-slate-100">{product.name}</span>
       </nav>
 
       <div className="grid gap-12 lg:grid-cols-2">
         {/* Imagem */}
-        <div className="relative aspect-square overflow-hidden rounded-2xl bg-slate-900">
+        <div className="relative aspect-square overflow-hidden rounded-3xl border border-slate-800 bg-slate-950">
           <Image
             src={product.image}
             alt={product.name}
@@ -141,27 +143,26 @@ export default async function ProductDetailPage({
             sizes="(max-width: 1024px) 100vw, 50vw"
             priority
           />
-          <span className="absolute right-4 top-4 flex items-center gap-1 rounded-full bg-purple-600 px-3 py-1.5 text-sm font-medium text-white">
-            <Download className="h-4 w-4" /> Produto Digital
+          <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full bg-slate-900/90 px-3 py-1.5 text-xs font-medium text-brand-400 backdrop-blur">
+            <Download className="h-3.5 w-3.5" /> Produto Digital
           </span>
         </div>
 
         {/* Info */}
         <div className="flex flex-col">
-          <span className="inline-flex w-fit rounded-full bg-slate-900/60 px-3 py-1 text-sm font-medium text-brand-400">
+          <span className="inline-flex w-fit rounded-full border border-slate-800 bg-slate-900/60 px-4 py-1.5 text-sm font-medium text-brand-400">
             {product.category.name}
           </span>
-          <h1 className="mt-4 text-3xl font-bold text-slate-100">{product.name}</h1>
+          <h1 className="mt-4 text-4xl font-bold leading-tight text-slate-100">{product.name}</h1>
 
-          {/* Rating */}
           {product.reviews.length > 0 && (
-            <div className="mt-2 flex items-center gap-2">
+            <div className="mt-3 flex items-center gap-2">
               <div className="flex">
                 {[1, 2, 3, 4, 5].map((s) => (
                   <Star
                     key={s}
                     className={`h-4 w-4 ${
-                      s <= Math.round(avgRating) ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+                      s <= Math.round(avgRating) ? "fill-yellow-400 text-yellow-400" : "text-slate-600"
                     }`}
                   />
                 ))}
@@ -172,43 +173,65 @@ export default async function ProductDetailPage({
             </div>
           )}
 
-          <p className="mt-4 text-slate-400 leading-relaxed">{product.description}</p>
-
-          {/* Preço */}
           <div className="mt-6">
-            <span className="text-4xl font-bold text-brand-400">
-              {formatCurrency(product.price)}
-            </span>
-            <p className="mt-1 text-sm text-slate-400">
+            <span className="text-4xl font-bold text-brand-400">{formatCurrency(product.price)}</span>
+            <p className="mt-2 text-sm text-slate-400">
               {product.stockMode === "CREDENTIALS"
                 ? "Disponível para entrega imediata após o pagamento"
                 : "Disponível para download imediato após o pagamento"}
             </p>
           </div>
 
-          {/* Features */}
-          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <div className="flex items-center gap-2 rounded-lg bg-slate-900 p-3">
-              <Zap className="h-5 w-5 text-green-600" />
+          <p className="mt-6 text-slate-400 leading-relaxed">{product.description}</p>
+
+          <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <div className="flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/60 p-3">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-green-900/30 text-green-400">
+                <Zap className="h-5 w-5" />
+              </div>
               <span className="text-xs font-medium text-slate-300">PIX Instantâneo</span>
             </div>
-            <div className="flex items-center gap-2 rounded-lg bg-slate-900 p-3">
-              <Shield className="h-5 w-5 text-blue-600" />
+            <div className="flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/60 p-3">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-900/30 text-blue-400">
+                <Shield className="h-5 w-5" />
+              </div>
               <span className="text-xs font-medium text-slate-300">Compra Segura</span>
             </div>
-            <div className="flex items-center gap-2 rounded-lg bg-slate-900 p-3">
-              <Download className="h-5 w-5 text-purple-600" />
+            <div className="flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/60 p-3">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-purple-900/30 text-purple-400">
+                <Download className="h-5 w-5" />
+              </div>
               <span className="text-xs font-medium text-slate-300">Entrega Digital</span>
             </div>
           </div>
 
-          {/* CTAs — AddToCart + Wishlist + Share */}
           <div className="mt-8 flex items-center gap-3">
             <AddToCartButton product={product} />
             <ProductDetailActions productId={product.id} />
           </div>
         </div>
       </div>
+
+      {/* Como Funciona */}
+      <section className="mt-16 rounded-2xl border border-slate-800 bg-slate-950 p-6 sm:p-10">
+        <h2 className="text-2xl font-bold text-slate-100">Como Funciona</h2>
+        <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {steps.map((step, i) => {
+            const Icon = step.icon;
+            return (
+              <div key={i} className="relative flex items-start gap-3">
+                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-brand-600/10 text-brand-400">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="font-semibold text-slate-100">{i + 1}. {step.title}</p>
+                  <p className="text-sm text-slate-400">{step.desc}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
 
       {/* Reviews */}
       <div className="mt-16">
@@ -218,31 +241,22 @@ export default async function ProductDetailPage({
       {/* Produtos Relacionados */}
       {relatedProducts.length > 0 && (
         <section className="mt-16">
-          <div className="mb-6 border-b border-slate-700 pb-4">
-            <h2 className="text-2xl font-bold text-slate-100">Produtos Relacionados</h2>
-            <p className="mt-1 text-sm text-slate-400">
-              Outros produtos de {product.category.name}
-            </p>
+          <div className="mb-6 flex items-end justify-between border-b border-slate-800 pb-4">
+            <div>
+              <h2 className="text-2xl font-bold text-slate-100">Produtos Relacionados</h2>
+              <p className="mt-1 text-sm text-slate-400">Outros produtos de {product.category.name}</p>
+            </div>
+            <Link href="/produtos" className="text-sm font-medium text-brand-400 hover:underline">
+              Ver todos
+            </Link>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {relatedProducts.map((p) => {
               const reviews = p.reviews || [];
               const rating = reviews.length > 0
-                ? reviews.reduce((s, r) => s + r.rating, 0) / reviews.length
+                ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
                 : 0;
-              return (
-                <ProductCard
-                  key={p.id}
-                  id={p.id}
-                  name={p.name}
-                  price={p.price}
-                  image={p.image}
-                  category={p.category}
-                  stockMode={p.stockMode}
-                  rating={rating}
-                  reviewCount={reviews.length}
-                />
-              );
+              return <ProductCard key={p.id} product={{ ...p, rating }} />;
             })}
           </div>
         </section>
