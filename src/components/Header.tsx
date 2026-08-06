@@ -3,27 +3,15 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
-import { ShoppingCart, User, LogOut, Package, Menu, X, LayoutDashboard, Download, Heart, Ticket as TicketIcon, Search, ChevronDown } from "lucide-react";
+import { ShoppingCart, User, LogOut, Package, Menu, X, LayoutDashboard, Download, Heart, Ticket as TicketIcon, Search } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { getRoleColorClass } from "@/lib/roles";
 import ImageWithFallback from "@/components/ImageWithFallback";
-
-interface Category {
-  id: string;
-  name: string;
-  slug: string;
-}
 
 function getRoleBadgeClass(color: string) {
   return getRoleColorClass(color).badge;
 }
-
-const publicLinks = [
-  { href: "/", label: "Início" },
-  { href: "/produtos", label: "Catálogo" },
-  { href: "/faq", label: "FAQ" },
-];
 
 export default function Header() {
   const { data: session } = useSession();
@@ -31,18 +19,20 @@ export default function Header() {
   const { itemCount } = useCart();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [catOpen, setCatOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const lastY = useRef(0);
 
   useEffect(() => {
-    fetch("/api/categories")
-      .then((r) => r.json())
-      .then((data) => setCategories(Array.isArray(data) ? data : []))
-      .catch(() => setCategories([]));
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10);
+    const handleScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 10);
+      if (y > lastY.current && y > 80) {
+        setHidden(true);
+      } else if (y < lastY.current) {
+        setHidden(false);
+      }
+      lastY.current = y;
+    };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -54,7 +44,9 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-4 left-1/2 z-50 w-[calc(100%-2rem)] max-w-6xl -translate-x-1/2 rounded-2xl border transition-all duration-300 md:top-6 ${
+      className={`fixed top-4 left-1/2 z-50 w-[calc(100%-2rem)] max-w-6xl -translate-x-1/2 rounded-2xl border transition-all duration-500 md:top-6 ${
+        hidden ? "-translate-y-[150%] opacity-0" : "translate-y-0 opacity-100"
+      } ${
         scrolled
           ? "border-slate-700/60 bg-slate-950/95 shadow-2xl shadow-black/30 backdrop-blur-xl"
           : "border-slate-800/40 bg-slate-950/95 backdrop-blur-lg"
@@ -77,30 +69,6 @@ export default function Header() {
           <Link href="/produtos" className="text-sm font-medium text-slate-400 transition-colors hover:text-slate-100">
             Catálogo
           </Link>
-          <div
-            className="group relative"
-            onMouseEnter={() => setCatOpen(true)}
-            onMouseLeave={() => setCatOpen(false)}
-          >
-            <button className="flex items-center gap-1 text-sm font-medium text-slate-400 transition-colors hover:text-slate-100">
-              Categorias <ChevronDown className="h-4 w-4" />
-            </button>
-            {catOpen && categories.length > 0 && (
-              <div className="absolute left-0 top-full z-50 w-56 pt-2">
-                <div className="rounded-xl border border-slate-800 bg-slate-950/95 p-2 shadow-xl backdrop-blur-lg">
-                  {categories.map((cat) => (
-                    <Link
-                      key={cat.id}
-                      href={`/produtos?categoria=${cat.slug}`}
-                      className="block rounded-lg px-3 py-2 text-sm text-slate-300 hover:bg-slate-900 hover:text-slate-100"
-                    >
-                      {cat.name}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
           <Link href="/faq" className="text-sm font-medium text-slate-400 transition-colors hover:text-slate-100">
             FAQ
           </Link>
@@ -178,19 +146,6 @@ export default function Header() {
           <nav className="flex flex-col gap-2">
             <Link href="/" className="rounded-xl px-3 py-2 text-sm font-medium text-slate-200 transition-colors hover:bg-slate-900" onClick={() => setMobileOpen(false)}>Início</Link>
             <Link href="/produtos" className="rounded-xl px-3 py-2 text-sm font-medium text-slate-200 transition-colors hover:bg-slate-900" onClick={() => setMobileOpen(false)}>Catálogo</Link>
-            <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-2">
-              <p className="px-3 py-1 text-xs font-medium text-slate-500">Categorias</p>
-              {categories.map((cat) => (
-                <Link
-                  key={cat.id}
-                  href={`/produtos?categoria=${cat.slug}`}
-                  className="block rounded-lg px-3 py-1.5 text-sm text-slate-300 hover:bg-slate-900"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {cat.name}
-                </Link>
-              ))}
-            </div>
             <Link href="/faq" className="rounded-xl px-3 py-2 text-sm font-medium text-slate-200 transition-colors hover:bg-slate-900" onClick={() => setMobileOpen(false)}>FAQ</Link>
             {session && (
               <>
