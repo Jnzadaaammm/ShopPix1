@@ -16,15 +16,15 @@ export default function HeroSection() {
         </span>
 
         <h1 className="mt-8 text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
-          Sua Loja Digital
+          Focadas em
           <br />
-          <span className="text-brand-500">Pronta</span> pra Usar
+          <span className="text-brand-500">Velocidade</span> e Praticidade
         </h1>
 
         <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-400 sm:text-xl">
-          Jogos, assinaturas, softwares e contas premium liberados na hora.
+          Receba seus produtos em segundos, 100% automático.
           <br className="hidden sm:block" />
-          <span className="font-medium text-slate-200">Pague e use agora mesmo.</span>
+          <span className="font-medium text-slate-200">Compre e use agora mesmo.</span>
         </p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
