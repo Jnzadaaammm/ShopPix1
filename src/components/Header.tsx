@@ -176,16 +176,22 @@ export default function Header() {
       {mobileOpen && (
         <div className="border-t border-slate-800/60 bg-slate-950/95 px-4 py-4 md:hidden animate-slide-in">
           <nav className="flex flex-col gap-2">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="rounded-xl px-3 py-2 text-sm font-medium text-slate-200 transition-colors hover:bg-slate-900"
-                onClick={() => setMobileOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
+            <Link href="/" className="rounded-xl px-3 py-2 text-sm font-medium text-slate-200 transition-colors hover:bg-slate-900" onClick={() => setMobileOpen(false)}>Início</Link>
+            <Link href="/produtos" className="rounded-xl px-3 py-2 text-sm font-medium text-slate-200 transition-colors hover:bg-slate-900" onClick={() => setMobileOpen(false)}>Catálogo</Link>
+            <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-2">
+              <p className="px-3 py-1 text-xs font-medium text-slate-500">Categorias</p>
+              {categories.map((cat) => (
+                <Link
+                  key={cat.id}
+                  href={`/produtos?categoria=${cat.slug}`}
+                  className="block rounded-lg px-3 py-1.5 text-sm text-slate-300 hover:bg-slate-900"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  {cat.name}
+                </Link>
+              ))}
+            </div>
+            <Link href="/faq" className="rounded-xl px-3 py-2 text-sm font-medium text-slate-200 transition-colors hover:bg-slate-900" onClick={() => setMobileOpen(false)}>FAQ</Link>
             {session && (
               <>
                 <Link href="/pedidos" className="flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-slate-200 transition-colors hover:bg-slate-900" onClick={() => setMobileOpen(false)}>
