@@ -404,7 +404,7 @@ export default function AdminRolesPage() {
                   type="text"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  placeholder="Ex: Prata, Ouro, Moderador..."
+                  placeholder="Ex: Prata, Ouro, Administrador..."
                   className="input mt-1"
                 />
               </div>

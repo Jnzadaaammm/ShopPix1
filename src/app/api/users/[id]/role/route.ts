@@ -125,7 +125,7 @@ export async function PUT(
     });
 
     // Só marcar isAdmin se tiver cargo com permissão "*" (Dono)
-    // Suporte e Moderador são TEAM mas não são admin — acessam só o que as permissões permitem
+    // Suporte e Administrador são TEAM; acesso depende das permissões
     const shouldBeAdmin = updatedRoles.some((ur) => {
       try {
         const perms = JSON.parse(ur.role.permissions as any);

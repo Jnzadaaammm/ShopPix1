@@ -49,7 +49,7 @@ const PERM = {
  * CLIENT: sem permissões especiais (membro comum)
  * TEAM: permissões crescentes conforme o nível:
  *   - Suporte (10+): ver logs, gerenciar mensagens, timeout, apelidos
- *   - Moderador (20+): + expulsar, banir
+ *   - Administrador (20+): + expulsar, banir
  *   - Dono (999): ADMINISTRATOR (tudo)
  */
 function computeDiscordPermissions(role: { type: string; level: number }): string {
@@ -69,7 +69,7 @@ function computeDiscordPermissions(role: { type: string; level: number }): strin
     perms |= PERM.MANAGE_NICKNAMES;
   }
 
-  // Moderador+ (level 20): + kick/ban
+  // Administrador+ (level 20): + kick/ban
   if (role.level >= 20) {
     perms |= PERM.KICK_MEMBERS;
     perms |= PERM.BAN_MEMBERS;
@@ -467,7 +467,7 @@ export async function setupDiscordRoles(): Promise<{
 
   // === Reordenar cargos por hierarquia ===
   // siteRoles já está ordenado por (type asc, level asc), que é a ordem
-  // hierárquica do site: Bronze < Prata < Ouro < Diamante < Suporte < Moderador < Dono
+  // hierárquica do site: Bronze < Prata < Ouro < Diamante < Suporte < Administrador
   // No Discord, posição maior = mais alto na hierarquia.
   // Vamos atribuir posições de 1 até N (abaixo do cargo do bot).
   if (siteToDiscordId.length > 1) {

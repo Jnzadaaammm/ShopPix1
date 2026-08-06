@@ -17,7 +17,7 @@ export async function GET(request: Request) {
   const status = searchParams.get("status");
   const adminView = searchParams.get("admin") === "true";
 
-  // Staff (Suporte/Moderador/Dono) pode ver todos, usuário comum só os seus
+  // Staff (Suporte/Administrador) pode ver todos, usuário comum só os seus
   const isStaff = await userHasPermission(session.user.id, "tickets.manage");
   const where: any = {};
   if (adminView && isStaff) {
