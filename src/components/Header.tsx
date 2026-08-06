@@ -50,8 +50,8 @@ export default function Header() {
         hidden ? "-translate-y-[150%] opacity-0" : "translate-y-0 opacity-100"
       } ${
         scrolled
-          ? "border-slate-700/60 bg-slate-950/90 shadow-2xl shadow-black/30 backdrop-blur-xl"
-          : "border-slate-800/40 bg-slate-950/70 backdrop-blur-lg"
+          ? "border-slate-700/60 bg-slate-950/95 shadow-2xl shadow-black/30 backdrop-blur-xl"
+          : "border-slate-800/40 bg-slate-950/95 backdrop-blur-lg"
       }`}
     >
       <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-6">
