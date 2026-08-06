@@ -7,9 +7,7 @@ export default function HeroSection() {
   return (
     <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden bg-slate-950 pt-24">
       {/* Efeitos de fundo */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(124,58,237,0.08)_1px,transparent_0)] bg-[length:40px_40px]" />
-      <div className="absolute left-1/4 top-1/4 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-600/15 blur-[120px]" />
-      <div className="absolute bottom-0 right-0 h-[600px] w-[600px] translate-x-1/4 translate-y-1/4 rounded-full bg-indigo-600/10 blur-[120px]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(124,58,237,0.04)_1px,transparent_0)] bg-[length:40px_40px]" />
 
       <div className="relative mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
         <span className="inline-flex items-center gap-2 rounded-full border border-brand-500/20 bg-slate-900/60 px-4 py-1.5 text-sm font-medium text-brand-300 backdrop-blur-md">
