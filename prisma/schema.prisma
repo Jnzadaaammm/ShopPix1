@@ -24,23 +24,8 @@ model User {
   wishlist      WishlistItem[]
   tickets       Ticket[]
   ticketReplies TicketMessage[]
-  activities    ActivityLog[]
   createdAt     DateTime          @default(now())
   updatedAt     DateTime          @updatedAt
-}
-
-model ActivityLog {
-  id        String   @id @default(cuid())
-  userId    String?
-  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
-  action    String
-  path      String?
-  ip        String?
-  details   String?
-  createdAt DateTime @default(now())
-
-  @@index([userId])
-  @@index([createdAt])
 }
 
 model UserRole {
