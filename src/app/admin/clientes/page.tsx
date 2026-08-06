@@ -419,7 +419,7 @@ export default function AdminCustomersPage() {
 
               <div className="mt-4 flex justify-end gap-2">
                 <button
-                  onClick={() => setSelectedUser(null)}
+                  onClick={() => { setPendingRoleIds(selectedUser.roles.map((ur) => ur.role.id)); setSelectedUser(null); }}
                   className="inline-flex items-center gap-2 rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-300 hover:bg-slate-900"
                 >
                   <X className="h-4 w-4" /> Cancelar
