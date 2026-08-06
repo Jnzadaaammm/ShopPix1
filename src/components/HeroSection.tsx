@@ -22,9 +22,9 @@ export default function HeroSection() {
         </h1>
 
         <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-400 sm:text-xl">
-          Keys, contas, softwares e assinaturas entregues na hora.
+          Jogos, assinaturas, softwares e contas premium liberados na hora.
           <br className="hidden sm:block" />
-          <span className="font-medium text-slate-200">Compre, ative e aproveite.</span>
+          <span className="font-medium text-slate-200">Pague e use agora mesmo.</span>
         </p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
