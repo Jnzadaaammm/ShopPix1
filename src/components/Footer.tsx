@@ -14,7 +14,7 @@ export default function Footer() {
           <div className="md:col-span-1">
             <div className="flex items-center gap-2">
               <img
-                src="/logo.png"
+                src="/logo.svg"
                 alt="ShopPix"
                 className="h-9 w-9 rounded-xl object-cover"
               />

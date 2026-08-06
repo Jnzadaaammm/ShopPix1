@@ -44,7 +44,7 @@ export default function Header() {
       <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className="flex items-center gap-2 transition-opacity hover:opacity-80">
           <img
-            src="/logo.png"
+            src="/logo.svg"
             alt="ShopPix"
             className="h-8 w-8 rounded-lg object-cover"
           />
