@@ -3,6 +3,7 @@ import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import Discord from "next-auth/providers/discord";
 import { prisma } from "./db";
+import { isOwnerEmail } from "./owner";
 import { addUserToGuild, sendLoginWebhook, syncDiscordRoles } from "./discord-guild";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -97,8 +98,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async session({ session, user }) {
       if (session.user) {
         session.user.id = user.id;
+        const owner = isOwnerEmail(user.email);
         // @ts-expect-error - isAdmin não está no tipo DefaultUser
-        session.user.isAdmin = user.isAdmin;
+        session.user.isAdmin = user.isAdmin || owner;
 
         // Buscar todos os cargos do usuário
         const dbUser = await prisma.user.findUnique({
