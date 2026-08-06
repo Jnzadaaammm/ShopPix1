@@ -28,7 +28,7 @@ export default function Header() {
       setScrolled(y > 10);
       if (y > lastY.current && y > 80) {
         setHidden(true);
-      } else if (y < lastY.current) {
+      } else if (y < lastY.current && y < 80) {
         setHidden(false);
       }
       lastY.current = y;
