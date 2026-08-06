@@ -16,15 +16,15 @@ export default function HeroSection() {
         </span>
 
         <h1 className="mt-8 text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
-          Produtos Digitais
+          Sua Loja Digital
           <br />
-          <span className="text-brand-500">Ativação</span> na Hora
+          <span className="text-brand-500">Pronta</span> pra Usar
         </h1>
 
         <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-400 sm:text-xl">
-          Keys, softwares, games e assinaturas entregues em segundos.
+          Keys, contas, softwares e assinaturas entregues na hora.
           <br className="hidden sm:block" />
-          <span className="font-medium text-slate-200">Pague e use agora mesmo.</span>
+          <span className="font-medium text-slate-200">Compre, ative e aproveite.</span>
         </p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
