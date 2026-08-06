@@ -38,8 +38,8 @@ const ticket: BotCommand = {
     await channel.send({ embeds: [embed], components: [row] });
     await prisma.ticket.create({
       data: {
-        title: `Ticket Discord - ${interaction.user.username}`,
-        description: "Aberto via bot do Discord",
+        subject: `Ticket Discord - ${interaction.user.username}`,
+        category: "general",
         status: "OPEN",
         userId: interaction.user.id,
       },
