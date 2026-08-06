@@ -3,7 +3,7 @@
 export const dynamic = "force-dynamic";
 
 import { useState, useCallback, useEffect, useMemo } from "react";
-import { Search, Shield, ShieldOff, Mail, Package, Calendar, Crown } from "lucide-react";
+import { Search, Shield, ShieldOff, Mail, Package, Calendar, Crown, Save, X } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
 import { toast } from "@/components/ui/Toaster";
 import { getRoleColorClass } from "@/lib/roles";
@@ -42,6 +42,7 @@ export default function AdminCustomersPage() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [pendingRoleIds, setPendingRoleIds] = useState<string[]>([]);
   const [updating, setUpdating] = useState(false);
 
   // Polling de usuários, pedidos e cargos (30s)
@@ -64,6 +65,14 @@ export default function AdminCustomersPage() {
       setLoading(false);
     }
   }, [usersData, ordersData, rolesData]);
+
+  useEffect(() => {
+    if (selectedUser) {
+      setPendingRoleIds(selectedUser.roles.map((ur) => ur.role.id));
+    } else {
+      setPendingRoleIds([]);
+    }
+  }, [selectedUser]);
 
   const toggleAdmin = async (userId: string, currentAdmin: boolean) => {
     setUpdating(true);
@@ -90,13 +99,14 @@ export default function AdminCustomersPage() {
     }
   };
 
-  const changeRole = async (userId: string, roleIds: string[]) => {
+  const saveRoles = async () => {
+    if (!selectedUser) return;
     setUpdating(true);
     try {
-      const res = await fetch(`/api/users/${userId}/role`, {
+      const res = await fetch(`/api/users/${selectedUser.id}/role`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ roleIds }),
+        body: JSON.stringify({ roleIds: pendingRoleIds }),
       });
       if (res.ok) {
         const data = await res.json();
@@ -114,11 +124,10 @@ export default function AdminCustomersPage() {
     }
   };
 
-  const toggleRole = (userId: string, roleId: string, currentRoleIds: string[]) => {
-    const newRoleIds = currentRoleIds.includes(roleId)
-      ? currentRoleIds.filter((id) => id !== roleId)
-      : [...currentRoleIds, roleId];
-    changeRole(userId, newRoleIds);
+  const togglePendingRole = (roleId: string) => {
+    setPendingRoleIds((prev) =>
+      prev.includes(roleId) ? prev.filter((id) => id !== roleId) : [...prev, roleId]
+    );
   };
 
   const filteredUsers = useMemo(() => users.filter(user =>
@@ -351,31 +360,34 @@ export default function AdminCustomersPage() {
                 <p className="font-medium text-slate-100">Cargos do Usuário</p>
               </div>
 
-              {/* Badges dos cargos atuais */}
-              {selectedUser.roles.length > 0 && (
+              {/* Badges dos cargos selecionados */}
+              {pendingRoleIds.length > 0 && (
                 <div className="mb-3 flex flex-wrap gap-2">
-                  {selectedUser.roles.map(({ role }) => (
-                    <span
-                      key={role.id}
-                      className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ${
-                        getRoleColorClass(role.color).badge
-                      }`}
-                    >
-                      {role.name}
-                      {role.discount > 0 && (
-                        <span className="ml-1 text-[10px] opacity-75">
-                          ({role.discount}%)
-                        </span>
-                      )}
-                    </span>
-                  ))}
+                  {pendingRoleIds
+                    .map((id) => roles.find((r) => r.id === id))
+                    .filter(Boolean)
+                    .map((role) => (
+                      <span
+                        key={role!.id}
+                        className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ${
+                          getRoleColorClass(role!.color).badge
+                        }`}
+                      >
+                        {role!.name}
+                        {role!.discount > 0 && (
+                          <span className="ml-1 text-[10px] opacity-75">
+                            ({role!.discount}%)
+                          </span>
+                        )}
+                      </span>
+                    ))}
                 </div>
               )}
 
               {/* Checkboxes para selecionar múltiplos cargos */}
               <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
                 {roles.map((role) => {
-                  const isSelected = selectedUser.roles.some((ur) => ur.role.id === role.id);
+                  const isSelected = pendingRoleIds.includes(role.id);
                   return (
                     <label
                       key={role.id}
@@ -388,13 +400,7 @@ export default function AdminCustomersPage() {
                       <input
                         type="checkbox"
                         checked={isSelected}
-                        onChange={() =>
-                          toggleRole(
-                            selectedUser.id,
-                            role.id,
-                            selectedUser.roles.map((ur) => ur.role.id)
-                          )
-                        }
+                        onChange={() => togglePendingRole(role.id)}
                         disabled={updating}
                         className="h-3.5 w-3.5 rounded border-slate-700 text-brand-400 focus:ring-brand-500"
                       />
@@ -410,15 +416,27 @@ export default function AdminCustomersPage() {
                   );
                 })}
               </div>
-            </div>
 
-            <div className="mt-6 flex justify-end">
-              <button
-                onClick={() => setSelectedUser(null)}
-                className="rounded-lg border px-4 py-2 text-slate-300 hover:bg-slate-900"
-              >
-                Fechar
-              </button>
+              <div className="mt-4 flex justify-end gap-2">
+                <button
+                  onClick={() => setSelectedUser(null)}
+                  className="inline-flex items-center gap-2 rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-300 hover:bg-slate-900"
+                >
+                  <X className="h-4 w-4" /> Cancelar
+                </button>
+                <button
+                  onClick={saveRoles}
+                  disabled={updating}
+                  className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm text-white hover:bg-brand-700 disabled:opacity-50"
+                >
+                  {updating ? (
+                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                  ) : (
+                    <Save className="h-4 w-4" />
+                  )}
+                  Salvar
+                </button>
+              </div>
             </div>
           </div>
         </div>
