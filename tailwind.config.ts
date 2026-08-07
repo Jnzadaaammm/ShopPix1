@@ -1,33 +1,22 @@
 import type { Config } from "tailwindcss";
 
-const withOpacity = (variable: string) => ({
-  opacityValue,
-}: {
-  opacityValue: number | string | undefined;
-}) => {
-  if (opacityValue !== undefined) return `rgb(var(${variable}) / ${opacityValue})`;
-  return `rgb(var(${variable}))`;
-};
-
-const brandColors = {
-  50: withOpacity("--color-brand-50"),
-  100: withOpacity("--color-brand-100"),
-  200: withOpacity("--color-brand-200"),
-  300: withOpacity("--color-brand-300"),
-  400: withOpacity("--color-brand-400"),
-  500: withOpacity("--color-brand-500"),
-  600: withOpacity("--color-brand-600"),
-  700: withOpacity("--color-brand-700"),
-  800: withOpacity("--color-brand-800"),
-  900: withOpacity("--color-brand-900"),
-};
-
 const config: Config = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       colors: {
-        brand: brandColors as any,
+        brand: {
+          50: "#f5f3ff",
+          100: "#ede9fe",
+          200: "#ddd6fe",
+          300: "#c4b5fd",
+          400: "#a78bfa",
+          500: "#8b5cf6",
+          600: "#7c3aed",
+          700: "#6d28d9",
+          800: "#5b21b6",
+          900: "#4c1d95",
+        },
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
