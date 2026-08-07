@@ -37,7 +37,6 @@ const nextConfig: NextConfig = {
     // Desativar recursos pesados
     optimizePackageImports: [
       "lucide-react",
-      "discord.js",
       "@paypal/react-paypal-js",
       "@stripe/react-stripe-js",
     ],
