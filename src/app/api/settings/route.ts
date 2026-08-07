@@ -5,18 +5,21 @@ import {
   savePaymentSettings,
   getStoreSettings,
   saveStoreSettings,
+  getAppearanceSettings,
+  saveAppearanceSettings,
 } from "@/lib/settings";
 import { userHasPermission, forbiddenResponse } from "@/lib/roles";
 
 /**
- * GET — público, retorna quais métodos de pagamento estão ativos + config da loja.
+ * GET — público, retorna quais métodos de pagamento estão ativos + config da loja + aparência.
  */
 export async function GET() {
-  const [payment, store] = await Promise.all([
+  const [payment, store, appearance] = await Promise.all([
     getPaymentSettings(),
     getStoreSettings(),
+    getAppearanceSettings(),
   ]);
-  return NextResponse.json({ ...payment, ...store });
+  return NextResponse.json({ ...payment, ...store, appearance });
 }
 
 /**
@@ -64,11 +67,17 @@ export async function PUT(request: Request) {
       await saveStoreSettings(storeUpdates);
     }
 
-    const [payment, store] = await Promise.all([
+    // Salvar aparência (objeto JSON)
+    if (body.appearance && typeof body.appearance === "object") {
+      await saveAppearanceSettings(body.appearance);
+    }
+
+    const [payment, store, appearance] = await Promise.all([
       getPaymentSettings(),
       getStoreSettings(),
+      getAppearanceSettings(),
     ]);
-    return NextResponse.json({ success: true, settings: { ...payment, ...store } });
+    return NextResponse.json({ success: true, settings: { ...payment, ...store, appearance } });
   } catch (error) {
     console.error("Erro ao salvar configurações:", error);
     return NextResponse.json({ error: "Erro ao salvar" }, { status: 500 });

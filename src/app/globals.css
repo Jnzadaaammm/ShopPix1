@@ -3,6 +3,19 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-brand-50: 245 243 255;
+    --color-brand-100: 237 233 254;
+    --color-brand-200: 221 214 254;
+    --color-brand-300: 196 181 253;
+    --color-brand-400: 167 139 250;
+    --color-brand-500: 139 92 246;
+    --color-brand-600: 124 58 237;
+    --color-brand-700: 109 40 217;
+    --color-brand-800: 91 33 182;
+    --color-brand-900: 76 29 149;
+  }
+
   body {
     @apply bg-slate-950 text-slate-100 antialiased;
   }

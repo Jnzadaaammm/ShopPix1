@@ -20,7 +20,17 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const [storeName, setStoreName] = useState("ShopPix");
   const lastY = useRef(0);
+
+  useEffect(() => {
+    fetch("/api/settings")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.storeName) setStoreName(data.storeName);
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,10 +66,10 @@ export default function Header() {
         <Link href="/" className="flex items-center gap-2 transition-opacity hover:opacity-80">
           <img
             src="/logo.svg"
-            alt="ShopPix"
+            alt={storeName}
             className="h-8 w-8 rounded-lg object-cover"
           />
-          <span className="text-lg font-bold tracking-tight text-slate-100">ShopPix</span>
+          <span className="text-lg font-bold tracking-tight text-slate-100">{storeName}</span>
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
