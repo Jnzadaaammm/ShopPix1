@@ -1,22 +1,33 @@
 import type { Config } from "tailwindcss";
 
+const withOpacity = (variable: string) => ({
+  opacityValue,
+}: {
+  opacityValue: number | string | undefined;
+}) => {
+  if (opacityValue !== undefined) return `rgb(var(${variable}) / ${opacityValue})`;
+  return `rgb(var(${variable}))`;
+};
+
+const brandColors = {
+  50: withOpacity("--color-brand-50"),
+  100: withOpacity("--color-brand-100"),
+  200: withOpacity("--color-brand-200"),
+  300: withOpacity("--color-brand-300"),
+  400: withOpacity("--color-brand-400"),
+  500: withOpacity("--color-brand-500"),
+  600: withOpacity("--color-brand-600"),
+  700: withOpacity("--color-brand-700"),
+  800: withOpacity("--color-brand-800"),
+  900: withOpacity("--color-brand-900"),
+};
+
 const config: Config = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       colors: {
-        brand: {
-          50: "rgb(var(--color-brand-50) / <alpha-value>)",
-          100: "rgb(var(--color-brand-100) / <alpha-value>)",
-          200: "rgb(var(--color-brand-200) / <alpha-value>)",
-          300: "rgb(var(--color-brand-300) / <alpha-value>)",
-          400: "rgb(var(--color-brand-400) / <alpha-value>)",
-          500: "rgb(var(--color-brand-500) / <alpha-value>)",
-          600: "rgb(var(--color-brand-600) / <alpha-value>)",
-          700: "rgb(var(--color-brand-700) / <alpha-value>)",
-          800: "rgb(var(--color-brand-800) / <alpha-value>)",
-          900: "rgb(var(--color-brand-900) / <alpha-value>)",
-        },
+        brand: brandColors as any,
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
