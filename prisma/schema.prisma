@@ -306,3 +306,16 @@ model TicketMessage {
   isStaff   Boolean  @default(false)
   createdAt DateTime @default(now())
 }
+
+// Chaves de API para integração externa (ex: bot do Discord)
+// A chave bruta só é mostrada uma vez na criação; armazenamos o hash.
+model ApiKey {
+  id          String    @id @default(cuid())
+  name        String                    // nome descritivo (ex: "Bot Discord")
+  keyHash     String    @unique         // hash SHA-256 da chave bruta
+  keyPrefix   String                    // primeiros 8 chars da chave (para identificação na UI)
+  permissions String    @default("[]")  // JSON array: ["*"] ou permissões específicas
+  lastUsedAt  DateTime?
+  createdAt   DateTime  @default(now())
+  revokedAt   DateTime?                 // null = ativa; preenchido = revogada
+}

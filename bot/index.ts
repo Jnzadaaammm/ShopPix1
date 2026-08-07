@@ -1,10 +1,29 @@
-import { Client, GatewayIntentBits, ActivityType, Events, Message } from "discord.js";
+/**
+ * Bot do Discord — ShopPix
+ *
+ * Gerencia a loja (produtos, pedidos, aprovações), suporte ao cliente
+ * (tickets) e moderação do servidor. Acessa o mesmo banco de dados do
+ * site via Prisma, garantindo que tudo esteja sempre sincronizado.
+ *
+ * Como rodar:
+ *   npm run bot          # produção
+ *   npm run bot:dev      # desenvolvimento (auto-reload)
+ *   npm run bot:deploy   # registrar comandos slash
+ */
+import "dotenv/config";
+import {
+  Client,
+  GatewayIntentBits,
+  Events,
+  ActivityType,
+  Partials,
+} from "discord.js";
+import { loadCommands } from "./commands/index";
 
 const TOKEN = process.env.DISCORD_BOT_TOKEN;
-const PREFIX = process.env.BOT_PREFIX || "!";
 
 if (!TOKEN) {
-  console.error("DISCORD_BOT_TOKEN não configurado");
+  console.error("❌ DISCORD_BOT_TOKEN não configurado no .env");
   process.exit(1);
 }
 
@@ -13,32 +32,45 @@ const client = new Client({
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMembers,
     GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent,
   ],
+  partials: [Partials.Channel],
 });
 
+const commands = await loadCommands();
+const commandMap = new Map(commands.map((c) => [c.data.name, c]));
+console.log(
+  `Comandos carregados (${commands.length}): ${[...commandMap.keys()].join(", ")}`,
+);
+
 client.once(Events.ClientReady, (c) => {
-  console.log(`Bot online como ${c.user.tag}`);
+  console.log(`✅ Bot online como ${c.user.tag}`);
   c.user.setPresence({
     status: "online",
     activities: [{ name: "ShopPix", type: ActivityType.Watching }],
   });
 });
 
-client.on(Events.MessageCreate, async (message: Message) => {
-  if (message.author.bot) return;
-  if (!message.content.startsWith(PREFIX)) return;
+client.on(Events.InteractionCreate, async (interaction) => {
+  if (!interaction.isChatInputCommand()) return;
+  const command = commandMap.get(interaction.commandName);
+  if (!command) return;
 
-  const args = message.content.slice(PREFIX.length).trim().split(/\s+/);
-  const command = args.shift()?.toLowerCase();
-
-  if (command === "painel") {
-    await message.reply(
-      "🛒 **Painel ShopPix**\n`!produtos` — lista produtos\n`!pedidos` — lista pedidos\n`!ticket` — abre ticket"
-    );
+  try {
+    await command.execute(interaction);
+  } catch (err: any) {
+    console.error(`Erro no comando /${interaction.commandName}:`, err);
+    const payload = {
+      content: `❌ Erro ao executar o comando: ${err.message}`,
+      ephemeral: true,
+    };
+    if (interaction.deferred || interaction.replied) {
+      await interaction.editReply(payload).catch(() => {});
+    } else {
+      await interaction.reply(payload).catch(() => {});
+    }
   }
 });
 
-client.on(Events.Error, (err) => console.error("Erro:", err));
+client.on(Events.Error, (err) => console.error("Erro no cliente:", err));
 
 client.login(TOKEN);
