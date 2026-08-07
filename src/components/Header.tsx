@@ -37,12 +37,22 @@ export default function Header() {
       const y = window.scrollY;
       setScrolled(y > 10);
       if (y > lastY.current && y > 80) {
-        setHidden(true);
-      } else if (y < lastY.current && y < 80) {
-        setHidden(false);
+        setHidden(true); // esconde ao descer após passar do topo
+      } else if (y < lastY.current) {
+        setHidden(false); // mostra ao subir
       }
       lastY.current = y;
     };
+
+    // verifica estado inicial (recarregamento no meio da página)
+    if (window.scrollY > 80) {
+      setScrolled(true);
+      setHidden(true);
+    } else {
+      setHidden(false);
+    }
+    lastY.current = window.scrollY;
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
