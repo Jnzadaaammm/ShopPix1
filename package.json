@@ -11,7 +11,10 @@
     "test": "tsx --test src/**/*.test.ts",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
-    "make-owner": "tsx make-owner.ts"
+    "make-owner": "tsx make-owner.ts",
+    "bot": "tsx bot/index.ts",
+    "bot:dev": "tsx watch bot/index.ts",
+    "bot:deploy": "tsx bot/deploy-commands.ts"
   },
   "engines": {
     "node": ">=20.0.0"
@@ -25,6 +28,8 @@
     "@stripe/stripe-js": "^9.12.1",
     "@thiagoprazeres/pix-static-brcode": "^1.0.1",
     "autoprefixer": "^10.4.20",
+    "concurrently": "^10.0.4",
+    "discord.js": "^14.27.0",
     "lucide-react": "^0.474.0",
     "next": "^15.1.6",
     "next-auth": "^5.0.0-beta.25",

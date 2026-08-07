@@ -19,6 +19,7 @@ import {
   Ticket,
   Crown,
   MessageSquare,
+  Key,
 } from "lucide-react";
 
 type NavItem = {
@@ -40,6 +41,7 @@ const navItems: NavItem[] = [
   { href: "/admin/tickets", label: "Tickets", icon: MessageSquare },
   { href: "/admin/cargos", label: "Cargos", icon: Crown, permission: "roles.manage" },
   { href: "/admin/configuracoes", label: "Configurações", icon: Settings, permission: "settings.manage" },
+  { href: "/admin/apigenerator", label: "Gerador de API", icon: Key, permission: "settings.manage" },
 ];
 
 export default function AdminMobileNav() {
