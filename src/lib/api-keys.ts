@@ -46,6 +46,12 @@ export async function createApiKey(
   name: string,
   permissions: string[] = ["*"],
 ): Promise<{ rawKey: string; apiKey: any }> {
+  // Revoga todas as chaves ativas anteriores para que só a nova funcione
+  await prisma.apiKey.updateMany({
+    where: { revokedAt: null },
+    data: { revokedAt: new Date() },
+  });
+
   const { rawKey, keyHash, keyPrefix } = generateApiKey();
   const apiKey = await prisma.apiKey.create({
     data: {
