@@ -36,41 +36,47 @@ const client = new Client({
   partials: [Partials.Channel],
 });
 
-const commands = await loadCommands();
-const commandMap = new Map(commands.map((c) => [c.data.name, c]));
-console.log(
-  `Comandos carregados (${commands.length}): ${[...commandMap.keys()].join(", ")}`,
-);
+let commandMap = new Map<string, any>();
 
-client.once(Events.ClientReady, (c) => {
-  console.log(`✅ Bot online como ${c.user.tag}`);
-  c.user.setPresence({
-    status: "online",
-    activities: [{ name: "ShopPix", type: ActivityType.Watching }],
+async function initBot() {
+  const commands = await loadCommands();
+  commandMap = new Map(commands.map((c) => [c.data.name, c]));
+  console.log(
+    `Comandos carregados (${commands.length}): ${[...commandMap.keys()].join(", ")}`,
+  );
+
+  client.once(Events.ClientReady, (c) => {
+    console.log(`✅ Bot online como ${c.user.tag}`);
+    c.user.setPresence({
+      status: "online",
+      activities: [{ name: "ShopPix", type: ActivityType.Watching }],
+    });
   });
-});
 
-client.on(Events.InteractionCreate, async (interaction) => {
-  if (!interaction.isChatInputCommand()) return;
-  const command = commandMap.get(interaction.commandName);
-  if (!command) return;
+  client.on(Events.InteractionCreate, async (interaction) => {
+    if (!interaction.isChatInputCommand()) return;
+    const command = commandMap.get(interaction.commandName);
+    if (!command) return;
 
-  try {
-    await command.execute(interaction);
-  } catch (err: any) {
-    console.error(`Erro no comando /${interaction.commandName}:`, err);
-    const payload = {
-      content: `❌ Erro ao executar o comando: ${err.message}`,
-      ephemeral: true,
-    };
-    if (interaction.deferred || interaction.replied) {
-      await interaction.editReply(payload).catch(() => {});
-    } else {
-      await interaction.reply(payload).catch(() => {});
+    try {
+      await command.execute(interaction);
+    } catch (err: any) {
+      console.error(`Erro no comando /${interaction.commandName}:`, err);
+      const payload = {
+        content: `❌ Erro ao executar o comando: ${err.message}`,
+        ephemeral: true,
+      };
+      if (interaction.deferred || interaction.replied) {
+        await interaction.editReply(payload).catch(() => {});
+      } else {
+        await interaction.reply(payload).catch(() => {});
+      }
     }
-  }
-});
+  });
 
-client.on(Events.Error, (err) => console.error("Erro no cliente:", err));
+  client.on(Events.Error, (err) => console.error("Erro no cliente:", err));
 
-client.login(TOKEN);
+  await client.login(TOKEN);
+}
+
+initBot();
