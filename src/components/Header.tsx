@@ -36,22 +36,13 @@ export default function Header() {
     const handleScroll = () => {
       const y = window.scrollY;
       setScrolled(y > 10);
-      if (y > lastY.current && y > 80) {
-        setHidden(true); // esconde ao descer após passar do topo
-      } else if (y < lastY.current) {
-        setHidden(false); // mostra ao subir
-      }
-      lastY.current = y;
+      setHidden(y > 80); // some ao sair do topo e não volta
     };
 
     // verifica estado inicial (recarregamento no meio da página)
-    if (window.scrollY > 80) {
-      setScrolled(true);
-      setHidden(true);
-    } else {
-      setHidden(false);
-    }
-    lastY.current = window.scrollY;
+    const y = window.scrollY;
+    setScrolled(y > 10);
+    setHidden(y > 80);
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
